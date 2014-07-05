@@ -1,6 +1,8 @@
 ---
-layout: default
-title: 你好，世界
+title: '你好，世界'
+layout: post
+tags:
+    - hello
 ---
 
 {{ page.title }}

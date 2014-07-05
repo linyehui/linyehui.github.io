@@ -5,18 +5,14 @@ layout: page
 
 a
 
-> Minimalist | Appleist | Unixer | Coder
+> GTDer | Coder | Father
 
 who involved in 
 
-> [github](https://github.com/waynezhang)
+> [github](https://github.com/linyehui)
 
-mail 
+follow 
 
-> echo srvpqxfbyqfvpdtkbjwt | tr yxwvtsrqpkjfdb zuonmlihgeca@.
-
-or follow 
-
-> [@o_lll](https://twitter.com/#!/o_lll)
+> [@linyehui](https://twitter.com/#!/linyehui)
 
 to reach me

@@ -1,12 +1,11 @@
 markdown: rdiscount
 pygments: true
 permalink: /:year/:month/:day/:title.html
-name: "rusty shutter"
-markdown: rdiscount
+name: "HABIT IS POWER"
 
-author: "wayne"
-atom-baseurl: "http://lhzhang.com"
-disqus: "gopherwood"
+author: "linyehui"
+atom-baseurl: "http://linyehui.github.io"
+disqus: "linyehui"
 
 navigations:
   - title: Archive
@@ -18,9 +17,6 @@ navigations:
   - title: About
     class: fa fa-user
     href: /about.html
-  - title: Gallery
-    class: fa fa-film
-    href: http://foto.lhzhang.com
   - title: Blogroll
     class: fa fa-link
     href: /links.html

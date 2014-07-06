@@ -28,19 +28,19 @@ tags:
 
 #### 术语解释
 
-[Noise reduction](http://en.wikipedia.org/wiki/Noise_reduction)
+[Noise reduction](http://en.wikipedia.org/wiki/Noise_reduction)  
 [Microphone Arrays : A Tutorial](http://www.multimediasignalprocessing.com/PDF/tutorial6.pdf)
 
 中文的降噪我没找到专业的术语解释
 
 #### 其他的引申阅读：
 
-[★双MIC降噪原理及优缺点分析（技术贴）](http://tieba.baidu.com/p/2126118342)
-[求双MIC的DSP降噪算法？](http://bbs.21ic.com/icview-244981-1-1.html)
-[Google学术搜索：双MIC消噪技术](http://scholar.google.com/scholar?q=%E5%8F%8CMIC%E6%B6%88%E5%99%AA%E6%8A%80%E6%9C%AF&hl=zh-CN&as_sdt=0&as_vis=1&oi=scholart&sa=X&ei=H8X9UvOUJKaWiQea0oDADQ&ved=0CCcQgQMwAA)
-[双MIC消噪技术 资料整理](http://www.docin.com/p-260511024.html)
-[MOTO丽音技术深度解析，帮助大家了解丽音](http://bbs.gfan.com/android-4421314-1-1.html)
-[为什么小米2在安静环境下通话效果差？双MIC降噪原理解析](http://www.miui.com/thread-1011253-1-1.html)
-[声学降噪技术](http://www.slideshare.net/lpzhang/demo-victor-cqf)
-[《看不出的创新，听得见的改变——谈 iPhone 5的通话性能提升》](http://qing.blog.sina.com.cn/tj/564012ca330025hg.html)
-[双MIC消噪技术](http://bbs.52rd.com/Thread-202698-1-1.html)
+[★双MIC降噪原理及优缺点分析（技术贴）](http://tieba.baidu.com/p/2126118342)  
+[求双MIC的DSP降噪算法？](http://bbs.21ic.com/icview-244981-1-1.html)  
+[Google学术搜索：双MIC消噪技术](http://scholar.google.com/scholar?q=%E5%8F%8CMIC%E6%B6%88%E5%99%AA%E6%8A%80%E6%9C%AF&hl=zh-CN&as_sdt=0&as_vis=1&oi=scholart&sa=X&ei=H8X9UvOUJKaWiQea0oDADQ&ved=0CCcQgQMwAA)  
+[双MIC消噪技术 资料整理](http://www.docin.com/p-260511024.html)  
+[MOTO丽音技术深度解析，帮助大家了解丽音](http://bbs.gfan.com/android-4421314-1-1.html)  
+[为什么小米2在安静环境下通话效果差？双MIC降噪原理解析](http://www.miui.com/thread-1011253-1-1.html)  
+[声学降噪技术](http://www.slideshare.net/lpzhang/demo-victor-cqf)  
+[《看不出的创新，听得见的改变——谈 iPhone 5的通话性能提升》](http://qing.blog.sina.com.cn/tj/564012ca330025hg.html)  
+[双MIC消噪技术](http://bbs.52rd.com/Thread-202698-1-1.html)  

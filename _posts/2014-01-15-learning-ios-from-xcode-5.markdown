@@ -24,22 +24,22 @@ tags:
 #### 方案二细化
 
 
-1.先看Apple官方提供的入门例子（这个例子一定是最新的，不用担心iOS SDK或者Xcode版本的问题），对iOS开发一个初步认识
+1.先看Apple官方提供的入门例子（这个例子一定是最新的，不用担心iOS SDK或者Xcode版本的问题），对iOS开发一个初步认识  
 [马上着手开发 iOS 应用程序 (Start Developing iOS Apps Today) ](https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOSCh/chapters/Introduction.html)
 
-2.Xcode 5之后的Single View Application 工程模板使用的Storyboard，但是目前（2014/1/15)市面上的很多iOS开发教程都是Xcode4时代出版或发表的，那么掌握下面这个技能，能帮助你“无缝对接” 大部分Xcode4的iOS教程：
+2.Xcode 5之后的Single View Application 工程模板使用的Storyboard，但是目前（2014/1/15)  市面上的很多iOS开发教程都是Xcode4时代出版或发表的，那么掌握下面这个技能，能帮助你“无缝对接” 大部分Xcode4的iOS教程：  
 [给Xcode5下Empty Application模板创建的工程添加Interface Builder](http://www.linyehui.com/empty-application-add-interface-builder-on-xcode-5)
 
-之前参考的这篇文章链接失效了，需要的话可以搜索下标题还是能找到其他的转载：
-[使用 Xcode 5 和 Interface Builder创建 Hello World App](http://www.blogchen.com/archives/581.html)
+之前参考的这篇文章链接失效了，需要的话可以搜索下标题还是能找到其他的转载：  
+[使用 Xcode 5 和 Interface Builder创建 Hello World App](http://www.blogchen.com/archives/581.html)  
 
-3.找一本iOS 5的入门教程，动手写代码 :)
-这里推荐一本不错的入门教程：
-[《iOS编程》英文版书名：《iOS Programming: The Big Nerd Ranch Guide (3rd Edition)》](http://book.douban.com/subject/21356354/)
-这边书有80页试读的PDF可以下载来先看看，觉得好的话再买下（google 《iOS编程（第3版）》80页抢鲜试读就能找到试读本的下载）
+3.找一本iOS 5的入门教程，动手写代码 :)  
+这里推荐一本不错的入门教程：  
+[《iOS编程》英文版书名：《iOS Programming: The Big Nerd Ranch Guide (3rd Edition)》](http://book.douban.com/subject/21356354/)  
+这边书有80页试读的PDF可以下载来先看看，觉得好的话再买下（google 《iOS编程（第3版）》80页抢鲜试读就能找到试读本的下载）  
 
-4.关于Storyboard的使用可以看下这个教程：
-[iOS 7教程-Storyboards Part1](http://www.ityran.com/archives/5365)
-[Storyboards Tutorial in iOS 7: Part 2](http://www.raywenderlich.com/50310/storyboards-tutorial-in-ios-7-part-2)
+4.关于Storyboard的使用可以看下这个教程：  
+[iOS 7教程-Storyboards Part1](http://www.ityran.com/archives/5365)  
+[Storyboards Tutorial in iOS 7: Part 2](http://www.raywenderlich.com/50310/storyboards-tutorial-in-ios-7-part-2)  
 
 未完待续……

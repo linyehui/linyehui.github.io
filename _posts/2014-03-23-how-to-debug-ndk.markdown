@@ -41,12 +41,12 @@ tags:
 [2013-06-25 15:25:22 - TestNDK2] run-as: exec failed for lib/gdbserver Error:No such file or directory
 [2013-06-25 15:25:22 - TestNDK2] Verify if the application was built with NDK_DEBUG=1
 
-解决方案：
-1.确认编译选项是否加了NDK_DEBUG=1
-2.已经加了还是不行，终端中输入下adb看看是不是adb命令不可用，是的话，配置下.bash_profile，把adb的路径加进去，加PATH可以参考[这个](http://gushedaoren.blog.163.com/blog/static/17366340520124300630343/)
-3.用这个命令把gdb_server push到Android手机或模拟器上
+**解决方案：**  
+1.确认编译选项是否加了NDK_DEBUG=1  
+2.已经加了还是不行，终端中输入下adb看看是不是adb命令不可用，是的话，配置下.bash_profile，把adb的路径加进去，加PATH可以参考[这个](http://gushedaoren.blog.163.com/blog/static/17366340520124300630343/)  
+3.用这个命令把gdb_server push到Android手机或模拟器上  
 > adb push /Applications/android-ndk-r9d/prebuilt/android-arm/gdbserver/gdbserver /data
-参考这个：[通过gdbserver实现远程调试](http://hi.baidu.com/linuxcfan/item/4d6a07ee9fcdb2255b2d64df) 
+参考这个：[通过gdbserver实现远程调试](http://hi.baidu.com/linuxcfan/item/4d6a07ee9fcdb2255b2d64df)   
 
 ##### 5.NDK调试提示错误：
 
@@ -60,12 +60,12 @@ public static void test1(){
     Log.i(tag, "test1");  
 }  
 然后在主activity起来的时候，调用一下这个方法就OK了。
-参考这篇文章：[android NDK开发、编译、调试环境搭建与操作入门](http://qiang106.iteye.com/blog/1830416)
+参考这篇文章：[android NDK开发、编译、调试环境搭建与操作入门](http://qiang106.iteye.com/blog/1830416)  
 
 #### 参考：
 
 网上的教程挺多的，我参考了下面这几篇：
-[Android官网](http://developer.android.com/tools/sdk/ndk/index.html)
-[超简单的NDK单步调试方法](http://blog.csdn.net/wutianyin222/article/details/8222838)
-[eclipse下ndk调试](http://blog.csdn.net/wjr2012/article/details/7993722)
-[【暗黑世界】NDK调试的设置方法](http://www.aiseminar.cn/bbs/home.php?mod=space&uid=3&do=blog&id=2735)
+[Android官网](http://developer.android.com/tools/sdk/ndk/index.html)  
+[超简单的NDK单步调试方法](http://blog.csdn.net/wutianyin222/article/details/8222838)  
+[eclipse下ndk调试](http://blog.csdn.net/wjr2012/article/details/7993722)  
+[【暗黑世界】NDK调试的设置方法](http://www.aiseminar.cn/bbs/home.php?mod=space&uid=3&do=blog&id=2735)  

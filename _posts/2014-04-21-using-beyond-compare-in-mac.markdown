@@ -13,8 +13,8 @@ tags:
 
 ### 需求描述
 
-# Windows下的Beyond Compare是个神器，Mac下也有，那么怎么在Mac下使用Beyond Compare呢？
-# 本文所使用的Beyond Compare是官网下载的Beta版本，版本号：Version 4.0 beta (build 17905)，安装包我是从[官网](http://www.scootersoftware.com/support.php?zz=kb_mac)下载到的。
+* Windows下的Beyond Compare是个神器，Mac下也有，那么怎么在Mac下使用Beyond Compare呢？
+* 本文所使用的Beyond Compare是官网下载的Beta版本，版本号：Version 4.0 beta (build 17905)，安装包我是从[官网](http://www.scootersoftware.com/support.php?zz=kb_mac)下载到的。
 
 ### Mac下命令行使用Beyond Compare
 

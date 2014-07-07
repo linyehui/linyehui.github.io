@@ -87,8 +87,11 @@ code {
   border: 1px dashed #e0e0e0;
   font-family: "Ubuntu", monospace; }
 
-h1, h2 {
-  font-size: 1.4em; }
+h1 {
+  font-size: 1.25em; }
+
+h2 {
+  font-size: 1.15em; }
 
 time {
   font-family: "Ubuntu", monospace; }
@@ -150,8 +153,10 @@ article {
   article p {
     padding: .7em 0; }
   article .title {
-    font-family: "telexregular", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
-    article .title header #header h1 a, header #header h1 article .title a, article .title a, article .title .meta .tags a, article .meta .tags .title a {
+    font-family: "telexregular", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; 
+    font-size: 2em; 
+    margin: 0.5em 0; }
+  article .title header #header h1 a, header #header h1 article .title a, article .title a, article .title .meta .tags a, article .meta .tags .title a {
       color: #777; }
   article .meta {
     display: block;

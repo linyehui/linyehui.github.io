@@ -6,18 +6,18 @@ tags:
     - winrt
 ---
 
-上周的Build 2013上微软发布了Windows 8.1 Preview，微软对外公布了8.1的更新信息：
+上周的Build 2013上微软发布了Windows 8.1 Preview，微软对外公布了8.1的更新信息：  
 [New or updated in Windows 8.1 Preview](http://msdn.microsoft.com/zh-cn/library/windows/apps/bg182889.aspx)
 
 我自己看了之后比较感兴趣的点有下面这些：
 
-# General updates
+# 1. General updates
 
 ### App bundle support
 
 资源包，方便做多语言的支持，比现在散落在目录下规范很多
 
-# Diagnostics
+# 2. Diagnostics
 
 ### Mixed-language debugging
 
@@ -47,11 +47,11 @@ task任务的堆栈可以追溯到创建的地方，这个调试异步任务时�
 
 实用
 
-# JavaScript editor
+# 3. JavaScript editor
 
 小改动都比较实用
 
-# C++ development
+# 4. C++ development
 
 ### C++ REST SDK
 
@@ -65,15 +65,15 @@ task任务的堆栈可以追溯到创建的地方，这个调试异步任务时�
 
 优化了并行编译，期待
 
-# HTML design tools
+# 5. HTML design tools
 
 使用的优化，对开发影响不大
 
-# XAML design tools
+# 6. XAML design tools
 
 使用的优化，对开发影响不大
 
-# Windows App Certification Kit 3.0
+# 7. Windows App Certification Kit 3.0
 
 连这个小工具都做了并行优化，挺用心的嘛
 
@@ -91,7 +91,7 @@ task任务的堆栈可以追溯到创建的地方，这个调试异步任务时�
 
 之前遇到过一个莫名其妙的启动性能Failed，给的report detail根本就看不出是什么原因导致的，希望这个版本能够有所改进。
 
-# 开发建议
+# 8. 开发建议
 
 从之前微软发布Windows 8 预览版的节操来看，Preview版本和RTM版本还是会有比较大的差异，所以开发者不要着急着全面跟进8.1的新特性；
 先把这些特性都研究下，改改兼容性的Bug，能做到8.1正式发布后第一时间有新版本跟进也就可以了。

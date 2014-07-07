@@ -15,20 +15,23 @@ tags:
 # 在WTL向导生成的工程中使用DuiEngine
 
 
-#### 1.用WTL向导生成一个Module Dialog的工程：WTLDemo
+#### 1. 用WTL向导生成一个Module Dialog的工程：WTLDemo
 
-#### 2.用DuiEngine向导生成一个最简单的工程：DuiDemo
+#### 2. 用DuiEngine向导生成一个最简单的工程：DuiDemo
 
-#### 3.从DuiDemo目录下复制这些目录和文件到WTLDemo目录下
+#### 3. 从DuiDemo目录下复制这些目录和文件到WTLDemo目录下
 
-> duires目录
-> skin目录
-> MainDlg.h和MainDlg.cpp
-> UIHandler.h和UIHandler.cpp
-#### 4.修改.rc文件，最方便的使用BeyondCompare等工具直接比较合并，其实需要合并过来的就是这三段
+```
+duires目录
+skin目录
+MainDlg.h和MainDlg.cpp
+UIHandler.h和UIHandler.cpp
+```
+
+#### 4. 修改.rc文件，最方便的使用BeyondCompare等工具直接比较合并，其实需要合并过来的就是这三段
 
 
-
+```c++
     3 TEXTINCLUDE 
     BEGIN
         "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
@@ -70,15 +73,18 @@ tags:
     #endif
     /////////////////////////////////////////////////////////////////////////////
     #endif    // not APSTUDIO_INVOKED
+```
 
+** resource.h中新增两行 **
 
-# resource.h中新增两行
-> #define IDR_NAME2ID                     112
-> #define IDI_MAINWND                     113
+```
+#define IDR_NAME2ID                     112
+#define IDI_MAINWND                     113
+```
 
-# stdafx.h中加入duiengine的头文件和lib
+** stdafx.h中加入duiengine的头文件和lib **
 
-
+```c++
     // dui include
     #include <duistd.h>
     #include <duihostwnd.h>
@@ -96,13 +102,13 @@ tags:
     #else
     	# pragma comment(lib, "duiengine_static.lib")
     #endif
+```
 
 
-
-#### 5.WTLDemo.cpp中新增DuiEngine的初始化和销毁，以及调用逻辑，直接贴下代码
-
+* 5.WTLDemo.cpp中新增DuiEngine的初始化和销毁，以及调用逻辑，直接贴下代码
 
 
+```c++
     #include "stdafx.h"
     
     #include "resource.h"
@@ -201,6 +207,6 @@ tags:
     
     	return nRet;
     }
+```
 
-
-#### 6.配置Pre Build Event，直接从DuiDemo复制过来就可以了，就是调用下residbuilder
+* 6.配置Pre Build Event，直接从DuiDemo复制过来就可以了，就是调用下residbuilder

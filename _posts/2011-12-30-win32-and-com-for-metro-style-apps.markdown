@@ -16,9 +16,9 @@ tags:
 
 由于在中国访问这个链接太吃力，而这个链接又非常有用，所以，不得已，整合下微软个几个子页面，方便查找的同时也算是备份一下这个数据。
 
-**Win32 and COM for Metro style apps (data)**
+## Win32 and COM for Metro style apps (data)
 
-1 readers found this helpful (1 ratings - Rate this content)
+```
 [This documentation is preliminary and is subject to change.]
 The following data access and storage APIs are supported for developing Metro style apps.
 File Systems
@@ -138,12 +138,13 @@ IXmlWriterOutput
 Windows Data Access Components
 IPlaylistCompletedEventHandler
 
+```
 ------
 
-**Win32 and COM for Metro style apps (devices)**
+# Win32 and COM for Metro style apps (devices)
 
 
-1 readers found this helpful (1 ratings - Rate this content)
+```
 [This documentation is preliminary and is subject to change.]
 The following device-related APIs are supported for developing Metro style apps.
 Device Access
@@ -217,10 +218,12 @@ XInputSetState
  
 Build date: 9/9/2011
 
+```
 ------
 
-**Win32 and COM for Metro style apps (diagnostics)**
+# Win32 and COM for Metro style apps (diagnostics)
 
+```
 [This documentation is preliminary and is subject to change.]
 The following diagnostics APIs are supported for developing Metro style apps.
 Debugging and Error Handling
@@ -254,10 +257,12 @@ StopTraceW
  
 Build date: 9/9/2011
 
+```
 ------
 
-**Win32 and COM for Metro style apps (graphics)**
+# Win32 and COM for Metro style apps (graphics)
 
+```
 [This documentation is preliminary and is subject to change.]
 The following graphics APIs are supported for developing Metro style apps.
 Direct2D
@@ -531,10 +536,12 @@ IInitializeAsyncOperation
  
 Build date: 9/9/2011
 
+```
 ------
 
-**Win32 and COM for Metro style apps (multimedia)**
+# Win32 and COM for Metro style apps (multimedia)
 
+```
 [This documentation is preliminary and is subject to change.]
 The following multimedia APIs are supported for developing Metro style apps.
 Core Audio
@@ -729,10 +736,12 @@ IVolumeHandler
  
 Build date: 9/9/2011
 
+```
 ------
 
-**Win32 and COM for Metro style apps (networking)**
+# Win32 and COM for Metro style apps (networking)
 
+```
 [This documentation is preliminary and is subject to change.]
 The following networking APIs are supported for developing Metro style apps.
 Dynamic Host Configuration Protocol
@@ -961,10 +970,12 @@ NdrStubInitialize
  
 Build date: 9/9/2011
 
+```
 ------
 
-**Win32 and COM for Metro style apps (printing and documents)**
+# Win32 and COM for Metro style apps (printing and documents)
 
+```
 [This documentation is preliminary and is subject to change.]
 The following printing APIs are supported for developing Metro style apps.
 Printing
@@ -1033,10 +1044,12 @@ IXpsOMVisualCollection
  
 Build date: 9/9/2011
 
+```
 ------
 
-**Win32 and COM for Metro style apps (security and identity)**
+# Win32 and COM for Metro style apps (security and identity)
 
+```
 [This documentation is preliminary and is subject to change.]
 The following security and identity APIs are supported for developing Metro style apps.
 Directory Services
@@ -1072,10 +1085,12 @@ CLSID_SecurityDescriptor
  
 Build date: 9/9/2011
 
+```
 ------
 
-**Win32 and COM for Metro style apps (system)**
+# Win32 and COM for Metro style apps (system)
 
+```
 [This documentation is preliminary and is subject to change.]
 The following system APIs are supported for developing Metro style apps.
 COM
@@ -1766,9 +1781,11 @@ WindowsTrimStringStart
  
  
 Build date: 9/9/2011
+```
 
-Win32 and COM for Metro style apps (user interface)
+# Win32 and COM for Metro style apps (user interface)
 
+```
 [This documentation is preliminary and is subject to change.]
 The following user interface APIs are supported for developing Metro style apps.
 Accessibility
@@ -2088,3 +2105,4 @@ IWriteUserImageCompletedEventHandler
  
  
 Build date: 9/9/2011
+```

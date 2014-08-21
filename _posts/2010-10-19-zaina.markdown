@@ -18,11 +18,11 @@ tags:
 
 # 应用截图
 
-![1f81b5ecbc30463c8679814d98c008bc.png](http://static.meizu.com/fileserver/app_snap/82/1f81b5ecbc30463c8679814d98c008bc.png)
-![ff6f99e23502498aacbde62c852bb5ec.png](http://static.meizu.com/fileserver/app_snap/83/ff6f99e23502498aacbde62c852bb5ec.png)
-![a142b69451c54fb780d6afb05dcf9cd6.png](http://static.meizu.com/fileserver/app_snap/83/a142b69451c54fb780d6afb05dcf9cd6.png)
-![b7f3e406e64946f8b1abb0017a916777.png](http://static.meizu.com/fileserver/app_snap/83/b7f3e406e64946f8b1abb0017a916777.png)
-![94c7f0a6fb504573a80dcfad0ed7f960.png](http://static.meizu.com/fileserver/app_snap/83/94c7f0a6fb504573a80dcfad0ed7f960.png)
+![M8 截图](/media/files/2010/10/29/zaina_prt_scn_01.png)
+![M8 截图](/media/files/2010/10/29/zaina_prt_scn_02.png)
+![M8 截图](/media/files/2010/10/29/zaina_prt_scn_03.png)
+![M8 截图](/media/files/2010/10/29/zaina_prt_scn_04.png)
+![M8 截图](/media/files/2010/10/29/zaina_prt_scn_05.png)
 
 # 应用下载
 CAB安装包下载（CAB包复制到M8中安装）：<http://zaina.codeplex.com/releases>

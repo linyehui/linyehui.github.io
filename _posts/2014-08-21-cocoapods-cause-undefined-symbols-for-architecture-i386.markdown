@@ -8,10 +8,8 @@ tags:
     - ios
 ---
 
-
-===
-
 # 问题
+---
 * 使用cocos2dx的iOS工程，通过cocospods引入了FMDB用于使用SQLite：
 > pod 'FMDB', '~> 2.3'
 
@@ -27,6 +25,7 @@ ld: symbol(s) not found for architecture i386
 ```
   
 # 问题分析
+---
 ## 尝试
 * 一开始搜索到的结果，出现这种情况都是因为没有把FMDB下的.m文件加入到工程里面；
 * 但是我们其实是通过CocoaPods进行第三方库依赖的，这种情况还要自己把.m加到工程就太可笑了
@@ -46,6 +45,7 @@ config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
 * cocos2dx为了兼容64位需要把这个选项设置位NO，而默认这个选项为YES
 
 # 解决方案
+---
 ### 解决的思路
 * cocos2dx（2.2.4）因为本身不支持64位，所以ONLY_ACTIVE_ARCH需要设置为NO，那么有没有方法把github上第三方的Spec也使用我们的这个属性配置？
 

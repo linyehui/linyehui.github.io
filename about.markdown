@@ -1,11 +1,11 @@
 ---
-title: about
+title: I'm
 layout: page
 ---
 
 a
 
-> GTDer | Coder | Father
+> Father | Coder | GTDer
 
 who involved in 
 
@@ -15,4 +15,4 @@ follow
 
 > [@linyehui](https://twitter.com/#!/linyehui)
 
-to reach me
+to reach me, have fun :)

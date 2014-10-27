@@ -11,8 +11,12 @@ who involved in
 
 > [github](https://github.com/linyehui)
 
-follow 
+follow me on Twitter
 
 > [@linyehui](https://twitter.com/#!/linyehui)
+
+or send an email 
+
+> echo qwertyuwitotepasdwqifgs | tr qeryuoasdfgipwt lnyhudgmaco.@ie
 
 to reach me, have fun :)

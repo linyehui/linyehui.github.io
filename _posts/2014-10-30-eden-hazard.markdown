@@ -40,9 +40,11 @@ tags:
 [eden的英语发音](http://dict.youdao.com/search?q=eden&keyfrom=dict.index)  
 [eden的法语发音](http://dict.youdao.com/search?le=fr&q=eden&keyfrom=dict.index)
 #### hazard的英语和法语发音区别
-法语中H和D是不发音的，所以hazard就变成了azar，这也就是为什么大家都叫他“阿扎尔”  
+法语中H和D在这个单词下是不发音的，所以hazard就变成了azar，这也就是为什么大家都叫他“阿扎尔”  
 [azar的英语发音](http://dict.youdao.com/search?le=eng&q=azar&keyfrom=dict.top)  
 [hzard的英语发音](http://dict.youdao.com/search?le=eng&q=hazard&keyfrom=dict.top)
+
+法语中部分字母不发音的参考：[法语-读音规则](http://zh.wikipedia.org/wiki/%E6%B3%95%E8%AF%AD)
 
 # 小结
 在英语环境下，比较中规中矩的发音['i:dən]['hæzəd]是没有错，但[edɛn azɑʁ]无疑是更加亲切的发音，而鸟叔又不是播新闻联播的，也不应该叫得那么官方，他叫阿扎尔 [edɛn] 就再正常不过了。

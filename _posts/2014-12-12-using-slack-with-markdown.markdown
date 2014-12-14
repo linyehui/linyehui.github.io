@@ -2,9 +2,8 @@
 title: 'Using Slack with Markdown'
 layout: post
 tags:
-    - Slack
-    - Markdown
-    - snippet
+    - slack
+    - markdown
 ---
 
 > Slack is awesome, but multiline code formatting in a Slack Post is sucks.

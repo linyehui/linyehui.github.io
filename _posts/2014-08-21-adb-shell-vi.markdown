@@ -32,7 +32,8 @@ adb shell vi这个方案无疑是操作起来最高效的，那怎样才能可�
 ### 2.2 Windows下的 adb shell vi
 * Windows下直接使用CDM连接后使用vi会出现乱码，解决的方案是使用：adbputty
 * 从这里下载：[adb putty](https://github.com/sztupy/adbputty/downloads)
-* 配置可以参考这个：[adb putty](http://yesokay.herokuapp.com/2012-07-31-adbputty.html)
+* putty配置：主机填写transport-usb ，连接类型选择Adb（对应5037端口）  
+配置可以参考这个：[adb putty](http://yesokay.herokuapp.com/2012-07-31-adbputty.html)
 
 ## 3. vi 保存文件时提示：Read-only file system.
 都是mount R/W的问题，同一个问题两个解决方案：

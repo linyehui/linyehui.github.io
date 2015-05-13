@@ -129,3 +129,17 @@ static void JsbVoiceHandleObjectCreateClass(JSContext *cx, JS::HandleObject glob
 [Cocos2D-X 3.6 android与友盟 zlib 冲突，无法编译！](http://bbs.umeng.com/thread-8639-1-1.html)
 
 这个目前只能呢个等待umeng官网更新版本支持。
+
+#### 2015-05-08更新
+umeng的跟进还是挺快的，他们更新了一个兼容cocos2d-x 3.6的测试版本，可以从[这里](http://dev.umeng.com/game_analytics/game-c2d/sdk-download)下载到（测试版本，后续可能会被更新掉）：   
+
+```
+cocos2dx 游戏统计分析SDK使用 v4.1 （2015-05-07）
+功能更新:
+新SDK使用新协议(Thrift)
+重构SDK数据采集的逻辑框架，提高SDK稳定性；
+采用了全新的账号统计接口
+支持cocos2dx 3.6
+支持按间隔发送数据策略
+```
+

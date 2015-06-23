@@ -10,7 +10,7 @@ tags:
 比较类似1.0.0的两个字符串
 
 ## 实现方案
-印象中这个代码自己好多次，不过这次写的是最快的，5分钟之内测试通过
+印象中这个代码自己写过好多次，不过这次写的是最快的，5分钟之内测试通过
 
 ```C++
 // ConsoleApplication2.cpp : Defines the entry point for the console application.
@@ -108,14 +108,17 @@ int _tmain(int argc, _TCHAR* argv[])
 	printf("======================\n");
 
 	printf("0 == %d\n", compareUpdateVersion("1.0.0", "1.0.0"));
-	
+	printf("0 == %d\n", compareUpdateVersion("2.4.3", "2.4.3"));
+
 	printf("-1 == %d\n", compareUpdateVersion("1.0.0", "1.0.1"));
 	printf("-1 == %d\n", compareUpdateVersion("1.0.9", "1.0.10"));
 	printf("-1 == %d\n", compareUpdateVersion("1.0.10", "1.1.0"));
-	
+	printf("-1 == %d\n", compareUpdateVersion("1.2.10", "2.0.0"));
+
 	printf("1 == %d\n", compareUpdateVersion("1.1.0", "1.0.0"));
 	printf("1 == %d\n", compareUpdateVersion("1.0.10", "1.0.0"));
 	printf("1 == %d\n", compareUpdateVersion("1.1.0", "1.0.10"));
+	printf("1 == %d\n", compareUpdateVersion("100.1.0", "10.0.10"));
 
 	return 0;
 }

@@ -9,6 +9,19 @@ tags:
 ### 第1次提交
 **提交类型**：重新提交  
 **提交时间**：2015-04-21  
+**结果公布**：2015-05-01  
+**审核结果**：拒绝  
+**拒绝原因**：demo account, 需要测试账号  
+**解决方案**：提供测试账号，重新提交  
+**相关条款**：  
+
+```
+We began the review of your app but are not able to continue because we need a demo account to fully access your app features.
+```
+
+### 第2次提交
+**提交类型**：重新提交  
+**提交时间**：2015-05-01  
 **结果公布**：2015-05-13  
 **审核结果**：拒绝  
 **拒绝原因**：条款2.2，没有用最新Xcode版本打包，且有明显Bug  
@@ -22,7 +35,7 @@ We found that your app exhibited one or more bugs, when reviewed on iPhone runni
 Specifically, the status indicator kept spinning indefinitely while logging in. We've attached the sample screenshot(s)
 ```
 
-### 第2次提交
+### 第3次提交
 **提交类型**：重新提交  
 **提交时间**：2015-05-13  
 **结果公布**：2015-05-22  
@@ -38,7 +51,7 @@ Specifically, the status indicator kept spinning indefinitely while logging in. 
 17.1 在未经用户事先许可，或未告知用户如何使用信息以及在何处使用信息的情况下，应用程序不能传输用户数据。
 ```
 
-### 第3次提交
+### 第4次提交
 **提交类型**：重新提交  
 **提交时间**：2015-05-22  
 **结果公布**：2015-06-02  
@@ -79,7 +92,7 @@ Thank you for reviewing our APP again.
 17.2: Apps that require users to share personal information, such as email address and date of birth, in order to function will be rejected
 ```
 
-### 第4次提交
+### 第5次提交
 **提交类型**：申诉  
 **提交时间**：2015-06-02  
 **结果公布**：2015-06-04  
@@ -92,7 +105,7 @@ Thank you for reviewing our APP again.
 2.16 Multitasking Apps may only use background services for their intended purposes: VoIP, audio playback, location, task completion, local notifications, etc.
 ```
 
-### 第5次提交
+### 第6次提交
 **提交类型**：重新提交  
 **提交时间**：2015-06-04  
 **结果公布**：2015-06-15  
@@ -105,7 +118,7 @@ Thank you for reviewing our APP again.
 2.2 Apps that exhibit bugs will be rejected
 ```
 
-### 第6次提交
+### 第7次提交
 **提交类型**：申诉  
 **提交时间**：2015-06-15  
 **结果公布**：2015-06-19  
@@ -119,7 +132,7 @@ Thank you for reviewing our APP again.
 ```
 
 
-### 第7次提交
+### 第8次提交
 **提交类型**：申诉  
 **提交时间**：2015-06-23（19号提交了一个版本但有问题，23号撤回后重新提交）  
 **结果公布**：2015-07-01 9:00  

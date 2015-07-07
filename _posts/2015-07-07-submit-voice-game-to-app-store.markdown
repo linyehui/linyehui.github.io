@@ -4,6 +4,7 @@ layout: post
 tags:
     - app-store
     - voice-game
+    - ios
 ---
 
 ### 第1次提交

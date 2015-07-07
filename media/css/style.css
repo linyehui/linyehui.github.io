@@ -84,6 +84,8 @@ blockquote, pre code {
   border-color: #e0e0e0 !important;
   font-size: 13px;
   line-height: 1.6;
+  word-wrap: break-word; 
+  word-break: normal; 
   display: block;
   overflow: auto; }
 

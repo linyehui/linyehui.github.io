@@ -1,5 +1,5 @@
 ---
-title: 'XCode7.1无法使用Instruments真机调试，设备灰色不可选'
+title: 'Xcode 7.1无法使用Instruments真机调试，设备灰色不可选'
 layout: post
 tags:
     - mac

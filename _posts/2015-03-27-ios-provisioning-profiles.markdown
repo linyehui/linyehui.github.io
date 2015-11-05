@@ -17,7 +17,7 @@ tags:
 1. 打开"钥匙串"，切换到证书，删除所有Apple Developer相关的证书
 2. 打开XCode，Performance,Account,删除之前的登录信息，重新登录开发者账号
 3. 删除本地的证书，服务器上配置的iOS Provisioning Profiles (Development)其实也是可以删除的，不删除也没问题，因为使用XCode重新申请证书的话，会自动把老的配置置为无效
-![证书](media/files/2015/03/27/12_revoke_certificate_2_2x.png)
+![证书](/media/files/2015/03/27/12_revoke_certificate_2_2x.png)
 
 做了上面的事情，你就可以安装各种教程，重新申请下证书了，这时你应该已经可以成功了。  
 

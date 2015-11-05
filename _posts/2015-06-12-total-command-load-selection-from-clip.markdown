@@ -36,7 +36,7 @@ PNGoo使用的Windows的文件选择框是支持文件多选的，支持的文�
 1. Total Command，到资源目录下Ctrl+B，把文件展开
 2. 把准备好的文件选中列表复制到剪切板（等会我会单独介绍怎么准备这个文件列表）
 3. 选择菜单上的“选择”-》“备份/回复选择列表”-》“从剪切板导入”
-![从剪切板导入](media/files/2015/06/12/load-selection-from-clip.png)
+![从剪切板导入](/media/files/2015/06/12/load-selection-from-clip.png)
 4. 拖动Total Command选中的文件列表到PNGoo中去
 5. 完成
 

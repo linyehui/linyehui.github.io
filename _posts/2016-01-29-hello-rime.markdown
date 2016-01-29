@@ -176,3 +176,14 @@ patch:
 
 ```
 
+### 全部使用英文符号
+默认输入中括号，出来的是花式的括号，有点不太习惯，从官方下载这个文档[alternative.yaml](https://gist.github.com/lotem/2334409)放到配置目录，然后修改下luna_pinyin.custom.yaml
+
+```
+# luna_pinyin.custom.yaml
+
+patch:
+  'punctuator/import_preset': alternative
+```
+
+这样就能直接用"[]"输出"[]"了

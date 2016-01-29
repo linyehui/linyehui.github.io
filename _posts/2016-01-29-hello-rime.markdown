@@ -10,6 +10,7 @@ tags:
 [Rime 定製指南](https://github.com/rime/home/wiki/CustomizationGuide)  
 [RimeWithSchemata](https://github.com/rime/home/wiki/RimeWithSchemata)  
 [「鼠須管」的调教笔记](https://medium.com/@scomper/%E9%BC%A0%E9%A0%88%E7%AE%A1-%E7%9A%84%E8%B0%83%E6%95%99%E7%AC%94%E8%AE%B0-3fdeb0e78814#.oq28ijk3h)  
+[Rime输入法—鼠须管(Squirrel)词库添加及配置](http://www.jianshu.com/p/cffc0ea094a7)  
 
 ## 配置入门
 ### 说在前面的几点提示

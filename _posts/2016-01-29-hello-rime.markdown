@@ -38,6 +38,13 @@ luna_pinyin_simp.custom.yaml ，定义扩充词库、加载符号库、模糊拼
 Ctrl+~
 选择“朙月拼音.简化字”
 ```
+### 切换全角和半角
+```
+shift+空格
+
+也可以使用Ctrl+~进行切换，不过就要多进行一次选择操作
+```
+
 
 ### squirrel.custom.yaml
 指定程序的名称（比如 Safari 浏览器的程序名称 com.apple.Safari ），通过在「应用程序」里选中 app 图标，鼠标右键选择「显示包内容」，然后找到包内文件夹里的「Info.plist」文件，找到其中 Bundle identifier 属性，对应的就是指定程序名称了。

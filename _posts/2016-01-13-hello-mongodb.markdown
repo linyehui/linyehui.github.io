@@ -11,7 +11,9 @@ tags:
 最近在看Tornado的[教程](http://demo.pythoner.com/itt2zh/ch4.html)，其中使用了MongoDB，之前没用过，所以需要配置下相关的环境，并在Python中使用
 
 ## 安装MongoDB
+
 ### 完整的命令行
+
 ```bash
 # 安装
 brew update

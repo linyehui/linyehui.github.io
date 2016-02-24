@@ -1,4 +1,7 @@
 markdown: kramdown
+kramdown:
+    input: GFM
+highlighter: rouge
 permalink: /:year/:month/:day/:title.html
 name: "HABIT IS POWER"
 

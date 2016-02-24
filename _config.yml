@@ -1,5 +1,4 @@
-markdown: rdiscount
-highlighter: pygments
+markdown: kramdown
 permalink: /:year/:month/:day/:title.html
 name: "HABIT IS POWER"
 

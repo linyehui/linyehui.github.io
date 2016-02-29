@@ -68,8 +68,8 @@ tags:
 # 小结
 
 我目前的做法就是对Nexus S这种神机进行适配：
-# 如果是Nexus S，前置摄像头，设置videoFrameRate 为 15
-# 如果是Nexus S，后置摄像头，就不要设置videoFrameRate 
-# 如果不是Nexus S，正常设置videoFrameRate 即可
+* 如果是Nexus S，前置摄像头，设置videoFrameRate 为 15
+* 如果是Nexus S，后置摄像头，就不要设置videoFrameRate 
+* 如果不是Nexus S，正常设置videoFrameRate 即可
 
 -- End --

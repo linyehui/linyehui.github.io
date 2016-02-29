@@ -18,6 +18,7 @@ PS.
 补充一个使用情况：在PC或Mac上，我都是优先选择使用Web版本，Slack我也是在我的Chrome中使用。
 
 # 解决方案
+
 ## 0.没有用的吐槽
 发了条[Twitter](https://twitter.com/linyehui/status/542993353340493824):
 > @SlackHQ Slack's Code Formatting with Markdown is sucks :( #markdown
@@ -25,6 +26,7 @@ PS.
 发现Twitter也有人反馈过这个问题，Slack的回复很官方，但是实际的效果就是排版惨不忍睹。
 
 ## 1.Markdown Preview Plus(Chrome Extension) + text snippet
+
 ## 解决方案描述
 1. 使用Chrome进行以下操作
 2. 安装[Markdown Preview Plus](https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon)

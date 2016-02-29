@@ -13,6 +13,7 @@ cocos2dx 3.0之后的版本从对于标准库的使用从原来的GNU版libstdc+
 因为这两个库的API接口是一致的，所以理论上不存在语法使用上的差异，你只需要修改下编译选项，重编下对应的第三方库即可。
 
 ### 举例说明
+
 #### 开源库
 boost，QT等都提供了指引
 #### 第三方SDK
@@ -21,6 +22,7 @@ boost，QT等都提供了指引
 修改下编译选项，重编下
 
 # 两者的区别
+
 ### 简单描述
 
 [Using libstdc++ compiled libraries with clang++ -stdlib=libc++](http://stackoverflow.com/questions/12542971/using-libstdc-compiled-libraries-with-clang-stdlib-libc)
@@ -36,6 +38,7 @@ the receiving code would think it has a libc++ std::string.
 [Defining a Portable C++ ABI - Open Standards](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4028.pdf)
 
 # 为什么要有两个库？
+
 #### GPLv3
 GCC 4.2.1之后的版本License改成了GPLv3，这个许可协议和Apple在AppStore里使用的DRM技术不相容，也就是说Apple以及第三方开发者不能使用GCC4.2.1之后的版本生成AppStore应用，libstdc++其实一直是GCC工具集的一部分，所以只好停留在GCC 4.2.1自带的那个版本。
 

@@ -13,6 +13,7 @@ tags:
 跨平台的代码，在各个平台下的代码显示都能正确对齐，中文不乱码
 
 # 规范内容
+
 ## 文件名
 > 文件名全小写加下划线
 
@@ -28,6 +29,7 @@ Eclipse,XCode 5.1+,VS2012都已经支持UTF-8 With BOM这个文件编码格式�
 > PS. 主流IDE下都有选项可以将TAB自动转换为空格  
 
 ### 使用空格替代TAB，在三大主流IDE下如何配置
+
 ##### Visual Studio 2012
 ![Visual Studio](/media/files/2014/08/29/vs.png)
 ##### ADT(Eclipse)

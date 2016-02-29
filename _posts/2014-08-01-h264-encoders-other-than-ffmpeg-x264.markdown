@@ -46,6 +46,7 @@ ffmpeg -i test.mp4 -vcodec h264 -c:a copy -vf "transpose=1" -strict -2 -y out.mp
 ffmpeg -i test.mp4 -metadata:s:v rotate="0" -strict -2 -y r.mp4
 
 # 裁剪视频
+
 # 视频裁剪的宽高分别是(480,480)，裁剪视频的起始点是(0,0)
 ffmpeg -i test.mp4 -vcodec h264 -c:a copy -filter:v "crop=480:480:0:0" -strict -2 -y ret.mp4
 

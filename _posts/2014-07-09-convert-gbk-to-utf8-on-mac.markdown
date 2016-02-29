@@ -23,6 +23,7 @@ tags:
 Windows和Mac下统一使用UTF8带BOM头的文件编码格式。
 
 ### 特别解释下
+
 #### 以前是这样的：
 UTF8不带BOM头的文件，在xcode和eclipse下显示正常，但Windows下会中文乱码；  
 UTF8带BOM头的文件，Windows下显示正常，但Xcode和eclipse下会中文乱码；

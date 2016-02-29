@@ -21,6 +21,7 @@ Oracle的导入导出数据是有专门的命令：exp和imp，需要注意的�
 [Oracle exp/imp导出导入工具的使用](http://www.blogjava.net/lyyb2001/archive/2007/09/03/142172.html)。
 
 ## 简单描述下我的导入数据步骤，因为我在这地方卡住了，╭(╯^╰)╮
+
 ### 001、为要导入的数据专门新建一个用户，在SQL Plus下进行（我新建了个用户:linyehui 密码:password）：
 
 ```

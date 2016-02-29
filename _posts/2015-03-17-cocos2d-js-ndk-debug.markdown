@@ -12,6 +12,7 @@ tags:
 cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As->Android Native Application。
 
 ## 解决过程 
+
 #### 环境配置
 Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。
 
@@ -26,6 +27,7 @@ D:\android-ndk-r9d
 为了说明这个问题，我用cocos code IDE创建了一个工程NativeDemo，下面中的.\NativeDemo就是这个工程的根目录
 
 #### Add Native Support
+
 ##### 默认生成的工程是找不到Add Native Support的
 用ADT打开工程后，没有办法使用Native来调试，这样就没办法调试NDK了，排查了下：  
 1.右键工程Android Tools中没有Add Native Support菜单  
@@ -57,6 +59,7 @@ D:\android-ndk-r9d
 
 
 #### 配置NDK build
+
 ##### 添加一个C++变量
 
 ```
@@ -135,6 +138,7 @@ $(call import-add-path, ../Classes)
 ./NativeDemo/frameworks/js-bindings/bindings/Android.mk
 
 #### 注释掉这个文件末尾中的这一行：
+
 #$(call import-module,.)
 ```
 

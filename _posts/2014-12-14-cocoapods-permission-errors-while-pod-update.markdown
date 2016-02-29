@@ -17,6 +17,7 @@ tags:
 >[!] CocoaPods was not able to update the `master` repo. If this is an unexpected issue and persists you can inspect it running `>pod repo update --verbose`
 
 # 解决思路
+
 ## 尝试1：重装CocoaPods，问题依旧
 ```
 gem list --local | grep cocoapods

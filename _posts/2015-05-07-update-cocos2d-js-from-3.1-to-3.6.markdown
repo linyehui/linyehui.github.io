@@ -17,6 +17,7 @@ cocos2d-js 3.1的热更新有点问题，我们想升级到3.2；打开官网一
 另外还有论坛上的帖子：[Cocos2d-JS v3.6 已发布！](http://www.cocoachina.com/bbs/read.php?tid=297633)  
 
 ## 升级前的准备
+
 ### 升级前的版本
 * cocos2d-js 3.1
 * cocos ide 1.1.0
@@ -30,12 +31,16 @@ cocos2d-js 3.1的热更新有点问题，我们想升级到3.2；打开官网一
 * cocos studio 2.2.0 官方声称兼容老的版本，所以我们这次没有升级，因为变化太大，但实际测试兼容还是有点小问题
 
 ## 升级步骤
+
 ##### 1.本次只更新cocos2d-js和ide，cocos studio保持1.6版本不变，需要下载下面这两个文件：  
 * cocos2d-js-v3.6.zip
 * cocos-code-ide-win64-1.2.0.exe，对应的Mac版本：cocos-code-ide-mac64-1.2.0.dmg  
 ##### 2.删除或者重命名cocod2d-3.1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）  
+
 ##### 3.解压cocos2d-js-v3.6.zip，解压后执行下setup.py，执行后在命令行下执行下cocos命令，检查下路径是否正确  
+
 ##### 4.安装cocos ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）  
+
 ##### 5.从cocos2d-js目录下重新复制这4个目录到工程目录：  
 frameworks/cocos2d-html5/
 frameworks/js-bindings/
@@ -45,6 +50,7 @@ tools/tojs/
 
 
 ## 升级过程中遇到的问题
+
 ### JSB编译错误
 主要是jsb开始使用智能指针，以前的代码需要改造下
 

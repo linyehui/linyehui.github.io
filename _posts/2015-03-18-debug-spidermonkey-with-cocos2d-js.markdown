@@ -11,7 +11,9 @@ tags:
 cocos2d-js-3.1中的spidermonkey是直接以头文件+.a文件的方式整合的，但是有些代码会crash在spidermonkey的代码中，所以我需要调试spidermonkey的C++代码。
 
 ## 解决
+
 ### 寻找cocos2d-js-3.1使用的spidermonkey版本
+
 #### 尝试1，v23版本
 版本 v23，看当前使用的版本，一开始的想法是查看本地cocos2d-x目录下的CHANGELOG，我看到的最新的是：  
 

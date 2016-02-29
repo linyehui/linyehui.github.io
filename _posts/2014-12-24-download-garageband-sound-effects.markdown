@@ -14,7 +14,9 @@ tags:
 ![Alt text](/media/files/2014/12/24/garageband_125_hours.png)
 
 # 解决方案
+
 #### 1.打开GarageBand开始下载
+
 #### 2.使用lsof命令查看GarageBand把文件下载到那里去了
 * 内容太多，所以先用ps命令找到GB的进程ID，我这里是291  
 * 然后再使用lsof，并把输出重定向到log.txt中去  
@@ -42,6 +44,7 @@ http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GB_Stere
 * 使用第三方下载工具，下载这个ULR对应的文件  
 
 #### 4.下载后了之后，有两种方式进行安装
+
 ##### 4.1 方案一：替换文件
 把下载到的文件替换到第2步得到的路径上，修改.resumeData中的文件大小，然后重启GarageBand。  
 

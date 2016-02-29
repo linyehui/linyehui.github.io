@@ -27,6 +27,7 @@ tags:
 # 提交Store之前的准备工作之Metro Style Apps 认证：
 
 ## 一、如何认证
+
 ### 1、制作安装包：
 1.1 认证的安装包必须使用Release，使用Debug是无法通过的
 1.2 右键主exe工程，选择Store，Create App Package，最后提交Store是需要使用"Create a package to upload to the Store or to use locally"进行打包的，但是认证的话使用"Create a package to use locally only"也是可以的

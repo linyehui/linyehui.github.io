@@ -12,7 +12,7 @@ tags:
 ## 实现方案
 印象中这个代码自己写过好多次，不过这次写的是最快的，5分钟之内测试通过
 
-```C++
+```cpp
 // ConsoleApplication2.cpp : Defines the entry point for the console application.
 //
 

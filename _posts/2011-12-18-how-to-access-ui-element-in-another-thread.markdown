@@ -19,7 +19,7 @@ WinRT下如何在另外一个线程中访问UI线程 How To Access UI Element In
 # 示例：
 假设存在一个回调接口的实现类CXXCallback，专门用于接收别的线程的回调消息，然后负责通知界面更新
 
-```c++
+```cpp
 void CXXCallback::OnUIChange()
 {
    auto callback = ref new Windows::UI::Core::InvokedHandler([this](Platform::Object^ sender, Windows::UI::Core::InvokedHandlerArgs^ eInvoke){

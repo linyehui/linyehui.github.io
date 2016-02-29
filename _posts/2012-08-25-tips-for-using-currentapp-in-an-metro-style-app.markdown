@@ -56,7 +56,7 @@ Defines methods and properties used to instantiate an object that you can use to
 
 所以我们需要对代码进行异常捕获，要这么写才可以： 
 
-```c++
+```cpp
  void AppEngine::InitializeLicenseCore()
  {
  	try

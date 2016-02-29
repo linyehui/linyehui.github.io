@@ -31,7 +31,7 @@ UIHandler.h和UIHandler.cpp
 #### 4. 修改.rc文件，最方便的使用BeyondCompare等工具直接比较合并，其实需要合并过来的就是这三段
 
 
-```c++
+```cpp
     3 TEXTINCLUDE 
     BEGIN
         "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
@@ -84,7 +84,7 @@ UIHandler.h和UIHandler.cpp
 
 ** stdafx.h中加入duiengine的头文件和lib **
 
-```c++
+```cpp
     // dui include
     #include <duistd.h>
     #include <duihostwnd.h>
@@ -108,7 +108,7 @@ UIHandler.h和UIHandler.cpp
 * 5.WTLDemo.cpp中新增DuiEngine的初始化和销毁，以及调用逻辑，直接贴下代码
 
 
-```c++
+```cpp
     #include "stdafx.h"
     
     #include "resource.h"

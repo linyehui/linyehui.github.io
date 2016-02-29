@@ -13,9 +13,11 @@ iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或
 ## 问题排查
 各种尝试后，发现了这篇文章：[调用录音后，游戏音效播放不出来的问题](http://www.imgeek.org/forum.php?mod=viewthread&tid=651)，这篇给了我们一个新的解决思路：  
 
+
 会不会是iOS下AVAudioSession的category导致的问题？
 
 在语音使用麦克风录音的前后，已经播放音效的前后，都将AVAudioSession的category属性Log打印出来，发现一旦我们使用了cocos2d-js提供的cc.audioEngine.playEffect方法，category就会变成kAudioSessionCategory_SoloAmbientSound，而像我们这种既有语音又有音效的情况，我们需要的其实是：AVAudioSessionCategoryPlayAndRecord。  
+
 
 好了，找到直接的原因了，但是怎么改呢？
 
@@ -40,6 +42,7 @@ iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或
             _sharedManagerState = kAMStateInitialised;//This is only really relevant when using asynchronous initialisation
             [[NSNotificationCenter defaultCenter] postNotificationName:kCDN_AudioManagerInitialised object:nil];
         }    
+
     }
     return sharedManager;
 }
@@ -47,11 +50,13 @@ iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或
 
 * 而默认的这个mode对应的正是AVAudioSessionCategorySoloAmbient  
 
+
 ```
 -(void) setMode:(tAudioManagerMode) mode {
 ```
 
 * 解决方案出来了  
+
 
 ```
 # 调用下CDAudioManager的这个方法，初始化下我们的mode
@@ -61,6 +66,8 @@ iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或
 ## 最终的解决方案
 
 1. 确认工程配置的Header目录包含CDAudioManager.h所在的目录  
+
 2. 在播放音效之前初始下CDAudioManager的mode为kAMM_PlayAndRecord  
+
 > [CDAudioManager configure:kAMM_PlayAndRecord];
 

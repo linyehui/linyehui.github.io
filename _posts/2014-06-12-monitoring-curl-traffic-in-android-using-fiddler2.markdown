@@ -51,11 +51,15 @@ cURL设置下代码就好了（我嚓咧，这么简单……）
 
 
     CURLOPT_TIMEOUT 设置cURL允许执行的最长秒数。  
+
     CURLOPT_TIMEOUT_MS 设置cURL允许执行的最长毫秒数。 
     
+
     CURLOPT_CONNECTTIMEOUT 在发起连接前等待的时间，如果设置为0，则无限等待。  
+
     CURLOPT_CONNECTTIMEOUT_MS 尝试连接等待的时间，以毫秒为单位。如果设置为0，则无限等待。 
     
+
     CURLOPT_DNS_CACHE_TIMEOUT 设置在内存中保存DNS信息的时间，默认为120秒。
 
 
@@ -63,8 +67,11 @@ cURL设置下代码就好了（我嚓咧，这么简单……）
 
 
     curl_easy_setopt(_handler,CURLOPT_TIMEOUT,_timeout);  
+
             curl_easy_setopt(_handler,CURLOPT_CONNECTTIMEOUT_MS,_connect_timeout_ms);  
+
             curl_easy_setopt(_handler,CURLOPT_DNS_CACHE_TIMEOUT,_dns_cache_timeout);  
+
             curl_easy_setopt(_handler,CURLOPT_NOSIGNAL,1);
 
 

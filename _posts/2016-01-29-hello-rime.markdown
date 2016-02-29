@@ -8,29 +8,41 @@ tags:
 
 ## 参考文档
 * [Rime 定製指南](https://github.com/rime/home/wiki/CustomizationGuide)  
+
 * [RimeWithSchemata](https://github.com/rime/home/wiki/RimeWithSchemata)  
+
 * [「鼠須管」的调教笔记](https://medium.com/@scomper/%E9%BC%A0%E9%A0%88%E7%AE%A1-%E7%9A%84%E8%B0%83%E6%95%99%E7%AC%94%E8%AE%B0-3fdeb0e78814#.oq28ijk3h)  
+
 * [Rime输入法—鼠须管(Squirrel)词库添加及配置](http://www.jianshu.com/p/cffc0ea094a7)  
+
 
 ## 配置入门
 
 ### 说在前面的几点提示
 * 1、不推荐使用图形化配置工具，直接修改配置文件是最靠谱的  
+
 * 2、配置文件在~/Library/Rime这个目录下  
+
 * 3、不要直接修改配置文件，使用.custom.yaml的扩展配置来自定义自己的配置  
+
 
 ### 配置文件说明
 注意下面的文件，都是对默认文件的自定义，所有文件名中都有".custom"  
 
 
+
 ```
 squirrel.custom.yaml ，自定义皮肤；  
+
 default.custom.yaml ，设定备选词数量，定义输入方案；  
+
 luna_pinyin_simp.custom.yaml ，定义扩充词库、加载符号库、模糊拼音。明月拼音·简化字输入方案配置文件，明月拼音对应的文件是 luna_pinyin.custom.yaml；  
+
 ```
 
 ### 还原默认配置文件
 万一你不听劝，还是修改来默认的配置文件，而且改坏来，那么有个简单的方法可以还原：  
+
 
 
 ```

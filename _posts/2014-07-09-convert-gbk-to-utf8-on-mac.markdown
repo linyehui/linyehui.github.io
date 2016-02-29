@@ -26,6 +26,7 @@ Windows和Mac下统一使用UTF8带BOM头的文件编码格式。
 
 #### 以前是这样的：
 UTF8不带BOM头的文件，在xcode和eclipse下显示正常，但Windows下会中文乱码；  
+
 UTF8带BOM头的文件，Windows下显示正常，但Xcode和eclipse下会中文乱码；
 
 #### 现在是这样的：
@@ -56,6 +57,7 @@ Sublime Text 2下，使用Package Control 安装 ConvertToUTF8 这个插件：
     Choose 'Reinterpret' if you believe the file has been opened with an incorrect encoding and you want to reopen it as 'Simplified Chinese (GB 2312)'.
 
 4. 把成功显示中文后的文件保存成UTF8格式：  
+
 再选择下Text Encoing->UTF8，这次出现的提示选择Convert
 
 5. 搞定

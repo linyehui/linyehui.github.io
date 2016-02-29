@@ -7,6 +7,7 @@ tags:
 ---
 
 上周的Build 2013上微软发布了Windows 8.1 Preview，微软对外公布了8.1的更新信息：  
+
 [New or updated in Windows 8.1 Preview](http://msdn.microsoft.com/zh-cn/library/windows/apps/bg182889.aspx)
 
 我自己看了之后比较感兴趣的点有下面这些：

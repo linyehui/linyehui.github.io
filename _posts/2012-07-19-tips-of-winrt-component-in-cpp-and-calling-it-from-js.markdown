@@ -39,9 +39,11 @@ WinRT下，使用HTML+JavaScript实现的界面应用层，调用C++实现的底
 
 	* 8.1、你有一个接口INotifyPropertyChanged，接口只有一个方法：event PropertyChangedEventHandler^ PropertyChanged;
 	* 8.2、如果：你的实现类直接继承了INotifyPropertyChanged，那么这样的导出类是没有问题的（这个时候按照语法你需要在你的实现类中这样声明下：  
+
      virtual event PropertyChangedEventHandler^ PropertyChanged;
 
 	* 8.3、如果：你的实现类，继承了一个类叫做NotifyPropertyChangedBase，而NotifyPropertyChangedBase又继承了INotifyPropertyChanged，那么这个代码在C++这边编译没有问题，但是JS一调用就会crash：  
+
 	An unhandled win32 exception occurred in WWAHost.exe
 
 * 9、还有什么回头想到我再补上

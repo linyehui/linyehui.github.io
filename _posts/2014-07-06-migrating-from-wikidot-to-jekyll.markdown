@@ -15,6 +15,7 @@ tags:
 * 保持原有的文章发布时间，标题，文章的Url，tag信息
 
 **PS.**  
+
 为什么把博客从Wikidot迁移出来？
 为什么选择Github Pages + Jekyll 而不是Farbox或者其他？
 这个先沉淀下，同时也用段时间验证下，过段时间再和大家分享。
@@ -76,6 +77,7 @@ tags:
     我新建了这个页面：
     > http://www.linyehui.com/misc:rss
     
+
     页面代码如下（点击Edit就能编辑）：
 
     ```

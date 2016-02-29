@@ -235,9 +235,14 @@ JS解决跨域问题的方案其实也是有的，但这个不是我们本文的
 ### 另外再附上帮助我解决问题的参考资料:
 
 [IHTMLWindow2的get_document方法有时候会返回E_ACCESSDENIED](http://blog.csdn.net/skyremember/article/details/3422841)  
+
 [VC++实现浏览器自动填表](http://blog.csdn.net/nvidiacuda/article/details/9300869)  
+
 [webbrowser控件的IHTMLDocument3 or2接口的iframe问题（非安全设置）](http://www.itdelphi.com/delphibbs/doc/2007/3845499.htm)  
+
 [window.name实现的跨域数据传输](http://www.cnblogs.com/rainman/archive/2011/02/21/1960044.html)  
+
 [JavaScript跨域总结与解决办法](http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html)  
+
 
 The End.

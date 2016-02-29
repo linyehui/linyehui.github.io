@@ -14,7 +14,9 @@ tags:
 
 # 修改工程的默认语言
 其中有一个默认语言的说法，这个在哪里设置呢？  
+
 用记事本打开工程的vcxproj文件，搜索：  
+
 ```
 <DefaultLanguage>zh-CN</DefaultLanguage>
 ```
@@ -27,6 +29,7 @@ tags:
 3. 还是坑爹啊，告诉你答案吧：不要用VS的编辑器打开，用文本格式打开.resw文件，手动添加"&#13;"就可以了
 
 # 帮助我解决这个问题的参考文章：  
+
 [WPF和字符串格式化](http://www.zhcnco.info/index.php?db=so&id=115431)
 
 回头发现，其实你需要回车的话可以直接在VS的编辑器中按：Shift+Enter

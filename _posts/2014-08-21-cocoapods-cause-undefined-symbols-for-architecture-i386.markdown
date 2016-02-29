@@ -24,6 +24,7 @@ Undefined symbols for architecture i386:
 ld: symbol(s) not found for architecture i386
 ```
   
+
 # 问题分析
 ---
 ## 尝试
@@ -32,6 +33,7 @@ ld: symbol(s) not found for architecture i386
 * 还有一个疑问是为什么非64的模拟器就可以编译通过？
 * 为了验证上面这个问题，我在github上找了个同样使用pod ‘FMDB’的例子，发现例子可以再64位下正常编译，也就是说和FMDB库是无关的，是我们自己使用的不对
 * 盯着64位这个字眼，突然想起了我们的工程因为为了支持cocos2dx，是修改了编译选项中的      
+
 
 ```
 config.build_settings['ARCHS'] = 'armv7 armv7s'
@@ -50,12 +52,17 @@ config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
 * cocos2dx（2.2.4）因为本身不支持64位，所以ONLY_ACTIVE_ARCH需要设置为NO，那么有没有方法把github上第三方的Spec也使用我们的这个属性配置？
 
 * 问题清楚后，搜索新的关键字马上就得到了答案：  
+
 用CocosPods 的Podfile配置可以满足我的需求:[post install](http://guides.cocoapods.org/syntax/podfile.html#post_install)
 
 * 然后我又去github上用post install位关键字找到好多类似的例子  
+
 [Podfile 参考1](https://github.com/needbee/nbasyncrestconnection/blob/ecadaf7206ffddfd9cc829b880ba015d33be9eb0/demo/Podfile)  
+
 [Podfile 参考2](https://github.com/cybertk/libchromium/blob/fa7fecdce6dbe31d8da82b80c999268bbea2ddf3/Example/Podfile)  
+
 [Podfile 参考3](https://github.com/mikefullerton/FishLampLib/blob/3d9f0308015edab41335641dc0cdd7f3e47d63ea/Podfile)  
+
 
 ### 最终的方案
  有了上面的信息，我的解决方案也就水到渠成了：

@@ -9,10 +9,13 @@ tags:
 ---
 
 # 首先你应该知道这个类大概是做什么的：  
+
 Windows::ApplicationModel::Store::CurrentApp  
+
 [MSDN上的说明：Windows.ApplicationModel.Store classes](http://msdn.microsoft.com/en-us/library/windows/apps/br229885.aspx)
 
 上面的MSDN页面给我们提供的API主要是用于Metro Style  App的Store购买相关的信息和功能，其实微软给我们提供了两个类：  
+
 
 ```
 CurrentApp class
@@ -30,6 +33,7 @@ Defines methods and properties used to instantiate an object that you can use to
 # 我遇到的问题：
 微软的MSDN说要调试CurrentApp必须使用开发者帐号，且应用已经上架，那我就想我本地想调试应该怎么弄呢？我不想用CurrentAppSimulator敷衍我自己  
 
+
 ```
 2012/9/8 补充
 这里其实有猫腻，所谓的已经上架还不够，还需要你在调试的机器上购买并下载了这个应用才算数
@@ -42,6 +46,7 @@ Defines methods and properties used to instantiate an object that you can use to
 
 ## 修改安装后的应用文件是否会影响CurrentApp->LicenseInformation的IsActive和IsTrial呢？
 我的实验结果是不会，而且我发现这影响Store返回的两个属性值的关键在于我上面提到的Package.appxmanifest里Packageing Tab页的Publisher这个证书。  
+
 也就是说你从Store安装了某个应用，然后修改这个应用安装目录下的文件，CurrentApp->LicenseInformation的IsActive和IsTrial属性并不会受到影响，其他的属性我就没有进一步确认，大家有兴趣可以自己验证。
 
 ## 2012/9/8 21:18 今晚调试后再补充点信息吧，希望对读者有用：

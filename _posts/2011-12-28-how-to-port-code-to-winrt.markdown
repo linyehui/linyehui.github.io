@@ -12,10 +12,12 @@ tags:
 
 # 问题一：App安装后，无法在认证列表中找到
 这个问题很诡异，我换了一台机器就好了，完全不知道什么原因，可以参照下下面这个帖子，看看过段时间微软的人会不会答复这个问题。  
+
 [Prerequisites for exposing metro applications to the Windows Logo Certification GUI application? ](http://social.msdn.microsoft.com/Forums/en-US/toolsforwinapps/thread/32ea893d-2e34-44f9-973f-5c3819141a7a)
 
 # 问题二：References没有Debug和Release之分，打包和认证时要特别留意
 如果用到了动态链接库，Deploy和Package VS都会把References那里指定的那个DLL打包过去！  
+
 注意：Debug和Release只能选择一个！这个问题不留意的话会遇到非常诡异的问题，编译没问题，调用时抛出莫名其妙的Exception
 
 ## 在解决认证的这个问题时我发现了这么一个诡异的问题：
@@ -64,6 +66,7 @@ SetThreadPriority-> :(
     		return stInfo.EndOfFile.LowPart;
     	}
     
+
     	return INVALID_FILE_SIZE;
     }
 ```
@@ -71,4 +74,5 @@ SetThreadPriority-> :(
 
 ## WinRT下支持的Win32API列表可以从这里查到
 (find Win32 API which is supported by WinRT here):  
+
 [Win32 and COM for Metro style apps](http://msdn.microsoft.com/en-us/library/windows/apps/br205757.aspx)  

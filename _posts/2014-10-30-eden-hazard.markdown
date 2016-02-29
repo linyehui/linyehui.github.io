@@ -38,11 +38,15 @@ tags:
 法语中的eden和hazard读音和英语中都是不一样的，法语中应该读成：艾登.阿扎尔 [edɛn azɑʁ]。
 
 #### eden的英语和法语发音区别  
+
 [eden的英语发音](http://dict.youdao.com/search?q=eden&keyfrom=dict.index)  
+
 [eden的法语发音](http://dict.youdao.com/search?le=fr&q=eden&keyfrom=dict.index)
 #### hazard的英语和法语发音区别
 法语中H和D在这个单词下是不发音的，所以hazard就变成了azar，这也就是为什么大家都叫他“阿扎尔”  
+
 [azar的英语发音](http://dict.youdao.com/search?le=eng&q=azar&keyfrom=dict.top)  
+
 [hzard的英语发音](http://dict.youdao.com/search?le=eng&q=hazard&keyfrom=dict.top)
 
 法语中部分字母不发音的参考：[法语-读音规则](http://zh.wikipedia.org/wiki/%E6%B3%95%E8%AF%AD)

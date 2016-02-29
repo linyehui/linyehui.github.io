@@ -15,6 +15,7 @@ Mac OS X下调试iOS模拟器中的服务端API请求，想通过修改host来�
 
 提示错误如下，但是如果把80改成别的端口就是好的  
 
+
 ```
 http://0.0.0.0:80/
 Traceback (most recent call last):
@@ -37,6 +38,7 @@ socket.error: No socket could be created
 ## 是不是端口占用的问题？
 用下面的命令查看了下，并没有进程占用80端口啊！  
 
+
 ```
 MAC下查看端口是否被占用的方法：
 
@@ -53,7 +55,9 @@ lsof -P | grep ':80' | awk '{print $2}' | xargs kill -9
 
 #### 参考:
 [MAC下查看端口是否被占用](http://www.qinbin.me/mac%E4%B8%8B%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E6%98%AF%E5%90%A6%E8%A2%AB%E5%8D%A0%E7%94%A8/)  
+
 [关闭Web共享](http://www.teanie.com/how-to-solve-mac-os-port-80-is-already-in-use-problem.html)  
+
 
 ## 权限问题！
 找到一篇文章后才知道，原来是类Linux系统下的安全策略设计就是这样的，自己对Linux的使用还是太少了！
@@ -62,6 +66,7 @@ lsof -P | grep ':80' | awk '{print $2}' | xargs kill -9
 
 #### 参考:
 [How can I open port 80 so a non-root process can bind to it?](http://superuser.com/questions/304206/how-do-i-start-nginx-on-port-80-at-os-x-login)  
+
 
 # 解决方案
 试了下sudo，成功了 囧rz

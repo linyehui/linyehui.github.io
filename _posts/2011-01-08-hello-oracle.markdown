@@ -18,6 +18,7 @@ tags:
 
 # 3、导入数据
 Oracle的导入导出数据是有专门的命令：exp和imp，需要注意的是这两个命令不是在SQL Plus下使用，而是在普通的CMD命令行下执行，具体命令行使用可以参考这个:  
+
 [Oracle exp/imp导出导入工具的使用](http://www.blogjava.net/lyyb2001/archive/2007/09/03/142172.html)。
 
 ## 简单描述下我的导入数据步骤，因为我在这地方卡住了，╭(╯^╰)╮
@@ -44,12 +45,16 @@ grant create session,resource to linyehui;
 ```
     Import: Release 10.2.0.3.0 - Production on 星期六 1月 8 14:30:40 2011
     
+
     Copyright (c) 1982, 2005, Oracle.  All rights reserved.
     
+
     
+
     连接到: Oracle Database 10g Enterprise Edition Release 10.2.0.3.0 - Production
     With the Partitioning, OLAP and Data Mining options
     
+
     经由常规路径由 EXPORT:V09.02.00 创建的导出文件
     已经完成 ZHS16GBK 字符集和 AL16UTF16 NCHAR 字符集中的导入
     . 正在将 ************************

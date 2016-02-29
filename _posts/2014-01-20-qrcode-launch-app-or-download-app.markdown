@@ -13,7 +13,9 @@ tags:
 手机淘宝就是个现成的例子
 
 1、手机淘宝的原始二维码链接：<http://ma.taobao.com/311fY>  
+
 2、跳转后：<http://h5.m.taobao.com/1212/express-pcqr.html?_qr=http%3A%2F%2Fma.taobao.com%2F311fY>  
+
 3、查看这个页面的代码你能直接发现实现的原理
 
 

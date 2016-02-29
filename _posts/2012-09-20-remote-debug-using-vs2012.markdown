@@ -10,6 +10,7 @@ tags:
 
 # 我的问题：
 环境：  
+
 Windows 8 版本 RTM (Build9200) + Visual Studio Ultimate 2012(Version 11.0.50722.1)
 
 我希望在同一个无线网络下的PC和平板之间远程调试我们的Metro 应用，PC上安装了VS2012，平板上没有安装VS2012，但是遇到了些问题

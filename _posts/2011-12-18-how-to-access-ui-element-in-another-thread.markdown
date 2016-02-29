@@ -34,11 +34,13 @@ void CXXCallback::OnUIChange()
 
 ## 我们猜测底层的实现机制可能类似：
 1、一个窗口，用来PostMessage  
+
 2、帮我们维护一些全局变量，让我们无缝的使用CXXCallback的类成员变量和OnUIChange()函数内的临时变量
 
 
 # 比较有用的参考资料：
 [Async everywhere: creating responsive APIs & apps](http://channel9.msdn.com/Events/BUILD/BUILD2011/PLAT-203T)PPT的第31页的位置  
+
 4 Don’t worry about Dispatcher.Invoke…
 
 [How to Access UI Element in a Thread Routine? ](http://social.msdn.microsoft.com/Forums/en/winappswithnativecode/thread/e36f84be-db95-4764-951e-bfa662cdd11d)

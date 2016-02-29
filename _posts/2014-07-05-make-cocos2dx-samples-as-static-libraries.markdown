@@ -115,12 +115,15 @@ CCApplication的之类全局自定义一个，然后runWitSenne拿到cocosView�
 1. Cocos本身的设计没有考虑这种一个进程多个游戏的架构，我们使用会有架构风险
 比如cocos2d::CCApplication的事件注册并不是Add上去，而是定义一个全局变量来实现，这个设计本身就没考虑多个实例同时存在
     
+
     
+
     // cocos2d application instance
         // 两个游戏加到一个工程的时候只能保留一个，否则会从Cocos内部直接异常退出
         // 变量名不同也没用，因为实际起作用的是父类CCApplication的成员变量
         // static CCApplication * sm_pSharedApplication;
         
+
         //static CocosAppDelegate s_sharedApplication;
 
     解决的办法，是多个游戏只保留一个CCApplication之类的全局变量的定义。

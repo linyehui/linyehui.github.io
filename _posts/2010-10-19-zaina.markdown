@@ -11,7 +11,9 @@ tags:
 
 【M8在哪】基于开源项目：<http://zaina.codeplex.com/>  
 
+
 软件实现依赖于.NET CF，使用之前请确认你的M8已经安装了.NET CF 3.5。  
+
 在哪的诞生离不开开源项目：[Managed Meizu SDK Wrapper](http://managedmeizusdk.codeplex.com/)
 
 【M8在哪】于2010/10/29日在魅族软件中心上架 [软件中心在哪介绍](http://developer.meizu.com/view/app-view.jsp?vid=160001)

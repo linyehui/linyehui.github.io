@@ -12,15 +12,20 @@ For a layman, What is the difference between 3G standars
 
 # 作为一个通讯行业的门外汉，对于这段时间频频发布的XXX手机电信版本，不禁要问：
 1、为什么需要单独针对电信版本的iPhone4，Lumia800？  
+
 2、这些3G标准或者说运营商们，到底哪个好？
 
 # 先来简单回答下上面两个问题：
 1、以iPhone为例，由于3G标准不同，支持WCDMA(联通）的手机是无法使用CDMA2000（电信）和TD-SCDMA(移动）的手机卡，这些卡片不单是大小不一样，类型都不一样：  
+
 SIM卡和UIM卡，所以针对不同的3G标准，必须推出不同的手机。
 
 2、中国的3中3G标准中：  
+
 移动的TD-SCDMA还不成熟，不靠谱；  
+
 联通的WCDMA是目前全球最成熟和最先进的，理论速度最快，但价格比较贵；  
+
 电信的CDMA2000理论速度比联通的慢，但资费套餐更实在一点。但目前中国整体的3G网络建设还不完善，所以网速都相对比较慢，联通的网速优势也没有特别明显。
 
 # 下面是一些更细节的比较：
@@ -37,11 +42,18 @@ SIM卡和UIM卡，所以针对不同的3G标准，必须推出不同的手机。
 
 # 参考资料：
 [3G](http://zh.wikipedia.org/wiki/3G)  
+
 [WCDMA](http://zh.wikipedia.org/wiki/WCDMA)  
+
 [CDMA2000](http://zh.wikipedia.org/wiki/CDMA2000)  
+
 [电信 CDMA 与联通 WCDMA 哪个更好？](http://www.zhihu.com/question/19936601)  
+
 [MWC 2012：中国 3G 市场数据](http://www.ifanr.com/75417)  
+
 [到底选谁? 移动电信联通3G资费业务全对比](http://tech.163.com/mobile/09/0512/07/593LH74J00112K8D.html)  
 
+
 **PS.**  
+
 你可能还对LTE 4G网络感兴趣，可以看下这个：[LTE 3GPP长期演进技术](http://zh.wikipedia.org/wiki/3GPP%E9%95%B7%E6%9C%9F%E6%BC%94%E9%80%B2%E6%8A%80%E8%A1%93)

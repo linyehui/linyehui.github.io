@@ -9,16 +9,23 @@ tags:
 ### 前言
 
 0、本文的前提是你已经知道什么是[Web.py](http://webpy.org/)并且知道怎么运行Web.py的代码。  
+
 1、本文是对Web.py Cookbook中[Webpy + Nginx with FastCGI](http://webpy.org/cookbook/fastcgi-nginx)这一章节的实践操作指南  
+
 2、所以本文假设你已经在本机安装好了python和web.py并能正常运行  
+
 
 ### 配置指南
 
 **1、下载并配置Nginx**  
+
 1.1 Nginx专门有Windows的zip包，直接从[官网](http://nginx.org/en/download.html)下载即可：[nginx/Windows-1.2.6](http://nginx.org/download/nginx-1.2.6.zip)  
 
+
 1.2 下载后解压到你喜欢的任何目录  
+
 1.3 打开nginx.conf进行配置，我的配置如下：  
+
 
 ```shell
     worker_processes  1;
@@ -156,17 +163,26 @@ tags:
 
 1.4 运行nginx.exe，并在浏览器输入127.0.0.1验证下nginx是否正常启动  
 
+
 **2、下载并配置Flup**  
+
 2.1 从[Python官网的Flup页面](http://pypi.python.org/pypi/flup)下载最新的Flup，我下载的是[flup 1.0.2](http://pypi.python.org/packages/source/f/flup/flup-1.0.2.tar.gz#md5=24dad7edc5ada31dddd49456ee8d5254)  
+
 2.2 解压后执行setup.py install就好了（依赖[setuptools](http://pypi.python.org/packages/2.7/s/setuptools/)）  
+
 2.3 好了  
 
+
 **3、启动web.py**  
+
 Nginx已经启动了，Flup也已经安装好了，现在你需要的就是根据Nginx.conf中配置的fastcgi端口(我的配置文件中是8051)，启动你的web.py:  
+
 > index.py 8051 fastcgi
 
 顺利的话，你已经在Windows上搭好了一个web.py的Nginx Web服务器，Have fun :)
 
 **参考文章**  
+
 [Windows下Nginx + flup + fastcgi + webpy 开发应用环境的设置](http://blog.csdn.net/yavobo/article/details/6240122)  
+
 [在windows上利用Nginx部署web.py](http://blog.ops.cc/develop/541ff02680c990b4.html)  

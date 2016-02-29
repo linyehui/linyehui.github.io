@@ -11,10 +11,13 @@ My solution is using [Markdown Preview Plus](https://chrome.google.com/webstore/
 
 # 需求
 使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。  
+
 解决这个问题，直接想到的就是"create a post"，Slack的POST虽然是支持Markdown的，但是他的支持非常有限，最让我无法忍受的是多行代码的排版，会完全乱掉。  
+
 能不能再Slack中使用Markdown而且有更好的排版支持呢？这是我的需求。
 
 PS.  
+
 补充一个使用情况：在PC或Mac上，我都是优先选择使用Web版本，Slack我也是在我的Chrome中使用。
 
 # 解决方案

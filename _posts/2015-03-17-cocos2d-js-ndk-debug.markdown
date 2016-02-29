@@ -30,13 +30,18 @@ D:\android-ndk-r9d
 
 ##### 默认生成的工程是找不到Add Native Support的
 用ADT打开工程后，没有办法使用Native来调试，这样就没办法调试NDK了，排查了下：  
+
 1.右键工程Android Tools中没有Add Native Support菜单  
+
 2.到工程属性中查看，有C/C++ Build这个Tab页，但是点开却提示这不是一个CDT工程  
+
 3.对比之前的CDT工程，发现了下面的区别，而根目录下并没有.cproject文件存在：  
+
 ![cproject](/media/files/2015/03/17/cproject.png)
 
 ##### 使用cocos console和cocos studio创建的工程有什么不同
 首先，这两种方式创建的工程，都有上面的这个问题，也就是缺失了.cproject这个文件；  
+
 除此之外cocos console创建的工程是个empty project，而cocos studio创建工程的时候会有一个简单的向导，帮你生成第一个页面。
 
 ##### 出现这个问题的原因：
@@ -45,17 +50,23 @@ D:\android-ndk-r9d
 ##### 解决方案：
 打开.\NativeDemo\frameworks\runtime-src\proj.android\.project，查找并删除cdt相关的两部分配置：
 1.BuildCommand  
+
 2.natures
 
 删除成功的标准就是右键工程-》Android Tools的菜单下可以看到Add Native Support；    
+
 另外删除成功后工程属性下也看不到C/C++ Build的Tab页；    
+
 而工程属性的Builder下会看不到 Scanner Configuration Builder。    
+
 
 修改好了之后，右键工程，Android Tools，Add Native Support 
 
 ##### 参考
 [How to build and run HelloWorld on Android NDK r5 and above](http://www.cocos2d-x.org/wiki/How_to_build_and_run_HelloWorld_on_Android_NDK_r5_and_above)  
+
 [无需cygwin，使用NDK进行开发](http://www.cnblogs.com/sw926/p/3232311.html)  
+
 
 
 #### 配置NDK build
@@ -101,7 +112,9 @@ Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersi
 ```
 #### 解决方案：
 手机上的版本需要和安装了的SDK已经配置的SDK版本一致，以我的小米2S为例，我的系统版本是4.1，也就是对应SDK 的API Level 16；  
+
 下面这两个文件需要对应的都修改成16：  
+
 ##### AndroidManifest.xml
 ```
 <uses-sdk android:minSdkVersion="16"/>
@@ -125,6 +138,7 @@ $(call import-add-path, ../Classes)
 ```
 
 [import-module的注意事项与NDK_MODULE_PATH的配置](http://blog.sina.com.cn/s/blog_4057ab62010197z8.html)  
+
 
 ```
 如果NDK_MODULE_PATH 没有设置或者设置不正确。编译时都是报错 Are you sure your NDK_MODULE_PATH variable is properly defined。

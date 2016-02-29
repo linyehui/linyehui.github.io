@@ -16,6 +16,7 @@ Windows 8 Consumer Preview下，用Windows App Certification Kit认证自己的�
 # 方案二，删除配置文件
 
 好在我有Everything，换了两个关键字后，我找到了他的配置文件所在  
+
 ## 我用的关键字：
 1. App Certification Kit
 2. AppCertKit

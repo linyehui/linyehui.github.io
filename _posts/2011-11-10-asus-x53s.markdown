@@ -30,10 +30,15 @@ tags:
 
 # 华硕笔记本FN快捷键失灵
 没高兴多久就发现问题了，优化过度了，FN快捷键用不了了，解决方法如下：  
+
 1、确认ATK是否被卸载了  
+
 2、确认以下两个服务是否被禁用，如果是恢复成自动后启动一下这两个服务，FN就能正常使用了：  
+
 ASLDRService  
+
 ATKGFNEXSrv  
+
 
 # Win7 Home Basic升级到旗舰版
 随机自带的Home Basic系统没有Aero桌面，丑的不能再丑了，用Windows Anytime Upgrade花不到10分钟就能升级到旗舰版

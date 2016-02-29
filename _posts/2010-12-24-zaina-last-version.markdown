@@ -9,6 +9,7 @@ tags:
 ![9f35e42344b24d9eb628c8c0d3ff43bd.png](http://static.meizu.com/fileserver/app_icon/23/9f35e42344b24d9eb628c8c0d3ff43bd.png)
 
 令人欣慰的是，M8在哪的1.0.6版本赶在圣诞之前（2010/12/24）上架了。  
+
 [点击这里围观](http://developer.meizu.com/view/app-view.jsp?vid=160001)
 
 # 1.0.6版本添加了2个功能：

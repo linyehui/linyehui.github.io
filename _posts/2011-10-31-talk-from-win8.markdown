@@ -8,7 +8,9 @@ tags:
 
 1. 关于Metro和界面风格
 单靠一个Metro微软不可能翻盘，这只是一个交互风格而已，不是决定平台好坏的核心；  
+
 否则的话小米手机岂不是要成为第二个苹果，那真是笑话。  
+
 每个平台都会有自己的Human Interface Guidelines，但可供设计师发挥的空间还非常大，iPhone上各种各样的twitter客户端就是最好的佐证
 
 2. Microsoft和Apple之于开发者

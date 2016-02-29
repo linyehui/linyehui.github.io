@@ -22,6 +22,7 @@ tags:
 ### 1.2 Windbg
 直接到微软下载就可以了：<http://msdn.microsoft.com/en-US/windows/hardware/gg463009/>  
 
+
 ### 1.3 SOS.dll
 文档中使用了[SOS.dll (SOS Debugging Extension)](http://msdn.microsoft.com/en-us/library/bb190764.aspx)，使用之前需要先用下面的命令加载下sos.dll
 
@@ -29,7 +30,9 @@ tags:
 .load <full path of sos.dll>
 ```
   
+
   
+
 ## 2. 遇到的其他错误
 
 ### 2.1 Failed to find runtime DLL (clr.dll), 0x80004005
@@ -42,10 +45,14 @@ tags:
 App必须是：Managed Windows Store Apps，所以对我们来说SOS.dll这个方向一开始就是错的，汗
 
 ### 2.3 参考：  
+
 [Load SOS in WinDbg](http://mylittlereminder.wordpress.com/2011/07/08/windbg-load-sos-in-windbg-0x80004005/)  
+
 [使用WinDbg调试Silverlight中遇到“Failed to find runtime DLL (clr.dll), 0x80004005”问题的解决方法之一](http://blog.csdn.net/neils03/article/details/7928641)  
 
+
   
+
 ## 3. 小结
 
 非Managed的App无法使用这个方案，这对我们的应用就没有意义了，但是解决前面遇到的几个小问题的方法希望对其他朋友有所帮助。

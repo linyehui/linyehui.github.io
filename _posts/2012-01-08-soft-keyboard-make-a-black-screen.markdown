@@ -23,5 +23,7 @@ Showing   Occurs when the input pane is about to be displayed by sliding into vi
 ```
 
 两个相关的MSDN链接：  
+
 [InputPane class](http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.inputpane.aspx)  
+
 [InputPaneVisibilityEventArgs class](http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.inputpanevisibilityeventargs)

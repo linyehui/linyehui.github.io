@@ -17,12 +17,14 @@ cocos2d-js-3.1中的spidermonkey是直接以头文件+.a文件的方式整合的
 #### 尝试1，v23版本
 版本 v23，看当前使用的版本，一开始的想法是查看本地cocos2d-x目录下的CHANGELOG，我看到的最新的是：  
 
+
 ```
 cocos2d-x-3.0alpha0 @Sep.19 2013
 Upgraded SpiderMonkey to Firefox v23
 ```
 
 而spidermonker目录下的README告诉我们需要去这个github仓库取代码  
+
 
 ```
 .\frameworks\js-bindings\external\spidermonkey\README.md
@@ -37,10 +39,13 @@ https://github.com/ricardoquesada/Spidermonkey/tree/c8f78c30b633025f48fc0075e5f9
 
 #### 尝试2，v28版本
 本地的CHANGELOG不对，那么就看下在线版本的；  
+
 我们的cocos2d-js版本是3.1对应到在线的CHANGELOG，其中的Spidermonkey版本是v28  
+
 https://github.com/cocos2d/cocos2d-js/blob/develop/CHANGELOG
 
 同样的还是没有release版本，所以还是到对应的commit页面下载  
+
 https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96
 
 ```

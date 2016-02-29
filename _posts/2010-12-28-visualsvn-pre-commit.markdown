@@ -94,6 +94,9 @@ exit(0);
 
 # 参考文献：
 [Perl pre-commit hook](http://groups.google.com/group/visualsvn/browse_thread/thread/5d73e465218abe51)  
+
 [Require subversion comments – a perl pre-commit hook](http://www.stillnetstudios.com/require-subversion-comments-minimum/)  
+
 [VisualSVN pre-commit rule](http://stackoverflow.com/questions/2920189/visualsvn-pre-commit-rule)  
+
 [VisualSVN 提交时必须输入消息设置](http://hi.baidu.com/djzbj/blog/item/60c5e9ea2c91f8d8d539c9bf.html)

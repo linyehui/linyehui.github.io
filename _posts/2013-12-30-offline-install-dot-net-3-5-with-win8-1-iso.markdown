@@ -29,7 +29,9 @@ Windows 8.1下安装VS2008，提示缺少.NET 3.5，但是.NET 3.5在Win8下属�
 
 
 1、直接右键装载Win8.1系统安装盘ISO（我这里装载后的盘符是E:）  
+
 2、从系统Charm菜单上选择搜索，输入CMD，然后右键选择“以管理员权限打开”  
+
 3、命令行下输入（注意，E:来自于第一步装载ISO后的盘符）：
 > dism.exe /online /enable-feature /featurename:NetFX3 /Source:E:\sources\sxs
 
@@ -42,4 +44,5 @@ Windows 8.1下安装VS2008，提示缺少.NET 3.5，但是.NET 3.5在Win8下属�
 > 控制面板 -> 程序和功能 -> 启用或关闭Windows 功能
 
 PS.  
+
 我的安装VS2008失败的问题也同时解决了，重新安装一次，成功 :)

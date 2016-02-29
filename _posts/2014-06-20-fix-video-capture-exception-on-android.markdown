@@ -58,15 +58,20 @@ Sony s39h 一点拍摄视频就crash，从他们上传上来的log看是autoFocu
     #34 paul.won...@gmail.com
     Hi everyone,
     
+
     I'm new to Android but encountered the same problem.  Could it be the case that the width and height parameters are not called properly?  I added the following two lines before parameters.setPreviewSize and it now seems to work fine.
     
+
     w = parameters.getPreviewSize().width;
     h = parameters.getPreviewSize().height;
             
+
     For the record, I am using a HTC Desire too.
     
+
     Cheers,
     
+
     Paul
 
 还是不行

@@ -9,7 +9,9 @@ tags:
 How to Build FFmpeg for Android On Mac
 
 官方文档在这：[CompilationGuide/Android](https://trac.ffmpeg.org/wiki/CompilationGuide/Android)  
+
 关于Android上的FFmpeg入门，这个Blog不错：[roman10 ffmpeg on Android](http://www.roman10.net/category/android-tutorial/ffmpeg-on-android/)  
+
 
 # 关于FFmpeg耻辱名单
 
@@ -31,11 +33,13 @@ How to Build FFmpeg for Android On Mac
 
 一不小心就上了耻辱名单，有没有什么防范措施呢？可以参考FFmpeg官方的[License Compliance Checklist](https://ffmpeg.org/legal.html)  
 
+
 # 在Mac下编译FFmpeg-2.1.4
 
 ### 概要说明
 
 Mac开发环境，按照这篇文章来的指引编译通过：[How to Build ffmpeg with NDK r9](http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/)  
+
 
 直接按照文章的指引编译通过，只有一个步骤需要特别注意，build_android.sh中：
 

@@ -61,6 +61,7 @@ Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S�
     profile.audioBitRate = 42 * 1024;
     profile.audioSampleRate = 44100;
     profile.audioChannels = 2;        
+
     mediaRecorder.setProfile(profile);
     mediaRecorder.setVideoSize(640, 480);
 
@@ -80,8 +81,12 @@ Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S�
 ## 参考
 
 [Error when Using Camera on Android 4/Nexus s](http://stackoverflow.com/questions/9271349/error-when-using-camera-on-android-4-nexus-s)  
+
 [Android MediaRecorder - “start failed: -19”](http://stackoverflow.com/questions/10496969/android-mediarecorder-start-failed-19)  
+
 [Mediarecorder start failed -19](http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19)  
+
 [Error处理： android.media.MediaRecorder.start(Native Method) 报错：start failed: -19](http://blog.csdn.net/netwalk/article/details/17686993)  
+
 
 -- End --

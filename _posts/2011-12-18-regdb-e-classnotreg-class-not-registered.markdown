@@ -17,6 +17,7 @@ WinRT多工程情况下，调用另一个DLL中的接口，构造那个类型的
 >  This causes a "Class not registered" error at run time, when JavaScript code tries to instantiate the class. The workaround is to add a default constructor.
 
 >  '''Important'''  
+
 When you encounter this error, simply adding a default constructor to the class doesn't fix the problem. Stop the debugger and then delete the AppXManifest.xml file from the Debug folder, forcing Visual Studio to regenerate the file and add the class. Alternatively, you can manually add the class to the extensions section of the manifest.
 
 

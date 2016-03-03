@@ -55,6 +55,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
+参考文章: [How to uninstall nvm? #298](https://github.com/creationix/nvm/issues/298)
+
 ### 清理干净后的确认
 重启终端后，挨个测试几个命令应该都是找不到，才算是正确的:
 
@@ -95,3 +97,8 @@ iojs -> N/A (default)
 
 
 好了，世界清净来 :)
+
+## 参考文章: 
+[Node.js 安裝與版本切換教學 (for MAC)](http://icarus4.logdown.com/posts/175092-nodejs-installation-guide)
+
+[Mac上使用brew安装nvm来支持多版本的Nodejs](http://www.cnblogs.com/Don/p/4672287.html)

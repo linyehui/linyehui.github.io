@@ -2,7 +2,7 @@
 title: 'HEX to RGB'
 layout: post
 tags:
-    - iOS
+    - ios
     - css
     - tips
 ---

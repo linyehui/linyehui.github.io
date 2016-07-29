@@ -265,3 +265,5 @@ npm run-script dev
 
 [webpack](http://webpack.github.io/)
 
+[babel 6 教程](https://www.zfanw.com/blog/babel-6.html)
+

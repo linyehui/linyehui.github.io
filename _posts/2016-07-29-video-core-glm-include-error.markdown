@@ -1,5 +1,5 @@
 ---
-title: ''type_half.inl' file not found'
+title: 'type_half.inl file not found'
 layout: post
 tags:
     - cocoapods

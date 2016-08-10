@@ -1,5 +1,5 @@
 ---
-title: 'Build srs on Mac'
+title: 'Build SRS on Mac'
 layout: post
 tags:
     - srs
@@ -51,7 +51,7 @@ make
 
 一切顺利的话，编译通过，会得到了./objs/srs这个可执行文件
 
-## 运行srs服务器
+## 运行SRS服务器
 
 #### srs.conf
 由于Mac系统的限制，运行SRS的话需要把./conf/srs.conf中的并发数修改下，我修改成100:

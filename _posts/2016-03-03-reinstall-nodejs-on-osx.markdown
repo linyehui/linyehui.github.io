@@ -1,5 +1,5 @@
 ---
-title: 'Mac OSX下的重装node.js'
+title: 'Mac OSX下重装node.js'
 layout: post
 tags:
     - mac
@@ -96,7 +96,7 @@ iojs -> N/A (default)
 ```
 
 
-好了，世界清净来 :)
+好了，世界清净了 :)
 
 ## 参考文章: 
 [Node.js 安裝與版本切換教學 (for MAC)](http://icarus4.logdown.com/posts/175092-nodejs-installation-guide)

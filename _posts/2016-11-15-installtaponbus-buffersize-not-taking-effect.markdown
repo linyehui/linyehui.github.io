@@ -37,6 +37,7 @@ iOS 10一下的版本，installTapOnBus的第二个参数bufferSize设置是无�
 我个人比较偏向第一种，这样就不存在构造时间戳的问题。
 
 ## 解决方案
+
 ### 第一步：installTapOnBus的Block中设置frameLength
 
 ```
@@ -48,11 +49,13 @@ const uint32_t frameLength = 1024;
 		buffer.frameLength = frameLength;
 }];
 ```
-##### 参考：
 
-[I want to call 20 times per second the installTapOnBus:bufferSize:format:block:](http://stackoverflow.com/questions/26115626/i-want-to-call-20-times-per-second-the-installtaponbusbuffersizeformatblock)
+
+#### 参考：[I want to call 20 times per second the installTapOnBus:bufferSize:format:block:](http://stackoverflow.com/questions/26115626/i-want-to-call-20-times-per-second-the-installtaponbusbuffersizeformatblock)
+
 
 ### 第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList
+
 如果你使用了步骤一的代码，那么installTapOnBus回调出来的AVAudioPCMBuffer，不要使用mutableAudioBufferList，必须使用audioBufferList。
 
 因为mutableAudioBufferList的mDataByteSize是frameCapacity，而audioBufferList的mDataByteSize是真实的frameLength

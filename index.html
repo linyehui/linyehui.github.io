@@ -241,6 +241,175 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/12/08/migrate-jekyll-to-hexo/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/08/migrate-jekyll-to-hexo/" itemprop="url">
+                  把GitHub Pages上的博客从Jekyll迁移到Hexo
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-08T17:21:02+08:00">
+                2016-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前用的Jekyll，最大的痛点是对Markdown的代码格式支持的不是很好，尝试过一些方法，不过都不太理想；<br>最近偶然看到Hexo的介绍，决定尝试一下；<br>迁移过程中有些小Tips觉得有必要小结下，对于迁移的人来说还是很有用的。</p>
+<ul>
+<li>迁移结果：<br>最终效果：<a href="http://linyehui.me">http://linyehui.me</a><br>Hexo生成的代码：<a href="https://github.com/linyehui/linyehui.github.io" target="_blank" rel="external">https://github.com/linyehui/linyehui.github.io</a><br>Blog源代码：<a href="https://github.com/linyehui/linyehui-hexo-blog" target="_blank" rel="external">https://github.com/linyehui/linyehui-hexo-blog</a></li>
+</ul>
+<h2 id="迁移步骤"><a href="#迁移步骤" class="headerlink" title="迁移步骤"></a>迁移步骤</h2><ul>
+<li>我的系统是Mac OS 10.12.1</li>
+<li>我原来的Jekylly代码在这个仓库下：<a href="https://github.com/linyehui/linyehui.github.io" target="_blank" rel="external">https://github.com/linyehui/linyehui.github.io</a></li>
+<li><p>代码备份</p>
+<ul>
+<li>从master建立分支用于代码备份（多留个心眼，后面发现很有用），备份用的分支：<a href="https://github.com/linyehui/linyehui.github.io/tree/release-jekyll" target="_blank" rel="external">release-jekyll</a></li>
+<li>保险起见，我把本地的github 仓库也备份了下</li>
+</ul>
+</li>
+<li><p>创建一个新的github仓库用户存储我的hexo blog代码：<a href="https://github.com/linyehui/linyehui-hexo-blog，git" target="_blank" rel="external">https://github.com/linyehui/linyehui-hexo-blog，git</a> clone到本地，得到hexo的本地根目录：linyehui-hexo-blog</p>
+</li>
+<li><p>初始化hexo本地环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/linyehui/linyehui-hexo-blog</div><div class="line">cd linyehui-hexo-blog</div><div class="line">npm install -g hexo-cli</div><div class="line"></div><div class="line">hexo init</div><div class="line"></div><div class="line">npm install hexo --save</div><div class="line">npm install hexo-generator-index --save</div><div class="line">npm install hexo-generator-archive --save</div><div class="line">npm install hexo-generator-category --save</div><div class="line">npm install hexo-generator-tag --save</div><div class="line">npm install hexo-server --save</div><div class="line">npm install hexo-deployer-git --save</div><div class="line">npm install hexo-deployer-heroku --save</div><div class="line">npm install hexo-deployer-rsync --save</div><div class="line">npm install hexo-deployer-openshift --save</div><div class="line">npm install hexo-renderer-marked@0.2 --save</div><div class="line">npm install hexo-renderer-stylus@0.2 --save</div><div class="line">npm install hexo-generator-feed@1 --save</div><div class="line">npm install hexo-generator-sitemap@1 --save</div></pre></td></tr></table></figure>
+<p>  这一步完成的时候，你就可以在根目录下执行hexo server，并且可以在浏览器上看到Hello World页面了</p>
+</li>
+<li><p>配置下_config.yml，这里就是各种名字的配置，配置完了之后，浏览器预览没问题就行了</p>
+</li>
+<li><p>配置theme，我用的是iissnan/hexo-theme-next</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># git clone到另外一个目录，然后复制到./linyehui-hexo-blog/themes/next目录下</div><div class="line">git clone https://github.com/iissnan/hexo-theme-next</div><div class="line"></div><div class="line"># 复制hexo-theme-next目录到./linyehui-hexo-blog/themes/next</div><div class="line"></div><div class="line"># 修改_config.yml中的这行文件，主题名字和目录名一致</div><div class="line">theme: next</div></pre></td></tr></table></figure>
+<p>  根据自己的需要修改下主题的配置：./linyehui-hexo-blog/themes/next/_cofig.yml</p>
+</li>
+<li><p>迁移之前博客的文章</p>
+<ul>
+<li>把Jekyll版本的_posts目录下的文件复制到./linyehui-hexo-blog/source/_posts/</li>
+<li><p>把之前根目录下的媒体文件目录：media（图片）复制到./linyehui-hexo-blog/source/media</p>
+<p>浏览器中预览下，首页应该能看到你的文章了，数据迁移非常简单，就这一步</p>
+</li>
+</ul>
+</li>
+<li><p>创建tags文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ cd linyehui-hexo-blog</div><div class="line">$ hexo new page tags</div><div class="line"></div><div class="line"># 文件内容如下：</div><div class="line">title: 标签</div><div class="line">date: 2016-12-08 12:36:06</div><div class="line">type: &quot;tags&quot;</div><div class="line">comments: false</div><div class="line">---</div></pre></td></tr></table></figure>
+</li>
+<li><p>上面都没问题，就可以发布了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+<p>  每次发布，你都会发现你的github仓库的master分支只有两次commit，也就是说hexo deploy把老的master分支给删除了……</p>
+</li>
+<li><p>发布没问题，我就把新的代码仓库下的文件给入库了，记得配置下.gitignore</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.DS_Store</div><div class="line">.deploy_git</div><div class="line">db.json</div><div class="line">node_modules</div><div class="line">public</div></pre></td></tr></table></figure>
+</li>
+<li><p>到这一步blog的主体功能已经迁移完成，剩下的就是些美化、图标、头像，这里就不细说了</p>
+</li>
+</ul>
+<h2 id="迁移Tips"><a href="#迁移Tips" class="headerlink" title="迁移Tips"></a>迁移Tips</h2><ul>
+<li>hexo deploy 每次会将master分支删除后重新创建，迁移之前的代码切记要建立分支进行备份</li>
+<li>hexo deploy 所做的事情：删除现有的master分支，并建立新的master分支，把hexo目录下的.deploy_git目录push到master分支上</li>
+<li>source/_posts目录支持按年份划分目录，_config.yml中这么配置就行了：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">new_post_name:</span> :year/:year-:month-:day-:title.md <span class="comment"># File name of new posts</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.ezlippi.com/blog/2016/02/jekyll-to-hexo.html" target="_blank" rel="external">Jekyll迁移到Hexo搭建个人博客</a><br><a href="http://www.wukai.me/2016/01/13/blog-jekyll-to-hexo/" target="_blank" rel="external">将博客从Jekyll迁移至Hexo</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/12/06/memory-leak-from-nsarray-sortedarrayusingfunction/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -320,13 +489,11 @@
         
           
             <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>对一个NSMutableArray进行排序，却造成了内存泄漏……</p>
-<h4 id="代码说明："><a href="#代码说明：" class="headerlink" title="代码说明："></a>代码说明：</h4><p>在多线程的流程中，存在一个NSMutableArray *sortList；<br>对sortList进行排序，一开始用的方法是这样的，有内存泄漏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare context:NULL];</div><div class="line">[self.sortList removeAllObjects];</div><div class="line">[self.sortList addObjectsFromArray:sortedSendQuery];</div></pre></td></tr></table></figure></p>
+<h3 id="代码说明："><a href="#代码说明：" class="headerlink" title="代码说明："></a>代码说明：</h3><p>在多线程的流程中，存在一个NSMutableArray *sortList；</p>
+<p>对sortList进行排序，一开始用的方法是这样的，有内存泄漏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare context:NULL];</div><div class="line">[self.sortList removeAllObjects];</div><div class="line">[self.sortList addObjectsFromArray:sortedSendQuery];</div></pre></td></tr></table></figure></p>
 <p>修正后的代码只有一行，没有内存泄漏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.sortList sortUsingFunction:frameDataCompare context:nil];</div></pre></td></tr></table></figure></p>
-<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>NSArray的排序方法是：sortedArrayUsingFunction</p>
-<p>NSMutableArray的排序方法是：sortUsingFunction</p>
-<p>self.sortList是一个NSMutableArray，直接使用NSMutableArray的排序方法sortUsingFunction不需要进行内存复制，可以提高性能；</p>
-<p>除了性能问题，由于在多线程中使用，而且如果NSMutableArray中的object内存分配来自于其他线程的，那么不必要的内存复制会导致内存泄漏，出现的内存泄漏问题类似于：</p>
-<p><a href="http://stackoverflow.com/questions/5200857/memory-leaks-from-multidimensional-array-nsmutablearray-nsarray-addobject-and" target="_blank" rel="external">Memory leaks from Multidimensional array: NSMutableArray, NSArray, addObject and insertObjectAtIndex</a></p>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>NSArray的排序方法是：sortedArrayUsingFunction<br>NSMutableArray的排序方法是：sortUsingFunction<br>self.sortList是一个NSMutableArray，直接使用NSMutableArray的排序方法sortUsingFunction不需要进行内存复制，可以提高性能；</p>
+<p>除了性能问题，由于在多线程中使用，而且如果NSMutableArray中的object内存分配来自于其他线程的，那么不必要的内存复制会导致内存泄漏，出现的内存泄漏问题类似于：<br><a href="http://stackoverflow.com/questions/5200857/memory-leaks-from-multidimensional-array-nsmutablearray-nsarray-addobject-and" target="_blank" rel="external">Memory leaks from Multidimensional array: NSMutableArray, NSArray, addObject and insertObjectAtIndex</a></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>对于NSMutable的使用，要留意调用正确的方法，能不做类型转换就不做</p>
 
           
@@ -1414,130 +1581,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/04/29/hex-to-rgb/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/29/hex-to-rgb/" itemprop="url">
-                  HEX to RGB
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-29T00:00:00+08:00">
-                2016-04-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；</p>
-<p>那么同样的逻辑下iOS是什么效果呢？</p>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的</p>
-<h4 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h4><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Assumes input like &quot;#00FF00&quot; (#RRGGBB).</div><div class="line">+ (UIColor *)colorFromHexString:(NSString *)hexString &#123;</div><div class="line">    unsigned rgbValue = 0;</div><div class="line">    NSScanner *scanner = [NSScanner scannerWithString:hexString];</div><div class="line">    [scanner setScanLocation:1]; // bypass &apos;#&apos; character</div><div class="line">    [scanner scanHexInt:&amp;rgbValue];</div><div class="line">    return [UIColor colorWithRed:((rgbValue &amp; 0xFF0000) &gt;&gt; 16)/255.0 green:((rgbValue &amp; 0xFF00) &gt;&gt; 8)/255.0 blue:(rgbValue &amp; 0xFF)/255.0 alpha:1.0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>根据这个代码，实际的效果会是这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#CCC 会被解释成 #000CCC，而不是像CSS中所期望的#CCCCCC</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章:"></a>参考文章:</h2><p><a href="https://en.wikipedia.org/wiki/Web_colors#Converting_RGB_to_hexadecimal" target="_blank" rel="external">Web colors</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1583,7 +1626,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1593,7 +1636,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">169</span>
+                <span class="site-state-item-count">171</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1639,7 +1682,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2011 - 
+  &copy;  2010 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>

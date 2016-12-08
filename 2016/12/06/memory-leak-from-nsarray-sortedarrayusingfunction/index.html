@@ -73,8 +73,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="HABIT IS POWSER" type="application/atom+xml" />
 
@@ -89,18 +87,21 @@
 
 
 <meta name="description" content="问题描述对一个NSMutableArray进行排序，却造成了内存泄漏……
-代码说明：在多线程的流程中，存在一个NSMutableArray *sortList；对sortList进行排序，一开始用的方法是这样的，有内存泄漏：123NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare c">
+代码说明：在多线程的流程中，存在一个NSMutableArray *sortList；
+对sortList进行排序，一开始用的方法是这样的，有内存泄漏：123NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NSArray sortedArrayUsingFunction引发的内存泄漏">
 <meta property="og:url" content="http://linyehui.me/2016/12/06/memory-leak-from-nsarray-sortedarrayusingfunction/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
 <meta property="og:description" content="问题描述对一个NSMutableArray进行排序，却造成了内存泄漏……
-代码说明：在多线程的流程中，存在一个NSMutableArray *sortList；对sortList进行排序，一开始用的方法是这样的，有内存泄漏：123NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare c">
-<meta property="og:updated_time" content="2016-12-06T08:03:52.000Z">
+代码说明：在多线程的流程中，存在一个NSMutableArray *sortList；
+对sortList进行排序，一开始用的方法是这样的，有内存泄漏：123NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare">
+<meta property="og:updated_time" content="2016-12-08T09:08:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSArray sortedArrayUsingFunction引发的内存泄漏">
 <meta name="twitter:description" content="问题描述对一个NSMutableArray进行排序，却造成了内存泄漏……
-代码说明：在多线程的流程中，存在一个NSMutableArray *sortList；对sortList进行排序，一开始用的方法是这样的，有内存泄漏：123NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare c">
+代码说明：在多线程的流程中，存在一个NSMutableArray *sortList；
+对sortList进行排序，一开始用的方法是这样的，有内存泄漏：123NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare">
 
 
 
@@ -319,13 +320,11 @@
 
       
         <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>对一个NSMutableArray进行排序，却造成了内存泄漏……</p>
-<h4 id="代码说明："><a href="#代码说明：" class="headerlink" title="代码说明："></a>代码说明：</h4><p>在多线程的流程中，存在一个NSMutableArray *sortList；<br>对sortList进行排序，一开始用的方法是这样的，有内存泄漏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare context:NULL];</div><div class="line">[self.sortList removeAllObjects];</div><div class="line">[self.sortList addObjectsFromArray:sortedSendQuery];</div></pre></td></tr></table></figure></p>
+<h3 id="代码说明："><a href="#代码说明：" class="headerlink" title="代码说明："></a>代码说明：</h3><p>在多线程的流程中，存在一个NSMutableArray *sortList；</p>
+<p>对sortList进行排序，一开始用的方法是这样的，有内存泄漏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare context:NULL];</div><div class="line">[self.sortList removeAllObjects];</div><div class="line">[self.sortList addObjectsFromArray:sortedSendQuery];</div></pre></td></tr></table></figure></p>
 <p>修正后的代码只有一行，没有内存泄漏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.sortList sortUsingFunction:frameDataCompare context:nil];</div></pre></td></tr></table></figure></p>
-<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>NSArray的排序方法是：sortedArrayUsingFunction</p>
-<p>NSMutableArray的排序方法是：sortUsingFunction</p>
-<p>self.sortList是一个NSMutableArray，直接使用NSMutableArray的排序方法sortUsingFunction不需要进行内存复制，可以提高性能；</p>
-<p>除了性能问题，由于在多线程中使用，而且如果NSMutableArray中的object内存分配来自于其他线程的，那么不必要的内存复制会导致内存泄漏，出现的内存泄漏问题类似于：</p>
-<p><a href="http://stackoverflow.com/questions/5200857/memory-leaks-from-multidimensional-array-nsmutablearray-nsarray-addobject-and" target="_blank" rel="external">Memory leaks from Multidimensional array: NSMutableArray, NSArray, addObject and insertObjectAtIndex</a></p>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>NSArray的排序方法是：sortedArrayUsingFunction<br>NSMutableArray的排序方法是：sortUsingFunction<br>self.sortList是一个NSMutableArray，直接使用NSMutableArray的排序方法sortUsingFunction不需要进行内存复制，可以提高性能；</p>
+<p>除了性能问题，由于在多线程中使用，而且如果NSMutableArray中的object内存分配来自于其他线程的，那么不必要的内存复制会导致内存泄漏，出现的内存泄漏问题类似于：<br><a href="http://stackoverflow.com/questions/5200857/memory-leaks-from-multidimensional-array-nsmutablearray-nsarray-addobject-and" target="_blank" rel="external">Memory leaks from Multidimensional array: NSMutableArray, NSArray, addObject and insertObjectAtIndex</a></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>对于NSMutable的使用，要留意调用正确的方法，能不做类型转换就不做</p>
 
       
@@ -372,6 +371,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/08/migrate-jekyll-to-hexo/" rel="prev" title="把GitHub Pages上的博客从Jekyll迁移到Hexo">
+                把GitHub Pages上的博客从Jekyll迁移到Hexo <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -439,7 +442,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -449,7 +452,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">169</span>
+                <span class="site-state-item-count">171</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -491,7 +494,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明："><span class="nav-number">1.0.1.</span> <span class="nav-text">代码说明：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因分析"><span class="nav-number">2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码说明："><span class="nav-number">1.1.</span> <span class="nav-text">代码说明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因分析"><span class="nav-number">2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
             
 
           </div>
@@ -511,7 +514,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2011 - 
+  &copy;  2010 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>

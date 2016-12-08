@@ -1,0 +1,729 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HABIT IS POWSER" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/media/favicon.gif?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="遇到了好多异常，逐一介绍解决方案如下。
+java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android拍摄视频异常处理">
+<meta property="og:url" content="http://linyehui.me/2014/06/20/fix-video-capture-exception-on-android/index.html">
+<meta property="og:site_name" content="HABIT IS POWSER">
+<meta property="og:description" content="遇到了好多异常，逐一介绍解决方案如下。
+java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
+<meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android拍摄视频异常处理">
+<meta name="twitter:description" content="遇到了好多异常，逐一介绍解决方案如下。
+java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://linyehui.me/2014/06/20/fix-video-capture-exception-on-android/"/>
+
+
+
+
+
+  <title> Android拍摄视频异常处理 | HABIT IS POWSER </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HABIT IS POWSER</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">习惯就是力量</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/06/20/fix-video-capture-exception-on-android/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android拍摄视频异常处理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-20T00:00:00+08:00">
+                2014-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>遇到了好多异常，逐一介绍解决方案如下。</p>
+<h1 id="java-lang-RuntimeException-autoFocus-failed-at-android-hardware-Camera-native-autoFocus"><a href="#java-lang-RuntimeException-autoFocus-failed-at-android-hardware-Camera-native-autoFocus" class="headerlink" title="java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus"></a>java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus</h1><h3 id="autoFocus-时机不对导致的Crash，异常信息"><a href="#autoFocus-时机不对导致的Crash，异常信息" class="headerlink" title="autoFocus 时机不对导致的Crash，异常信息:"></a>autoFocus 时机不对导致的Crash，异常信息:</h3><pre><code>java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus
+</code></pre><h3 id="得到的用户反馈描述："><a href="#得到的用户反馈描述：" class="headerlink" title="得到的用户反馈描述："></a>得到的用户反馈描述：</h3><p>Sony s39h 一点拍摄视频就crash，从他们上传上来的log看是autoFocus的时候crash了，找了下资料，这个比较接近：<a href="http://www.hitziger.net/blog/android-camera-autofocus-failed/" target="_blank" rel="external">Android Camera.autoFocus() failed</a></p>
+<h3 id="参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus-，去掉，搞定。"><a href="#参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus-，去掉，搞定。" class="headerlink" title="参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus()，去掉，搞定。"></a>参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus()，去掉，搞定。</h3><h1 id="java-lang-RuntimeException-startPreview-failed"><a href="#java-lang-RuntimeException-startPreview-failed" class="headerlink" title="java.lang.RuntimeException: startPreview failed"></a>java.lang.RuntimeException: startPreview failed</h1><h3 id="老的系统版本需要调用SurfaceView的-setType，异常信息："><a href="#老的系统版本需要调用SurfaceView的-setType，异常信息：" class="headerlink" title="老的系统版本需要调用SurfaceView的 setType，异常信息："></a>老的系统版本需要调用SurfaceView的 setType，异常信息：</h3><pre><code>06-19 21:25:28.730: E/AndroidRuntime(1082): FATAL EXCEPTION: main
+    06-19 21:25:28.730: E/AndroidRuntime(1082): java.lang.RuntimeException: startPreview failed
+    06-19 21:25:28.730: E/AndroidRuntime(1082):     at android.hardware.Camera.startPreview(Native Method)
+    06-19 21:25:28.730: E/AndroidRuntime(1082):     at com.duowan.huanjuwan.app.truthordare.MediaActivity$1.surfaceChanged(MediaActivity.java:413)
+</code></pre><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><strong>只需要加上setType这个修改就可以了</strong>，但是代码加的位置有讲究，要在getHolder().addCallback之后加才可以</p>
+<pre><code>getHolder().addCallback(this);
+getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+</code></pre><h2 id="心路历程"><a href="#心路历程" class="headerlink" title="心路历程"></a>心路历程</h2><p>解决问题的过程比结果更优价值 :)</p>
+<h3 id="搜索到描述最接近的一文章："><a href="#搜索到描述最接近的一文章：" class="headerlink" title="搜索到描述最接近的一文章："></a>搜索到描述最接近的一文章：</h3><p><a href="http://stackoverflow.com/questions/7942378/android-camera-will-not-work-startpreview-fails" target="_blank" rel="external">Android Camera will not work. startPreview fails</a><br>试了下里面的代码，没有解决</p>
+<h3 id="其他的参考文章："><a href="#其他的参考文章：" class="headerlink" title="其他的参考文章："></a>其他的参考文章：</h3><p><a href="http://code.google.com/p/android/issues/detail?id=7909" target="_blank" rel="external">Issue 7909:Camera preview does not work on HTC Desire</a><br><a href="http://www.cnblogs.com/dyingbleed/archive/2012/12/04/2801621.html" target="_blank" rel="external">java.lang.RuntimeException: startPreview failed</a></p>
+<h3 id="再试下这个："><a href="#再试下这个：" class="headerlink" title="再试下这个："></a>再试下这个：</h3><pre><code>#34 paul.won...@gmail.com
+Hi everyone,
+
+
+I&apos;m new to Android but encountered the same problem.  Could it be the case that the width and height parameters are not called properly?  I added the following two lines before parameters.setPreviewSize and it now seems to work fine.
+
+
+w = parameters.getPreviewSize().width;
+h = parameters.getPreviewSize().height;
+
+
+For the record, I am using a HTC Desire too.
+
+
+Cheers,
+
+
+Paul
+</code></pre><p>还是不行</p>
+<h3 id="尝试下用Demo来调试"><a href="#尝试下用Demo来调试" class="headerlink" title="尝试下用Demo来调试"></a>尝试下用Demo来调试</h3><p>Demo加了两个地方，成功跑起来了，要看下能不能具体到只加一个就可以</p>
+<pre><code>@SuppressWarnings(&quot;deprecation&quot;)
+        public void initCameraManager(Context paramContext) {
+            cameraManager = ((MainActivity) paramContext).getCameraManager();
+            getHolder().addCallback(this);
+            getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        }
+
+
+
+int preview_width = parameters.getPreviewSize().width;
+                int preview_height = parameters.getPreviewSize().height;
+                parameters.setPreviewSize(preview_width, preview_height);
+                Log.e(&quot;video&quot;, &quot;Width: &quot; + preview_width + &quot;, height: &quot; + preview_height);
+                //parameters.setPreviewSize(640, 480);
+                camera.setParameters(parameters);
+</code></pre><p><strong>确认了：只需要加上setType这个修改就可以了</strong>，比较奇怪的是我昨天在我们的产品工程加了，但还是crash了，可能是加的位置不对</p>
+<blockquote>
+<p>getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);</p>
+</blockquote>
+<h3 id="回我们的产品工程再验证下"><a href="#回我们的产品工程再验证下" class="headerlink" title="回我们的产品工程再验证下"></a>回我们的产品工程再验证下</h3><p>果然是加的位置不对，要在getHolder().addCallback之后加才可以</p>
+<pre><code>getHolder().addCallback(this);
+getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+</code></pre><h1 id="java-lang-NoSuchFieldError-android-os-AsyncTask-THREAD-POOL-EXECUTOR"><a href="#java-lang-NoSuchFieldError-android-os-AsyncTask-THREAD-POOL-EXECUTOR" class="headerlink" title="java.lang.NoSuchFieldError: android.os.AsyncTask.THREAD_POOL_EXECUTOR"></a>java.lang.NoSuchFieldError: android.os.AsyncTask.THREAD_POOL_EXECUTOR</h1><h3 id="THREAD-POOL-EXECUTOR在Level-11后才有，需要做系统版本判断再调用，异常信息"><a href="#THREAD-POOL-EXECUTOR在Level-11后才有，需要做系统版本判断再调用，异常信息" class="headerlink" title="THREAD_POOL_EXECUTOR在Level 11后才有，需要做系统版本判断再调用，异常信息:"></a>THREAD_POOL_EXECUTOR在Level 11后才有，需要做系统版本判断再调用，异常信息:</h3><pre><code>06-20 12:36:06.410: E/AndroidRuntime(1613): FATAL EXCEPTION: main
+    06-20 12:36:06.410: E/AndroidRuntime(1613): java.lang.NoSuchFieldError: android.os.AsyncTask.THREAD_POOL_EXECUTOR
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at com.duowan.huanjuwan.app.camera.AutoFocusManager.onAutoFocus(AutoFocusManager.java:67)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at android.hardware.Camera$EventHandler.handleMessage(Camera.java:559)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at android.os.Handler.dispatchMessage(Handler.java:99)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at android.os.Looper.loop(Looper.java:130)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at android.app.ActivityThread.main(ActivityThread.java:3703)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at java.lang.reflect.Method.invokeNative(Native Method)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at java.lang.reflect.Method.invoke(Method.java:507)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:841)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:599)
+    06-20 12:36:06.410: E/AndroidRuntime(1613):     at dalvik.system.NativeStart.main(Native Method)
+</code></pre><h3 id="参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError"><a href="#参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError" class="headerlink" title="参考这个文章解决了：Android 2.3.3 AsyncTask call throws NoSuchFieldError"></a>参考这个文章解决了：<a href="http://stackoverflow.com/questions/12227682/android-2-3-3-asynctask-call-throws-nosuchfielderror" target="_blank" rel="external">Android 2.3.3 AsyncTask call throws NoSuchFieldError</a></h3><pre><code>@TargetApi(11)
+  static public &lt;T&gt; void executeAsyncTask(AsyncTask&lt;T, ?, ?&gt; task,
+                                          T... params) {
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.HONEYCOMB) {
+      task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+    }
+    else {
+      task.execute(params);
+    }
+  }
+</code></pre><h1 id="可以启动并预览，但是一开始录制视频，画面就卡住，没Crash"><a href="#可以启动并预览，但是一开始录制视频，画面就卡住，没Crash" class="headerlink" title="可以启动并预览，但是一开始录制视频，画面就卡住，没Crash"></a>可以启动并预览，但是一开始录制视频，画面就卡住，没Crash</h1><h3 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h3><pre><code>06-20 12:53:07.766: E/AndroidRuntime(1682): FATAL EXCEPTION: main
+    06-20 12:53:07.766: E/AndroidRuntime(1682): java.lang.OutOfMemoryError: bitmap size exceeds VM budget
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at android.graphics.BitmapFactory.nativeDecodeByteArray(Native Method)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at android.graphics.BitmapFactory.decodeByteArray(BitmapFactory.java:419)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at android.graphics.BitmapFactory.decodeByteArray(BitmapFactory.java:432)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at com.duowan.huanjuwan.app.truthordare.MediaActivity$9.onPictureTaken(MediaActivity.java:446)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at android.hardware.Camera$EventHandler.handleMessage(Camera.java:529)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at android.os.Handler.dispatchMessage(Handler.java:99)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at android.os.Looper.loop(Looper.java:130)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at android.app.ActivityThread.main(ActivityThread.java:3703)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at java.lang.reflect.Method.invokeNative(Native Method)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at java.lang.reflect.Method.invoke(Method.java:507)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:841)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:599)
+    06-20 12:53:07.766: E/AndroidRuntime(1682):     at dalvik.system.NativeStart.main(Native Method)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): Unexpected exception while focusing
+    06-20 12:53:08.207: W/AutoFocusManager(1682): java.lang.RuntimeException: autoFocus failed
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at android.hardware.Camera.native_autoFocus(Native Method)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at android.hardware.Camera.autoFocus(Camera.java:650)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at com.duowan.huanjuwan.app.camera.AutoFocusManager.start(AutoFocusManager.java:82)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at com.duowan.huanjuwan.app.camera.AutoFocusManager$AutoFocusTask.doInBackground(AutoFocusManager.java:118)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at android.os.AsyncTask$2.call(AsyncTask.java:185)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:306)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1088)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:581)
+    06-20 12:53:08.207: W/AutoFocusManager(1682):     at java.lang.Thread.run(Thread.java:1019)
+    06-20 12:53:10.198: I/Process(1682): Sending signal. PID: 1682 SIG: 9
+    06-20 12:53:10.539: I/dalvikvm(1884): Could not find method android.view.Display.getSize, referenced from method com.duowan.huanjuwan.app.common.Utils.getDisplaySize
+    06-20 12:53:10.549: W/dalvikvm(1884): VFY: unable to resolve virtual method 7806: Landroid/view/Display;.getSize (Landroid/graphics/Point;)V
+    06-20 12:53:10.549: D/dalvikvm(1884): VFY: replacing opcode 0x6e at 0x0017
+</code></pre><h3 id="结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。"><a href="#结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。" class="headerlink" title="结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。"></a>结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。</h3><p>———-The End———–</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/06/18/online-markdown-editor/" rel="next" title="Markdown在线编辑器对比">
+                <i class="fa fa-chevron-left"></i> Markdown在线编辑器对比
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/07/01/what-did-add-native-support-do/" rel="prev" title="Add Native Support 都做了些什么">
+                Add Native Support 都做了些什么 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="linyehui" />
+          <p class="site-author-name" itemprop="name">linyehui</p>
+          <p class="site-description motion-element" itemprop="description">HABIT IS POWSER</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">169</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java-lang-RuntimeException-autoFocus-failed-at-android-hardware-Camera-native-autoFocus"><span class="nav-number">1.</span> <span class="nav-text">java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#autoFocus-时机不对导致的Crash，异常信息"><span class="nav-number">1.0.1.</span> <span class="nav-text">autoFocus 时机不对导致的Crash，异常信息:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#得到的用户反馈描述："><span class="nav-number">1.0.2.</span> <span class="nav-text">得到的用户反馈描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus-，去掉，搞定。"><span class="nav-number">1.0.3.</span> <span class="nav-text">参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus()，去掉，搞定。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-lang-RuntimeException-startPreview-failed"><span class="nav-number">2.</span> <span class="nav-text">java.lang.RuntimeException: startPreview failed</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#老的系统版本需要调用SurfaceView的-setType，异常信息："><span class="nav-number">2.0.1.</span> <span class="nav-text">老的系统版本需要调用SurfaceView的 setType，异常信息：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">2.1.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心路历程"><span class="nav-number">2.2.</span> <span class="nav-text">心路历程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索到描述最接近的一文章："><span class="nav-number">2.2.1.</span> <span class="nav-text">搜索到描述最接近的一文章：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他的参考文章："><span class="nav-number">2.2.2.</span> <span class="nav-text">其他的参考文章：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再试下这个："><span class="nav-number">2.2.3.</span> <span class="nav-text">再试下这个：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试下用Demo来调试"><span class="nav-number">2.2.4.</span> <span class="nav-text">尝试下用Demo来调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回我们的产品工程再验证下"><span class="nav-number">2.2.5.</span> <span class="nav-text">回我们的产品工程再验证下</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-lang-NoSuchFieldError-android-os-AsyncTask-THREAD-POOL-EXECUTOR"><span class="nav-number">3.</span> <span class="nav-text">java.lang.NoSuchFieldError: android.os.AsyncTask.THREAD_POOL_EXECUTOR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#THREAD-POOL-EXECUTOR在Level-11后才有，需要做系统版本判断再调用，异常信息"><span class="nav-number">3.0.1.</span> <span class="nav-text">THREAD_POOL_EXECUTOR在Level 11后才有，需要做系统版本判断再调用，异常信息:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError"><span class="nav-number">3.0.2.</span> <span class="nav-text">参考这个文章解决了：Android 2.3.3 AsyncTask call throws NoSuchFieldError</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可以启动并预览，但是一开始录制视频，画面就卡住，没Crash"><span class="nav-number">4.</span> <span class="nav-text">可以启动并预览，但是一开始录制视频，画面就卡住，没Crash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常信息："><span class="nav-number">4.0.1.</span> <span class="nav-text">异常信息：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。"><span class="nav-number">4.0.2.</span> <span class="nav-text">结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

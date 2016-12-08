@@ -1,0 +1,675 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HABIT IS POWSER" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/media/favicon.gif?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。
+
+引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！  
+还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。  
+我这么说是有原因的，且听我一一道来，先来看看">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WinRT for Win32 programmers, Part II-Win32代码移植">
+<meta property="og:url" content="http://linyehui.me/2012/05/07/winrt-for-win32-programmers-part-ii-port-code-to-winrt-html/index.html">
+<meta property="og:site_name" content="HABIT IS POWSER">
+<meta property="og:description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。
+
+引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！  
+还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。  
+我这么说是有原因的，且听我一一道来，先来看看">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723263913.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723282777.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723285063.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723291338.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723294233.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723362013.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723330675.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723333844.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723340136.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723380747.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723345174.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723384590.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723385716.png">
+<meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WinRT for Win32 programmers, Part II-Win32代码移植">
+<meta name="twitter:description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。
+
+引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！  
+还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。  
+我这么说是有原因的，且听我一一道来，先来看看">
+<meta name="twitter:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723263913.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://linyehui.me/2012/05/07/winrt-for-win32-programmers-part-ii-port-code-to-winrt-html/"/>
+
+
+
+
+
+  <title> WinRT for Win32 programmers, Part II-Win32代码移植 | HABIT IS POWSER </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HABIT IS POWSER</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">习惯就是力量</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/05/07/winrt-for-win32-programmers-part-ii-port-code-to-winrt-html/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                WinRT for Win32 programmers, Part II-Win32代码移植
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-05-07T00:00:00+08:00">
+                2012-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文首发于 <a href="http://www.cnblogs.com/linyehui/" target="_blank" rel="external">http://www.cnblogs.com/linyehui/</a>   这里是我的Blog备份。</p>
+</blockquote>
+<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！  </p>
+<p>还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。  </p>
+<h1 id="我这么说是有原因的，且听我一一道来，先来看看目前的形势："><a href="#我这么说是有原因的，且听我一一道来，先来看看目前的形势：" class="headerlink" title="我这么说是有原因的，且听我一一道来，先来看看目前的形势："></a>我这么说是有原因的，且听我一一道来，先来看看目前的形势：</h1><ol>
+<li>我们在Win32下已经积累了多年的代码，如果全部抛掉，在WinRT下重新造一套轮子，SQLite，ZLib这些第三方库且不说，我们和我们公司的祖祖辈辈们一起开发的业务相关的功能库难道也全部重写？这个代价是不是有点大了？</li>
+<li>WinRT支持部分Win32 API和部分.NET API</li>
+</ol>
+<p>想到上面两点，作为一个成熟的Win32程序员，很自然的你会想到，用老的代码稍微组合拼凑下，看看在WinRT下能不能跑起来？  </p>
+<p>只要你运气不是太差的话你将发现：新建了个WinRT的工程，把Win32的代码文件拖进去，很轻松的就能编译通过，甚至一次通过，很欢畅的跑起来了呢~  </p>
+<p>没白跟着微软混这么多年啊！</p>
+<p>但是得但是，你别高兴的太早，因为想要提交到Windows Store，能编译通过还不算数，还要经过微软的“重重审核”，这其中就有一项微软要求开发者在提交应用之前必须自己在本地审核通过的项目：  </p>
+<p><strong>Windows App Certification Kit</strong> Validate Metro style App<br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723263913.png" alt="2012050723263913.png"></p>
+<p>如果你的应用无法通过这个认证，就更无法通过微软的审核了，而阻碍你通过认证最大的障碍就来自于Win32移植过来的代码，这也是本文的重点所在。</p>
+<h1 id="提交Store之前的准备工作之Metro-Style-Apps-认证："><a href="#提交Store之前的准备工作之Metro-Style-Apps-认证：" class="headerlink" title="提交Store之前的准备工作之Metro Style Apps 认证："></a>提交Store之前的准备工作之Metro Style Apps 认证：</h1><h2 id="一、如何认证"><a href="#一、如何认证" class="headerlink" title="一、如何认证"></a>一、如何认证</h2><h3 id="1、制作安装包："><a href="#1、制作安装包：" class="headerlink" title="1、制作安装包："></a>1、制作安装包：</h3><p>1.1 认证的安装包必须使用Release，使用Debug是无法通过的<br>1.2 右键主exe工程，选择Store，Create App Package，最后提交Store是需要使用”Create a package to upload to the Store or to use locally”进行打包的，但是认证的话使用”Create a package to use locally only”也是可以的<br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723282777.png" alt="2012050723282777.png"><br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723285063.png" alt="2012050723285063.png"><br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723291338.png" alt="2012050723291338.png"><br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723294233.png" alt="2012050723294233.png"><br>制作好安装包后，直接点击”Launch Windows App Certification Kit”按钮，就能开始认证了，类似下图，在对你的应用一阵蹂躏后你就能得到认证结果了：<br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723362013.png" alt="2012050723362013.png"><br>这个方法是最简单的，但有时候会出问题，所以我下面介绍下手动安装和认证的方法</p>
+<h2 id="2、手动安装"><a href="#2、手动安装" class="headerlink" title="2、手动安装"></a>2、手动安装</h2><p>2.1 制作出来的安装包目录下，会有一个Add-AppxDevPackage.bat文件，以管理员权限运行，就能安装了</p>
+<p>PS. 虽然这个步骤很简单，但还是可以有些诡异的问题，大家留意下下面这两点</p>
+<p>2.2 安装包所在的路径如果包含中文会导致安装失败<br>2.3 如果你是从别的机器拿过来的安装包，那么你可能由于没有开发者证书而导致安装失败<br>解决方法：打开VS，新建一个工程，编译时会出现提示让你申请开发者证书，按提示输入Live ID就可以了；<br>其实还有不用安装VS就可以获取Live ID的方法，这个就另外找地方再给大家介绍了</p>
+<h2 id="3、手动认证"><a href="#3、手动认证" class="headerlink" title="3、手动认证"></a>3、手动认证</h2><p>3.1 从Charm中搜索应用程序，找到Windows App Cert Kit，运行<br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723330675.png" alt="2012050723330675.png"><br>3.2 选择Validate Metro style App，进入后找到你的应用，选中，然后开始跑认证<br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723333844.png" alt="2012050723333844.png"><br>点下“Next”，又是一阵蹂躏之后，你就能得到想要的认证结果了<br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723340136.png" alt="2012050723340136.png"></p>
+<h2 id="二、认证结果的分析"><a href="#二、认证结果的分析" class="headerlink" title="二、认证结果的分析"></a>二、认证结果的分析</h2><p>认证过程其实比较简单，认证结果是一个xml文件，我们需要的是全部PASS。<br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723380747.png" alt="2012050723380747.png"><br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723345174.png" alt="2012050723345174.png"></p>
+<p>如果有Failed的项就需要根据提示来进行修正，然后重新编包，重新认证，直到认证通过为止。<br>而今天我们要说的最重要的部分，就在于，认证结果中的Use of Supported Platform </p>
+<h4 id="APIs这个部分，如果认证不通过应该怎么处理？"><a href="#APIs这个部分，如果认证不通过应该怎么处理？" class="headerlink" title="APIs这个部分，如果认证不通过应该怎么处理？"></a>APIs这个部分，如果认证不通过应该怎么处理？</h4><p><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723384590.png" alt="2012050723384590.png"><br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723385716.png" alt="2012050723385716.png"></p>
+<h4 id="1、为什么认证会不通过"><a href="#1、为什么认证会不通过" class="headerlink" title="1、为什么认证会不通过"></a>1、为什么认证会不通过</h4><p>其实字面意思已经很清楚了，就是使用了这些不被支持的API导致的，那究竟哪些函数是被支持的呢？<br>微软的网站上面有详细的API列表，大家可以查阅：<br><a href="http://msdn.microsoft.com/zh-cn/library/windows/apps/br205757" target="_blank" rel="external">Win32 and COM for Metro style apps</a><br>上面的链接比较分散，我当初在做移植时专门做了个简单的拼接，方便查阅：[<a href="http://www.linyehui.com/win32-and-com-for-metro-style-apps" target="_blank" rel="external">转载</a>[合集]Win32 and COM for Metro style apps]</p>
+<h4 id="2、怎样认证通过"><a href="#2、怎样认证通过" class="headerlink" title="2、怎样认证通过"></a>2、怎样认证通过</h4><p>把不被支持的函数换成被支持的，或者去掉不被支持的函数调用，改用WinRT自己的API。  </p>
+<p>说的很简单，有些事情做起来可能那么轻松，我这里列出一些简单的函数移植对应关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">CreateEvent-&gt;CreateEventEx</div><div class="line">CreateFileW-&gt;CreateFile2</div><div class="line">CreateMutexW-&gt;CreateMutexEx</div><div class="line">WaitForSingleObject-&gt;WaitForSingleObjectEx</div><div class="line">GetTickCount-&gt;(DWORD)GetTickCount64</div><div class="line">DeleteFileA-&gt;DeleteFileW</div><div class="line">FormatMessageA-&gt;FormatMessageW</div><div class="line">GetDiskFreeSpaceA-&gt;GetDiskFreeSpaceW</div><div class="line">GetFileAttributes-&gt;GetFileAttributesEx</div><div class="line">GetFileSize-&gt;GetFileInformationByHandleEx</div><div class="line">GetFullPathName-&gt; :(</div><div class="line">GetTempPathA-&gt; :(</div><div class="line">GetVersionExW-&gt; :(</div><div class="line">InitializeCriticalSection-&gt;InitializeCriticalSectionEx</div><div class="line">LoadLibrary-&gt;don&apos;t use this at best,alothough ther is LoadPackagedLibrary can use</div><div class="line">LockFile-&gt;LockFileEx</div><div class="line">UnLockFile-&gt;UnLockFileEx</div><div class="line">OutputDebugStringA-&gt; don&apos;t use</div><div class="line">SetFilePointer-&gt;SetFilePointerEx</div><div class="line">SetThreadPriority-&gt; :(</div></pre></td></tr></table></figure>
+<p>可以看到，不是所有函数都有直接可以替换的函数，更有像socket这类API，整套API WinRT都不允许你使用，这种你只能使用WinRT自己提供的那套新API来替换了。</p>
+<h1 id="关于Win32下的开源代码库"><a href="#关于Win32下的开源代码库" class="headerlink" title="关于Win32下的开源代码库"></a>关于Win32下的开源代码库</h1><p>类似ZLib这种优秀的开源代码，一个字都不用改就能直接在WinRT下编译通过且顺利通过认证，他们的优势在于代码使用纯C标准库实现；<br>而像SQLite这样的使用了部分Windows API的开源库，想要通过WinRT认证就得费点心思了，好在SQLite团队已经开始进行这件事情，大家着急的话可以自己从这里找到并下载SQLite的WinRT分支代码：<a href="http://www.sqlite.org/src/timeline?r=winrt" target="_blank" rel="external">http://www.sqlite.org/src/timeline?r=winrt</a>  　截至目前(2012/5/7 11:55)SQLite的WinRT分支还没合入trunk</p>
+<h2 id="自己的开发的代码库就更得自己移植了"><a href="#自己的开发的代码库就更得自己移植了" class="headerlink" title="自己的开发的代码库就更得自己移植了"></a>自己的开发的代码库就更得自己移植了</h2><p>我们当时移植的过程中，被折磨的最残的是对socket的支持，上面说到WinRT不允许使用WinSock，而我们的底层是基于异步socket的，为了平滑的移植我们的底层库，我们用StreamSocket这样的“高级”API适配出了“低级”的socket，这个恶心的过程以及这块的代码另外找机会再和大家分享交流。</p>
+<h1 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h1><p>很多跨平台移植性好的代码还是能很容易的移植到WinRT上，对于Win32程序员来说绝对是个好消息，这里也提醒大家在写跨平台代码时还是尽可能的使用C标准库的函数，这样在进行跨平台移植时才能做到事半功倍。</p>
+<p>更详细的提交应用到Windows Store的细节和注意事项，都可以参考微软的官方文档：<br>Selling apps<br>Certification requirements for Windows apps</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012/04/20/shutdown-intellisense-in-vs2011/" rel="next" title="VS2011中关掉坑爹的IntelliSense">
+                <i class="fa fa-chevron-left"></i> VS2011中关掉坑爹的IntelliSense
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2012/05/08/the-world-is-a-book-and-those-who-do-not-travel-read-o/" rel="prev" title="The world is a book, and those who do not travel read only one page">
+                The world is a book, and those who do not travel read only one page <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="linyehui" />
+          <p class="site-author-name" itemprop="name">linyehui</p>
+          <p class="site-description motion-element" itemprop="description">HABIT IS POWSER</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">169</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我这么说是有原因的，且听我一一道来，先来看看目前的形势："><span class="nav-number">2.</span> <span class="nav-text">我这么说是有原因的，且听我一一道来，先来看看目前的形势：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交Store之前的准备工作之Metro-Style-Apps-认证："><span class="nav-number">3.</span> <span class="nav-text">提交Store之前的准备工作之Metro Style Apps 认证：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、如何认证"><span class="nav-number">3.1.</span> <span class="nav-text">一、如何认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、制作安装包："><span class="nav-number">3.1.1.</span> <span class="nav-text">1、制作安装包：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、手动安装"><span class="nav-number">3.2.</span> <span class="nav-text">2、手动安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、手动认证"><span class="nav-number">3.3.</span> <span class="nav-text">3、手动认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、认证结果的分析"><span class="nav-number">3.4.</span> <span class="nav-text">二、认证结果的分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#APIs这个部分，如果认证不通过应该怎么处理？"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">APIs这个部分，如果认证不通过应该怎么处理？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、为什么认证会不通过"><span class="nav-number">3.4.0.2.</span> <span class="nav-text">1、为什么认证会不通过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、怎样认证通过"><span class="nav-number">3.4.0.3.</span> <span class="nav-text">2、怎样认证通过</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于Win32下的开源代码库"><span class="nav-number">4.</span> <span class="nav-text">关于Win32下的开源代码库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自己的开发的代码库就更得自己移植了"><span class="nav-number">4.1.</span> <span class="nav-text">自己的开发的代码库就更得自己移植了</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结："><span class="nav-number">5.</span> <span class="nav-text">小结：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

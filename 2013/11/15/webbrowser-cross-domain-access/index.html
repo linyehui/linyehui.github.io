@@ -1,0 +1,836 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HABIT IS POWSER" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/media/favicon.gif?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。
+我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebBrowser内嵌页面的跨域调用问题">
+<meta property="og:url" content="http://linyehui.me/2013/11/15/webbrowser-cross-domain-access/index.html">
+<meta property="og:site_name" content="HABIT IS POWSER">
+<meta property="og:description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。
+我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
+<meta property="og:updated_time" content="2016-02-29T08:27:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebBrowser内嵌页面的跨域调用问题">
+<meta name="twitter:description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。
+我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://linyehui.me/2013/11/15/webbrowser-cross-domain-access/"/>
+
+
+
+
+
+  <title> WebBrowser内嵌页面的跨域调用问题 | HABIT IS POWSER </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HABIT IS POWSER</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">习惯就是力量</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2013/11/15/webbrowser-cross-domain-access/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                WebBrowser内嵌页面的跨域调用问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-11-15T00:00:00+08:00">
+                2013-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>很早之前我写过一篇Blog：<a href="http://blog.csdn.net/debehe/article/details/5053759" target="_blank" rel="external">网页通过External接口与WebBrowser交互</a>，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。</p>
+<h2 id="我遇到的问题："><a href="#我遇到的问题：" class="headerlink" title="我遇到的问题："></a>我遇到的问题：</h2><p>内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面iframe.html，iframe.html上有个JS方法，我用C++调用不到，而host.html上的JS方法可以正常调用到。</p>
+<h2 id="问题分析："><a href="#问题分析：" class="headerlink" title="问题分析："></a>问题分析：</h2><p>从JS来说，这是个跨域问题，host.html和iframe.html不在一个域内；<br>JS解决跨域问题的方案其实也是有的，但这个不是我们本文的重点，本文的重点是怎么通过WebBrowser控件直接来解决这个“跨域调用”的问题。</p>
+<h3 id="问题的根本原因在于："><a href="#问题的根本原因在于：" class="headerlink" title="问题的根本原因在于："></a>问题的根本原因在于：</h3><p>调用网页的JS需要拿到IHTMLDocument2接口，而每个iframe都有自己对应的IHTMLDocument2，所以我们只要能拿到iframe对应的IHTMLDocument2就能解决问题了。</p>
+<h2 id="解决方案：直接上代码吧"><a href="#解决方案：直接上代码吧" class="headerlink" title="解决方案：直接上代码吧"></a>解决方案：直接上代码吧</h2><pre><code>/* -------------------------------------------------------------------------
+//    FileName    :    calljs_helper.h
+//    Creator        :    linyehui
+//    Date        :    2013/11/16 01:18:09
+//    Brief        :    调用WebBrowser控件内嵌页上的JS函数，iframe中的也能调到
+//
+//    $Id: $
+// -----------------------------------------------------------------------*/
+#ifndef __CALLJS_HELPER_H__
+#define __CALLJS_HELPER_H__
+
+// -------------------------------------------------------------------------
+namespace calljs_helper
+{
+    bool CallFunction(
+        CComPtr&lt;IWebBrowser2&gt; spIWebBrowser, 
+        LPCTSTR lpFuncName,
+        const vector&lt;wstring&gt;&amp; paramArray, 
+        CComVariant * pVarResult = NULL,
+        bool bEnumFrame = true);
+
+} // namespace
+
+// -------------------------------------------------------------------------
+// $Log: $
+
+#endif /* __CALLJS_HELPER_H__ */
+
+
+
+/* -------------------------------------------------------------------------
+//    FileName    :    calljs_helper.cpp
+//    Creator        :    linyehui
+//    Date        :    2013/11/16 01:18:14
+//    Brief        :    调用WebBrowser控件内嵌页上的JS函数，iframe中的也能调到
+//
+//    $Id: $
+// -----------------------------------------------------------------------*/
+
+#include &quot;stdafx.h&quot;
+#include &quot;calljs_helper.h&quot;
+
+// -------------------------------------------------------------------------
+
+CComPtr&lt;IWebBrowser2&gt; HtmlWindowToHtmlWebBrowser(CComPtr&lt;IHTMLWindow2&gt; spWindow)
+{
+    ATLASSERT(spWindow != NULL);
+    CComQIPtr&lt;IServiceProvider&gt;  spServiceProvider = spWindow;
+    if (spServiceProvider == NULL)
+    {
+        return CComPtr&lt;IWebBrowser2&gt;();
+    }
+
+    CComPtr&lt;IWebBrowser2&gt; spWebBrws;
+    HRESULT hRes = spServiceProvider-&gt;QueryService(IID_IWebBrowserApp, IID_IWebBrowser2, (void**)&amp;spWebBrws);
+    if (hRes != S_OK)
+    {
+        return CComPtr&lt;IWebBrowser2&gt;();
+    }
+
+    return spWebBrws;
+}
+
+// Converts a IHTMLWindow2 object to a IHTMLDocument2. Returns NULL in case of failure.
+// It takes into account accessing the DOM across frames loaded from different domains.
+CComPtr&lt;IHTMLDocument2&gt; HtmlWindowToHtmlDocument(CComPtr&lt;IHTMLWindow2&gt; spWindow)
+{
+    ATLASSERT(spWindow != NULL);
+    CComPtr&lt;IHTMLDocument2&gt; spDocument;
+    HRESULT hRes = spWindow-&gt;get_document(&amp;spDocument);
+    if ((S_OK == hRes) &amp;&amp; (spDocument != NULL))
+    {
+        // The html document was properly retrieved.
+        return spDocument;
+    }
+
+    // hRes could be E_ACCESSDENIED that means a security restriction that
+    // prevents scripting across frames that loads documents from different internet domains.
+    CComPtr&lt;IWebBrowser2&gt; spBrws = HtmlWindowToHtmlWebBrowser(spWindow);
+    if (spBrws == NULL)
+    {
+        return CComPtr&lt;IHTMLDocument2&gt;();
+    }
+
+    // Get the document object from the IWebBrowser2 object.
+    CComPtr&lt;IDispatch&gt; spDisp;
+    hRes = spBrws-&gt;get_Document(&amp;spDisp);
+    spDocument = spDisp;
+    return spDocument;
+}
+
+bool CallFunctionInDocument(
+                            CComPtr&lt;IHTMLDocument2&gt; spDocument2, 
+                            LPCTSTR lpFuncName,
+                            const vector&lt;wstring&gt;&amp; paramArray, 
+                            CComVariant * pVarResult)
+{
+    if (!spDocument2)
+        return false;
+
+    CComPtr&lt;IDispatch&gt; spScript; 
+    if (FAILED(spDocument2-&gt;get_Script(&amp;spScript))) { return false; }
+
+    CComBSTR bstrMember(lpFuncName); 
+    DISPID dispid = NULL; 
+    HRESULT hr = spScript-&gt;GetIDsOfNames(IID_NULL, &amp;bstrMember, 1, LOCALE_SYSTEM_DEFAULT, &amp;dispid); 
+    if (FAILED(hr)) { return false; }
+
+    const int arraySize = paramArray.size(); 
+
+    DISPPARAMS dispparams; 
+    memset(&amp;dispparams, 0, sizeof dispparams); 
+    dispparams.cArgs = arraySize; 
+    dispparams.rgvarg = new VARIANT[dispparams.cArgs]; 
+
+    for (int i = 0; i &lt; arraySize; i++)
+    {
+        CComBSTR bstr = paramArray[arraySize - 1 - i].c_str(); // back reading
+        bstr.CopyTo(&amp;dispparams.rgvarg[i].bstrVal); 
+        dispparams.rgvarg[i].vt = VT_BSTR; 
+    }
+    dispparams.cNamedArgs = 0; 
+
+    EXCEPINFO excepInfo; 
+    memset(&amp;excepInfo, 0, sizeof excepInfo); 
+    CComVariant vaResult; 
+    UINT nArgErr = (UINT)-1;  // initialize to invalid arg
+
+    hr = spScript-&gt;Invoke(dispid, IID_NULL, 0, DISPATCH_METHOD, &amp;dispparams, &amp;vaResult, &amp;excepInfo, &amp;nArgErr); 
+
+    delete [] dispparams.rgvarg; 
+    if (FAILED(hr)) { return false; }
+
+    if (pVarResult) { *pVarResult = vaResult; }
+
+    return true;
+}
+
+void EnumFrame(
+                              CComPtr&lt;IHTMLDocument2&gt; spIHTMLDocument2, 
+                              LPCTSTR lpFuncName,const vector&lt;wstring&gt;&amp; paramArray, 
+                              CComVariant* pVarResult)
+{
+    if ( !spIHTMLDocument2 )
+        return;
+
+    CComPtr&lt; IHTMLFramesCollection2 &gt; spFramesCollection2;
+    spIHTMLDocument2-&gt;get_frames( &amp;spFramesCollection2 );
+
+    long nFrameCount=0;
+    HRESULT hr = spFramesCollection2-&gt;get_length( &amp;nFrameCount );
+    if ( FAILED ( hr ) || 0 == nFrameCount )
+        return;
+
+    for(long i = 0; i &lt; nFrameCount; i++)
+    {
+        CComVariant vDispWin2;
+        hr = spFramesCollection2-&gt;item( &amp;CComVariant(i), &amp;vDispWin2 );
+        if ( FAILED ( hr ) ) 
+            continue;
+
+        CComQIPtr&lt; IHTMLWindow2 &gt; spWin2 = vDispWin2.pdispVal;
+        if( !spWin2 )
+            continue;
+
+        CComPtr &lt; IHTMLDocument2 &gt; spDoc2;
+        spDoc2 = HtmlWindowToHtmlDocument(spWin2);
+        if (!spDoc2)
+            continue;
+
+        CallFunctionInDocument(spDoc2, lpFuncName, paramArray, pVarResult);
+    }
+}
+
+bool calljs_helper::CallFunction(
+                  CComPtr&lt;IWebBrowser2&gt; spIWebBrowser, 
+                  LPCTSTR lpFuncName,
+                  const vector&lt;wstring&gt;&amp; paramArray, 
+                  CComVariant * pVarResult,
+                  bool bEnumFrame)
+{
+    if (!spIWebBrowser) 
+        return false;
+
+    CComPtr&lt;IDispatch&gt; spDispDoc; 
+    HRESULT hr = spIWebBrowser-&gt;get_Document(&amp;spDispDoc); 
+    if (FAILED(hr))
+        return false;
+
+    CComQIPtr&lt;IHTMLDocument2&gt; spDocument2 = spDispDoc; 
+    if (!spDocument2)
+        return false;
+
+    CallFunctionInDocument(spDocument2, lpFuncName, paramArray, pVarResult);
+
+    if (bEnumFrame)
+    {
+        EnumFrame(spDocument2, lpFuncName, paramArray, pVarResult);
+    }
+
+    return true; 
+}
+
+// -------------------------------------------------------------------------
+// $Log: $
+</code></pre><p>完整的例子代码在附件中。</p>
+<h3 id="另外再附上帮助我解决问题的参考资料"><a href="#另外再附上帮助我解决问题的参考资料" class="headerlink" title="另外再附上帮助我解决问题的参考资料:"></a>另外再附上帮助我解决问题的参考资料:</h3><p><a href="http://blog.csdn.net/skyremember/article/details/3422841" target="_blank" rel="external">IHTMLWindow2的get_document方法有时候会返回E_ACCESSDENIED</a>  </p>
+<p><a href="http://blog.csdn.net/nvidiacuda/article/details/9300869" target="_blank" rel="external">VC++实现浏览器自动填表</a>  </p>
+<p><a href="http://www.itdelphi.com/delphibbs/doc/2007/3845499.htm" target="_blank" rel="external">webbrowser控件的IHTMLDocument3 or2接口的iframe问题（非安全设置）</a>  </p>
+<p><a href="http://www.cnblogs.com/rainman/archive/2011/02/21/1960044.html" target="_blank" rel="external">window.name实现的跨域数据传输</a>  </p>
+<p><a href="http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html" target="_blank" rel="external">JavaScript跨域总结与解决办法</a>  </p>
+<p>The End.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/09/26/update-duiengine/" rel="next" title="升级DuiEngine到2013">
+                <i class="fa fa-chevron-left"></i> 升级DuiEngine到2013
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/12/06/stdout-make-curl-302-crash/" rel="prev" title="stdout引发的curl 302跳转 crash">
+                stdout引发的curl 302跳转 crash <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="linyehui" />
+          <p class="site-author-name" itemprop="name">linyehui</p>
+          <p class="site-description motion-element" itemprop="description">HABIT IS POWSER</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">169</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#我遇到的问题："><span class="nav-number">1.</span> <span class="nav-text">我遇到的问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分析："><span class="nav-number">2.</span> <span class="nav-text">问题分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题的根本原因在于："><span class="nav-number">2.1.</span> <span class="nav-text">问题的根本原因在于：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案：直接上代码吧"><span class="nav-number">3.</span> <span class="nav-text">解决方案：直接上代码吧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#另外再附上帮助我解决问题的参考资料"><span class="nav-number">3.1.</span> <span class="nav-text">另外再附上帮助我解决问题的参考资料:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

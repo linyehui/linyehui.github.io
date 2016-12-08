@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>HABIT IS POWSER</title>
+  <subtitle>习惯就是力量</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://linyehui.me/"/>
+  <updated>2016-12-06T08:03:52.000Z</updated>
+  <id>http://linyehui.me/</id>
+  
+  <author>
+    <name>linyehui</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NSArray sortedArrayUsingFunction引发的内存泄漏</title>
+    <link href="http://linyehui.me/2016/12/06/memory-leak-from-nsarray-sortedarrayusingfunction/"/>
+    <id>http://linyehui.me/2016/12/06/memory-leak-from-nsarray-sortedarrayusingfunction/</id>
+    <published>2016-12-05T16:00:00.000Z</published>
+    <updated>2016-12-06T08:03:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>对一个NSMutableArray进行排序，却造成了内存泄漏……</p>
+<h4 id="代码说明："><a href="#代码说明：" class="headerlink" title="代码说明："></a>代码说明：</h4><p>在多线程的流程中，存在一个NSMutableArray *sortList；<br>对sortList进行排序，一开始用的方法是这样的，有内存泄漏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare context:NULL];</div><div class="line">[self.sortList removeAllObjects];</div><div class="line">[self.sortList addObjectsFromArray:sortedSendQuery];</div></pre></td></tr></table></figure></p>
+<p>修正后的代码只有一行，没有内存泄漏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.sortList sortUsingFunction:frameDataCompare context:nil];</div></pre></td></tr></table></figure></p>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>NSArray的排序方法是：sortedArrayUsingFunction</p>
+<p>NSMutableArray的排序方法是：sortUsingFunction</p>
+<p>self.sortList是一个NSMutableArray，直接使用NSMutableArray的排序方法sortUsingFunction不需要进行内存复制，可以提高性能；</p>
+<p>除了性能问题，由于在多线程中使用，而且如果NSMutableArray中的object内存分配来自于其他线程的，那么不必要的内存复制会导致内存泄漏，出现的内存泄漏问题类似于：</p>
+<p><a href="http://stackoverflow.com/questions/5200857/memory-leaks-from-multidimensional-array-nsmutablearray-nsarray-addobject-and" target="_blank" rel="external">Memory leaks from Multidimensional array: NSMutableArray, NSArray, addObject and insertObjectAtIndex</a></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>对于NSMutable的使用，要留意调用正确的方法，能不做类型转换就不做</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;对一个NSMutableArray进行排序，却造成了内存泄漏……&lt;/p&gt;
+&lt;h4 id=&quot;代码说明：&quot;&gt;&lt;a href=&quot;#
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="memory-leak" scheme="http://linyehui.me/tags/memory-leak/"/>
+    
+      <category term="nsarray" scheme="http://linyehui.me/tags/nsarray/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Instruments Allocations排查内存释放不及时的问题</title>
+    <link href="http://linyehui.me/2016/12/01/fix-memory-problem-with-allocation/"/>
+    <id>http://linyehui.me/2016/12/01/fix-memory-problem-with-allocation/</id>
+    <published>2016-11-30T16:00:00.000Z</published>
+    <updated>2016-12-01T07:38:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦；</p>
+<p>这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。</p>
+<h3 id="使用之前先说几个Instruments的调试技巧"><a href="#使用之前先说几个Instruments的调试技巧" class="headerlink" title="使用之前先说几个Instruments的调试技巧"></a>使用之前先说几个Instruments的调试技巧</h3><p>1、调试内存可以用Debug模式来调试，但是记得在工程设置中把Debug模式的Debug Information Format设置成：DWARF with dSYM File，否则无法在Instruments中看到出问题的符号对应的代码</p>
+<p>2、性能调试真机调试的时候有时候连接不上，试试重启手机，实在还是不行，可以换成Debug模式，相对没那么容易连接不上手机(修改方法：Edit Scheme-&gt;Profile-&gt;Build Configuration 修改成Debug)</p>
+<h3 id="一个典型案例，问题描述"><a href="#一个典型案例，问题描述" class="headerlink" title="一个典型案例，问题描述"></a>一个典型案例，问题描述</h3><p>假定我们有一个页面MainViewController，打开这个页面后会开始进行视频直播，在直播的过程中会出现内存没有及时释放，比如10分钟后应用的内存占用已经达到了200MB，但是页面一关闭内存有都正确释放了。</p>
+<p>针对这样的一个问题我们应该怎么来排查呢？</p>
+<h3 id="排查步骤"><a href="#排查步骤" class="headerlink" title="排查步骤"></a>排查步骤</h3><p>1、Xcode中启动Profile工具<br><img src="/media/files/2016/12/01/01.png" alt="image"></p>
+<p>2、选择Allocations工具，点击红色按钮开始“录制”，这时Instruments会启动我们的应用<br><img src="/media/files/2016/12/01/02.png" alt="image"></p>
+<p>3、打开有内存释放问题的页面，稍微等一下，等页面的常规初始化完成，比如等个10秒钟</p>
+<p>4、从Instruments右下角的区域切换到“Display Settings” Tab页，并点击“Mark Generation”生成第一个Generation：Generation A；<br>这个相当于是我们判断内存没有及时释放的起始点<br><img src="/media/files/2016/12/01/04.png" alt="image"></p>
+<p>5、为了让没有及时释放的内存泄漏问题，累积的更多一点，第二次Mark的时间可以稍微多等久一点（等多久这个取决于你的内存问题出现所需要的时间，比如2分钟），然后再次点击“Mark Generation”，这个时候你就会发现两次Generation之间的内存增长，而这里面的增长其实就是我们所寻找的没有及时释放的内存：</p>
+<p><img src="/media/files/2016/12/01/05.png" alt="image"></p>
+<p>6、点击小箭头查看更详细的信息，根据内存占用的比例，找到占用比例最高的，并且不断展开，直到找到我们自己的代码，这就是出问题的地方了。<br><img src="/media/files/2016/12/01/06.png" alt="image"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="memory-leak" scheme="http://linyehui.me/tags/memory-leak/"/>
+    
+      <category term="instruments" scheme="http://linyehui.me/tags/instruments/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用AudioEngine时installTapOnBus的bufferSize设置无效</title>
+    <link href="http://linyehui.me/2016/11/15/installtaponbus-buffersize-not-taking-effect/"/>
+    <id>http://linyehui.me/2016/11/15/installtaponbus-buffersize-not-taking-effect/</id>
+    <published>2016-11-14T16:00:00.000Z</published>
+    <updated>2016-11-21T06:54:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>1、使用AudioEngine进行音频采集，并加入部分EQ等效果器</p>
+<p>2、将混音后的音频输出为PCM的Buffer</p>
+<p>3、将PCM Buffer编码为AAC</p>
+<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><p>AudioEngine的这个方法有Bug: <a href="https://developer.apple.com/reference/avfoundation/avaudionode/1387122-installtaponbus" target="_blank" rel="external">installTapOnBus</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)bufferSize format:(AVAudioFormat * __nullable)format block:(AVAudioNodeTapBlock)tapBlock;</div></pre></td></tr></table></figure>
+<p>iOS 10一下的版本，installTapOnBus的第二个参数bufferSize设置是无效的，<br>比如我设置bufferSize为1024，如果我的format中的bytePerFrame是4，那么最后出来的bufferSize应该是1024*4=4096才对，但是在iOS 10一下的版本，出来的bufferSize每次都是66148</p>
+<p>如果我们要进行AAC编码，那么AAC编码的bufferSize必须是能够被1024整除的，而66148是无法被1024整除</p>
+<p>如果AAC编码的时候没有对齐bufferSize和1024，就会出现音频数据丢失的情况</p>
+<h3 id="解决这个问题的两个角度"><a href="#解决这个问题的两个角度" class="headerlink" title="解决这个问题的两个角度"></a>解决这个问题的两个角度</h3><p>1、让installTapOnBus出来的数据能够被1024整除</p>
+<p>2、自己用做对齐的事情，那么部分音频数据的采集时间戳就需要自己构造</p>
+<p>我个人比较偏向第一种，这样就不存在构造时间戳的问题。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="第一步：installTapOnBus的Block中设置frameLength"><a href="#第一步：installTapOnBus的Block中设置frameLength" class="headerlink" title="第一步：installTapOnBus的Block中设置frameLength"></a>第一步：installTapOnBus的Block中设置frameLength</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">const uint32_t frameLength = 1024;</div><div class="line">[_inputNode installTapOnBus:0 bufferSize:frameLength format:[_inputNode outputFormatForBus:0] block:</div><div class="line">	^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) &#123;</div><div class="line">		// iOS 10以下需要这么设置才可以缩短Block回调的Buffer大小和同时也能缩短Block回调的时间间隔</div><div class="line">		// linyehui 2016-11-11</div><div class="line">		buffer.frameLength = frameLength;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<h4 id="参考：I-want-to-call-20-times-per-second-the-installTapOnBus-bufferSize-format-block"><a href="#参考：I-want-to-call-20-times-per-second-the-installTapOnBus-bufferSize-format-block" class="headerlink" title="参考：I want to call 20 times per second the installTapOnBus:bufferSize:format:block:"></a>参考：<a href="http://stackoverflow.com/questions/26115626/i-want-to-call-20-times-per-second-the-installtaponbusbuffersizeformatblock" target="_blank" rel="external">I want to call 20 times per second the installTapOnBus:bufferSize:format:block:</a></h4><h3 id="第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList"><a href="#第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList" class="headerlink" title="第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList"></a>第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList</h3><p>如果你使用了步骤一的代码，那么installTapOnBus回调出来的AVAudioPCMBuffer，不要使用mutableAudioBufferList，必须使用audioBufferList。</p>
+<p>因为mutableAudioBufferList的mDataByteSize是frameCapacity，而audioBufferList的mDataByteSize是真实的frameLength</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;1、使用AudioEngine进行音频采集，并加入部分EQ等效果器&lt;/p&gt;
+&lt;p&gt;2、将混音后的音频输出为PCM的Buffer&lt;/p&gt;
+&lt;p
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="audioengine" scheme="http://linyehui.me/tags/audioengine/"/>
+    
+      <category term="installtaponbus" scheme="http://linyehui.me/tags/installtaponbus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac升级到Sierra后SSH自动登录提示输入密码</title>
+    <link href="http://linyehui.me/2016/10/09/unable-to-ssh-without-password-after-updating-sierra/"/>
+    <id>http://linyehui.me/2016/10/09/unable-to-ssh-without-password-after-updating-sierra/</id>
+    <published>2016-10-08T16:00:00.000Z</published>
+    <updated>2016-10-09T11:01:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：<br><a href="http://i.am.simonkuang.com/2015/12/05/%E5%8F%91%E7%8E%B0-Gitlab-%E7%9A%84%E4%B8%80%E4%B8%AA%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/" target="_blank" rel="external">发现 Gitlab 的一个权限问题</a>中描述的那样，要求我输入密码；</p>
+<p>不过后面突然想到今天升级了系统，所以加上了Sierra关键字又搜索了下，发现了同类中人：  </p>
+<p><a href="https://forums.developer.apple.com/thread/48794" target="_blank" rel="external">Unable to ssh without password after installing Sierra</a></p>
+<p><a href="https://www.oschina.net/question/1262012_2199479" target="_blank" rel="external">苹果系统升级到sierra后，ssh远程证书免密码登录出错了</a></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>上面两个帖子里的办法没有能解决我的问题，我最终的解决方案是：</p>
+<blockquote>
+<p>在Sierra系统下重新生成id_rsa和id_rsa.pub，重新设置服务端的id_rsa.pub证书</p>
+</blockquote>
+<h3 id="一个小问题"><a href="#一个小问题" class="headerlink" title="一个小问题"></a>一个小问题</h3><p>一开始我生成的证书没有命名为默认的名字：id_rsa，会出现这个错误：<br><a href="https://www.zhihu.com/question/21402411" target="_blank" rel="external">github提示Permission denied (publickey)，如何才能解决？</a></p>
+<h4 id="这个问题其实好解决，两个方案："><a href="#这个问题其实好解决，两个方案：" class="headerlink" title="这个问题其实好解决，两个方案："></a>这个问题其实好解决，两个方案：</h4><ul>
+<li>方案一，把老的id_ras和id_rsa.pub备份起来，把新的证书改成默认名字</li>
+<li>方案二，<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="external">adding SSH key to the ssh-agent</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：&lt;br&gt;&lt;a href=&quot;ht
+    
+    </summary>
+    
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="sierra" scheme="http://linyehui.me/tags/sierra/"/>
+    
+      <category term="ssh" scheme="http://linyehui.me/tags/ssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AVAudioPCMBuffer to CMSampleBufferRef</title>
+    <link href="http://linyehui.me/2016/09/22/avaudiopcmbuffer-to-cmsamplebufferref/"/>
+    <id>http://linyehui.me/2016/09/22/avaudiopcmbuffer-to-cmsamplebufferref/</id>
+    <published>2016-09-21T16:00:00.000Z</published>
+    <updated>2016-09-22T05:02:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>把AVAudioPCMBuffer转换层CMSampleBufferRef，同理也可以从AudioBufferList加上AudioStreamBasicDescription转换成CMSampleBufferRef</p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><p>实现代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (CMSampleBufferRef)createAudioSampleBufferFrom:(AVAudioPCMBuffer *) pcmBuffer &#123;</div><div class="line">	AudioBufferList *audioBufferList = [pcmBuffer mutableAudioBufferList];</div><div class="line">	AudioStreamBasicDescription asbd = *pcmBuffer.format.streamDescription;</div><div class="line"></div><div class="line">	CMSampleBufferRef sampleBuffer = NULL;</div><div class="line">	CMFormatDescriptionRef format = NULL;</div><div class="line"></div><div class="line">	OSStatus error = CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &amp;asbd, 0, NULL, 0, NULL, NULL, &amp;format);</div><div class="line">	if (error != noErr) &#123;</div><div class="line">		return nil;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	CMSampleTimingInfo timing = &#123; CMTimeMake(1, asbd.mSampleRate), kCMTimeZero, kCMTimeInvalid &#125;;</div><div class="line">	error = CMSampleBufferCreate(kCFAllocatorDefault,</div><div class="line">								 NULL, false, NULL, NULL, format,</div><div class="line">								 pcmBuffer.frameLength,</div><div class="line">								 1, &amp;timing, 0, NULL, &amp;sampleBuffer);</div><div class="line">	if (error != noErr) &#123;</div><div class="line">		CFRelease(format);</div><div class="line">		NSLog(@&quot;CMSampleBufferCreate returned error: %d&quot;, (int)error);</div><div class="line">		return nil;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	error = CMSampleBufferSetDataBufferFromAudioBufferList(sampleBuffer, kCFAllocatorDefault, kCFAllocatorDefault, 0, audioBufferList);</div><div class="line">	if (error != noErr) &#123;</div><div class="line">		CFRelease(format);</div><div class="line">		NSLog(@&quot;CMSampleBufferSetDataBufferFromAudioBufferList returned error: %d&quot;, (int)error);</div><div class="line">		return nil;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	CFRelease(format);</div><div class="line">	return sampleBuffer;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="内存释放"><a href="#内存释放" class="headerlink" title="内存释放"></a>内存释放</h2><p>生成的CMSampleBufferRef引用计数为1，记得释放，类似：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CMSampleBufferRef sampleBuffer = [self createAudioSampleBufferFrom:pcmBuffer];</div><div class="line"></div><div class="line">// do somthing with sampleBuffer</div><div class="line"></div><div class="line">CFRelease(sampleBuffer);</div></pre></td></tr></table></figure>
+<h2 id="AudioBufferList"><a href="#AudioBufferList" class="headerlink" title="AudioBufferList"></a>AudioBufferList</h2><p>关于AudioBufferList，需要说的是PCM中的双通道，对应到AudioBufferList就是mNumberBuffers</p>
+<p>假定存在</p>
+<blockquote>
+<p>AudioBufferList *ioData = …<br>AudioStreamBasicDescription asbd = …</p>
+</blockquote>
+<p>如果ioData-&gt;mNumberBuffers为2，那么有以下几个推导：</p>
+<ul>
+<li>1、ioData-&gt;mBuffers[0]有数据外，ioData-&gt;mBuffers[1]也有数据；</li>
+<li>2、跟AudioBufferList对应的asbd-&gt;mChannelsPerFrame == 2</li>
+<li>3、还要补充一点的是，asbd.mChannelsPerFrame == 2的时候，asbd.mBytesPerFrame并不会包含2个channel的数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">asbd.mBytesPerFrame = asbd.mBitsPerChannel/8; // 正确</div><div class="line">asbd.mBytesPerFrame = asbd.mBitsPerChannel/8 * mChannelsPerFrame; // 错误</div></pre></td></tr></table></figure>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://developer.apple.com/reference/coremedia/1669345-cmsamplebuffer?language=objc" target="_blank" rel="external">CMSampleBuffer</a><br><a href="http://blog.csdn.net/wnnvv/article/details/50865201" target="_blank" rel="external">iOS 音频采集 AudioBufferList转CMSampleBufferRef</a><br><a href="https://forums.developer.apple.com/thread/11418" target="_blank" rel="external">CMSampleBufferSetDataBufferFromAudioBufferList returning -12731</a><br><a href="https://www.osstatus.com/search/results?platform=all&amp;framework=all&amp;search=-12737" target="_blank" rel="external">osstatus</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;把AVAudioPCMBuffer转换层CMSampleBufferRef，同理也可以从AudioBufferList加上AudioStre
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="audio" scheme="http://linyehui.me/tags/audio/"/>
+    
+      <category term="pcm" scheme="http://linyehui.me/tags/pcm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Build SRS librtmp for iOS</title>
+    <link href="http://linyehui.me/2016/08/12/build-srs-librtmp-for-ios/"/>
+    <id>http://linyehui.me/2016/08/12/build-srs-librtmp-for-ios/</id>
+    <published>2016-08-11T16:00:00.000Z</published>
+    <updated>2016-08-12T05:36:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>编译iOS版本的SRS librtmp</p>
+<h2 id="编译步骤"><a href="#编译步骤" class="headerlink" title="编译步骤"></a>编译步骤</h2><p>1、使用SRS的configure 生成单独的librtmp工程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure --export-librtmp-single=&lt;path&gt;</div></pre></td></tr></table></figure>
+<p>2、创建iOS空工程，并复制srs-librtmp src目录下的文件到新工程的vendor/srs-librtmp目录下</p>
+<p>3、从SRS的srs目录中把srs_auto_headers.hpp文件也复制到新工程的vendor/srs-librtmp目录下</p>
+<p>4、配置Header Search Paths，把librtmp的代码目录加入配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./srs-librtmp/vendor/srs-librtmp</div><div class="line">./srs-librtmp/vendor/srs-librtmp/core</div><div class="line">./srs-librtmp/vendor/srs-librtmp/kernel</div><div class="line">./srs-librtmp/vendor/srs-librtmp/libs</div><div class="line">./srs-librtmp/vendor/srs-librtmp/protocol</div></pre></td></tr></table></figure>
+<p>5、C++ Language Dialect 配置为 GNU++98</p>
+<p>6、C++ Standard Library 配置为 libstdc++(GNU C++ standard library)</p>
+<p>7、在main.m中添加测试代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#include &quot;srs_librtmp.hpp&quot;</div><div class="line"></div><div class="line">srs_rtmp_t rtmp;</div><div class="line"></div><div class="line">printf(&quot;Example for srs-librtmp\n&quot;);</div><div class="line">printf(&quot;SRS(ossrs) client librtmp library.\n&quot;);</div><div class="line">printf(&quot;version: %d.%d.%d\n&quot;, srs_version_major(), srs_version_minor(), srs_version_revision());</div><div class="line"></div><div class="line">rtmp = srs_rtmp_create(&quot;rtmp://ossrs.net/live/livestream&quot;);</div><div class="line">srs_human_trace(&quot;create rtmp success&quot;);</div><div class="line">srs_rtmp_destroy(rtmp);</div></pre></td></tr></table></figure>
+<p>8、编译正常，完成。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/ossrs/srs/wiki/v2_CN_SrsLibrtmp" target="_blank" rel="external">SRS提供的librtmp</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;编译iOS版本的SRS librtmp&lt;/p&gt;
+&lt;h2 id=&quot;编译步骤&quot;&gt;&lt;a href=&quot;#编译步骤&quot; class=&quot;headerlin
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="srs" scheme="http://linyehui.me/tags/srs/"/>
+    
+      <category term="rtmp" scheme="http://linyehui.me/tags/rtmp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Build SRS on Mac</title>
+    <link href="http://linyehui.me/2016/08/10/build-srs-on-mac/"/>
+    <id>http://linyehui.me/2016/08/10/build-srs-on-mac/</id>
+    <published>2016-08-09T16:00:00.000Z</published>
+    <updated>2016-08-10T08:01:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>1、在Mac下编译SRS的RTMP服务器</p>
+<p>2、用OBS往我们自己搭建的服务器上推流</p>
+<p>3、用RTMP播放器（比如VLC），观看服务器上RTMP流</p>
+<h2 id="取代码"><a href="#取代码" class="headerlink" title="取代码"></a>取代码</h2><p>官方git仓库已经不维护了：<a href="https://github.com/ossrs/srs" target="_blank" rel="external">https://github.com/ossrs/srs</a></p>
+<p>我使用的是官方推荐的第一个fork：<a href="https://github.com/smartdu/srs" target="_blank" rel="external">https://github.com/smartdu/srs</a></p>
+<p>由于代码比较大，挂个代理git clone成功率会高很多，这里顺便推荐下神器：proxychains4</p>
+<h2 id="编译参考文档"><a href="#编译参考文档" class="headerlink" title="编译参考文档"></a>编译参考文档</h2><p><a href="https://github.com/ossrs/srs/wiki/v1_CN_SampleRTMP" target="_blank" rel="external">https://github.com/ossrs/srs/wiki/v1_CN_SampleRTMP</a></p>
+<h5 id="PS"><a href="#PS" class="headerlink" title="PS."></a>PS.</h5><p>如果之前用不同的配置编译过，那么可以这样子清理下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd trunk</div><div class="line">make clean</div><div class="line">rm -f Makefile</div></pre></td></tr></table></figure>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><h4 id="用configure脚本来生成Makefile"><a href="#用configure脚本来生成Makefile" class="headerlink" title="用configure脚本来生成Makefile"></a>用configure脚本来生成Makefile</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ./srs/trunk</div><div class="line"></div><div class="line"><span class="comment"># 看下配置的选项</span></div><div class="line"></div><div class="line">./configure -h</div><div class="line"></div><div class="line"><span class="comment"># 指定Mac编译，并关闭其他option</span></div><div class="line">./configure --osx --without-ssl --without-hls --without-hds --without-dvr --without-nginx --without-http-callback --without-http-server --without-stream-caster --without-http-api --without-ffmpeg --without-transcode --without-ingest --without-stat --without-librtmp</div><div class="line"></div><div class="line">make</div></pre></td></tr></table></figure>
+<p>一切顺利的话，编译通过，会得到了./objs/srs这个可执行文件</p>
+<h2 id="运行SRS服务器"><a href="#运行SRS服务器" class="headerlink" title="运行SRS服务器"></a>运行SRS服务器</h2><h4 id="srs-conf"><a href="#srs-conf" class="headerlink" title="srs.conf"></a>srs.conf</h4><p>由于Mac系统的限制，运行SRS的话需要把./conf/srs.conf中的并发数修改下，我修改成100:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#srs.conf中的这一行需要修改下：</span></div><div class="line">max_connections     100;</div></pre></td></tr></table></figure>
+<h4 id="rtmp服务器跑起来"><a href="#rtmp服务器跑起来" class="headerlink" title="rtmp服务器跑起来"></a>rtmp服务器跑起来</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">./objs/srs -c ./conf/srs.conf</div><div class="line"></div><div class="line"><span class="comment">#跑起来后要留意下log，配置存在错误的话，srs进程会关闭掉</span></div><div class="line">tail <span class="_">-f</span> ./objs/srs.log</div><div class="line"></div><div class="line"><span class="comment">#检查下srs进程是否正常运行</span></div><div class="line">ps aux | grep srs</div></pre></td></tr></table></figure>
+<h4 id="推流"><a href="#推流" class="headerlink" title="推流"></a>推流</h4><p>直接使用OBS或者其他RTMP推流工具，填写下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">URL：rtmp://10.0.0.54/live</div><div class="line">流密钥：livestream</div></pre></td></tr></table></figure>
+<h4 id="看RTMP流视频"><a href="#看RTMP流视频" class="headerlink" title="看RTMP流视频"></a>看RTMP流视频</h4><p>直接用VLC打开这个地址就可以了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rtmp://10.0.0.54/live/livestream</div></pre></td></tr></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到此Mac上最精简的SRS算是编译通过，且能正常跑起来了~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;1、在Mac下编译SRS的RTMP服务器&lt;/p&gt;
+&lt;p&gt;2、用OBS往我们自己搭建的服务器上推流&lt;/p&gt;
+&lt;p&gt;3、用RTMP播放器（比如V
+    
+    </summary>
+    
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="srs" scheme="http://linyehui.me/tags/srs/"/>
+    
+      <category term="rtmp" scheme="http://linyehui.me/tags/rtmp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>type_half.inl file not found</title>
+    <link href="http://linyehui.me/2016/07/29/video-core-glm-include-error/"/>
+    <id>http://linyehui.me/2016/07/29/video-core-glm-include-error/</id>
+    <published>2016-07-28T16:00:00.000Z</published>
+    <updated>2016-08-10T07:49:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>通过CocoaPods使用VideoCore，出现编译错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;type_half.inl&apos; file not found</div></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>I solved this problem by change the search path setting in Pods project. Just remove all “”${PODS_ROOT}/Headers/Private” in “Header Search Paths”</p>
+<p>记得选着Pod工程下的VideoCore这个Target进行配置，这个不是最优的方案，但是算是比较简单的方案。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/jgh-/VideoCore/issues/209" target="_blank" rel="external">GLM Include Error #209</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;通过CocoaPods使用VideoCore，出现编译错误：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;tab
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="cocoapods" scheme="http://linyehui.me/tags/cocoapods/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello React</title>
+    <link href="http://linyehui.me/2016/05/04/hello-react/"/>
+    <id>http://linyehui.me/2016/05/04/hello-react/</id>
+    <published>2016-05-03T16:00:00.000Z</published>
+    <updated>2016-05-05T09:17:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>我在react还是0.x版本的时候，走过一遍react的Getting Started，目前虽然已经写了一些代码，但是完完整整的Hello World倒是没写过，所以决定补下这篇Hello World教程，并做一些相关知识的入门介绍。</p>
+<h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p>如果你能看得懂react官网的介绍，其实也没必要看我这篇转述的教程。</p>
+<p><a href="https://facebook.github.io/react/docs/getting-started.html" target="_blank" rel="external">React官方 Getting Started</a>  </p>
+<p><a href="https://cdnjs.com/libraries/react/" target="_blank" rel="external">CDN静态文件（为什么不用Facebook的CDN大家都懂的）</a>  </p>
+<p><a href="https://facebook.github.io/react/docs/package-management.html#using-react-from-npm" target="_blank" rel="external">Package Management</a>  </p>
+<h2 id="最简单的Hello-World"><a href="#最简单的Hello-World" class="headerlink" title="最简单的Hello World"></a>最简单的Hello World</h2><p>单个静态文件，并使用CDN直接引用react.js、react-dom.js以及browser.min.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8" /&gt;</div><div class="line">    &lt;title&gt;Hello React!&lt;/title&gt;</div><div class="line">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react.min.js"&gt;&lt;/script&gt;</div><div class="line">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react-dom.min.js"&gt;&lt;/script&gt;</div><div class="line">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"&gt;&lt;/script&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;div id="example"&gt;&lt;/div&gt;</div><div class="line">    &lt;script type="text/babel"&gt;</div><div class="line">      ReactDOM.render(</div><div class="line">        &lt;h1&gt;Hello, world! @eden&lt;/h1&gt;,</div><div class="line">        document.getElementById('example')</div><div class="line">      );</div><div class="line">    &lt;/script&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="React-npm-webpack"><a href="#React-npm-webpack" class="headerlink" title="React + npm + webpack"></a>React + npm + webpack</h2><h4 id="1-创建一个目录hello-react"><a href="#1-创建一个目录hello-react" class="headerlink" title="1. 创建一个目录hello-react"></a>1. 创建一个目录hello-react</h4><p>之后的命令行操作都是在这个目录下进行的。</p>
+<h4 id="2-npm-init一个package-json文件，全部使用默认即可"><a href="#2-npm-init一个package-json文件，全部使用默认即可" class="headerlink" title="2. npm init一个package.json文件，全部使用默认即可"></a>2. npm init一个package.json文件，全部使用默认即可</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure>
+<h4 id="3-配置npm依赖"><a href="#3-配置npm依赖" class="headerlink" title="3. 配置npm依赖"></a>3. 配置npm依赖</h4><p>这里的webpack我并没有使用全局安装，下面的步骤会用到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save react react-dom babel-preset-react babel-loader babel-core webpack</div></pre></td></tr></table></figure>
+<h4 id="4-在hello-html和hello-js中写代码"><a href="#4-在hello-html和hello-js中写代码" class="headerlink" title="4. 在hello.html和hello.js中写代码"></a>4. 在hello.html和hello.js中写代码</h4><h5 id="hello-html"><a href="#hello-html" class="headerlink" title="hello.html"></a>hello.html</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello React!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- No need for Babel! --&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="hello-js"><a href="#hello-js" class="headerlink" title="hello.js"></a>hello.js</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// hello.js</span></div><div class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</div><div class="line"><span class="keyword">var</span> ReactDOM = <span class="built_in">require</span>(<span class="string">'react-dom'</span>);</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world! I'm eden<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>,</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>)</div><div class="line">);</div></pre></td></tr></table></figure>
+<h4 id="5-用webpack生成bundle-js"><a href="#5-用webpack生成bundle-js" class="headerlink" title="5. 用webpack生成bundle.js"></a>5. 用webpack生成bundle.js</h4><h5 id="创建并配置babel：-babelrc"><a href="#创建并配置babel：-babelrc" class="headerlink" title="创建并配置babel：.babelrc"></a>创建并配置babel：.babelrc</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; &quot;presets&quot;: [&quot;react&quot;] &#125;</div></pre></td></tr></table></figure>
+<h5 id="webpack打包，使用本地目录下的webpack，而不是全局的"><a href="#webpack打包，使用本地目录下的webpack，而不是全局的" class="headerlink" title="webpack打包，使用本地目录下的webpack，而不是全局的"></a>webpack打包，使用本地目录下的webpack，而不是全局的</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./node_modules/webpack/bin/webpack.js hello.js bundle.js --module-bind &apos;js=babel-loader&apos;</div></pre></td></tr></table></figure>
+<p>这样我们就在hello-react的根目录下得到了下面这几个文件和目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">./.babelrc</div><div class="line">./bundle.js</div><div class="line">./hello.html</div><div class="line">./main.js</div><div class="line">./node_modules</div><div class="line">./package.json</div></pre></td></tr></table></figure>
+<h4 id="6-OK了"><a href="#6-OK了" class="headerlink" title="6. OK了"></a>6. OK了</h4><p>直接用浏览器打开./hello.html就是我们想要的用npm和webpack打包出来的，最简单的react hello worl</p>
+<h2 id="webpack配置"><a href="#webpack配置" class="headerlink" title="webpack配置"></a>webpack配置</h2><p>上面我们使用了webpack的命令行进行打包，其实用npm配合webpack会更方便，同时我们也调整下我们的目录结构，把hello.js放到src目录下，并把打包生成的bundle.js,以及hello.html放到build目录下。</p>
+<h3 id="添加一个webpack-config-js"><a href="#添加一个webpack-config-js" class="headerlink" title="添加一个webpack.config.js"></a>添加一个webpack.config.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var path = require(&apos;path&apos;);</div><div class="line"></div><div class="line">var config = &#123;</div><div class="line">    entry: [</div><div class="line">        path.resolve(__dirname, &apos;src/hello.js&apos;)</div><div class="line">    ],</div><div class="line">    output: &#123;</div><div class="line">        path: path.resolve(__dirname, &apos;build&apos;),</div><div class="line">        filename: &apos;bundle.js&apos;,</div><div class="line">    &#125;,</div><div class="line">    module: &#123;</div><div class="line">        loaders: [&#123;</div><div class="line">            test: /\.jsx?$/,</div><div class="line">            exclude: /node_modules/, </div><div class="line">            loader: &apos;babel&apos;,</div><div class="line">            query: &#123;&#125;</div><div class="line">        &#125;]</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">module.exports = config;</div></pre></td></tr></table></figure>
+<h3 id="修改下package-json添加一个build的script"><a href="#修改下package-json添加一个build的script" class="headerlink" title="修改下package.json添加一个build的script"></a>修改下package.json添加一个build的script</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;hello-react&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</div><div class="line">    &quot;build&quot;: &quot;webpack&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;babel-core&quot;: &quot;^6.8.0&quot;,</div><div class="line">    &quot;babel-loader&quot;: &quot;^6.2.4&quot;,</div><div class="line">    &quot;babel-preset-react&quot;: &quot;^6.5.0&quot;,</div><div class="line">    &quot;react&quot;: &quot;^15.0.2&quot;,</div><div class="line">    &quot;react-dom&quot;: &quot;^15.0.2&quot;,</div><div class="line">    &quot;webpack&quot;: &quot;^1.13.0&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="通过npm来执行webpack打包"><a href="#通过npm来执行webpack打包" class="headerlink" title="通过npm来执行webpack打包"></a>通过npm来执行webpack打包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run-script build</div></pre></td></tr></table></figure>
+<p>这样我们就在hello-react的根目录下得到了下面这几个文件和目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">./.babelrc</div><div class="line">./build/bundle.js</div><div class="line">./build/hello.html</div><div class="line">./package.json</div><div class="line">./src/hello.js</div><div class="line">./webpack.config.js</div></pre></td></tr></table></figure>
+<h3 id="好了，可以通过打开hello-html来查看下我们的成果了"><a href="#好了，可以通过打开hello-html来查看下我们的成果了" class="headerlink" title="好了，可以通过打开hello.html来查看下我们的成果了"></a>好了，可以通过打开hello.html来查看下我们的成果了</h3><h3 id="webpack-小结"><a href="#webpack-小结" class="headerlink" title="webpack 小结"></a>webpack 小结</h3><p>再往后，你可能就需要用webpack-dev-server来自动刷新页面，这个本文就不具体介绍了，因为webpack可以做的事情非常多，大家慢慢去发现吧 :)</p>
+<p>这里贴下在上面的步骤之后配置webpack-dev-server的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save webpack-dev-server</div></pre></td></tr></table></figure>
+<h4 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">var path = require(&apos;path&apos;);</div><div class="line"></div><div class="line">var config = &#123;</div><div class="line">    entry: [</div><div class="line">        &apos;webpack/hot/dev-server&apos;,</div><div class="line">        &apos;webpack-dev-server/client?http://localhost:8080&apos;,</div><div class="line">        path.resolve(__dirname, &apos;src/hello.js&apos;)</div><div class="line">    ],</div><div class="line">    output: &#123;</div><div class="line">        path: path.resolve(__dirname, &apos;build&apos;),</div><div class="line">        filename: &apos;bundle.js&apos;,</div><div class="line">    &#125;,</div><div class="line">    module: &#123;</div><div class="line">        loaders: [&#123;</div><div class="line">            test: /\.jsx?$/,</div><div class="line">            exclude: /node_modules/, </div><div class="line">            loader: &apos;babel&apos;,</div><div class="line">            query: &#123;&#125;</div><div class="line">        &#125;]</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">module.exports = config;</div></pre></td></tr></table></figure>
+<h4 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;hello-react&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</div><div class="line">    &quot;build&quot;: &quot;webpack&quot;,</div><div class="line">    &quot;dev&quot;: &quot;webpack-dev-server --devtool eval --progress --colors --hot --content-base build&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;babel-core&quot;: &quot;^6.8.0&quot;,</div><div class="line">    &quot;babel-loader&quot;: &quot;^6.2.4&quot;,</div><div class="line">    &quot;babel-preset-react&quot;: &quot;^6.5.0&quot;,</div><div class="line">    &quot;react&quot;: &quot;^15.0.2&quot;,</div><div class="line">    &quot;react-dom&quot;: &quot;^15.0.2&quot;,</div><div class="line">    &quot;webpack&quot;: &quot;^1.13.0&quot;,</div><div class="line">    &quot;webpack-dev-server&quot;: &quot;^1.14.1&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="执行脚本："><a href="#执行脚本：" class="headerlink" title="执行脚本："></a>执行脚本：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run-script dev</div></pre></td></tr></table></figure>
+<p>然后你就可以在浏览器上用<a href="http://127.0.0.1:8080/hello.html自动刷新你的修改了" target="_blank" rel="external">http://127.0.0.1:8080/hello.html自动刷新你的修改了</a></p>
+<h2 id="关键字说明"><a href="#关键字说明" class="headerlink" title="关键字说明"></a>关键字说明</h2><p><a href="https://babeljs.io/" target="_blank" rel="external">babel</a></p>
+<p><a href="http://webpack.github.io/" target="_blank" rel="external">webpack</a></p>
+<p><a href="https://www.zfanw.com/blog/babel-6.html" target="_blank" rel="external">babel 6 教程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;我在react还是0.x版本的时候，走过一遍react的Getting Started，目前虽然已经写了一些代码，但是完完整整的Hello 
+    
+    </summary>
+    
+    
+      <category term="react" scheme="http://linyehui.me/tags/react/"/>
+    
+      <category term="npm" scheme="http://linyehui.me/tags/npm/"/>
+    
+      <category term="webpack" scheme="http://linyehui.me/tags/webpack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HEX to RGB</title>
+    <link href="http://linyehui.me/2016/04/29/hex-to-rgb/"/>
+    <id>http://linyehui.me/2016/04/29/hex-to-rgb/</id>
+    <published>2016-04-28T16:00:00.000Z</published>
+    <updated>2016-04-29T03:20:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；</p>
+<p>那么同样的逻辑下iOS是什么效果呢？</p>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的</p>
+<h4 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h4><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Assumes input like &quot;#00FF00&quot; (#RRGGBB).</div><div class="line">+ (UIColor *)colorFromHexString:(NSString *)hexString &#123;</div><div class="line">    unsigned rgbValue = 0;</div><div class="line">    NSScanner *scanner = [NSScanner scannerWithString:hexString];</div><div class="line">    [scanner setScanLocation:1]; // bypass &apos;#&apos; character</div><div class="line">    [scanner scanHexInt:&amp;rgbValue];</div><div class="line">    return [UIColor colorWithRed:((rgbValue &amp; 0xFF0000) &gt;&gt; 16)/255.0 green:((rgbValue &amp; 0xFF00) &gt;&gt; 8)/255.0 blue:(rgbValue &amp; 0xFF)/255.0 alpha:1.0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>根据这个代码，实际的效果会是这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#CCC 会被解释成 #000CCC，而不是像CSS中所期望的#CCCCCC</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章:"></a>参考文章:</h2><p><a href="https://en.wikipedia.org/wiki/Web_colors#Converting_RGB_to_hexadecimal" target="_blank" rel="external">Web colors</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;疑问&quot;&gt;&lt;a href=&quot;#疑问&quot; class=&quot;headerlink&quot; title=&quot;疑问&quot;&gt;&lt;/a&gt;疑问&lt;/h2&gt;&lt;p&gt;CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；&lt;/p&gt;
+&lt;p&gt;那么同样的逻辑下
+    
+    </summary>
+    
+    
+      <category term="tips" scheme="http://linyehui.me/tags/tips/"/>
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="css" scheme="http://linyehui.me/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac OSX下重装node.js</title>
+    <link href="http://linyehui.me/2016/03/03/reinstall-nodejs-on-osx/"/>
+    <id>http://linyehui.me/2016/03/03/reinstall-nodejs-on-osx/</id>
+    <published>2016-03-02T16:00:00.000Z</published>
+    <updated>2016-09-06T06:28:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>之前没太留意node的安装版本，各种手动安装，今天突然发现node怎么又变成了0.10的版本，nvm，npm，node版本都怪怪的。</p>
+<p>在代码洁癖的驱动下，准备清理这个恶劣的开发环境，清理后的目标是:</p>
+<ul>
+<li>用brew来安装nvm，并管理nvm的升级</li>
+<li>用nvm来安装node.js，并管理node.js的升级</li>
+</ul>
+<h2 id="卸载老版本的node和nvm"><a href="#卸载老版本的node和nvm" class="headerlink" title="卸载老版本的node和nvm"></a>卸载老版本的node和nvm</h2><h3 id="卸载node"><a href="#卸载node" class="headerlink" title="卸载node"></a>卸载node</h3><ul>
+<li>如果是从brew安装的, 运行brew uninstall node</li>
+<li>删除~/目录下所有node和node_modules</li>
+<li>删除/usr/local/lib中的所有node和node_modules</li>
+<li>删除/usr/local/lib中的所有node和node_modules的文件夹</li>
+<li>在/usr/local/bin中, 删除所有node的可执行文件(node和npm)</li>
+</ul>
+<h4 id="手动删除文件，整理成脚本是这个样子"><a href="#手动删除文件，整理成脚本是这个样子" class="headerlink" title="手动删除文件，整理成脚本是这个样子:"></a>手动删除文件，整理成脚本是这个样子:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo rm -rf ~/.npm</div><div class="line">sudo rm -rf ~/node_modules</div><div class="line">sudo rm -rf ~/.node-gyp</div><div class="line">sudo rm /usr/local/bin/node</div><div class="line">sudo rm /usr/local/bin/npm</div><div class="line">sudo rm /usr/local/lib/dtrace/node.d</div></pre></td></tr></table></figure>
+<p>参考文章: <a href="https://www.zhihu.com/question/27389115/answer/36434788" target="_blank" rel="external">如何删除node.js？</a></p>
+<h3 id="卸载-nvm"><a href="#卸载-nvm" class="headerlink" title="卸载.nvm"></a>卸载.nvm</h3><p>我之前是手动安装的nvm，nvm的目录结构比较简单，删除这三个就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rm -rf ~/.nvm</div><div class="line">rm -rf ~/.npm</div><div class="line">rm -rf ~/.bower</div></pre></td></tr></table></figure>
+<p>还需要删除下.bash_profile文件中的配置(用brew安装后还需要重新加上，但不太一样)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># vim .bash_profile</div><div class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</div></pre></td></tr></table></figure>
+<p>参考文章: <a href="https://github.com/creationix/nvm/issues/298" target="_blank" rel="external">How to uninstall nvm? #298</a></p>
+<h3 id="清理干净后的确认"><a href="#清理干净后的确认" class="headerlink" title="清理干净后的确认"></a>清理干净后的确认</h3><p>重启终端后，挨个测试几个命令应该都是找不到，才算是正确的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">nvm</div><div class="line">node</div><div class="line">npm</div></pre></td></tr></table></figure>
+<h2 id="重新安装"><a href="#重新安装" class="headerlink" title="重新安装"></a>重新安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 使用brew安装nvm</div><div class="line">brew install nvm</div><div class="line"></div><div class="line"># vim .bash_profile后增加下面这两行</div><div class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">source $(brew --prefix nvm)/nvm.sh</div><div class="line"></div><div class="line"># 使用nvm安装node.js</div><div class="line">nvm install node</div><div class="line"></div><div class="line"># 校验</div><div class="line">$ nvm --version</div><div class="line">0.31.0</div><div class="line">$ node -v</div><div class="line">v5.7.1</div><div class="line">$ npm -v</div><div class="line">3.6.0</div><div class="line">$ nvm list</div><div class="line">-&gt;       v5.7.1</div><div class="line">default -&gt; node (-&gt; v5.7.1)</div><div class="line">node -&gt; stable (-&gt; v5.7.1) (default)</div><div class="line">stable -&gt; 5.7 (-&gt; v5.7.1) (default)</div><div class="line">iojs -&gt; N/A (default)</div></pre></td></tr></table></figure>
+<p>好了，世界清净了 :)</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章:"></a>参考文章:</h2><p><a href="http://icarus4.logdown.com/posts/175092-nodejs-installation-guide" target="_blank" rel="external">Node.js 安裝與版本切換教學 (for MAC)</a></p>
+<p><a href="http://www.cnblogs.com/Don/p/4672287.html" target="_blank" rel="external">Mac上使用brew安装nvm来支持多版本的Nodejs</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;之前没太留意node的安装版本，各种手动安装，今天突然发现node怎么又变成了0.10的版本，nvm，npm，node版本都怪怪的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="nvm" scheme="http://linyehui.me/tags/nvm/"/>
+    
+      <category term="nodejs" scheme="http://linyehui.me/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>将 GitHub Pages 从 rdiscount 切换到 kramdown</title>
+    <link href="http://linyehui.me/2016/02/29/migrate-github-pages-to-jekyll-3-with-kramdown/"/>
+    <id>http://linyehui.me/2016/02/29/migrate-github-pages-to-jekyll-3-with-kramdown/</id>
+    <published>2016-02-28T16:00:00.000Z</published>
+    <updated>2016-02-29T09:01:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>需求来自Github的一条公告:</p>
+<p><a href="https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0" target="_blank" rel="external">GitHub Pages now faster and simpler with Jekyll 3.0</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&apos;s default Markdown engine.</div></pre></td></tr></table></figure>
+<p>GitHub宣布从 2016 年 5 月 1 日起，GitHub Pages 将只支持 kramdown 作为唯一的 Markdown 引擎，而我之前使用的rdiscount需要做迁移。</p>
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><h3 id="升级本地Jekyll到3-0方便调试"><a href="#升级本地Jekyll到3-0方便调试" class="headerlink" title="升级本地Jekyll到3.0方便调试"></a>升级本地Jekyll到3.0方便调试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem install jekyll</div></pre></td></tr></table></figure>
+<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><h4 id="老的配置文件"><a href="#老的配置文件" class="headerlink" title="老的配置文件"></a>老的配置文件</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">markdown: rdiscount</div><div class="line">highlighter: pygments</div><div class="line">permalink: /:year/:month/:day/:title.html</div><div class="line">name: "HABIT IS POWER"</div><div class="line"></div><div class="line">author: "linyehui"</div><div class="line">atom-baseurl: "http://linyehui.github.io"</div><div class="line">disqus: "linyehui"</div><div class="line"></div><div class="line">navigations:</div></pre></td></tr></table></figure>
+<h4 id="更新后的配置文件"><a href="#更新后的配置文件" class="headerlink" title="更新后的配置文件"></a>更新后的配置文件</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">markdown: kramdown</div><div class="line">kramdown:</div><div class="line">    input: GFM</div><div class="line">highlighter: rouge</div><div class="line">permalink: /:year/:month/:day/:title.html</div><div class="line">name: "HABIT IS POWER"</div><div class="line"></div><div class="line">author: "linyehui"</div><div class="line">atom-baseurl: "http://linyehui.github.io"</div><div class="line">disqus: "linyehui"</div><div class="line"></div><div class="line">navigations:</div></pre></td></tr></table></figure>
+<h2 id="升级后的格式问题"><a href="#升级后的格式问题" class="headerlink" title="升级后的格式问题"></a>升级后的格式问题</h2><p>升级之后，最大的问题就是换行问题，再有就是代码格式问题</p>
+<h3 id="换行问题"><a href="#换行问题" class="headerlink" title="换行问题"></a>换行问题</h3><p>这个麻烦一点，找了下，没办法从配置上修改，只好用正则表达式全局搜索替换</p>
+<h4 id="连续两行-开头的话中间加一个空行"><a href="#连续两行-开头的话中间加一个空行" class="headerlink" title="连续两行#开头的话中间加一个空行"></a>连续两行#开头的话中间加一个空行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(#.+\s)(^#)</div><div class="line">$1\n$2</div></pre></td></tr></table></figure>
+<h4 id="行末尾两个空格替换成一个空行"><a href="#行末尾两个空格替换成一个空行" class="headerlink" title="行末尾两个空格替换成一个空行"></a>行末尾两个空格替换成一个空行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(  $)</div><div class="line">$1\n</div></pre></td></tr></table></figure>
+<h3 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h3><p>我涉及到的代码格式主要是这几种，代码块的左<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<p>object-c<br>objc</p>
+<p>C++<br>cpp</p>
+<p>c#<br>csharp</p>
+<p>```</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;需求来自Github的一条公告:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/blog/2100-github-p
+    
+    </summary>
+    
+    
+      <category term="markdown" scheme="http://linyehui.me/tags/markdown/"/>
+    
+      <category term="jekyll" scheme="http://linyehui.me/tags/jekyll/"/>
+    
+      <category term="github" scheme="http://linyehui.me/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rime 鼠须管输入法</title>
+    <link href="http://linyehui.me/2016/01/29/hello-rime/"/>
+    <id>http://linyehui.me/2016/01/29/hello-rime/</id>
+    <published>2016-01-28T16:00:00.000Z</published>
+    <updated>2016-02-29T08:33:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><p><a href="https://github.com/rime/home/wiki/CustomizationGuide" target="_blank" rel="external">Rime 定製指南</a>  </p>
+</li>
+<li><p><a href="https://github.com/rime/home/wiki/RimeWithSchemata" target="_blank" rel="external">RimeWithSchemata</a>  </p>
+</li>
+<li><p><a href="https://medium.com/@scomper/%E9%BC%A0%E9%A0%88%E7%AE%A1-%E7%9A%84%E8%B0%83%E6%95%99%E7%AC%94%E8%AE%B0-3fdeb0e78814#.oq28ijk3h" target="_blank" rel="external">「鼠須管」的调教笔记</a>  </p>
+</li>
+<li><p><a href="http://www.jianshu.com/p/cffc0ea094a7" target="_blank" rel="external">Rime输入法—鼠须管(Squirrel)词库添加及配置</a>  </p>
+</li>
+</ul>
+<h2 id="配置入门"><a href="#配置入门" class="headerlink" title="配置入门"></a>配置入门</h2><h3 id="说在前面的几点提示"><a href="#说在前面的几点提示" class="headerlink" title="说在前面的几点提示"></a>说在前面的几点提示</h3><ul>
+<li><p>1、不推荐使用图形化配置工具，直接修改配置文件是最靠谱的  </p>
+</li>
+<li><p>2、配置文件在~/Library/Rime这个目录下  </p>
+</li>
+<li><p>3、不要直接修改配置文件，使用.custom.yaml的扩展配置来自定义自己的配置  </p>
+</li>
+</ul>
+<h3 id="配置文件说明"><a href="#配置文件说明" class="headerlink" title="配置文件说明"></a>配置文件说明</h3><p>注意下面的文件，都是对默认文件的自定义，所有文件名中都有”.custom”  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">squirrel.custom.yaml ，自定义皮肤；  </div><div class="line"></div><div class="line">default.custom.yaml ，设定备选词数量，定义输入方案；  </div><div class="line"></div><div class="line">luna_pinyin_simp.custom.yaml ，定义扩充词库、加载符号库、模糊拼音。明月拼音·简化字输入方案配置文件，明月拼音对应的文件是 luna_pinyin.custom.yaml；</div></pre></td></tr></table></figure>
+<h3 id="还原默认配置文件"><a href="#还原默认配置文件" class="headerlink" title="还原默认配置文件"></a>还原默认配置文件</h3><p>万一你不听劝，还是修改来默认的配置文件，而且改坏来，那么有个简单的方法可以还原：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">把~/Library/Rime目录删除，然后点击下“重新部署”，会自动生成默认配置。</div></pre></td></tr></table></figure>
+<h3 id="切换到简体输入"><a href="#切换到简体输入" class="headerlink" title="切换到简体输入"></a>切换到简体输入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Ctrl+~</div><div class="line">选择“朙月拼音.简化字”</div></pre></td></tr></table></figure>
+<h3 id="切换全角和半角"><a href="#切换全角和半角" class="headerlink" title="切换全角和半角"></a>切换全角和半角</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">shift+空格</div><div class="line"></div><div class="line">也可以使用Ctrl+~进行切换，不过就要多进行一次选择操作</div></pre></td></tr></table></figure>
+<h3 id="squirrel-custom-yaml"><a href="#squirrel-custom-yaml" class="headerlink" title="squirrel.custom.yaml"></a>squirrel.custom.yaml</h3><p>指定程序的名称（比如 Safari 浏览器的程序名称 com.apple.Safari ），通过在「应用程序」里选中 app 图标，鼠标右键选择「显示包内容」，然后找到包内文件夹里的「Info.plist」文件，找到其中 Bundle identifier 属性，对应的就是指定程序名称了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">patch:</div><div class="line">  style:</div><div class="line">    horizontal: true</div><div class="line">    font_point: 32</div><div class="line">    color_scheme: starcraft</div><div class="line">    horizontal : true # 候选词横排</div><div class="line">    font_face&quot; : &quot;苹方-简 细体&quot; # 字体名称</div><div class="line">  app_options:</div><div class="line">    com.alfredapp.Alfred:</div><div class="line">      ascii_mode: true</div><div class="line">    com.runningwithcrayons.Alfred-2:</div><div class="line">      ascii_mode: true</div><div class="line">    com.blacktree.Quicksilver:</div><div class="line">      ascii_mode: true</div><div class="line">    com.apple.Terminal:</div><div class="line">      ascii_mode: true</div><div class="line">      no_inline: true</div><div class="line">    com.googlecode.iterm2:</div><div class="line">      ascii_mode: true</div><div class="line">    org.vim.MacVim:</div><div class="line">      ascii_mode: true</div><div class="line">      no_inline: true</div><div class="line">    com.apple.dt.Xcode:</div><div class="line">      ascii_mode: true</div><div class="line">    com.apple.spotlight:</div><div class="line">      ascii_mode: true</div><div class="line">    com.apple.finder:</div><div class="line">      ascii_mode: true</div><div class="line">    com.sublimetext.3:</div><div class="line">      ascii_mode: true</div></pre></td></tr></table></figure>
+<h3 id="luna-pinyin-custom-yaml"><a href="#luna-pinyin-custom-yaml" class="headerlink" title="luna_pinyin.custom.yaml"></a>luna_pinyin.custom.yaml</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"># luna_pinyin.custom.yaml</div><div class="line">#</div><div class="line"># 【朙月拼音】模糊音定製模板</div><div class="line">#   佛振配製 :-)</div><div class="line">#</div><div class="line"># 位置：</div><div class="line"># ~/.config/ibus/rime  (Linux)</div><div class="line"># ~/Library/Rime  (Mac OS)</div><div class="line"># %APPDATA%\Rime  (Windows)</div><div class="line">#</div><div class="line"># 於重新部署後生效</div><div class="line">#</div><div class="line"></div><div class="line">patch:</div><div class="line">  'speller/algebra':</div><div class="line">    - erase/^xx$/                      # 第一行保留</div><div class="line"></div><div class="line">    # 模糊音定義</div><div class="line">    # 需要哪組就刪去行首的 # 號，單雙向任選</div><div class="line">    - derive/^([zcs])h/$1/             # zh, ch, sh =&gt; z, c, s</div><div class="line">    - derive/^([zcs])([^h])/$1h$2/     # z, c, s =&gt; zh, ch, sh</div><div class="line"></div><div class="line">    #- derive/^n/l/                     # n =&gt; l</div><div class="line">    #- derive/^l/n/                     # l =&gt; n</div><div class="line"></div><div class="line">    # 這兩組一般是單向的</div><div class="line">    - derive/^r/l/                     # r =&gt; l</div><div class="line"></div><div class="line">    #- derive/^ren/yin/                 # ren =&gt; yin, reng =&gt; ying</div><div class="line">    #- derive/^r/y/                     # r =&gt; y</div><div class="line"></div><div class="line">    # 下面 hu &lt;=&gt; f 這組寫法複雜一些，分情況討論</div><div class="line">    #- derive/^hu$/fu/                  # hu =&gt; fu</div><div class="line">    #- derive/^hong$/feng/              # hong =&gt; feng</div><div class="line">    #- derive/^hu([in])$/fe$1/          # hui =&gt; fei, hun =&gt; fen</div><div class="line">    #- derive/^hu([ao])/f$1/            # hua =&gt; fa, ...</div><div class="line"></div><div class="line">    #- derive/^fu$/hu/                  # fu =&gt; hu</div><div class="line">    #- derive/^feng$/hong/              # feng =&gt; hong</div><div class="line">    #- derive/^fe([in])$/hu$1/          # fei =&gt; hui, fen =&gt; hun</div><div class="line">    #- derive/^f([ao])/hu$1/            # fa =&gt; hua, ...</div><div class="line"></div><div class="line">    # 韻母部份</div><div class="line">    #- derive/^([bpmf])eng$/$1ong/      # meng = mong, ...</div><div class="line">    - derive/([eia])n$/$1ng/            # en =&gt; eng, in =&gt; ing, an =&gt; ang</div><div class="line">    - derive/([eia])ng$/$1n/            # eng =&gt; en, ing =&gt; in, ang =&gt; an</div><div class="line"></div><div class="line">    # 樣例足夠了，其他請自己總結……</div><div class="line"></div><div class="line">    # 反模糊音？</div><div class="line">    # 誰說方言沒有普通話精確、有模糊音，就能有反模糊音。</div><div class="line">    # 示例爲分尖團的中原官話：</div><div class="line">    #- derive/^ji$/zii/   # 在設計者安排下鳩佔鵲巢，尖音i只好雙寫了</div><div class="line">    #- derive/^qi$/cii/</div><div class="line">    #- derive/^xi$/sii/</div><div class="line">    #- derive/^ji/zi/</div><div class="line">    #- derive/^qi/ci/</div><div class="line">    #- derive/^xi/si/</div><div class="line">    #- derive/^ju/zv/</div><div class="line">    #- derive/^qu/cv/</div><div class="line">    #- derive/^xu/sv/</div><div class="line">    # 韻母部份，只能從大面上覆蓋</div><div class="line">    #- derive/^([bpm])o$/$1eh/          # bo =&gt; beh, ...</div><div class="line">    #- derive/(^|[dtnlgkhzcs]h?)e$/$1eh/  # ge =&gt; geh, se =&gt; sheh, ...</div><div class="line">    #- derive/^([gkh])uo$/$1ue/         # guo =&gt; gue, ...</div><div class="line">    #- derive/^([gkh])e$/$1uo/          # he =&gt; huo, ...</div><div class="line">    #- derive/([uv])e$/$1o/             # jue =&gt; juo, lve =&gt; lvo, ...</div><div class="line">    #- derive/^fei$/fi/                 # fei =&gt; fi</div><div class="line">    #- derive/^wei$/vi/                 # wei =&gt; vi</div><div class="line">    #- derive/^([nl])ei$/$1ui/          # nei =&gt; nui, lei =&gt; lui</div><div class="line">    #- derive/^([nlzcs])un$/$1vn/       # lun =&gt; lvn, zun =&gt; zvn, ... </div><div class="line">    #- derive/^([nlzcs])ong$/$1iong/    # long =&gt; liong, song =&gt; siong, ...</div><div class="line">    # 這個辦法雖從拼寫上做出了區分，然而受詞典制約，候選字仍是混的。</div><div class="line">    # 只有真正的方音輸入方案纔能做到！但「反模糊音」這個玩法快速而有效！</div><div class="line"></div><div class="line">    # 模糊音定義先於簡拼定義，方可令簡拼支持以上模糊音</div><div class="line">    - abbrev/^([a-z]).+$/$1/           # 簡拼（首字母）</div><div class="line">    - abbrev/^([zcs]h).+$/$1/          # 簡拼（zh, ch, sh）</div><div class="line"></div><div class="line">    # 以下是一組容錯拼寫，《漢語拼音》方案以前者爲正</div><div class="line">    - derive/^([nl])ve$/$1ue/          # nve = nue, lve = lue</div><div class="line">    - derive/^([jqxy])u/$1v/           # ju = jv,</div><div class="line">    - derive/un$/uen/                  # gun = guen,</div><div class="line">    - derive/ui$/uei/                  # gui = guei,</div><div class="line">    - derive/iu$/iou/                  # jiu = jiou,</div><div class="line"></div><div class="line">    # 自動糾正一些常見的按鍵錯誤</div><div class="line">    - derive/([aeiou])ng$/$1gn/        # dagn =&gt; dang </div><div class="line">    - derive/([dtngkhrzcs])o(u|ng)$/$1o/  # zho =&gt; zhong|zhou</div><div class="line">    - derive/ong$/on/                  # zhonguo =&gt; zhong guo</div><div class="line">    - derive/ao$/oa/                   # hoa =&gt; hao</div><div class="line">    - derive/([iu])a(o|ng?)$/a$1$2/    # tain =&gt; tian</div><div class="line"></div><div class="line">  # 分尖團後 v =&gt; ü 的改寫條件也要相應地擴充：</div><div class="line">  #'translator/preedit_format':</div><div class="line">  #  - "xform/([nljqxyzcs])v/$1ü/"</div></pre></td></tr></table></figure>
+<h3 id="全部使用英文符号"><a href="#全部使用英文符号" class="headerlink" title="全部使用英文符号"></a>全部使用英文符号</h3><p>默认输入中括号，出来的是花式的括号，有点不太习惯，从官方下载这个文档<a href="https://gist.github.com/lotem/2334409" target="_blank" rel="external">alternative.yaml</a>放到配置目录，然后修改下luna_pinyin.custom.yaml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># luna_pinyin.custom.yaml</div><div class="line"></div><div class="line">patch:</div><div class="line">  &apos;punctuator/import_preset&apos;: alternative</div></pre></td></tr></table></figure>
+<p>这样就能直接用”[]”输出”[]”了</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;参考文档&quot;&gt;&lt;a href=&quot;#参考文档&quot; class=&quot;headerlink&quot; title=&quot;参考文档&quot;&gt;&lt;/a&gt;参考文档&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/rime/home/wiki/Customizat
+    
+    </summary>
+    
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="rime" scheme="http://linyehui.me/tags/rime/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello MongoDB</title>
+    <link href="http://linyehui.me/2016/01/13/hello-mongodb/"/>
+    <id>http://linyehui.me/2016/01/13/hello-mongodb/</id>
+    <published>2016-01-12T16:00:00.000Z</published>
+    <updated>2016-02-24T07:26:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>最近在看Tornado的<a href="http://demo.pythoner.com/itt2zh/ch4.html" target="_blank" rel="external">教程</a>，其中使用了MongoDB，之前没用过，所以需要配置下相关的环境，并在Python中使用</p>
+<h2 id="安装MongoDB"><a href="#安装MongoDB" class="headerlink" title="安装MongoDB"></a>安装MongoDB</h2><h3 id="完整的命令行"><a href="#完整的命令行" class="headerlink" title="完整的命令行"></a>完整的命令行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 安装</span></div><div class="line">brew update</div><div class="line">brew install mongodb</div><div class="line"></div><div class="line"><span class="comment"># 为数据库创建默认的文件目录，并设置权限</span></div><div class="line">sudo mkdir -p /data/db</div><div class="line">sudo chown -R linyehui /data</div><div class="line"></div><div class="line"><span class="comment"># 启动服务器</span></div><div class="line">mongod</div><div class="line"></div><div class="line"><span class="comment"># 另外启动一个终端，连接服务器</span></div><div class="line">mongo</div></pre></td></tr></table></figure>
+<h3 id="过程分解"><a href="#过程分解" class="headerlink" title="过程分解"></a>过程分解</h3><p>我的系统是Mac OS X 10.11.2，根据<a href="https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/" target="_blank" rel="external">MongoDB官网的指引</a>，我直接用HomeBrew安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install mongodb</div></pre></td></tr></table></figure>
+<p>安装成功后，尝试启动数据库服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mongod</div><div class="line"></div><div class="line"><span class="comment"># 出现错误，提示</span></div><div class="line">2016-01-13T15:19:24.484+0800 I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: 29 Data directory /data/db not found., terminating</div></pre></td></tr></table></figure>
+<p>原来是默认的数据库目录不存在，但是于是创建下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /data/db</div><div class="line"></div><div class="line"><span class="comment"># 记得要设置下目录权限，把owner设置成当前用户</span></div><div class="line">sudo chown -R linyehui /data</div></pre></td></tr></table></figure>
+<p>如果目前权限没有设置正常，会出现权限问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2016-01-13T15:22:47.055+0800 I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: 98 Unable to create/open lock file: /data/db/mongod.lock errno:13 Permission denied Is a mongod instance already running?, terminating</div></pre></td></tr></table></figure>
+<p>好了，可以起启动了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mongod</div><div class="line"></div><div class="line"><span class="comment"># 终端显示</span></div><div class="line">2016-01-13T19:58:30.287+0800 I CONTROL  [initandlisten] MongoDB starting : pid=16845 port=27017 dbpath=/data/db 64-bit host=linyehui-mbp.local</div><div class="line">2016-01-13T19:58:30.288+0800 I CONTROL  [initandlisten] db version v3.2.0</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>服务器启动好了，就可以新建一个终端，来连接数据库测试了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mongo</div><div class="line"></div><div class="line"><span class="comment"># 终端显示</span></div><div class="line">MongoDB shell version: 3.2.0</div><div class="line">connecting to: <span class="built_in">test</span></div></pre></td></tr></table></figure>
+<h2 id="Python中使用MongoDB"><a href="#Python中使用MongoDB" class="headerlink" title="Python中使用MongoDB"></a>Python中使用MongoDB</h2><p>我们这里使用的Python库是PyMongo，我直接用pip安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo pip install pymongo</div><div class="line">pip show pymongo</div><div class="line"></div><div class="line"><span class="comment"># 终端显示</span></div><div class="line">Name: pymongo</div><div class="line">Version: 3.2</div></pre></td></tr></table></figure>
+<p>安装成功后，就可以在Python下，import pymongo了</p>
+<p>参考<a href="http://api.mongodb.org/python/current/api/pymongo/mongo_client.html#pymongo.mongo_client.MongoClient" target="_blank" rel="external">PyMongo的官方文档</a>，pymongo的连接测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = MongoClient()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.test_database</div><div class="line">Database(MongoClient(host=[<span class="string">'localhost:27017'</span>], document_class=dict, tz_aware=<span class="keyword">False</span>, connect=<span class="keyword">True</span>), <span class="string">u'test_database'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="string">'test-database'</span>]</div><div class="line">Database(MongoClient(host=[<span class="string">'localhost:27017'</span>], document_class=dict, tz_aware=<span class="keyword">False</span>, connect=<span class="keyword">True</span>), <span class="string">u'test-database'</span>)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<p>好了，可以用了 ：）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;最近在看Tornado的&lt;a href=&quot;http://demo.pythoner.com/itt2zh/ch4.html&quot; target=
+    
+    </summary>
+    
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="mongodb" scheme="http://linyehui.me/tags/mongodb/"/>
+    
+      <category term="python" scheme="http://linyehui.me/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微信JS-SDK联调</title>
+    <link href="http://linyehui.me/2015/12/11/weixin-js-sdk-tips/"/>
+    <id>http://linyehui.me/2015/12/11/weixin-js-sdk-tips/</id>
+    <published>2015-12-10T16:00:00.000Z</published>
+    <updated>2016-02-29T08:22:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在微信中打开我们的网页，网页能够使用微信提供的JS-SDK，比如使用chooseImage，选择图片等等</p>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="AppID"><a href="#AppID" class="headerlink" title="AppID"></a>AppID</h3><p>要使用公众账号的开发AppID，而不是微信开发平台下的应用AppID</p>
+<h3 id="业务域名和JS接口安全域名"><a href="#业务域名和JS接口安全域名" class="headerlink" title="业务域名和JS接口安全域名"></a>业务域名和JS接口安全域名</h3><p>1、不设置会导致签名失败  </p>
+<p>2、设置方法  </p>
+<p>在微信公众平台的后台，公众设置，功能设置中进行设置，业务域名和JS接口安全域名都是需要设置的  </p>
+<h3 id="签名失败"><a href="#签名失败" class="headerlink" title="签名失败"></a>签名失败</h3><p>遇到签名失败，首先根据微信官方的指引：<a href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html#.E9.99.84.E5.BD.955-.E5.B8.B8.E8.A7.81.E9.94.99.E8.AF.AF.E5.8F.8A.E8.A7.A3.E5.86.B3.E6.96.B9.E6.B3.95" target="_blank" rel="external">《附录5-常见错误及解决方法》</a>，看看能不能解决。</p>
+<h4 id="我自己踩坑之后的理解如下："><a href="#我自己踩坑之后的理解如下：" class="headerlink" title="我自己踩坑之后的理解如下："></a>我自己踩坑之后的理解如下：</h4><p>1、签名用的url要动态获取  </p>
+<blockquote>
+<p>location.href.split(‘#’)[0]</p>
+</blockquote>
+<p>2、appID不要用错了，要用公众平台的开发appID  </p>
+<p>3、怀疑签名算法有问题，可以用微信提供的签名校验网址来确认：<a href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign" target="_blank" rel="external">微信 JS 接口签名校验工具</a>  </p>
+<p>4、文档中说了“出于安全考虑，开发者必须在服务器端实现签名的逻辑。”，这个不是强制的，在前端静态页面直接获取到token后再去获取ticket，然后直接生成签名，也是可以的。    </p>
+<p>当然这样做并不安全，只是说可以这样子，微信并没有做代码级的限制。  </p>
+<p>5、JS-SDK的调通跟公众平台后台的”开发-》基本配置-》服务器配置(未启用)”没有关系。    </p>
+<h2 id="参考的材料"><a href="#参考的材料" class="headerlink" title="参考的材料"></a>参考的材料</h2><p><a href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html" target="_blank" rel="external">微信JS-SDK说明文档</a>  </p>
+<p><a href="http://pigerla.com/wechat-api/2015-06-23/using-js-sdk-of-WeChat/" target="_blank" rel="external">如何接入微信公众平台（nodejs）</a>  </p>
+<p><a href="http://m.oschina.net/blog/384705" target="_blank" rel="external">微信JS-SDK分享功能开发实例</a>  </p>
+<p><a href="http://www.smallerpig.com/889.html" target="_blank" rel="external">微信JSSDK Python版本讲解</a>  </p>
+<p><a href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#JSSDK.E4.BD.BF.E7.94.A8.E6.AD.A5.E9.AA.A4" target="_blank" rel="external">微信JS-SDK 接入步骤</a>  </p>
+<p><a href="http://www.cocoachina.com/webapp/20150708/12465.html" target="_blank" rel="external">基于node.js的微信JS-SDK简单应用</a>  </p>
+<p><a href="http://203.195.235.76/jssdk/sample.zip" target="_blank" rel="external">微信官方提供的sample</a>  </p>
+<p><a href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign" target="_blank" rel="external">微信 JS 接口签名校验工具</a>  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;在微信中打开我们的网页，网页能够使用微信提供的JS-SDK，比如使用chooseImage，选择图片等等&lt;/p&gt;
+&lt;h2 id=&quot;坑&quot;&gt;&lt;a
+    
+    </summary>
+    
+    
+      <category term="tips" scheme="http://linyehui.me/tags/tips/"/>
+    
+      <category term="javascript" scheme="http://linyehui.me/tags/javascript/"/>
+    
+      <category term="weixin" scheme="http://linyehui.me/tags/weixin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Xcode 7.1无法使用Instruments真机调试，设备灰色不可选</title>
+    <link href="http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/"/>
+    <id>http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/</id>
+    <published>2015-11-04T16:00:00.000Z</published>
+    <updated>2016-02-29T08:22:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>Macbook Pro + Mac OS X 10.11.1 + Xcode 7.1 +Instruments 7.1  </p>
+<p>iPhone 6 + iOS 9.1  </p>
+<h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="/media/files/2015/11/05/instruments-gray-device.png" alt="Instruments中的设备选择无法选择iPhone真机，灰色不可选"></p>
+<p>Instruments中的设备选择无法选择iPhone真机，灰色不可选</p>
+<h3 id="解决方案：重启"><a href="#解决方案：重启" class="headerlink" title="解决方案：重启"></a>解决方案：重启</h3><p>我最终的解决步骤：  </p>
+<p>1、拔掉iPhone的USB线，重启iPhone  </p>
+<p>2、关闭Xcode和Instruments  </p>
+<p>3、重新连接iPhone到Mac上  </p>
+<p>4、重启Xcode并启动Profile  </p>
+<p>5、成功  </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>这个帖子的方法管用，我的iPhone 6 9.1系统可以正常调试起来了  </p>
+<p><a href="http://stackoverflow.com/questions/32878283/unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta" target="_blank" rel="external">unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;h3 id=&quot;开发环境&quot;&gt;&lt;a href=&quot;#开发环境&quot; class=&quot;headerlink&quot; title=&quot;开发环境&quot;&gt;&lt;/a
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="xcode" scheme="http://linyehui.me/tags/xcode/"/>
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Double Commander for Mac</title>
+    <link href="http://linyehui.me/2015/11/05/double-commander-for-mac/"/>
+    <id>http://linyehui.me/2015/11/05/double-commander-for-mac/</id>
+    <published>2015-11-04T16:00:00.000Z</published>
+    <updated>2016-02-29T08:33:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h3><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
+<p>TC确实可以替换系统的资源管理器，但是他的目标可不是替换系统资源管理器这么简单。</p>
+<p>无奈之下选择了一款免费的Finder插件XtraFinder，用了一段时间之后，我的Mac升级了OS X 10.11，用不了了：<a href="https://www.trankynam.com/xtrafinder/sip.html" target="_blank" rel="external">如果不关闭System Integrity Protection就无法使用了</a>。</p>
+<p>不能忍，再找找吧，在网上看到了这几个帖子：  </p>
+<p><a href="https://www.v2ex.com/t/66737" target="_blank" rel="external">怎么，Mac 下的诸多文件管理软件还在仰望 Total Commander，在 TC 的阴影下生活么？</a>  </p>
+<p><a href="http://www.zhihu.com/question/19607061" target="_blank" rel="external">Mac 是否有类似Windows上 Total Commander 这样的应用？</a></p>
+<p>几个帖子中都提到了一个我之前没有试用过的软件：<a href="http://doublecmd.sourceforge.net/" target="_blank" rel="external">Double Commander</a></p>
+<p>用了一分钟之后，我只能说：相见恨晚</p>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><h3 id="Mac下的版本选择"><a href="#Mac下的版本选择" class="headerlink" title="Mac下的版本选择"></a>Mac下的版本选择</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Mac OS X &gt;= 10.5</div><div class="line">doublecmd-0.6.6-6327.carbon.i386.dmg</div><div class="line"></div><div class="line">Mac OS X &gt;= 10.8	</div><div class="line">64 bit	doublecmd-0.6.6-6327.qt.x86_64.dmg</div></pre></td></tr></table></figure>
+<h4 id="结论是：选择32位版本"><a href="#结论是：选择32位版本" class="headerlink" title="结论是：选择32位版本"></a>结论是：选择32位版本</h4><h4 id="理由："><a href="#理由：" class="headerlink" title="理由："></a>理由：</h4><p>1、性能上的差别没有做比较，但是两者使用下来没有明显的差异，至少没有卡顿的情况；  </p>
+<p>2、除去性能，64位的界面太毛糙了，无论是图标还是界面的文字显示效果都很差；  </p>
+<p>两者的界面库是不同的，32位下采用carbon，而64位下使用的是Qt，carbon的界面是使用系统原生来适配的，而qt的界面是跨平台的。</p>
+<p>举个简单的例子：carbon可以使用OS X 10.11后的新字体，而Qt没有使用。</p>
+<h3 id="快捷键冲突"><a href="#快捷键冲突" class="headerlink" title="快捷键冲突"></a>快捷键冲突</h3><h4 id="复制、剪切、和粘贴"><a href="#复制、剪切、和粘贴" class="headerlink" title="复制、剪切、和粘贴"></a>复制、剪切、和粘贴</h4><p>为了方便在Finder和DC之间复制文件，对应Ctrl+C、Ctrl+X、Ctrl+V分别多加一个快捷键   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Command+C、Command+X、Command+V</div></pre></td></tr></table></figure>
+<h4 id="左右窗口的复制快捷键Ctrl-左-右和Mac的屏幕切换冲突了"><a href="#左右窗口的复制快捷键Ctrl-左-右和Mac的屏幕切换冲突了" class="headerlink" title="左右窗口的复制快捷键Ctrl+左/右和Mac的屏幕切换冲突了"></a>左右窗口的复制快捷键Ctrl+左/右和Mac的屏幕切换冲突了</h4><p>我的做法是自定义快捷键：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Ctrl+option+左</div><div class="line">Ctrl+option+右</div></pre></td></tr></table></figure>
+<p>其他的快捷键冲突，也使用类似的解决方案</p>
+<h3 id="对键盘党来说必备的小功能"><a href="#对键盘党来说必备的小功能" class="headerlink" title="对键盘党来说必备的小功能"></a>对键盘党来说必备的小功能</h3><p>F5复制，F6移动  </p>
+<p>快速过滤定位文件  </p>
+<p>文件内查找文本  </p>
+<p>批量重命名  </p>
+<p>压缩文件  </p>
+<p>比较文件  </p>
+<p>等等……  </p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Path Finder等收费软件虽然界面很美观，但产品的定位上只是Finder的一个增强或者替代品，和Total Commander没有可比性；  </p>
+<p>作为一个独立的效率工具来说，Double Commander和Total Commander定位非常接近；  </p>
+<p>另外还有一点，作为开源软件的Double Commander，他的版本计划还在继续，非常值得期待。  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;相见恨晚&quot;&gt;&lt;a href=&quot;#相见恨晚&quot; class=&quot;headerlink&quot; title=&quot;相见恨晚&quot;&gt;&lt;/a&gt;相见恨晚&lt;/h3&gt;&lt;p&gt;作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，
+    
+    </summary>
+    
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="totalcommander" scheme="http://linyehui.me/tags/totalcommander/"/>
+    
+      <category term="doublecommander" scheme="http://linyehui.me/tags/doublecommander/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS版本GarageBand使用小技巧</title>
+    <link href="http://linyehui.me/2015/10/23/ios-garageband-tips/"/>
+    <id>http://linyehui.me/2015/10/23/ios-garageband-tips/</id>
+    <published>2015-10-22T16:00:00.000Z</published>
+    <updated>2016-02-29T08:22:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="录音时长"><a href="#录音时长" class="headerlink" title="录音时长"></a>录音时长</h2><p>点击右上角的“+”号，修改为自动，时间就不会只有8秒了</p>
+<h2 id="导出到Mac上-GarageBand进行编辑"><a href="#导出到Mac上-GarageBand进行编辑" class="headerlink" title="导出到Mac上 GarageBand进行编辑"></a>导出到Mac上 GarageBand进行编辑</h2><p>1、在iOS的“我的乐曲”页面，长按选择一首乐曲，然后点击左上角的分享图标，出现的选择列表中，选择“iTunes”  </p>
+<p>2、在Mac上打开iTunes，在我的设备，应用的底部，可以看到“共享文档”，选择GarageBand，就能看到你刚刚导出的.band文件  </p>
+<p>3、选择并点击右下角的“存储到”，把.band文件保存到Mac上  </p>
+<p>4、在Mac上直接打开刚刚导出的.band文件，Mac版的GarageBand会自动帮你转换成Mac版本的.band文件，另存下就可以了  </p>
+<p>5、第一次使用还会下载iOS上的效果库，300多MB，直接下载很慢可以挂个代理  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;录音时长&quot;&gt;&lt;a href=&quot;#录音时长&quot; class=&quot;headerlink&quot; title=&quot;录音时长&quot;&gt;&lt;/a&gt;录音时长&lt;/h2&gt;&lt;p&gt;点击右上角的“+”号，修改为自动，时间就不会只有8秒了&lt;/p&gt;
+&lt;h2 id=&quot;导出到Mac上-GarageBand进行编辑
+    
+    </summary>
+    
+    
+      <category term="music" scheme="http://linyehui.me/tags/music/"/>
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="garageband" scheme="http://linyehui.me/tags/garageband/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS图片裁剪scale问题</title>
+    <link href="http://linyehui.me/2015/09/24/uiimage-get-sub-image/"/>
+    <id>http://linyehui.me/2015/09/24/uiimage-get-sub-image/</id>
+    <published>2015-09-23T16:00:00.000Z</published>
+    <updated>2016-02-29T08:33:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>资源中有一张cover@2x.png，对图片进行裁剪后图片的大小是对的，但是图片上裁剪的区域不对。</p>
+<h2 id="先直接看最终的代码吧"><a href="#先直接看最终的代码吧" class="headerlink" title="先直接看最终的代码吧"></a>先直接看最终的代码吧</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  截取部分图像</div><div class="line"> *</div><div class="line"> *  @param rect 裁剪的区域</div><div class="line"> *</div><div class="line"> */</div><div class="line">-(<span class="built_in">UIImage</span> *)getSubImage:(<span class="built_in">CGRect</span>)rect&#123;</div><div class="line">    <span class="built_in">CGImageRef</span> subImageRef = <span class="built_in">CGImageCreateWithImageInRect</span>(<span class="keyword">self</span>.CGImage,</div><div class="line">														  <span class="built_in">CGRectMake</span>(rect.origin.x,</div><div class="line">																	 rect.origin.y,</div><div class="line">																	 rect.size.width * <span class="keyword">self</span>.scale,</div><div class="line">																	 rect.size.height * <span class="keyword">self</span>.scale));</div><div class="line">    <span class="built_in">CGRect</span> smallBounds = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="built_in">CGImageGetWidth</span>(subImageRef), <span class="built_in">CGImageGetHeight</span>(subImageRef));</div><div class="line">    </div><div class="line">    <span class="comment">//UIGraphicsBeginImageContext(smallBounds.size);</span></div><div class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(smallBounds.size, <span class="literal">NO</span>, [<span class="built_in">UIScreen</span> mainScreen].scale);</div><div class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</div><div class="line">    <span class="built_in">CGContextDrawImage</span>(context, smallBounds, subImageRef);</div><div class="line">    <span class="built_in">UIImage</span>* smallImage = [<span class="built_in">UIImage</span> imageWithCGImage:subImageRef];</div><div class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> smallImage;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>@2x，表示图片的scale是2，但是裁剪的时候，使用UIImage size获取到的其实是图片@2x处理后的大小，也就是除以2之后的大小，所以导致了裁剪的区域错误。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>解决的方案如代码所见，对需要裁剪的高度和宽度都乘以scale就可以了。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/#//apple_ref/c/func/UIGraphicsBeginImageContextWithOptions" target="_blank" rel="external">UIGraphicsBeginImageContextWithOptions</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;资源中有一张cover@2x.png，对图片进行裁剪后图片的大小是对的，但是图片上裁剪的区域不对。&lt;/p&gt;
+&lt;h2 id=&quot;先直接看最终的代
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="uiimage" scheme="http://linyehui.me/tags/uiimage/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一款语音杀人游戏的App Store提交记录</title>
+    <link href="http://linyehui.me/2015/07/07/submit-voice-game-to-app-store/"/>
+    <id>http://linyehui.me/2015/07/07/submit-voice-game-to-app-store/</id>
+    <published>2015-07-06T16:00:00.000Z</published>
+    <updated>2016-02-29T08:33:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="第1次提交"><a href="#第1次提交" class="headerlink" title="第1次提交"></a>第1次提交</h3><p><strong>提交类型</strong>：重新提交  </p>
+<p><strong>提交时间</strong>：2015-04-21  </p>
+<p><strong>结果公布</strong>：2015-05-01  </p>
+<p><strong>审核结果</strong>：拒绝  </p>
+<p><strong>拒绝原因</strong>：demo account, 需要测试账号  </p>
+<p><strong>解决方案</strong>：提供测试账号，重新提交  </p>
+<p><strong>相关条款</strong>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">We began the review of your app but are not able to continue because we need a demo account to fully access your app features.</div></pre></td></tr></table></figure>
+<h3 id="第2次提交"><a href="#第2次提交" class="headerlink" title="第2次提交"></a>第2次提交</h3><p><strong>提交类型</strong>：重新提交  </p>
+<p><strong>提交时间</strong>：2015-05-01  </p>
+<p><strong>结果公布</strong>：2015-05-13  </p>
+<p><strong>审核结果</strong>：拒绝  </p>
+<p><strong>拒绝原因</strong>：条款2.2，没有用最新Xcode版本打包，且有明显Bug  </p>
+<p><strong>解决方案</strong>：修正Bug，用最新Xcode重新打包，提交  </p>
+<p><strong>相关条款</strong>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">2.2: Apps that exhibit bugs will be rejected 2.2</div><div class="line"></div><div class="line">We found that your app exhibited one or more bugs, when reviewed on iPhone running iOS 8.3 on both Wi-Fi and cellular networks.</div><div class="line">Specifically, the status indicator kept spinning indefinitely while logging in. We&apos;ve attached the sample screenshot(s)</div></pre></td></tr></table></figure>
+<h3 id="第3次提交"><a href="#第3次提交" class="headerlink" title="第3次提交"></a>第3次提交</h3><p><strong>提交类型</strong>：重新提交  </p>
+<p><strong>提交时间</strong>：2015-05-13  </p>
+<p><strong>结果公布</strong>：2015-05-22  </p>
+<p><strong>审核结果</strong>：拒绝  </p>
+<p><strong>拒绝原因</strong>：条款17.1，游戏中的排行榜侵犯用户隐私，使用用户数据需要先获得授权  </p>
+<p><strong>解决方案</strong>：游戏登录之前加上隐私声明，不同意不能登录  </p>
+<p><strong>相关条款</strong>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">17.1 - Apps cannot transmit data about a user without obtaining the user&apos;s prior permission and providing the user with access to information about how and where the data will be used</div><div class="line"></div><div class="line">17.隐私</div><div class="line">17.1 在未经用户事先许可，或未告知用户如何使用信息以及在何处使用信息的情况下，应用程序不能传输用户数据。</div></pre></td></tr></table></figure>
+<h3 id="第4次提交"><a href="#第4次提交" class="headerlink" title="第4次提交"></a>第4次提交</h3><p><strong>提交类型</strong>：重新提交  </p>
+<p><strong>提交时间</strong>：2015-05-22  </p>
+<p><strong>结果公布</strong>：2015-06-02  </p>
+<p><strong>审核结果</strong>：拒绝  </p>
+<p><strong>拒绝原因</strong>：  </p>
+<p>条款2.2，游戏Bug，充值后金币没有刷新  </p>
+<p>条款2.8，设置页面有个二维码，二维码扫描后是fir.im的下载页面  </p>
+<p>条款17.2，登录必须使用YY登录，需要解释为什么必须使用第三方账号，或者提供“游客模式”  </p>
+<p><strong>解决方案</strong>：  </p>
+<p>2.2，游戏Bug，修正游戏Bug，热更新游戏解决<br>2.8，去掉二维码，改成Logo，热更新游戏解决<br>17.2，写段申诉描述，主要说我们使用了YY的实时语音功能，需要接入YY账号</p>
+<h5 id="这个版本的问题都可以通过热更新解决，所以使用申诉而不是重新提交："><a href="#这个版本的问题都可以通过热更新解决，所以使用申诉而不是重新提交：" class="headerlink" title="这个版本的问题都可以通过热更新解决，所以使用申诉而不是重新提交："></a>这个版本的问题都可以通过热更新解决，所以使用申诉而不是重新提交：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">2.2 - Apps that exhibit bugs will be rejected</div><div class="line">2.8 - Apps that install or launch other executable code will be rejected</div><div class="line">--------------------</div><div class="line">These are Bugs in our server, we have fixed them without changing the APP, please re-confirm this error, Thank you.</div><div class="line"></div><div class="line">17.2 - Apps that require users to share personal information, such as email address and date of birth, in order to function will be rejected</div><div class="line">--------------------</div><div class="line">This APP is a real-time voice communication social game. </div><div class="line">This APP relies on real-time voice communication function which is provided by YY account, so we need user registration prior to using real-time voice communication.</div><div class="line"></div><div class="line">Take YY (https://itunes.apple.com/en/app/yy-zui-huo-shi-pin-zhi-bo/id427941017?mt=8) as a reference, when user using YY, they can watch videos without login, but if they want to chat with friends, it is necessary to registration prior and login wity YY account.</div><div class="line"></div><div class="line">Thank you for reviewing our APP again.</div></pre></td></tr></table></figure>
+<p><strong>相关条款</strong>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2.2 Apps that exhibit bugs will be rejected</div><div class="line">2.8 Apps that install or launch other executable code will be rejected</div><div class="line">17.2: Apps that require users to share personal information, such as email address and date of birth, in order to function will be rejected</div></pre></td></tr></table></figure>
+<h3 id="第5次提交"><a href="#第5次提交" class="headerlink" title="第5次提交"></a>第5次提交</h3><p><strong>提交类型</strong>：申诉  </p>
+<p><strong>提交时间</strong>：2015-06-02  </p>
+<p><strong>结果公布</strong>：2015-06-04  </p>
+<p><strong>审核结果</strong>：拒绝  </p>
+<p><strong>拒绝原因</strong>：条款2.16，VoIP权限  </p>
+<p><strong>解决方案</strong>：去掉VoIP的权限  </p>
+<p><strong>相关条款</strong>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2.16 Multitasking Apps may only use background services for their intended purposes: VoIP, audio playback, location, task completion, local notifications, etc.</div></pre></td></tr></table></figure>
+<h3 id="第6次提交"><a href="#第6次提交" class="headerlink" title="第6次提交"></a>第6次提交</h3><p><strong>提交类型</strong>：重新提交  </p>
+<p><strong>提交时间</strong>：2015-06-04  </p>
+<p><strong>结果公布</strong>：2015-06-15  </p>
+<p><strong>审核结果</strong>：拒绝  </p>
+<p><strong>拒绝原因</strong>：条款2.2，游戏Bug，金币充值失败  </p>
+<p><strong>解决方案</strong>：修正游戏Bug，发布热更新后，提交申诉  </p>
+<p><strong>相关条款</strong>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2.2 Apps that exhibit bugs will be rejected</div></pre></td></tr></table></figure>
+<h3 id="第7次提交"><a href="#第7次提交" class="headerlink" title="第7次提交"></a>第7次提交</h3><p><strong>提交类型</strong>：申诉  </p>
+<p><strong>提交时间</strong>：2015-06-15  </p>
+<p><strong>结果公布</strong>：2015-06-19  </p>
+<p><strong>审核结果</strong>：拒绝  </p>
+<p><strong>拒绝原因</strong>：条款2.2，1.拍视频解释为什么要使用Background Audio权限；2，标题中的“美女陪你放纵”要去掉  </p>
+<p><strong>解决方案</strong>：1.去掉Background Audio权限；2，去掉标题和描述中可能有问题的文字  </p>
+<p><strong>相关条款</strong>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2.2 Apps that exhibit bugs will be rejected</div></pre></td></tr></table></figure>
+<h3 id="第8次提交"><a href="#第8次提交" class="headerlink" title="第8次提交"></a>第8次提交</h3><p><strong>提交类型</strong>：申诉  </p>
+<p><strong>提交时间</strong>：2015-06-23（19号提交了一个版本但有问题，23号撤回后重新提交）  </p>
+<p><strong>结果公布</strong>：2015-07-01 9:00  </p>
+<p><strong>审核结果</strong>：审核通过  </p>
+<p><strong>拒绝原因</strong>：无  </p>
+<p><strong>解决方案</strong>：无  </p>
+<p><strong>相关条款</strong>：无  </p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://developer.apple.com/app-store/review/guidelines/" target="_blank" rel="external">App Store Review Guidelines</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;第1次提交&quot;&gt;&lt;a href=&quot;#第1次提交&quot; class=&quot;headerlink&quot; title=&quot;第1次提交&quot;&gt;&lt;/a&gt;第1次提交&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;提交类型&lt;/strong&gt;：重新提交  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;提交时间&lt;/strong&gt;：
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="app-store" scheme="http://linyehui.me/tags/app-store/"/>
+    
+      <category term="voice-game" scheme="http://linyehui.me/tags/voice-game/"/>
+    
+  </entry>
+  
+</feed>

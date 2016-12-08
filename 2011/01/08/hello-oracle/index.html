@@ -1,0 +1,641 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hello,oracle," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HABIT IS POWSER" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/media/favicon.gif?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="由于某种不可抗拒的力量，我必须把一个Oracle XXX系统跑起来，按正常来说只是跑起来这应该很简单，又不需要自己写一个，但是我在Oracle上确实遇到了麻烦，这东西很不人性化，是我接触的数据库中最难上手的一个。
+1、安装问题我的机器安装的是Win7，在Oracle官网下载了最不同的10g Express版本，安装过程和使用过程中一堆莫名其妙的错误，后面试试感觉应该也问题不大，但整个流程让人很不放">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle初体验">
+<meta property="og:url" content="http://linyehui.me/2011/01/08/hello-oracle/index.html">
+<meta property="og:site_name" content="HABIT IS POWSER">
+<meta property="og:description" content="由于某种不可抗拒的力量，我必须把一个Oracle XXX系统跑起来，按正常来说只是跑起来这应该很简单，又不需要自己写一个，但是我在Oracle上确实遇到了麻烦，这东西很不人性化，是我接触的数据库中最难上手的一个。
+1、安装问题我的机器安装的是Win7，在Oracle官网下载了最不同的10g Express版本，安装过程和使用过程中一堆莫名其妙的错误，后面试试感觉应该也问题不大，但整个流程让人很不放">
+<meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Oracle初体验">
+<meta name="twitter:description" content="由于某种不可抗拒的力量，我必须把一个Oracle XXX系统跑起来，按正常来说只是跑起来这应该很简单，又不需要自己写一个，但是我在Oracle上确实遇到了麻烦，这东西很不人性化，是我接触的数据库中最难上手的一个。
+1、安装问题我的机器安装的是Win7，在Oracle官网下载了最不同的10g Express版本，安装过程和使用过程中一堆莫名其妙的错误，后面试试感觉应该也问题不大，但整个流程让人很不放">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://linyehui.me/2011/01/08/hello-oracle/"/>
+
+
+
+
+
+  <title> Oracle初体验 | HABIT IS POWSER </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HABIT IS POWSER</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">习惯就是力量</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2011/01/08/hello-oracle/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Oracle初体验
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2011-01-08T00:00:00+08:00">
+                2011-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由于某种不可抗拒的力量，我必须把一个Oracle XXX系统跑起来，按正常来说只是跑起来这应该很简单，又不需要自己写一个，但是我在Oracle上确实遇到了麻烦，这东西很不人性化，是我接触的数据库中最难上手的一个。</p>
+<h1 id="1、安装问题"><a href="#1、安装问题" class="headerlink" title="1、安装问题"></a>1、安装问题</h1><p>我的机器安装的是Win7，在Oracle官网下载了最不同的10g Express版本，安装过程和使用过程中一堆莫名其妙的错误，后面试试感觉应该也问题不大，但整个流程让人很不放心无法放心使用。在我的一番尝试下（10g Express, 10g 企业版，10g for vista, 11g），结论是：Win7下还是10g for vista版本最靠谱。</p>
+<h1 id="2、添加用户"><a href="#2、添加用户" class="headerlink" title="2、添加用户"></a>2、添加用户</h1><p>新建数据库后，Oracle会在开始菜单为你提供一个管理网页的链接，我原本以为这个网页应该会累死phpAdmin那样方便，结果大失所望，一堆功能的麻木堆砌，不是一般的难用。</p>
+<p>最后我还是采用了SQL Plus的命令行方式进行添加用户，找到命令行一下子找回了数据库的感觉。</p>
+<h1 id="3、导入数据"><a href="#3、导入数据" class="headerlink" title="3、导入数据"></a>3、导入数据</h1><p>Oracle的导入导出数据是有专门的命令：exp和imp，需要注意的是这两个命令不是在SQL Plus下使用，而是在普通的CMD命令行下执行，具体命令行使用可以参考这个:  </p>
+<p><a href="http://www.blogjava.net/lyyb2001/archive/2007/09/03/142172.html" target="_blank" rel="external">Oracle exp/imp导出导入工具的使用</a>。</p>
+<h2 id="简单描述下我的导入数据步骤，因为我在这地方卡住了，╭-╯-╰-╮"><a href="#简单描述下我的导入数据步骤，因为我在这地方卡住了，╭-╯-╰-╮" class="headerlink" title="简单描述下我的导入数据步骤，因为我在这地方卡住了，╭(╯^╰)╮"></a>简单描述下我的导入数据步骤，因为我在这地方卡住了，╭(╯^╰)╮</h2><h3 id="001、为要导入的数据专门新建一个用户，在SQL-Plus下进行（我新建了个用户-linyehui-密码-password）："><a href="#001、为要导入的数据专门新建一个用户，在SQL-Plus下进行（我新建了个用户-linyehui-密码-password）：" class="headerlink" title="001、为要导入的数据专门新建一个用户，在SQL Plus下进行（我新建了个用户:linyehui 密码:password）："></a>001、为要导入的数据专门新建一个用户，在SQL Plus下进行（我新建了个用户:linyehui 密码:password）：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">--创建用户</div><div class="line">create user linyehui identified by password</div><div class="line">default tablespace users</div><div class="line">temporary tablespace temp</div><div class="line">quota 10m on users;</div><div class="line"></div><div class="line">grant create session,resource to linyehui;</div></pre></td></tr></table></figure>
+<h3 id="002、在cmd命令行下："><a href="#002、在cmd命令行下：" class="headerlink" title="002、在cmd命令行下："></a>002、在cmd命令行下：</h3><blockquote>
+<p>$ imp linyehui/password file = all.dmp full=y</p>
+</blockquote>
+<p>你应该可以得到类似的提示，如果你的数据是正确的话：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Import: Release 10.2.0.3.0 - Production on 星期六 1月 8 14:30:40 2011</div><div class="line"></div><div class="line"></div><div class="line">Copyright (c) 1982, 2005, Oracle.  All rights reserved.</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">连接到: Oracle Database 10g Enterprise Edition Release 10.2.0.3.0 - Production</div><div class="line">With the Partitioning, OLAP and Data Mining options</div><div class="line"></div><div class="line"></div><div class="line">经由常规路径由 EXPORT:V09.02.00 创建的导出文件</div><div class="line">已经完成 ZHS16GBK 字符集和 AL16UTF16 NCHAR 字符集中的导入</div><div class="line">. 正在将 ************************</div><div class="line">. . 正在导入表                          &quot;TABLE1&quot;导入了           4 行</div><div class="line">. . 正在导入表                        &quot;TABLE2&quot;导入了           7 行</div><div class="line">. . 正在导入表                         &quot;TABLE3&quot;导入了          12 行</div><div class="line">成功终止导入, 没有出现警告。</div></pre></td></tr></table></figure>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>好了，数据库方面的问题已经搞定了，剩下的就是调用的问题了，<a href="http://twitter.com/#!/linyehui/status/23642782056841216" target="_blank" rel="external">http://twitter.com/#!/linyehui/status/23642782056841216</a> Y(^o^)Y</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hello/" rel="tag"># hello</a>
+          
+            <a href="/tags/oracle/" rel="tag"># oracle</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2011/01/05/cc-tips/" rel="next" title="ClearCase使用技巧">
+                <i class="fa fa-chevron-left"></i> ClearCase使用技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2011/10/13/createmutex-binitialowner/" rel="prev" title="关于CreateMutex的bInitialOwner参数">
+                关于CreateMutex的bInitialOwner参数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="linyehui" />
+          <p class="site-author-name" itemprop="name">linyehui</p>
+          <p class="site-description motion-element" itemprop="description">HABIT IS POWSER</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">169</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、安装问题"><span class="nav-number">1.</span> <span class="nav-text">1、安装问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、添加用户"><span class="nav-number">2.</span> <span class="nav-text">2、添加用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、导入数据"><span class="nav-number">3.</span> <span class="nav-text">3、导入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单描述下我的导入数据步骤，因为我在这地方卡住了，╭-╯-╰-╮"><span class="nav-number">3.1.</span> <span class="nav-text">简单描述下我的导入数据步骤，因为我在这地方卡住了，╭(╯^╰)╮</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#001、为要导入的数据专门新建一个用户，在SQL-Plus下进行（我新建了个用户-linyehui-密码-password）："><span class="nav-number">3.1.1.</span> <span class="nav-text">001、为要导入的数据专门新建一个用户，在SQL Plus下进行（我新建了个用户:linyehui 密码:password）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#002、在cmd命令行下："><span class="nav-number">3.1.2.</span> <span class="nav-text">002、在cmd命令行下：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

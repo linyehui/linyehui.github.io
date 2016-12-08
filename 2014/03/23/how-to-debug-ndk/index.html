@@ -1,0 +1,659 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,ndk," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="HABIT IS POWSER" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/media/favicon.gif?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。
+我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何调试NDK">
+<meta property="og:url" content="http://linyehui.me/2014/03/23/how-to-debug-ndk/index.html">
+<meta property="og:site_name" content="HABIT IS POWSER">
+<meta property="og:description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。
+我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
+<meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何调试NDK">
+<meta name="twitter:description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。
+我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://linyehui.me/2014/03/23/how-to-debug-ndk/"/>
+
+
+
+
+
+  <title> 如何调试NDK | HABIT IS POWSER </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HABIT IS POWSER</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">习惯就是力量</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/03/23/how-to-debug-ndk/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                如何调试NDK
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-03-23T00:00:00+08:00">
+                2014-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？<br>网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。</p>
+<h4 id="我遇到的问题"><a href="#我遇到的问题" class="headerlink" title="我遇到的问题"></a>我遇到的问题</h4><p>首先我照着这个教程:<a href="http://blog.micro-studios.com/?p=4212" target="_blank" rel="external">利用JNI技术在Android中调用、调试C++代码</a>写了个HelloWorld，而且可以“Debug As Android Application”跑起来，但是我想要“Debug As Android Native Application” 的时候就遇到了下面这些问题：</p>
+<h5 id="1-提示-Unknown-Application-ABI"><a href="#1-提示-Unknown-Application-ABI" class="headerlink" title="1.提示 Unknown Application ABI:"></a>1.提示 Unknown Application ABI:</h5><p>你会发现Console中有很多行这个提示，但是其实这个提示是可以先忽略掉的，你可以拿个文本编辑器把重复的这些提示过滤掉，这样你就能看到真正的错误提示了；<br>我看到的是我的第二个问题</p>
+<h5 id="2-提示-Android-NDK-WARNING-APP-PLATFORM-android-19-is-larger-than-android-minSdkVersion-16"><a href="#2-提示-Android-NDK-WARNING-APP-PLATFORM-android-19-is-larger-than-android-minSdkVersion-16" class="headerlink" title="2.提示 Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 16"></a>2.提示 Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 16</h5><p>解决方案1，这个提示我暂时还没弄明白原理，但是有个最简单的方法来解决：<br>到AndroidManifest.xml中把这两个字段都改成最大的版本号</p>
+<blockquote>
+<p>android:minSdkVersion=”19”<br>android:targetSdkVersion=”19”</p>
+</blockquote>
+<p>解决方案2：<br>到SDK Manager中去下载对应版本的Android SDK Build-tools和SDK Platform</p>
+<h5 id="3-模拟器调试"><a href="#3-模拟器调试" class="headerlink" title="3.模拟器调试"></a>3.模拟器调试</h5><p>自带的模拟器有多慢大家肯定是知道的，方便调试我使用的是Genymotion，但是后面我发现Genymotion是不支持Debug As Android Native Application的，会提示下面这个，暂时还没找到问题的解决方案：</p>
+<blockquote>
+<p>[2014-03-23 17:28:00 - HelloNDK] Unable to find a compatible ABI<br>[2014-03-23 17:28:00 - HelloNDK] ABI’s supported by the application: armeabi<br>[2014-03-23 17:28:00 - HelloNDK] ABI’s supported by the device: x86, armeabi-v7a</p>
+</blockquote>
+<h5 id="4-提示"><a href="#4-提示" class="headerlink" title="4.提示"></a>4.提示</h5><p>[2013-06-25 15:25:22 - TestNDK2] gdbserver output:<br>[2013-06-25 15:25:22 - TestNDK2] run-as: exec failed for lib/gdbserver Error:No such file or directory<br>[2013-06-25 15:25:22 - TestNDK2] Verify if the application was built with NDK_DEBUG=1</p>
+<p><strong>解决方案：</strong>  </p>
+<p>1.确认编译选项是否加了NDK_DEBUG=1  </p>
+<p>2.已经加了还是不行，终端中输入下adb看看是不是adb命令不可用，是的话，配置下.bash_profile，把adb的路径加进去，加PATH可以参考<a href="http://gushedaoren.blog.163.com/blog/static/17366340520124300630343/" target="_blank" rel="external">这个</a>  </p>
+<p>3.用这个命令把gdb_server push到Android手机或模拟器上  </p>
+<blockquote>
+<p>adb push /Applications/android-ndk-r9d/prebuilt/android-arm/gdbserver/gdbserver /data<br>参考这个：<a href="http://hi.baidu.com/linuxcfan/item/4d6a07ee9fcdb2255b2d64df" target="_blank" rel="external">通过gdbserver实现远程调试</a>   </p>
+</blockquote>
+<h5 id="5-NDK调试提示错误："><a href="#5-NDK调试提示错误：" class="headerlink" title="5.NDK调试提示错误："></a>5.NDK调试提示错误：</h5><blockquote>
+<p>No symbol table is loaded.  Use the “file” command.  </p>
+</blockquote>
+<p>使用ndk-gdb –start 启动程序第一个activity，但是此时so文件并没有被加载。解决方法：首先打开程序并使用，在保证so文件已经被使用的情况下，调用ndk-gdb命令调试程序进程。<br>正确流程：1.创建一个模拟器或者使用真机运行想要调试的程序，确保so文件已经被加载。<br>一个比较简单的方法，在load so库的java文件中添加一个无关紧要的方法，比如：<br>Java代码  收藏代码<br>public static void test1(){  </p>
+<pre><code>Log.i(tag, &quot;test1&quot;);  
+</code></pre><p>}  </p>
+<p>然后在主activity起来的时候，调用一下这个方法就OK了。<br>参考这篇文章：<a href="http://qiang106.iteye.com/blog/1830416" target="_blank" rel="external">android NDK开发、编译、调试环境搭建与操作入门</a>  </p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p>网上的教程挺多的，我参考了下面这几篇：<br><a href="http://developer.android.com/tools/sdk/ndk/index.html" target="_blank" rel="external">Android官网</a>  </p>
+<p><a href="http://blog.csdn.net/wutianyin222/article/details/8222838" target="_blank" rel="external">超简单的NDK单步调试方法</a>  </p>
+<p><a href="http://blog.csdn.net/wjr2012/article/details/7993722" target="_blank" rel="external">eclipse下ndk调试</a>  </p>
+<p><a href="http://www.aiseminar.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=blog&amp;id=2735" target="_blank" rel="external">【暗黑世界】NDK调试的设置方法</a>  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/ndk/" rel="tag"># ndk</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/02/14/what-is-noise-reduction/" rel="next" title="什么是声音降噪">
+                <i class="fa fa-chevron-left"></i> 什么是声音降噪
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/04/09/char-is-different-in-ios-and-android/" rel="prev" title="char的定义在iOS和Android下是不同的">
+                char的定义在iOS和Android下是不同的 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="linyehui" />
+          <p class="site-author-name" itemprop="name">linyehui</p>
+          <p class="site-description motion-element" itemprop="description">HABIT IS POWSER</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">169</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#我遇到的问题"><span class="nav-number">1.</span> <span class="nav-text">我遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-提示-Unknown-Application-ABI"><span class="nav-number">1.1.</span> <span class="nav-text">1.提示 Unknown Application ABI:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-提示-Android-NDK-WARNING-APP-PLATFORM-android-19-is-larger-than-android-minSdkVersion-16"><span class="nav-number">1.2.</span> <span class="nav-text">2.提示 Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 16</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-模拟器调试"><span class="nav-number">1.3.</span> <span class="nav-text">3.模拟器调试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-提示"><span class="nav-number">1.4.</span> <span class="nav-text">4.提示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-NDK调试提示错误："><span class="nav-number">1.5.</span> <span class="nav-text">5.NDK调试提示错误：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考："><span class="nav-number">2.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

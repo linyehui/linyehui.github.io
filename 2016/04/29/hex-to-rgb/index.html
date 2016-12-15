@@ -98,7 +98,7 @@
 解答因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的
 如果按照比较常用的方式是什么样的呢？How can I create a UIColor from a hex string?
 12345678// Assu">
-<meta property="og:updated_time" content="2016-04-29T03:20:35.000Z">
+<meta property="og:updated_time" content="2016-12-15T04:34:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HEX to RGB">
 <meta name="twitter:description" content="疑问CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；
@@ -342,7 +342,7 @@
         <h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；</p>
 <p>那么同样的逻辑下iOS是什么效果呢？</p>
 <h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的</p>
-<h4 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h4><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
+<h3 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h3><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Assumes input like &quot;#00FF00&quot; (#RRGGBB).</div><div class="line">+ (UIColor *)colorFromHexString:(NSString *)hexString &#123;</div><div class="line">    unsigned rgbValue = 0;</div><div class="line">    NSScanner *scanner = [NSScanner scannerWithString:hexString];</div><div class="line">    [scanner setScanLocation:1]; // bypass &apos;#&apos; character</div><div class="line">    [scanner scanHexInt:&amp;rgbValue];</div><div class="line">    return [UIColor colorWithRed:((rgbValue &amp; 0xFF0000) &gt;&gt; 16)/255.0 green:((rgbValue &amp; 0xFF00) &gt;&gt; 8)/255.0 blue:(rgbValue &amp; 0xFF)/255.0 alpha:1.0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>根据这个代码，实际的效果会是这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#CCC 会被解释成 #000CCC，而不是像CSS中所期望的#CCCCCC</div></pre></td></tr></table></figure>
@@ -532,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#疑问"><span class="nav-number">1.</span> <span class="nav-text">疑问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解答"><span class="nav-number">2.</span> <span class="nav-text">解答</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如果按照比较常用的方式是什么样的呢？"><span class="nav-number">2.0.1.</span> <span class="nav-text">如果按照比较常用的方式是什么样的呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">3.</span> <span class="nav-text">参考文章:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#疑问"><span class="nav-number">1.</span> <span class="nav-text">疑问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解答"><span class="nav-number">2.</span> <span class="nav-text">解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如果按照比较常用的方式是什么样的呢？"><span class="nav-number">2.1.</span> <span class="nav-text">如果按照比较常用的方式是什么样的呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">3.</span> <span class="nav-text">参考文章:</span></a></li></ol></div>
             
 
           </div>

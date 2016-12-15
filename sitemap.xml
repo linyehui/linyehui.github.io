@@ -2,9 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://linyehui.me/2015/01/26/libcxx-and-libstdcxx/</loc>
+    
+    <lastmod>2016-12-15T04:44:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2015/03/04/douya/</loc>
+    
+    <lastmod>2016-12-15T04:42:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2015/03/17/cocos2d-js-ndk-debug/</loc>
+    
+    <lastmod>2016-12-15T04:41:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2015/05/07/update-cocos2d-js-from-3.1-to-3.6/</loc>
+    
+    <lastmod>2016-12-15T04:39:59.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2015/07/07/submit-voice-game-to-app-store/</loc>
+    
+    <lastmod>2016-12-15T04:38:27.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2015/11/05/double-commander-for-mac/</loc>
+    
+    <lastmod>2016-12-15T04:36:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2016/04/29/hex-to-rgb/</loc>
+    
+    <lastmod>2016-12-15T04:34:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2016/05/04/hello-react/</loc>
+    
+    <lastmod>2016-12-15T04:32:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2016/08/10/build-srs-on-mac/</loc>
+    
+    <lastmod>2016-12-15T04:28:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://linyehui.me/2016/12/08/migrate-jekyll-to-hexo/</loc>
     
-    <lastmod>2016-12-08T10:39:55.000Z</lastmod>
+    <lastmod>2016-12-08T18:25:04.000Z</lastmod>
     
   </url>
   
@@ -72,30 +135,9 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2016/08/10/build-srs-on-mac/</loc>
-    
-    <lastmod>2016-08-10T08:01:01.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://linyehui.me/2016/07/29/video-core-glm-include-error/</loc>
     
     <lastmod>2016-08-10T07:49:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2016/05/04/hello-react/</loc>
-    
-    <lastmod>2016-05-05T09:17:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2016/04/29/hex-to-rgb/</loc>
-    
-    <lastmod>2016-04-29T03:20:35.000Z</lastmod>
     
   </url>
   
@@ -128,7 +170,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/08/25/tips-for-using-currentapp-in-an-metro-style-app/</loc>
+    <loc>http://linyehui.me/2015/06/22/compare-version/</loc>
     
     <lastmod>2016-02-29T08:35:29.000Z</lastmod>
     
@@ -142,7 +184,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2015/06/22/compare-version/</loc>
+    <loc>http://linyehui.me/2012/08/25/tips-for-using-currentapp-in-an-metro-style-app/</loc>
     
     <lastmod>2016-02-29T08:35:29.000Z</lastmod>
     
@@ -163,62 +205,6 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2013/03/30/fix-network-after-imported-an-appliance/</loc>
-    
-    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2011/10/13/createmutex-binitialowner/</loc>
-    
-    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2015/05/07/update-cocos2d-js-from-3.1-to-3.6/</loc>
-    
-    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2015/07/07/submit-voice-game-to-app-store/</loc>
-    
-    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2016/01/29/hello-rime/</loc>
-    
-    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2015/03/17/cocos2d-js-ndk-debug/</loc>
-    
-    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2015/11/05/double-commander-for-mac/</loc>
-    
-    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/08/01/h264-encoders-other-than-ffmpeg-x264/</loc>
-    
-    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://linyehui.me/2014/08/21/adb-shell-vi/</loc>
     
     <lastmod>2016-02-29T08:33:23.000Z</lastmod>
@@ -226,7 +212,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2014/09/27/clean-webview-cache-of-android-app/</loc>
+    <loc>http://linyehui.me/2014/12/14/cocoapods-permission-errors-while-pod-update/</loc>
     
     <lastmod>2016-02-29T08:33:23.000Z</lastmod>
     
@@ -240,6 +226,34 @@
   </url>
   
   <url>
+    <loc>http://linyehui.me/2016/01/29/hello-rime/</loc>
+    
+    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/10/13/createmutex-binitialowner/</loc>
+    
+    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/09/27/clean-webview-cache-of-android-app/</loc>
+    
+    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2013/03/30/fix-network-after-imported-an-appliance/</loc>
+    
+    <lastmod>2016-02-29T08:33:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://linyehui.me/2012/10/14/god-is-not-easy/</loc>
     
     <lastmod>2016-02-29T08:33:23.000Z</lastmod>
@@ -247,7 +261,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2014/12/14/cocoapods-permission-errors-while-pod-update/</loc>
+    <loc>http://linyehui.me/2014/08/01/h264-encoders-other-than-ffmpeg-x264/</loc>
     
     <lastmod>2016-02-29T08:33:23.000Z</lastmod>
     
@@ -289,35 +303,14 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2010/11/25/change-cc-compare/</loc>
+    <loc>http://linyehui.me/2015/03/18/debug-spidermonkey-with-cocos2d-js/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/05/07/winrt-for-win32-programmers-part-ii-port-code-to-winrt-html/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/05/08/the-world-is-a-book-and-those-who-do-not-travel-read-o/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2011/10/31/talk-from-win8/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/06/20/music-fm-vs/</loc>
+    <loc>http://linyehui.me/2014/12/12/using-slack-with-markdown/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -325,6 +318,13 @@
   
   <url>
     <loc>http://linyehui.me/2012/06/08/two-years-after-the-release-of-the-m8zaina/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2012/06/20/music-fm-vs/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -352,14 +352,14 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2010/10/19/zaina/</loc>
+    <loc>http://linyehui.me/2012/09/20/remote-debug-using-vs2012/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/09/20/remote-debug-using-vs2012/</loc>
+    <loc>http://linyehui.me/2012/03/16/why-git-but-not-svn/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -373,7 +373,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2011/11/10/asus-x53s/</loc>
+    <loc>http://linyehui.me/2012/03/04/winrt-localization/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -381,13 +381,6 @@
   
   <url>
     <loc>http://linyehui.me/2012/10/16/malaysia-travel-guide/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/12/24/christmas-eve-2012/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -408,7 +401,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2011/11/15/how-to-load-win32-dll-with-metro-app/</loc>
+    <loc>http://linyehui.me/2012/12/24/christmas-eve-2012/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -422,7 +415,14 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2011/11/19/pes2012-training-attack-and-teammate-controls/</loc>
+    <loc>http://linyehui.me/2012/03/23/winrt-sqlite/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/12/24/download-garageband-sound-effects/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -450,7 +450,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2011/11/23/winrt-0xc0000135/</loc>
+    <loc>http://linyehui.me/2012/02/28/hello-win8qq/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -464,14 +464,14 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2011/11/28/recursive-lambda/</loc>
+    <loc>http://linyehui.me/2012/03/21/appcertkit-crash-at-launch/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2011/12/01/shenzhen-gongjijin/</loc>
+    <loc>http://linyehui.me/2012/05/08/the-world-is-a-book-and-those-who-do-not-travel-read-o/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -485,217 +485,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2010/12/21/hello-git/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/01/15/learning-ios-from-xcode-5/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/01/20/qrcode-launch-app-or-download-app/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2010/12/22/wikidot-tips/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/02/14/what-is-noise-reduction/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/03/23/how-to-debug-ndk/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2011/12/18/regdb-e-classnotreg-class-not-registered/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2011/12/22/build-c-files-in-metrol-style-app-project-with-vs2011/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2010/12/24/zaina-last-version/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2011/12/30/3rdparty-port-to-winrt/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://linyehui.me/2010/10/29/zaina-positioning/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/05/09/how-to-build-ffmpeg-for-android-on-mac/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/05/15/mediarecorder-start-failed-19/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/06/10/like-and-love/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/01/02/access-denied-on-pictures-library/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/06/12/monitoring-curl-traffic-in-android-using-fiddler2/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/06/18/online-markdown-editor/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/06/20/fix-video-capture-exception-on-android/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2015/12/11/weixin-js-sdk-tips/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/07/05/make-cocos2dx-samples-as-static-libraries/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/07/06/migrating-from-wikidot-to-jekyll/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/07/09/convert-gbk-to-utf8-on-mac/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/01/06/smart-team/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/01/08/soft-keyboard-make-a-black-screen/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/01/30/zhuhai-hongkong-peak/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/08/21/cocoapods-cause-undefined-symbols-for-architecture-i386/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/08/29/cross-platform-indent-style/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/02/28/hello-win8qq/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/09/27/fts-world-tips/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2012/02/28/what-is-the-difference-between-3g-standars/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -709,6 +499,13 @@
   </url>
   
   <url>
+    <loc>http://linyehui.me/2012/02/28/what-is-the-difference-between-3g-standars/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://linyehui.me/2014/10/31/mac-sudo-port-80/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
@@ -716,56 +513,112 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2014/12/12/using-slack-with-markdown/</loc>
+    <loc>http://linyehui.me/2010/11/25/change-cc-compare/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/03/04/winrt-localization/</loc>
+    <loc>http://linyehui.me/2012/01/30/zhuhai-hongkong-peak/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2014/12/24/download-garageband-sound-effects/</loc>
+    <loc>http://linyehui.me/2012/01/08/soft-keyboard-make-a-black-screen/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2015/10/23/ios-garageband-tips/</loc>
+    <loc>http://linyehui.me/2012/01/06/smart-team/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2011/01/08/hello-oracle/</loc>
+    <loc>http://linyehui.me/2012/01/02/access-denied-on-pictures-library/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2015/03/04/douya/</loc>
+    <loc>http://linyehui.me/2011/12/30/3rdparty-port-to-winrt/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/03/16/why-git-but-not-svn/</loc>
+    <loc>http://linyehui.me/2011/12/22/build-c-files-in-metrol-style-app-project-with-vs2011/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2015/03/18/debug-spidermonkey-with-cocos2d-js/</loc>
+    <loc>http://linyehui.me/2011/12/18/regdb-e-classnotreg-class-not-registered/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/09/27/fts-world-tips/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/12/01/shenzhen-gongjijin/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/11/28/recursive-lambda/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/11/23/winrt-0xc0000135/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2010/12/22/wikidot-tips/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/11/19/pes2012-training-attack-and-teammate-controls/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/11/15/how-to-load-win32-dll-with-metro-app/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2012/03/30/winrt-for-win32-programmers-part-i-hello-winrt/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -793,13 +646,6 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/03/21/appcertkit-crash-at-launch/</loc>
-    
-    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://linyehui.me/2015/06/12/total-command-load-selection-from-clip/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
@@ -807,14 +653,63 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/03/23/winrt-sqlite/</loc>
+    <loc>http://linyehui.me/2011/11/10/asus-x53s/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/03/30/winrt-for-win32-programmers-part-i-hello-winrt/</loc>
+    <loc>http://linyehui.me/2014/08/21/cocoapods-cause-undefined-symbols-for-architecture-i386/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/10/31/talk-from-win8/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/01/08/hello-oracle/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2015/10/23/ios-garageband-tips/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/08/29/cross-platform-indent-style/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2015/12/11/weixin-js-sdk-tips/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/01/15/learning-ios-from-xcode-5/</loc>
     
     <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
@@ -828,9 +723,114 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2015/01/26/libcxx-and-libstdcxx/</loc>
+    <loc>http://linyehui.me/2010/12/24/zaina-last-version/</loc>
     
-    <lastmod>2016-02-29T08:16:11.000Z</lastmod>
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/03/23/how-to-debug-ndk/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/01/20/qrcode-launch-app-or-download-app/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/02/14/what-is-noise-reduction/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2010/12/21/hello-git/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/07/09/convert-gbk-to-utf8-on-mac/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/07/06/migrating-from-wikidot-to-jekyll/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/07/05/make-cocos2dx-samples-as-static-libraries/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/05/15/mediarecorder-start-failed-19/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/05/09/how-to-build-ffmpeg-for-android-on-mac/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/06/18/online-markdown-editor/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2012/05/07/winrt-for-win32-programmers-part-ii-port-code-to-winrt-html/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/06/10/like-and-love/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/06/12/monitoring-curl-traffic-in-android-using-fiddler2/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/06/20/fix-video-capture-exception-on-android/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2010/10/19/zaina/</loc>
+    
+    <lastmod>2016-02-29T08:22:23.000Z</lastmod>
     
   </url>
   
@@ -870,14 +870,7 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2014/05/09/keystone-habits/</loc>
-    
-    <lastmod>2014-07-07T13:47:02.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2014/07/01/what-did-add-native-support-do/</loc>
+    <loc>http://linyehui.me/2014/07/02/empty-application-add-interface-builder-on-xcode-5/</loc>
     
     <lastmod>2014-07-07T13:47:02.000Z</lastmod>
     
@@ -898,7 +891,14 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2014/07/02/empty-application-add-interface-builder-on-xcode-5/</loc>
+    <loc>http://linyehui.me/2014/05/09/keystone-habits/</loc>
+    
+    <lastmod>2014-07-07T13:47:02.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/07/01/what-did-add-native-support-do/</loc>
     
     <lastmod>2014-07-07T13:47:02.000Z</lastmod>
     
@@ -933,21 +933,14 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2012/03/03/how-to-reset-all-settings-of-visual-studio-11/</loc>
-    
-    <lastmod>2014-07-06T12:28:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linyehui.me/2011/11/02/weibo-wall/</loc>
-    
-    <lastmod>2014-07-06T12:28:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://linyehui.me/2014/02/13/reading-learning/</loc>
+    
+    <lastmod>2014-07-06T12:28:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2014/04/09/char-is-different-in-ios-and-android/</loc>
     
     <lastmod>2014-07-06T12:28:14.000Z</lastmod>
     
@@ -961,7 +954,14 @@
   </url>
   
   <url>
-    <loc>http://linyehui.me/2014/04/09/char-is-different-in-ios-and-android/</loc>
+    <loc>http://linyehui.me/2012/03/03/how-to-reset-all-settings-of-visual-studio-11/</loc>
+    
+    <lastmod>2014-07-06T12:28:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linyehui.me/2011/11/02/weibo-wall/</loc>
     
     <lastmod>2014-07-06T12:28:14.000Z</lastmod>
     

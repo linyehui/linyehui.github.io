@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linyehui.me/"/>
-  <updated>2016-12-08T10:39:55.000Z</updated>
+  <updated>2016-12-08T18:25:04.000Z</updated>
   <id>http://linyehui.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linyehui.me/2016/12/08/migrate-jekyll-to-hexo/"/>
     <id>http://linyehui.me/2016/12/08/migrate-jekyll-to-hexo/</id>
     <published>2016-12-08T09:21:02.000Z</published>
-    <updated>2016-12-08T10:39:55.000Z</updated>
+    <updated>2016-12-08T18:25:04.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前用的Jekyll，最大的痛点是对Markdown的代码格式支持的不是很好，尝试过一些方法，不过都不太理想；<br>最近偶然看到Hexo的介绍，决定尝试一下；<br>迁移过程中有些小Tips觉得有必要小结下，对于迁移的人来说还是很有用的。</p>
 <ul>
@@ -35,7 +35,7 @@
 <li>保险起见，我把本地的github 仓库也备份了下</li>
 </ul>
 </li>
-<li><p>创建一个新的github仓库用户存储我的hexo blog代码：<a href="https://github.com/linyehui/linyehui-hexo-blog，git" target="_blank" rel="external">https://github.com/linyehui/linyehui-hexo-blog，git</a> clone到本地，得到hexo的本地根目录：linyehui-hexo-blog</p>
+<li><p>创建一个新的github仓库用于存储我的hexo blog代码：<a href="https://github.com/linyehui/linyehui-hexo-blog" target="_blank" rel="external">linyehui-hexo-blog</a>，git clone到本地，得到hexo的本地根目录：linyehui-hexo-blog</p>
 </li>
 <li><p>初始化hexo本地环境</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/linyehui/linyehui-hexo-blog</div><div class="line">cd linyehui-hexo-blog</div><div class="line">npm install -g hexo-cli</div><div class="line"></div><div class="line">hexo init</div><div class="line"></div><div class="line">npm install hexo --save</div><div class="line">npm install hexo-generator-index --save</div><div class="line">npm install hexo-generator-archive --save</div><div class="line">npm install hexo-generator-category --save</div><div class="line">npm install hexo-generator-tag --save</div><div class="line">npm install hexo-server --save</div><div class="line">npm install hexo-deployer-git --save</div><div class="line">npm install hexo-deployer-heroku --save</div><div class="line">npm install hexo-deployer-rsync --save</div><div class="line">npm install hexo-deployer-openshift --save</div><div class="line">npm install hexo-renderer-marked@0.2 --save</div><div class="line">npm install hexo-renderer-stylus@0.2 --save</div><div class="line">npm install hexo-generator-feed@1 --save</div><div class="line">npm install hexo-generator-sitemap@1 --save</div></pre></td></tr></table></figure>
@@ -154,9 +154,9 @@
     </summary>
     
     
-      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
-    
       <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
     
       <category term="memory-leak" scheme="http://linyehui.me/tags/memory-leak/"/>
     
@@ -326,7 +326,7 @@
     <link href="http://linyehui.me/2016/08/10/build-srs-on-mac/"/>
     <id>http://linyehui.me/2016/08/10/build-srs-on-mac/</id>
     <published>2016-08-09T16:00:00.000Z</published>
-    <updated>2016-08-10T08:01:01.000Z</updated>
+    <updated>2016-12-15T04:28:33.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>1、在Mac下编译SRS的RTMP服务器</p>
 <p>2、用OBS往我们自己搭建的服务器上推流</p>
@@ -335,18 +335,20 @@
 <p>我使用的是官方推荐的第一个fork：<a href="https://github.com/smartdu/srs" target="_blank" rel="external">https://github.com/smartdu/srs</a></p>
 <p>由于代码比较大，挂个代理git clone成功率会高很多，这里顺便推荐下神器：proxychains4</p>
 <h2 id="编译参考文档"><a href="#编译参考文档" class="headerlink" title="编译参考文档"></a>编译参考文档</h2><p><a href="https://github.com/ossrs/srs/wiki/v1_CN_SampleRTMP" target="_blank" rel="external">https://github.com/ossrs/srs/wiki/v1_CN_SampleRTMP</a></p>
-<h5 id="PS"><a href="#PS" class="headerlink" title="PS."></a>PS.</h5><p>如果之前用不同的配置编译过，那么可以这样子清理下：</p>
+<ul>
+<li>PS.<br>如果之前用不同的配置编译过，那么可以这样子清理下：</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd trunk</div><div class="line">make clean</div><div class="line">rm -f Makefile</div></pre></td></tr></table></figure>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><h4 id="用configure脚本来生成Makefile"><a href="#用configure脚本来生成Makefile" class="headerlink" title="用configure脚本来生成Makefile"></a>用configure脚本来生成Makefile</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ./srs/trunk</div><div class="line"></div><div class="line"><span class="comment"># 看下配置的选项</span></div><div class="line"></div><div class="line">./configure -h</div><div class="line"></div><div class="line"><span class="comment"># 指定Mac编译，并关闭其他option</span></div><div class="line">./configure --osx --without-ssl --without-hls --without-hds --without-dvr --without-nginx --without-http-callback --without-http-server --without-stream-caster --without-http-api --without-ffmpeg --without-transcode --without-ingest --without-stat --without-librtmp</div><div class="line"></div><div class="line">make</div></pre></td></tr></table></figure>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><h3 id="用configure脚本来生成Makefile"><a href="#用configure脚本来生成Makefile" class="headerlink" title="用configure脚本来生成Makefile"></a>用configure脚本来生成Makefile</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ./srs/trunk</div><div class="line"></div><div class="line"><span class="comment"># 看下配置的选项</span></div><div class="line"></div><div class="line">./configure -h</div><div class="line"></div><div class="line"><span class="comment"># 指定Mac编译，并关闭其他option</span></div><div class="line">./configure --osx --without-ssl --without-hls --without-hds --without-dvr --without-nginx --without-http-callback --without-http-server --without-stream-caster --without-http-api --without-ffmpeg --without-transcode --without-ingest --without-stat --without-librtmp</div><div class="line"></div><div class="line">make</div></pre></td></tr></table></figure>
 <p>一切顺利的话，编译通过，会得到了./objs/srs这个可执行文件</p>
-<h2 id="运行SRS服务器"><a href="#运行SRS服务器" class="headerlink" title="运行SRS服务器"></a>运行SRS服务器</h2><h4 id="srs-conf"><a href="#srs-conf" class="headerlink" title="srs.conf"></a>srs.conf</h4><p>由于Mac系统的限制，运行SRS的话需要把./conf/srs.conf中的并发数修改下，我修改成100:</p>
+<h2 id="运行SRS服务器"><a href="#运行SRS服务器" class="headerlink" title="运行SRS服务器"></a>运行SRS服务器</h2><h3 id="srs-conf"><a href="#srs-conf" class="headerlink" title="srs.conf"></a>srs.conf</h3><p>由于Mac系统的限制，运行SRS的话需要把./conf/srs.conf中的并发数修改下，我修改成100:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#srs.conf中的这一行需要修改下：</span></div><div class="line">max_connections     100;</div></pre></td></tr></table></figure>
-<h4 id="rtmp服务器跑起来"><a href="#rtmp服务器跑起来" class="headerlink" title="rtmp服务器跑起来"></a>rtmp服务器跑起来</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">./objs/srs -c ./conf/srs.conf</div><div class="line"></div><div class="line"><span class="comment">#跑起来后要留意下log，配置存在错误的话，srs进程会关闭掉</span></div><div class="line">tail <span class="_">-f</span> ./objs/srs.log</div><div class="line"></div><div class="line"><span class="comment">#检查下srs进程是否正常运行</span></div><div class="line">ps aux | grep srs</div></pre></td></tr></table></figure>
-<h4 id="推流"><a href="#推流" class="headerlink" title="推流"></a>推流</h4><p>直接使用OBS或者其他RTMP推流工具，填写下：</p>
+<h3 id="rtmp服务器跑起来"><a href="#rtmp服务器跑起来" class="headerlink" title="rtmp服务器跑起来"></a>rtmp服务器跑起来</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">./objs/srs -c ./conf/srs.conf</div><div class="line"></div><div class="line"><span class="comment">#跑起来后要留意下log，配置存在错误的话，srs进程会关闭掉</span></div><div class="line">tail <span class="_">-f</span> ./objs/srs.log</div><div class="line"></div><div class="line"><span class="comment">#检查下srs进程是否正常运行</span></div><div class="line">ps aux | grep srs</div></pre></td></tr></table></figure>
+<h3 id="推流"><a href="#推流" class="headerlink" title="推流"></a>推流</h3><p>直接使用OBS或者其他RTMP推流工具，填写下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">URL：rtmp://10.0.0.54/live</div><div class="line">流密钥：livestream</div></pre></td></tr></table></figure>
-<h4 id="看RTMP流视频"><a href="#看RTMP流视频" class="headerlink" title="看RTMP流视频"></a>看RTMP流视频</h4><p>直接用VLC打开这个地址就可以了:</p>
+<h3 id="看RTMP流视频"><a href="#看RTMP流视频" class="headerlink" title="看RTMP流视频"></a>看RTMP流视频</h3><p>直接用VLC打开这个地址就可以了:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rtmp://10.0.0.54/live/livestream</div></pre></td></tr></table></figure>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到此Mac上最精简的SRS算是编译通过，且能正常跑起来了~</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>到此Mac上最精简的SRS算是编译通过，且能正常跑起来了~</p>
 ]]></content>
     
     <summary type="html">
@@ -397,7 +399,7 @@
     <link href="http://linyehui.me/2016/05/04/hello-react/"/>
     <id>http://linyehui.me/2016/05/04/hello-react/</id>
     <published>2016-05-03T16:00:00.000Z</published>
-    <updated>2016-05-05T09:17:36.000Z</updated>
+    <updated>2016-12-15T04:32:54.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>我在react还是0.x版本的时候，走过一遍react的Getting Started，目前虽然已经写了一些代码，但是完完整整的Hello World倒是没写过，所以决定补下这篇Hello World教程，并做一些相关知识的入门介绍。</p>
 <h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p>如果你能看得懂react官网的介绍，其实也没必要看我这篇转述的教程。</p>
@@ -406,17 +408,17 @@
 <p><a href="https://facebook.github.io/react/docs/package-management.html#using-react-from-npm" target="_blank" rel="external">Package Management</a>  </p>
 <h2 id="最简单的Hello-World"><a href="#最简单的Hello-World" class="headerlink" title="最简单的Hello World"></a>最简单的Hello World</h2><p>单个静态文件，并使用CDN直接引用react.js、react-dom.js以及browser.min.js</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8" /&gt;</div><div class="line">    &lt;title&gt;Hello React!&lt;/title&gt;</div><div class="line">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react.min.js"&gt;&lt;/script&gt;</div><div class="line">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react-dom.min.js"&gt;&lt;/script&gt;</div><div class="line">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"&gt;&lt;/script&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;div id="example"&gt;&lt;/div&gt;</div><div class="line">    &lt;script type="text/babel"&gt;</div><div class="line">      ReactDOM.render(</div><div class="line">        &lt;h1&gt;Hello, world! @eden&lt;/h1&gt;,</div><div class="line">        document.getElementById('example')</div><div class="line">      );</div><div class="line">    &lt;/script&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<h2 id="React-npm-webpack"><a href="#React-npm-webpack" class="headerlink" title="React + npm + webpack"></a>React + npm + webpack</h2><h4 id="1-创建一个目录hello-react"><a href="#1-创建一个目录hello-react" class="headerlink" title="1. 创建一个目录hello-react"></a>1. 创建一个目录hello-react</h4><p>之后的命令行操作都是在这个目录下进行的。</p>
-<h4 id="2-npm-init一个package-json文件，全部使用默认即可"><a href="#2-npm-init一个package-json文件，全部使用默认即可" class="headerlink" title="2. npm init一个package.json文件，全部使用默认即可"></a>2. npm init一个package.json文件，全部使用默认即可</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure>
-<h4 id="3-配置npm依赖"><a href="#3-配置npm依赖" class="headerlink" title="3. 配置npm依赖"></a>3. 配置npm依赖</h4><p>这里的webpack我并没有使用全局安装，下面的步骤会用到</p>
+<h2 id="React-npm-webpack"><a href="#React-npm-webpack" class="headerlink" title="React + npm + webpack"></a>React + npm + webpack</h2><h3 id="1-创建一个目录hello-react"><a href="#1-创建一个目录hello-react" class="headerlink" title="1. 创建一个目录hello-react"></a>1. 创建一个目录hello-react</h3><p>之后的命令行操作都是在这个目录下进行的。</p>
+<h3 id="2-npm-init一个package-json文件，全部使用默认即可"><a href="#2-npm-init一个package-json文件，全部使用默认即可" class="headerlink" title="2. npm init一个package.json文件，全部使用默认即可"></a>2. npm init一个package.json文件，全部使用默认即可</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure>
+<h3 id="3-配置npm依赖"><a href="#3-配置npm依赖" class="headerlink" title="3. 配置npm依赖"></a>3. 配置npm依赖</h3><p>这里的webpack我并没有使用全局安装，下面的步骤会用到</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save react react-dom babel-preset-react babel-loader babel-core webpack</div></pre></td></tr></table></figure>
-<h4 id="4-在hello-html和hello-js中写代码"><a href="#4-在hello-html和hello-js中写代码" class="headerlink" title="4. 在hello.html和hello.js中写代码"></a>4. 在hello.html和hello.js中写代码</h4><h5 id="hello-html"><a href="#hello-html" class="headerlink" title="hello.html"></a>hello.html</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello React!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- No need for Babel! --&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<h5 id="hello-js"><a href="#hello-js" class="headerlink" title="hello.js"></a>hello.js</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// hello.js</span></div><div class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</div><div class="line"><span class="keyword">var</span> ReactDOM = <span class="built_in">require</span>(<span class="string">'react-dom'</span>);</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world! I'm eden<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>,</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>)</div><div class="line">);</div></pre></td></tr></table></figure>
-<h4 id="5-用webpack生成bundle-js"><a href="#5-用webpack生成bundle-js" class="headerlink" title="5. 用webpack生成bundle.js"></a>5. 用webpack生成bundle.js</h4><h5 id="创建并配置babel：-babelrc"><a href="#创建并配置babel：-babelrc" class="headerlink" title="创建并配置babel：.babelrc"></a>创建并配置babel：.babelrc</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; &quot;presets&quot;: [&quot;react&quot;] &#125;</div></pre></td></tr></table></figure>
-<h5 id="webpack打包，使用本地目录下的webpack，而不是全局的"><a href="#webpack打包，使用本地目录下的webpack，而不是全局的" class="headerlink" title="webpack打包，使用本地目录下的webpack，而不是全局的"></a>webpack打包，使用本地目录下的webpack，而不是全局的</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./node_modules/webpack/bin/webpack.js hello.js bundle.js --module-bind &apos;js=babel-loader&apos;</div></pre></td></tr></table></figure>
+<h3 id="4-在hello-html和hello-js中写代码"><a href="#4-在hello-html和hello-js中写代码" class="headerlink" title="4. 在hello.html和hello.js中写代码"></a>4. 在hello.html和hello.js中写代码</h3><h4 id="hello-html"><a href="#hello-html" class="headerlink" title="hello.html"></a>hello.html</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello React!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- No need for Babel! --&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="hello-js"><a href="#hello-js" class="headerlink" title="hello.js"></a>hello.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// hello.js</span></div><div class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</div><div class="line"><span class="keyword">var</span> ReactDOM = <span class="built_in">require</span>(<span class="string">'react-dom'</span>);</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world! I'm eden<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>,</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'example'</span>)</div><div class="line">);</div></pre></td></tr></table></figure>
+<h3 id="5-用webpack生成bundle-js"><a href="#5-用webpack生成bundle-js" class="headerlink" title="5. 用webpack生成bundle.js"></a>5. 用webpack生成bundle.js</h3><h4 id="创建并配置babel：-babelrc"><a href="#创建并配置babel：-babelrc" class="headerlink" title="创建并配置babel：.babelrc"></a>创建并配置babel：.babelrc</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; &quot;presets&quot;: [&quot;react&quot;] &#125;</div></pre></td></tr></table></figure>
+<h4 id="webpack打包，使用本地目录下的webpack，而不是全局的"><a href="#webpack打包，使用本地目录下的webpack，而不是全局的" class="headerlink" title="webpack打包，使用本地目录下的webpack，而不是全局的"></a>webpack打包，使用本地目录下的webpack，而不是全局的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./node_modules/webpack/bin/webpack.js hello.js bundle.js --module-bind &apos;js=babel-loader&apos;</div></pre></td></tr></table></figure>
 <p>这样我们就在hello-react的根目录下得到了下面这几个文件和目录：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">./.babelrc</div><div class="line">./bundle.js</div><div class="line">./hello.html</div><div class="line">./main.js</div><div class="line">./node_modules</div><div class="line">./package.json</div></pre></td></tr></table></figure>
-<h4 id="6-OK了"><a href="#6-OK了" class="headerlink" title="6. OK了"></a>6. OK了</h4><p>直接用浏览器打开./hello.html就是我们想要的用npm和webpack打包出来的，最简单的react hello worl</p>
+<h3 id="6-OK了"><a href="#6-OK了" class="headerlink" title="6. OK了"></a>6. OK了</h3><p>直接用浏览器打开./hello.html就是我们想要的用npm和webpack打包出来的，最简单的react hello worl</p>
 <h2 id="webpack配置"><a href="#webpack配置" class="headerlink" title="webpack配置"></a>webpack配置</h2><p>上面我们使用了webpack的命令行进行打包，其实用npm配合webpack会更方便，同时我们也调整下我们的目录结构，把hello.js放到src目录下，并把打包生成的bundle.js,以及hello.html放到build目录下。</p>
 <h3 id="添加一个webpack-config-js"><a href="#添加一个webpack-config-js" class="headerlink" title="添加一个webpack.config.js"></a>添加一个webpack.config.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var path = require(&apos;path&apos;);</div><div class="line"></div><div class="line">var config = &#123;</div><div class="line">    entry: [</div><div class="line">        path.resolve(__dirname, &apos;src/hello.js&apos;)</div><div class="line">    ],</div><div class="line">    output: &#123;</div><div class="line">        path: path.resolve(__dirname, &apos;build&apos;),</div><div class="line">        filename: &apos;bundle.js&apos;,</div><div class="line">    &#125;,</div><div class="line">    module: &#123;</div><div class="line">        loaders: [&#123;</div><div class="line">            test: /\.jsx?$/,</div><div class="line">            exclude: /node_modules/, </div><div class="line">            loader: &apos;babel&apos;,</div><div class="line">            query: &#123;&#125;</div><div class="line">        &#125;]</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">module.exports = config;</div></pre></td></tr></table></figure>
 <h3 id="修改下package-json添加一个build的script"><a href="#修改下package-json添加一个build的script" class="headerlink" title="修改下package.json添加一个build的script"></a>修改下package.json添加一个build的script</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;hello-react&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</div><div class="line">    &quot;build&quot;: &quot;webpack&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;babel-core&quot;: &quot;^6.8.0&quot;,</div><div class="line">    &quot;babel-loader&quot;: &quot;^6.2.4&quot;,</div><div class="line">    &quot;babel-preset-react&quot;: &quot;^6.5.0&quot;,</div><div class="line">    &quot;react&quot;: &quot;^15.0.2&quot;,</div><div class="line">    &quot;react-dom&quot;: &quot;^15.0.2&quot;,</div><div class="line">    &quot;webpack&quot;: &quot;^1.13.0&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -455,12 +457,12 @@
     <link href="http://linyehui.me/2016/04/29/hex-to-rgb/"/>
     <id>http://linyehui.me/2016/04/29/hex-to-rgb/</id>
     <published>2016-04-28T16:00:00.000Z</published>
-    <updated>2016-04-29T03:20:35.000Z</updated>
+    <updated>2016-12-15T04:34:23.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；</p>
 <p>那么同样的逻辑下iOS是什么效果呢？</p>
 <h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的</p>
-<h4 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h4><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
+<h3 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h3><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Assumes input like &quot;#00FF00&quot; (#RRGGBB).</div><div class="line">+ (UIColor *)colorFromHexString:(NSString *)hexString &#123;</div><div class="line">    unsigned rgbValue = 0;</div><div class="line">    NSScanner *scanner = [NSScanner scannerWithString:hexString];</div><div class="line">    [scanner setScanLocation:1]; // bypass &apos;#&apos; character</div><div class="line">    [scanner scanHexInt:&amp;rgbValue];</div><div class="line">    return [UIColor colorWithRed:((rgbValue &amp; 0xFF0000) &gt;&gt; 16)/255.0 green:((rgbValue &amp; 0xFF00) &gt;&gt; 8)/255.0 blue:(rgbValue &amp; 0xFF)/255.0 alpha:1.0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>根据这个代码，实际的效果会是这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#CCC 会被解释成 #000CCC，而不是像CSS中所期望的#CCCCCC</div></pre></td></tr></table></figure>
@@ -566,11 +568,11 @@
     </summary>
     
     
+      <category term="github" scheme="http://linyehui.me/tags/github/"/>
+    
       <category term="markdown" scheme="http://linyehui.me/tags/markdown/"/>
     
       <category term="jekyll" scheme="http://linyehui.me/tags/jekyll/"/>
-    
-      <category term="github" scheme="http://linyehui.me/tags/github/"/>
     
   </entry>
   
@@ -621,9 +623,9 @@
     </summary>
     
     
-      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
-    
       <category term="rime" scheme="http://linyehui.me/tags/rime/"/>
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
     
   </entry>
   
@@ -747,11 +749,11 @@
     </summary>
     
     
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
       <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
     
       <category term="xcode" scheme="http://linyehui.me/tags/xcode/"/>
-    
-      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
     
   </entry>
   
@@ -760,9 +762,9 @@
     <link href="http://linyehui.me/2015/11/05/double-commander-for-mac/"/>
     <id>http://linyehui.me/2015/11/05/double-commander-for-mac/</id>
     <published>2015-11-04T16:00:00.000Z</published>
-    <updated>2016-02-29T08:33:23.000Z</updated>
+    <updated>2016-12-15T04:36:21.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h3><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
+    <content type="html"><![CDATA[<h2 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h2><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
 <p>TC确实可以替换系统的资源管理器，但是他的目标可不是替换系统资源管理器这么简单。</p>
 <p>无奈之下选择了一款免费的Finder插件XtraFinder，用了一段时间之后，我的Mac升级了OS X 10.11，用不了了：<a href="https://www.trankynam.com/xtrafinder/sip.html" target="_blank" rel="external">如果不关闭System Integrity Protection就无法使用了</a>。</p>
 <p>不能忍，再找找吧，在网上看到了这几个帖子：  </p>
@@ -794,7 +796,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;相见恨晚&quot;&gt;&lt;a href=&quot;#相见恨晚&quot; class=&quot;headerlink&quot; title=&quot;相见恨晚&quot;&gt;&lt;/a&gt;相见恨晚&lt;/h3&gt;&lt;p&gt;作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，
+      &lt;h2 id=&quot;相见恨晚&quot;&gt;&lt;a href=&quot;#相见恨晚&quot; class=&quot;headerlink&quot; title=&quot;相见恨晚&quot;&gt;&lt;/a&gt;相见恨晚&lt;/h2&gt;&lt;p&gt;作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，
     
     </summary>
     
@@ -832,9 +834,9 @@
     
       <category term="music" scheme="http://linyehui.me/tags/music/"/>
     
-      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
-    
       <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
     
       <category term="garageband" scheme="http://linyehui.me/tags/garageband/"/>
     
@@ -862,9 +864,9 @@
     </summary>
     
     
-      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
-    
       <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
     
       <category term="uiimage" scheme="http://linyehui.me/tags/uiimage/"/>
     

@@ -336,7 +336,7 @@
             <h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；</p>
 <p>那么同样的逻辑下iOS是什么效果呢？</p>
 <h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的</p>
-<h4 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h4><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
+<h3 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h3><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Assumes input like &quot;#00FF00&quot; (#RRGGBB).</div><div class="line">+ (UIColor *)colorFromHexString:(NSString *)hexString &#123;</div><div class="line">    unsigned rgbValue = 0;</div><div class="line">    NSScanner *scanner = [NSScanner scannerWithString:hexString];</div><div class="line">    [scanner setScanLocation:1]; // bypass &apos;#&apos; character</div><div class="line">    [scanner scanHexInt:&amp;rgbValue];</div><div class="line">    return [UIColor colorWithRed:((rgbValue &amp; 0xFF0000) &gt;&gt; 16)/255.0 green:((rgbValue &amp; 0xFF00) &gt;&gt; 8)/255.0 blue:(rgbValue &amp; 0xFF)/255.0 alpha:1.0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>根据这个代码，实际的效果会是这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#CCC 会被解释成 #000CCC，而不是像CSS中所期望的#CCCCCC</div></pre></td></tr></table></figure>
@@ -1329,7 +1329,7 @@
       
         
           
-            <h3 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h3><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
+            <h2 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h2><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
 <p>TC确实可以替换系统的资源管理器，但是他的目标可不是替换系统资源管理器这么简单。</p>
 <p>无奈之下选择了一款免费的Finder插件XtraFinder，用了一段时间之后，我的Mac升级了OS X 10.11，用不了了：<a href="https://www.trankynam.com/xtrafinder/sip.html" target="_blank" rel="external">如果不关闭System Integrity Protection就无法使用了</a>。</p>
 <p>不能忍，再找找吧，在网上看到了这几个帖子：  </p>

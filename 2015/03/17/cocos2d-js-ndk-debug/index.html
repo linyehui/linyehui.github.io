@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android,ndk,cocos2d-js,cocos2d," />
+  <meta name="keywords" content="ndk,cocos2d-js,cocos2d,android," />
 
 
 
@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://linyehui.me/media/files/2015/03/17/cproject.png">
 <meta property="og:image" content="http://linyehui.me/media/files/2015/03/17/build_var.png">
 <meta property="og:image" content="http://linyehui.me/media/files/2015/03/17/ndk_build.png">
-<meta property="og:updated_time" content="2016-02-29T08:33:23.000Z">
+<meta property="og:updated_time" content="2016-12-15T04:41:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2d-js 配置NDK调试">
 <meta name="twitter:description" content="需求cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&amp;gt;Android Native Application。
@@ -338,34 +338,34 @@
 
       
         <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&gt;Android Native Application。</p>
-<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><p>Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。</p>
+<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Android Developer Tools</div><div class="line">Build: v22.3.0-887826</div><div class="line"></div><div class="line">NDK </div><div class="line">D:\android-ndk-r9d</div></pre></td></tr></table></figure>
 <p>为了说明这个问题，我用cocos code IDE创建了一个工程NativeDemo，下面中的.\NativeDemo就是这个工程的根目录</p>
-<h4 id="Add-Native-Support"><a href="#Add-Native-Support" class="headerlink" title="Add Native Support"></a>Add Native Support</h4><h5 id="默认生成的工程是找不到Add-Native-Support的"><a href="#默认生成的工程是找不到Add-Native-Support的" class="headerlink" title="默认生成的工程是找不到Add Native Support的"></a>默认生成的工程是找不到Add Native Support的</h5><p>用ADT打开工程后，没有办法使用Native来调试，这样就没办法调试NDK了，排查了下：  </p>
+<h3 id="Add-Native-Support"><a href="#Add-Native-Support" class="headerlink" title="Add Native Support"></a>Add Native Support</h3><h4 id="默认生成的工程是找不到Add-Native-Support的"><a href="#默认生成的工程是找不到Add-Native-Support的" class="headerlink" title="默认生成的工程是找不到Add Native Support的"></a>默认生成的工程是找不到Add Native Support的</h4><p>用ADT打开工程后，没有办法使用Native来调试，这样就没办法调试NDK了，排查了下：  </p>
 <p>1.右键工程Android Tools中没有Add Native Support菜单  </p>
 <p>2.到工程属性中查看，有C/C++ Build这个Tab页，但是点开却提示这不是一个CDT工程  </p>
 <p>3.对比之前的CDT工程，发现了下面的区别，而根目录下并没有.cproject文件存在：  </p>
 <p><img src="/media/files/2015/03/17/cproject.png" alt="cproject"></p>
-<h5 id="使用cocos-console和cocos-studio创建的工程有什么不同"><a href="#使用cocos-console和cocos-studio创建的工程有什么不同" class="headerlink" title="使用cocos console和cocos studio创建的工程有什么不同"></a>使用cocos console和cocos studio创建的工程有什么不同</h5><p>首先，这两种方式创建的工程，都有上面的这个问题，也就是缺失了.cproject这个文件；  </p>
+<h4 id="使用cocos-console和cocos-studio创建的工程有什么不同"><a href="#使用cocos-console和cocos-studio创建的工程有什么不同" class="headerlink" title="使用cocos console和cocos studio创建的工程有什么不同"></a>使用cocos console和cocos studio创建的工程有什么不同</h4><p>首先，这两种方式创建的工程，都有上面的这个问题，也就是缺失了.cproject这个文件；  </p>
 <p>除此之外cocos console创建的工程是个empty project，而cocos studio创建工程的时候会有一个简单的向导，帮你生成第一个页面。</p>
-<h5 id="出现这个问题的原因："><a href="#出现这个问题的原因：" class="headerlink" title="出现这个问题的原因："></a>出现这个问题的原因：</h5><p>工程创建的时候生成的.project已经添加了”Add Native Support”支持，但是同时生成的.cproject文件却没有入库，从而导致了上面的问题</p>
-<h5 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h5><p>打开.\NativeDemo\frameworks\runtime-src\proj.android.project，查找并删除cdt相关的两部分配置：<br>1.BuildCommand  </p>
+<h4 id="出现这个问题的原因："><a href="#出现这个问题的原因：" class="headerlink" title="出现这个问题的原因："></a>出现这个问题的原因：</h4><p>工程创建的时候生成的.project已经添加了”Add Native Support”支持，但是同时生成的.cproject文件却没有入库，从而导致了上面的问题</p>
+<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p>打开.\NativeDemo\frameworks\runtime-src\proj.android.project，查找并删除cdt相关的两部分配置：<br>1.BuildCommand  </p>
 <p>2.natures</p>
 <p>删除成功的标准就是右键工程-》Android Tools的菜单下可以看到Add Native Support；    </p>
 <p>另外删除成功后工程属性下也看不到C/C++ Build的Tab页；    </p>
 <p>而工程属性的Builder下会看不到 Scanner Configuration Builder。    </p>
 <p>修改好了之后，右键工程，Android Tools，Add Native Support </p>
-<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://www.cocos2d-x.org/wiki/How_to_build_and_run_HelloWorld_on_Android_NDK_r5_and_above" target="_blank" rel="external">How to build and run HelloWorld on Android NDK r5 and above</a>  </p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.cocos2d-x.org/wiki/How_to_build_and_run_HelloWorld_on_Android_NDK_r5_and_above" target="_blank" rel="external">How to build and run HelloWorld on Android NDK r5 and above</a>  </p>
 <p><a href="http://www.cnblogs.com/sw926/p/3232311.html" target="_blank" rel="external">无需cygwin，使用NDK进行开发</a>  </p>
-<h4 id="配置NDK-build"><a href="#配置NDK-build" class="headerlink" title="配置NDK build"></a>配置NDK build</h4><h5 id="添加一个C-变量"><a href="#添加一个C-变量" class="headerlink" title="添加一个C++变量"></a>添加一个C++变量</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">COCOS2DX_HOME</div><div class="line">../../js-bindings/cocos2d-x</div></pre></td></tr></table></figure>
+<h3 id="配置NDK-build"><a href="#配置NDK-build" class="headerlink" title="配置NDK build"></a>配置NDK build</h3><h4 id="添加一个C-变量"><a href="#添加一个C-变量" class="headerlink" title="添加一个C++变量"></a>添加一个C++变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">COCOS2DX_HOME</div><div class="line">../../js-bindings/cocos2d-x</div></pre></td></tr></table></figure>
 <p><img src="/media/files/2015/03/17/build_var.png" alt="build var"></p>
-<h5 id="配置NDK-build的命令行"><a href="#配置NDK-build的命令行" class="headerlink" title="配置NDK build的命令行"></a>配置NDK build的命令行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#Windows</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..;$&#123;COCOS2DX_HOME&#125;;$&#123;COCOS2DX_HOME&#125;/external;$&#123;COCOS2DX_HOME&#125;/cocos;../Classes&quot;</div><div class="line"></div><div class="line">#Mac</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..:$&#123;COCOS2DX_HOME&#125;:$&#123;COCOS2DX_HOME&#125;/external:$&#123;COCOS2DX_HOME&#125;/cocos:../Classes&quot;</div></pre></td></tr></table></figure>
+<h4 id="配置NDK-build的命令行"><a href="#配置NDK-build的命令行" class="headerlink" title="配置NDK build的命令行"></a>配置NDK build的命令行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#Windows</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..;$&#123;COCOS2DX_HOME&#125;;$&#123;COCOS2DX_HOME&#125;/external;$&#123;COCOS2DX_HOME&#125;/cocos;../Classes&quot;</div><div class="line"></div><div class="line">#Mac</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..:$&#123;COCOS2DX_HOME&#125;:$&#123;COCOS2DX_HOME&#125;/external:$&#123;COCOS2DX_HOME&#125;/cocos:../Classes&quot;</div></pre></td></tr></table></figure>
 <p><img src="/media/files/2015/03/17/ndk_build.png" alt="ndk build"></p>
 <ul>
 <li>NDK_DEBUG=1这个参数记得加上</li>
 </ul>
 <h3 id="R-ARM-THM-CALL"><a href="#R-ARM-THM-CALL" class="headerlink" title="R_ARM_THM_CALL"></a>R_ARM_THM_CALL</h3><p>C++编译过程中出现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed Android build: “error: relocation overflow in R_ARM_THM_CALL”</div></pre></td></tr></table></figure></p>
-<h5 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h5><p>/runtime-scr/proj.android/jni/Android.mk 中添加一行：</p>
+<h4 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h4><p>/runtime-scr/proj.android/jni/Android.mk 中添加一行：</p>
 <blockquote>
 <p>LOCAL_ARM_MODE := arm</p>
 </blockquote>
@@ -406,13 +406,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"># android</a>
-          
             <a href="/tags/ndk/" rel="tag"># ndk</a>
           
             <a href="/tags/cocos2d-js/" rel="tag"># cocos2d-js</a>
           
             <a href="/tags/cocos2d/" rel="tag"># cocos2d</a>
+          
+            <a href="/tags/android/" rel="tag"># android</a>
           
         </div>
       
@@ -570,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决过程"><span class="nav-number">2.</span> <span class="nav-text">解决过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境配置"><span class="nav-number">2.0.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Native-Support"><span class="nav-number">2.0.2.</span> <span class="nav-text">Add Native Support</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#默认生成的工程是找不到Add-Native-Support的"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">默认生成的工程是找不到Add Native Support的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用cocos-console和cocos-studio创建的工程有什么不同"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">使用cocos console和cocos studio创建的工程有什么不同</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#出现这个问题的原因："><span class="nav-number">2.0.2.3.</span> <span class="nav-text">出现这个问题的原因：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案："><span class="nav-number">2.0.2.4.</span> <span class="nav-text">解决方案：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">2.0.2.5.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置NDK-build"><span class="nav-number">2.0.3.</span> <span class="nav-text">配置NDK build</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加一个C-变量"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">添加一个C++变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置NDK-build的命令行"><span class="nav-number">2.0.3.2.</span> <span class="nav-text">配置NDK build的命令行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-ARM-THM-CALL"><span class="nav-number">2.1.</span> <span class="nav-text">R_ARM_THM_CALL</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案：-1"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">解决方案：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDK版本号导致的Unknown-Application-ABI"><span class="nav-number">2.2.</span> <span class="nav-text">SDK版本号导致的Unknown Application ABI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案：-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AndroidManifest-xml"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">AndroidManifest.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#project-properties"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">project.properties</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NDK-MODULE-PATH"><span class="nav-number">2.3.</span> <span class="nav-text">NDK_MODULE_PATH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bindings目录下的Android-mk有语法错误"><span class="nav-number">2.4.</span> <span class="nav-text">bindings目录下的Android.mk有语法错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搞定了"><span class="nav-number">2.5.</span> <span class="nav-text">搞定了</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决过程"><span class="nav-number">2.</span> <span class="nav-text">解决过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境配置"><span class="nav-number">2.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Native-Support"><span class="nav-number">2.2.</span> <span class="nav-text">Add Native Support</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#默认生成的工程是找不到Add-Native-Support的"><span class="nav-number">2.2.1.</span> <span class="nav-text">默认生成的工程是找不到Add Native Support的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用cocos-console和cocos-studio创建的工程有什么不同"><span class="nav-number">2.2.2.</span> <span class="nav-text">使用cocos console和cocos studio创建的工程有什么不同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#出现这个问题的原因："><span class="nav-number">2.2.3.</span> <span class="nav-text">出现这个问题的原因：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案："><span class="nav-number">2.2.4.</span> <span class="nav-text">解决方案：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">2.2.5.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NDK-build"><span class="nav-number">2.3.</span> <span class="nav-text">配置NDK build</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加一个C-变量"><span class="nav-number">2.3.1.</span> <span class="nav-text">添加一个C++变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置NDK-build的命令行"><span class="nav-number">2.3.2.</span> <span class="nav-text">配置NDK build的命令行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-ARM-THM-CALL"><span class="nav-number">2.4.</span> <span class="nav-text">R_ARM_THM_CALL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案：-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">解决方案：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDK版本号导致的Unknown-Application-ABI"><span class="nav-number">2.5.</span> <span class="nav-text">SDK版本号导致的Unknown Application ABI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案：-2"><span class="nav-number">2.5.1.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AndroidManifest-xml"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">AndroidManifest.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#project-properties"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">project.properties</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NDK-MODULE-PATH"><span class="nav-number">2.6.</span> <span class="nav-text">NDK_MODULE_PATH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bindings目录下的Android-mk有语法错误"><span class="nav-number">2.7.</span> <span class="nav-text">bindings目录下的Android.mk有语法错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搞定了"><span class="nav-number">2.8.</span> <span class="nav-text">搞定了</span></a></li></ol></li></ol></div>
             
 
           </div>

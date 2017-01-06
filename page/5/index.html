@@ -248,6 +248,138 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/09/27/clean-webview-cache-of-android-app/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/09/27/clean-webview-cache-of-android-app/" itemprop="url">
+                  Android下手动清除WebView缓存
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-27T00:00:00+08:00">
+                2014-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/09/27/clean-webview-cache-of-android-app/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/27/clean-webview-cache-of-android-app/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>手动清除Android QQ中内嵌WebView缓存</p>
+<h1 id="寻找解决方案"><a href="#寻找解决方案" class="headerlink" title="寻找解决方案"></a>寻找解决方案</h1><p><a href="http://blog.csdn.net/moubenmao_jun/article/details/17078269" target="_blank" rel="external">WebView Cache 缓存清除</a></p>
+<h3 id="简单说，就是应用内的WebView缓存都会序列化在这里："><a href="#简单说，就是应用内的WebView缓存都会序列化在这里：" class="headerlink" title="简单说，就是应用内的WebView缓存都会序列化在这里："></a>简单说，就是应用内的WebView缓存都会序列化在这里：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/data/data/package_name/cache/</div><div class="line">/data/data/package_name/database/webview.db</div><div class="line">/data/data/package_name/database/webviewCache.db</div></pre></td></tr></table></figure>
+<h1 id="手动删除缓存-操作步骤"><a href="#手动删除缓存-操作步骤" class="headerlink" title="手动删除缓存-操作步骤"></a>手动删除缓存-操作步骤</h1><ul>
+<li>杀掉应用</li>
+<li>去/data/data/package_name/目录下删除cache目录</li>
+<li>去/data/data/package_name/database/目录下删除所有webView前缀的文件</li>
+<li>搞定</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/08/29/cross-platform-indent-style/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -350,157 +482,6 @@
 <h3 id="使用空格替代TAB，在三大主流IDE下如何配置"><a href="#使用空格替代TAB，在三大主流IDE下如何配置" class="headerlink" title="使用空格替代TAB，在三大主流IDE下如何配置"></a>使用空格替代TAB，在三大主流IDE下如何配置</h3><h5 id="Visual-Studio-2012"><a href="#Visual-Studio-2012" class="headerlink" title="Visual Studio 2012"></a>Visual Studio 2012</h5><p><img src="/media/files/2014/08/29/vs.png" alt="Visual Studio"></p>
 <h5 id="ADT-Eclipse"><a href="#ADT-Eclipse" class="headerlink" title="ADT(Eclipse)"></a>ADT(Eclipse)</h5><p><img src="/media/files/2014/08/29/eclipse.png" alt="Eclipse"></p>
 <h5 id="Xcode-5-1-1"><a href="#Xcode-5-1-1" class="headerlink" title="Xcode 5.1.1"></a>Xcode 5.1.1</h5><p><img src="/media/files/2014/08/29/xcode.jpg" alt="Xcode"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/08/21/adb-shell-vi/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/21/adb-shell-vi/" itemprop="url">
-                  adb shell下使用vi修改hosts
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-21T00:00:00+08:00">
-                2014-08-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/08/21/adb-shell-vi/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/21/adb-shell-vi/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="原始需求"><a href="#原始需求" class="headerlink" title="原始需求"></a>原始需求</h2><p>Android应用测试的时候经常需要修改/system/etc/hosts，有这么几种常见方法：  </p>
-<ul>
-<li>1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦）</li>
-<li>2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作）</li>
-<li>3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）</li>
-</ul>
-<h2 id="落地需求"><a href="#落地需求" class="headerlink" title="落地需求"></a>落地需求</h2><p>adb shell vi这个方案无疑是操作起来最高效的，那怎样才能可以在adb shell下使用vi命令呢？</p>
-<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="0-前提：你的手机已经ROOT过了"><a href="#0-前提：你的手机已经ROOT过了" class="headerlink" title="0. 前提：你的手机已经ROOT过了"></a>0. 前提：你的手机已经ROOT过了</h2><h2 id="1-手机上下载并安装BusyBox"><a href="#1-手机上下载并安装BusyBox" class="headerlink" title="1. 手机上下载并安装BusyBox"></a>1. 手机上下载并安装BusyBox</h2><ul>
-<li>我用的是这个：<a href="http://www.wandoujia.com/apps/stericson.busybox.donate" target="_blank" rel="external">BusyBox工具箱 汉化版</a></li>
-<li>我安装的版本是1.22.1</li>
-<li>安装的时候直接安装到/system/bin，这样敲命令行的时候就不需要这么敲了：<blockquote>
-<p>busybox vi</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="2-adb-shell-vi"><a href="#2-adb-shell-vi" class="headerlink" title="2. adb shell vi"></a>2. adb shell vi</h2><h3 id="2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用"><a href="#2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用" class="headerlink" title="2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用"></a>2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用</h3><h3 id="2-2-Windows下的-adb-shell-vi"><a href="#2-2-Windows下的-adb-shell-vi" class="headerlink" title="2.2 Windows下的 adb shell vi"></a>2.2 Windows下的 adb shell vi</h3><ul>
-<li>Windows下直接使用CDM连接后使用vi会出现乱码，解决的方案是使用：adbputty</li>
-<li>从这里下载：<a href="https://github.com/sztupy/adbputty/downloads" target="_blank" rel="external">adb putty</a></li>
-<li>putty配置：主机填写transport-usb ，连接类型选择Adb（对应5037端口）  </li>
-</ul>
-<p>配置可以参考这个：<a href="http://yesokay.herokuapp.com/2012-07-31-adbputty.html" target="_blank" rel="external">adb putty</a></p>
-<h2 id="3-vi-保存文件时提示：Read-only-file-system"><a href="#3-vi-保存文件时提示：Read-only-file-system" class="headerlink" title="3. vi 保存文件时提示：Read-only file system."></a>3. vi 保存文件时提示：Read-only file system.</h2><p>都是mount R/W的问题，同一个问题两个解决方案：</p>
-<h3 id="3-1-mount-R-W"><a href="#3-1-mount-R-W" class="headerlink" title="3.1 mount R/W"></a>3.1 mount R/W</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Simply change ro to rw and add the remount option</div><div class="line"># mount -o rw,remount /system</div><div class="line"></div><div class="line">Once you are done making changes, you should remount with the original readonly.</div><div class="line"># mount -o ro,remount /system</div></pre></td></tr></table></figure>
-<h3 id="3-2-还有个比较鸡肋，但是偷懒的解决方案"><a href="#3-2-还有个比较鸡肋，但是偷懒的解决方案" class="headerlink" title="3.2 还有个比较鸡肋，但是偷懒的解决方案"></a>3.2 还有个比较鸡肋，但是偷懒的解决方案</h3><p>不记得命令行的时候可以使用下 :)</p>
-<ol>
-<li>使用Root Exporler等工具，点击Mount R/W按钮</li>
-<li>回到adb shell下操作，你会发现已经可以保存了</li>
-</ol>
 
           
         
@@ -669,6 +650,157 @@
 <p><a href="https://github.com/mikefullerton/FishLampLib/blob/3d9f0308015edab41335641dc0cdd7f3e47d63ea/Podfile" target="_blank" rel="external">Podfile 参考3</a>  </p>
 <h3 id="最终的方案"><a href="#最终的方案" class="headerlink" title="最终的方案"></a>最终的方案</h3><p> 有了上面的信息，我的解决方案也就水到渠成了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">pod &apos;FMDB&apos;, &apos;~&gt; 2.3&apos;</div><div class="line"></div><div class="line">post_install do |installer_representation|</div><div class="line">  installer_representation.project.targets.each do |target|</div><div class="line">    target.build_configurations.each do |config|</div><div class="line">      config.build_settings[&apos;ARCHS&apos;] = &apos;armv7 armv7s&apos;</div><div class="line">      config.build_settings[&apos;ONLY_ACTIVE_ARCH&apos;] = &apos;NO&apos;</div><div class="line">    end</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/08/21/adb-shell-vi/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/21/adb-shell-vi/" itemprop="url">
+                  adb shell下使用vi修改hosts
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-21T00:00:00+08:00">
+                2014-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/08/21/adb-shell-vi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/21/adb-shell-vi/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="原始需求"><a href="#原始需求" class="headerlink" title="原始需求"></a>原始需求</h2><p>Android应用测试的时候经常需要修改/system/etc/hosts，有这么几种常见方法：  </p>
+<ul>
+<li>1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦）</li>
+<li>2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作）</li>
+<li>3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）</li>
+</ul>
+<h2 id="落地需求"><a href="#落地需求" class="headerlink" title="落地需求"></a>落地需求</h2><p>adb shell vi这个方案无疑是操作起来最高效的，那怎样才能可以在adb shell下使用vi命令呢？</p>
+<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="0-前提：你的手机已经ROOT过了"><a href="#0-前提：你的手机已经ROOT过了" class="headerlink" title="0. 前提：你的手机已经ROOT过了"></a>0. 前提：你的手机已经ROOT过了</h2><h2 id="1-手机上下载并安装BusyBox"><a href="#1-手机上下载并安装BusyBox" class="headerlink" title="1. 手机上下载并安装BusyBox"></a>1. 手机上下载并安装BusyBox</h2><ul>
+<li>我用的是这个：<a href="http://www.wandoujia.com/apps/stericson.busybox.donate" target="_blank" rel="external">BusyBox工具箱 汉化版</a></li>
+<li>我安装的版本是1.22.1</li>
+<li>安装的时候直接安装到/system/bin，这样敲命令行的时候就不需要这么敲了：<blockquote>
+<p>busybox vi</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-adb-shell-vi"><a href="#2-adb-shell-vi" class="headerlink" title="2. adb shell vi"></a>2. adb shell vi</h2><h3 id="2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用"><a href="#2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用" class="headerlink" title="2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用"></a>2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用</h3><h3 id="2-2-Windows下的-adb-shell-vi"><a href="#2-2-Windows下的-adb-shell-vi" class="headerlink" title="2.2 Windows下的 adb shell vi"></a>2.2 Windows下的 adb shell vi</h3><ul>
+<li>Windows下直接使用CDM连接后使用vi会出现乱码，解决的方案是使用：adbputty</li>
+<li>从这里下载：<a href="https://github.com/sztupy/adbputty/downloads" target="_blank" rel="external">adb putty</a></li>
+<li>putty配置：主机填写transport-usb ，连接类型选择Adb（对应5037端口）  </li>
+</ul>
+<p>配置可以参考这个：<a href="http://yesokay.herokuapp.com/2012-07-31-adbputty.html" target="_blank" rel="external">adb putty</a></p>
+<h2 id="3-vi-保存文件时提示：Read-only-file-system"><a href="#3-vi-保存文件时提示：Read-only-file-system" class="headerlink" title="3. vi 保存文件时提示：Read-only file system."></a>3. vi 保存文件时提示：Read-only file system.</h2><p>都是mount R/W的问题，同一个问题两个解决方案：</p>
+<h3 id="3-1-mount-R-W"><a href="#3-1-mount-R-W" class="headerlink" title="3.1 mount R/W"></a>3.1 mount R/W</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Simply change ro to rw and add the remount option</div><div class="line"># mount -o rw,remount /system</div><div class="line"></div><div class="line">Once you are done making changes, you should remount with the original readonly.</div><div class="line"># mount -o ro,remount /system</div></pre></td></tr></table></figure>
+<h3 id="3-2-还有个比较鸡肋，但是偷懒的解决方案"><a href="#3-2-还有个比较鸡肋，但是偷懒的解决方案" class="headerlink" title="3.2 还有个比较鸡肋，但是偷懒的解决方案"></a>3.2 还有个比较鸡肋，但是偷懒的解决方案</h3><p>不记得命令行的时候可以使用下 :)</p>
+<ol>
+<li>使用Root Exporler等工具，点击Mount R/W按钮</li>
+<li>回到adb shell下操作，你会发现已经可以保存了</li>
+</ol>
 
           
         
@@ -1694,138 +1826,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/01/what-did-add-native-support-do/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/07/01/what-did-add-native-support-do/" itemprop="url">
-                  Add Native Support 都做了些什么
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-07-01T00:00:00+08:00">
-                2014-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/07/01/what-did-add-native-support-do/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/01/what-did-add-native-support-do/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><blockquote>
-<p>Android工程不小心点击了Android Tools-&gt;Add Native Support，怎么还原</p>
-</blockquote>
-<h3 id="还原步骤"><a href="#还原步骤" class="headerlink" title="还原步骤"></a>还原步骤</h3><h4 id="1-删除工程根目录的-cproject文件"><a href="#1-删除工程根目录的-cproject文件" class="headerlink" title="1. 删除工程根目录的 .cproject文件"></a>1. 删除工程根目录的 .cproject文件</h4><h4 id="2-删除-project中的cdt部分"><a href="#2-删除-project中的cdt部分" class="headerlink" title="2. 删除.project中的cdt部分"></a>2. 删除.project中的cdt部分</h4><ul>
-<li>Add Native Support后的工程会在<buildspec>下多出一个<buildcommand></buildcommand>XML段，找到包含cdt的buildCommand XML段删除</buildspec></li>
-<li>Add Native Support后的工程会在<natures>下多出几个包含cdt的XML段，删除</natures></li>
-</ul>
-<h4 id="3-回到Eclipse，刷新，右键工程-gt-Android-Tools-gt-Add-Native-Support又回来了"><a href="#3-回到Eclipse，刷新，右键工程-gt-Android-Tools-gt-Add-Native-Support又回来了" class="headerlink" title="3. 回到Eclipse，刷新，右键工程-&gt;Android Tools-&gt;Add Native Support又回来了"></a>3. 回到Eclipse，刷新，右键工程-&gt;Android Tools-&gt;Add Native Support又回来了</h4><p>#不折腾不舒服斯基</p>
-<p>—–The End—–</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1871,7 +1871,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">137</span>
+              <span class="site-state-item-count">138</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1881,7 +1881,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">171</span>
+                <span class="site-state-item-count">172</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1941,7 +1941,7 @@
         <div class="copyright" >
   
   &copy;  2010 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-wifi"></i>
   </span>

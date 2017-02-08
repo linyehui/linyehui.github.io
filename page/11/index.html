@@ -248,6 +248,137 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/03/21/appcertkit-crash-at-launch/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2012/03/21/appcertkit-crash-at-launch/" itemprop="url">
+                  Windows App Certification Kit 一启动就Crash
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-03-21T00:00:00+08:00">
+                2012-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2012/03/21/appcertkit-crash-at-launch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/03/21/appcertkit-crash-at-launch/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>Windows 8 Consumer Preview下，用Windows App Certification Kit认证自己的应用，认证到一半卡住了，10分钟了都没动静，连系统都卡死了，于是我长按“Power”键进行了暴力重启，重启之后就悲剧了：Windows App Certification Kit 一启动就Crash！！！</p>
+<h1 id="方案一，重装SDK"><a href="#方案一，重装SDK" class="headerlink" title="方案一，重装SDK"></a>方案一，重装SDK</h1><p>在微软官网下载了包含Windows App Certification   Kit的SDK进行安装，但是发现根本没用，难不成我只能重装系统吗？！！</p>
+<h1 id="方案二，删除配置文件"><a href="#方案二，删除配置文件" class="headerlink" title="方案二，删除配置文件"></a>方案二，删除配置文件</h1><p>好在我有Everything，换了两个关键字后，我找到了他的配置文件所在  </p>
+<h2 id="我用的关键字："><a href="#我用的关键字：" class="headerlink" title="我用的关键字："></a>我用的关键字：</h2><ol>
+<li>App Certification Kit</li>
+<li>AppCertKit</li>
+</ol>
+<h2 id="找到的配置路径："><a href="#找到的配置路径：" class="headerlink" title="找到的配置路径："></a>找到的配置路径：</h2><p>C:\Users\XXXX\AppData\Local\Microsoft\AppCertKit</p>
+<h2 id="把AppCertKit路径下的文件全部删了，就可以解决问题。"><a href="#把AppCertKit路径下的文件全部删了，就可以解决问题。" class="headerlink" title="把AppCertKit路径下的文件全部删了，就可以解决问题。"></a>把AppCertKit路径下的文件全部删了，就可以解决问题。</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/03/16/why-git-but-not-svn/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -515,132 +646,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/03/03/how-to-reset-all-settings-of-visual-studio-11/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2012/03/03/how-to-reset-all-settings-of-visual-studio-11/" itemprop="url">
-                  如何重置Visual Studio的设置(C++ / C#)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-03-03T00:00:00+08:00">
-                2012-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2012/03/03/how-to-reset-all-settings-of-visual-studio-11/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/03/03/how-to-reset-all-settings-of-visual-studio-11/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>C++程序员和C#程序员的Visual Studio设置在Visual Studio第一次安装的时候会进行一次选择，如果第一次选错了，后面如何改选呢？</p>
-<p><strong>Visual Studio 11 可以这么来：</strong><br>Tools-&gt;Import and Export Settings-&gt;Reset all settings</p>
-<p>我记得自己以前都是直接去删除VS的整个配置目录，然后他就会自己提示重新设置了</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/03/03/microsoft-visual-studio-11-ultimate-beta-iso/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -766,7 +771,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/02/28/hello-win8qq/">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/03/03/how-to-reset-all-settings-of-visual-studio-11/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="linyehui">
@@ -791,8 +796,8 @@
             
               
                 
-                <a class="post-title-link" href="/2012/02/28/hello-win8qq/" itemprop="url">
-                  Hello Win8QQ
+                <a class="post-title-link" href="/2012/03/03/how-to-reset-all-settings-of-visual-studio-11/" itemprop="url">
+                  如何重置Visual Studio的设置(C++ / C#)
                 </a>
               
             
@@ -806,8 +811,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-02-28T00:00:00+08:00">
-                2012-02-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-03-03T00:00:00+08:00">
+                2012-03-03
               </time>
             
 
@@ -822,8 +827,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2012/02/28/hello-win8qq/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/02/28/hello-win8qq/" itemprop="commentCount"></span>
+                <a href="/2012/03/03/how-to-reset-all-settings-of-visual-studio-11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/03/03/how-to-reset-all-settings-of-visual-studio-11/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -851,13 +856,9 @@
       
         
           
-            <p><img src="http://t3.qpic.cn/mblogpic/9651916edc7521c1a9f8/2000" alt="2000"></p>
-<p>Win8QQ Twitter: <a href="https://twitter.com/Win8QQ" target="_blank" rel="external">Win8QQ Twitter</a>  </p>
-<p>Win8QQ 腾讯微博: <a href="http://t.qq.com/win8qq" target="_blank" rel="external">Win8QQ 腾讯微博</a>  </p>
-<p>PS.  </p>
-<p>Win8QQ是针对Windows 8 Metro UI的全新体验版本，只能从Windows Store上下载；  </p>
-<p>Windows 8 Desktop下还是继续使用<a href="http://im.qq.com" target="_blank" rel="external">QQ2011</a>，还有即将面世的QQ2012  </p>
-<p>本博客非官方博客，所有消息均为“小道消息” :)</p>
+            <p>C++程序员和C#程序员的Visual Studio设置在Visual Studio第一次安装的时候会进行一次选择，如果第一次选错了，后面如何改选呢？</p>
+<p><strong>Visual Studio 11 可以这么来：</strong><br>Tools-&gt;Import and Export Settings-&gt;Reset all settings</p>
+<p>我记得自己以前都是直接去删除VS的整个配置目录，然后他就会自己提示重新设置了</p>
 
           
         
@@ -1007,6 +1008,136 @@
 <p><a href="http://tech.163.com/mobile/09/0512/07/593LH74J00112K8D.html" target="_blank" rel="external">到底选谁? 移动电信联通3G资费业务全对比</a>  </p>
 <p><strong>PS.</strong>  </p>
 <p>你可能还对LTE 4G网络感兴趣，可以看下这个：<a href="http://zh.wikipedia.org/wiki/3GPP%E9%95%B7%E6%9C%9F%E6%BC%94%E9%80%B2%E6%8A%80%E8%A1%93" target="_blank" rel="external">LTE 3GPP长期演进技术</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/02/28/hello-win8qq/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2012/02/28/hello-win8qq/" itemprop="url">
+                  Hello Win8QQ
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-02-28T00:00:00+08:00">
+                2012-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2012/02/28/hello-win8qq/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/02/28/hello-win8qq/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://t3.qpic.cn/mblogpic/9651916edc7521c1a9f8/2000" alt="2000"></p>
+<p>Win8QQ Twitter: <a href="https://twitter.com/Win8QQ" target="_blank" rel="external">Win8QQ Twitter</a>  </p>
+<p>Win8QQ 腾讯微博: <a href="http://t.qq.com/win8qq" target="_blank" rel="external">Win8QQ 腾讯微博</a>  </p>
+<p>PS.  </p>
+<p>Win8QQ是针对Windows 8 Metro UI的全新体验版本，只能从Windows Store上下载；  </p>
+<p>Windows 8 Desktop下还是继续使用<a href="http://im.qq.com" target="_blank" rel="external">QQ2011</a>，还有即将面世的QQ2012  </p>
+<p>本博客非官方博客，所有消息均为“小道消息” :)</p>
 
           
         
@@ -1455,155 +1586,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/01/02/access-denied-on-pictures-library/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2012/01/02/access-denied-on-pictures-library/" itemprop="url">
-                  无法访问“我的图片(Pictures Library)”中的文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-01-02T00:00:00+08:00">
-                2012-01-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2012/01/02/access-denied-on-pictures-library/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/01/02/access-denied-on-pictures-library/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>在WinRT下，文件访问有着严格的限制，默认你只能访问<strong>Windows::Storage::ApplicationData::Current</strong>  下属的一些目录，连“我的文档”，“我的图片”都无法访问。  </p>
-<p>那么如果我们想从“我的图片”中选择一张图片并上传，我们应该怎么做呢？</p>
-<p>我当时也找到了这个<a href="http://social.msdn.microsoft.com/Forums/en-US/winappswithcsharp/thread/0fef7363-73c6-4ff5-8e03-14b795e47068" target="_blank" rel="external">MSDN帖子:Access denied on Pictures library</a>，但没有得到答案，最终我自己解决后回复如下：</p>
-<blockquote>
-<p>If you want access a file in Document Library，you must follow:<br>1.select “Document Library Access” in “Capabilities” Tab of “.appxmanifest”<br>2.add “File Type Associations” in Declarations Tab of “.appxmanifest” </p>
-<p>you can get sample from “File access sample”, which is one of “Windows Developer Preview Metro style app samples”</p>
-</blockquote>
-<h1 id="描述下我的解决方案："><a href="#描述下我的解决方案：" class="headerlink" title="描述下我的解决方案："></a>描述下我的解决方案：</h1><ul>
-<li>1、打开.appxmanifest文件，进入”Capabilities” Tab页，将”Picture Library Access”勾上</li>
-<li>2、打开.appxmanifest文件，进入”Declarations” Tab页，添加”File Type Associations”，并在右侧的<strong>“Supported File Types”</strong>中加上“.png”、”.jpg”等的文件类型支持。  </li>
-</ul>
-<p>这一步我自己也是后面自己查看后才发现的，一定要特别留意。</p>
-<ul>
-<li>3、有了上面两步，你就可以用Windows::Storage下的API进行访问和修改Picture Library下的文件了，不过你还是不能用Win32的API来访问下面的文件，怎么办呢？</li>
-</ul>
-<h3 id="方法还是有的："><a href="#方法还是有的：" class="headerlink" title="方法还是有的："></a>方法还是有的：</h3><p>用Windows::Storage下的CopyAsync方法先把文件复制到应用自己的目录下：Windows::Storage::ApplicationData::Current-&gt;TemporaryFolder，  </p>
-<p>在这个目录下的文件你就可以用CreateFile2、fopen等方法来访问了。  </p>
-<p>从Picture Library复制到App Temp目录下的代码就暂时不放出来了，除非有人需要，其实就是一堆的Lambda表达式</p>
-<h1 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h1><p>其实你在“Capabilities”中选择“Document Library Access”时，右边的文字提示对这个问题说的很清楚，只是大家一开始都没太留意，原来还有一个步骤要做：  </p>
-<blockquote>
-<p>The package can onle access file types in the documents library that are defined in the manifest<br>using the File Association Handler declaration.</p>
-</blockquote>
-<p>原文：</p>
-<blockquote>
-<p>Proviedes the capability to add, change, or delete files in the documents library. The package can onle access file<br>types in the documents library that are defined in the manifest using the File Association Handler declaration.<br>The package cannot access document libraryies on HomeGroup computers.</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1649,7 +1631,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">138</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1659,7 +1641,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-count">173</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

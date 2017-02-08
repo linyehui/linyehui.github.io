@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linyehui.me/"/>
-  <updated>2017-01-06T05:48:40.000Z</updated>
+  <updated>2017-02-08T08:23:26.000Z</updated>
   <id>http://linyehui.me/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ignore SIGPIPE crash</title>
+    <link href="http://linyehui.me/2017/02/08/ignore-sigpipe-crash/"/>
+    <id>http://linyehui.me/2017/02/08/ignore-sigpipe-crash/</id>
+    <published>2017-02-07T16:00:00.000Z</published>
+    <updated>2017-02-08T08:23:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：</p>
+<blockquote>
+<p>Signal 13 was raised. SIGPIPE</p>
+</blockquote>
+<p>查找资料后，发现最简单的解决方案就是忽略这个错误：</p>
+<blockquote>
+<p>signal(SIGPIPE, SIG_IGN);</p>
+</blockquote>
+<p>但实际的结果是我们设置了还是会继续出现闪退</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>排查了很久后才发现，问题的原因是BugTags也会控制这个开头，默认是不忽略，而且这个默认显然代码是主动调用了，而不是我们期望的不调用就不设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 是否忽略 PIPE Signal (SIGPIPE) 闪退，默认 NO</div><div class="line"> */</div><div class="line">@property(nonatomic, assign) BOOL ignorePIPESignalCrash;</div></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>设置BugTags的对应开关即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// Bugtags</div><div class="line">BugtagsOptions *options = [[BugtagsOptions alloc] init];</div><div class="line">options.ignorePIPESignalCrash = YES;</div><div class="line">[Bugtags startWithAppKey:BugTagsAPPKEY invocationEvent:BTGInvocationEventNone options:options];</div></pre></td></tr></table></figure></p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这个问题我们排查了很久，一直在找我们自己的原因，但其实这种bug因为跟网络环境有关系不容易重现；<br>其实反思后发现，排查这个问题我们应该先做一个事情，就是手动出发SIGNAL 13，看闪退是否被正确忽略；<br>而我们恰恰没做这个事情，思路上的疏漏导致了之前的大量工作变成了无用功。</p>
+<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a href="http://www.jianshu.com/p/1957d2b18d2c" target="_blank" rel="external">如何在 iOS 上避免 SIGPIPE 信号导致的 crash (Avoiding SIGPIPE signal crash in iOS)</a><br><a href="https://developer.apple.com/reference/foundation/nsstream/1410399-close?language=objc" target="_blank" rel="external">NSStream close</a><br><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Streams/Articles/WritingOutputStreams.html" target="_blank" rel="external">Writing OutputStreams</a><br><a href="http://www.cnblogs.com/kesalin/archive/2013/04/29/ios_network_nsstream.html" target="_blank" rel="external">[深入浅出Cocoa]iOS网络编程之NSStream</a><br><a href="http://iphonedevsdk.com/forum/iphone-sdk-development/21065-how-to-make-a-nsstream-instance-reusable.html" target="_blank" rel="external">How to make a NSStream instance reusable?</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="SIGPIPE" scheme="http://linyehui.me/tags/sigpipe/"/>
+    
+  </entry>
   
   <entry>
     <title>setStatusBarOrientation:animated: not working</title>
@@ -755,6 +790,42 @@
   </entry>
   
   <entry>
+    <title>Xcode 7.1无法使用Instruments真机调试，设备灰色不可选</title>
+    <link href="http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/"/>
+    <id>http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/</id>
+    <published>2015-11-04T16:00:00.000Z</published>
+    <updated>2016-02-29T08:22:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>Macbook Pro + Mac OS X 10.11.1 + Xcode 7.1 +Instruments 7.1  </p>
+<p>iPhone 6 + iOS 9.1  </p>
+<h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="/media/files/2015/11/05/instruments-gray-device.png" alt="Instruments中的设备选择无法选择iPhone真机，灰色不可选"></p>
+<p>Instruments中的设备选择无法选择iPhone真机，灰色不可选</p>
+<h3 id="解决方案：重启"><a href="#解决方案：重启" class="headerlink" title="解决方案：重启"></a>解决方案：重启</h3><p>我最终的解决步骤：  </p>
+<p>1、拔掉iPhone的USB线，重启iPhone  </p>
+<p>2、关闭Xcode和Instruments  </p>
+<p>3、重新连接iPhone到Mac上  </p>
+<p>4、重启Xcode并启动Profile  </p>
+<p>5、成功  </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>这个帖子的方法管用，我的iPhone 6 9.1系统可以正常调试起来了  </p>
+<p><a href="http://stackoverflow.com/questions/32878283/unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta" target="_blank" rel="external">unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;h3 id=&quot;开发环境&quot;&gt;&lt;a href=&quot;#开发环境&quot; class=&quot;headerlink&quot; title=&quot;开发环境&quot;&gt;&lt;/a
+    
+    </summary>
+    
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
+    
+      <category term="xcode" scheme="http://linyehui.me/tags/xcode/"/>
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Double Commander for Mac</title>
     <link href="http://linyehui.me/2015/11/05/double-commander-for-mac/"/>
     <id>http://linyehui.me/2015/11/05/double-commander-for-mac/</id>
@@ -803,75 +874,6 @@
       <category term="totalcommander" scheme="http://linyehui.me/tags/totalcommander/"/>
     
       <category term="doublecommander" scheme="http://linyehui.me/tags/doublecommander/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Xcode 7.1无法使用Instruments真机调试，设备灰色不可选</title>
-    <link href="http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/"/>
-    <id>http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/</id>
-    <published>2015-11-04T16:00:00.000Z</published>
-    <updated>2016-02-29T08:22:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>Macbook Pro + Mac OS X 10.11.1 + Xcode 7.1 +Instruments 7.1  </p>
-<p>iPhone 6 + iOS 9.1  </p>
-<h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="/media/files/2015/11/05/instruments-gray-device.png" alt="Instruments中的设备选择无法选择iPhone真机，灰色不可选"></p>
-<p>Instruments中的设备选择无法选择iPhone真机，灰色不可选</p>
-<h3 id="解决方案：重启"><a href="#解决方案：重启" class="headerlink" title="解决方案：重启"></a>解决方案：重启</h3><p>我最终的解决步骤：  </p>
-<p>1、拔掉iPhone的USB线，重启iPhone  </p>
-<p>2、关闭Xcode和Instruments  </p>
-<p>3、重新连接iPhone到Mac上  </p>
-<p>4、重启Xcode并启动Profile  </p>
-<p>5、成功  </p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>这个帖子的方法管用，我的iPhone 6 9.1系统可以正常调试起来了  </p>
-<p><a href="http://stackoverflow.com/questions/32878283/unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta" target="_blank" rel="external">unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;h3 id=&quot;开发环境&quot;&gt;&lt;a href=&quot;#开发环境&quot; class=&quot;headerlink&quot; title=&quot;开发环境&quot;&gt;&lt;/a
-    
-    </summary>
-    
-    
-      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
-    
-      <category term="xcode" scheme="http://linyehui.me/tags/xcode/"/>
-    
-      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS版本GarageBand使用小技巧</title>
-    <link href="http://linyehui.me/2015/10/23/ios-garageband-tips/"/>
-    <id>http://linyehui.me/2015/10/23/ios-garageband-tips/</id>
-    <published>2015-10-22T16:00:00.000Z</published>
-    <updated>2016-02-29T08:22:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="录音时长"><a href="#录音时长" class="headerlink" title="录音时长"></a>录音时长</h2><p>点击右上角的“+”号，修改为自动，时间就不会只有8秒了</p>
-<h2 id="导出到Mac上-GarageBand进行编辑"><a href="#导出到Mac上-GarageBand进行编辑" class="headerlink" title="导出到Mac上 GarageBand进行编辑"></a>导出到Mac上 GarageBand进行编辑</h2><p>1、在iOS的“我的乐曲”页面，长按选择一首乐曲，然后点击左上角的分享图标，出现的选择列表中，选择“iTunes”  </p>
-<p>2、在Mac上打开iTunes，在我的设备，应用的底部，可以看到“共享文档”，选择GarageBand，就能看到你刚刚导出的.band文件  </p>
-<p>3、选择并点击右下角的“存储到”，把.band文件保存到Mac上  </p>
-<p>4、在Mac上直接打开刚刚导出的.band文件，Mac版的GarageBand会自动帮你转换成Mac版本的.band文件，另存下就可以了  </p>
-<p>5、第一次使用还会下载iOS上的效果库，300多MB，直接下载很慢可以挂个代理  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;录音时长&quot;&gt;&lt;a href=&quot;#录音时长&quot; class=&quot;headerlink&quot; title=&quot;录音时长&quot;&gt;&lt;/a&gt;录音时长&lt;/h2&gt;&lt;p&gt;点击右上角的“+”号，修改为自动，时间就不会只有8秒了&lt;/p&gt;
-&lt;h2 id=&quot;导出到Mac上-GarageBand进行编辑
-    
-    </summary>
-    
-    
-      <category term="music" scheme="http://linyehui.me/tags/music/"/>
-    
-      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
-    
-      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
-    
-      <category term="garageband" scheme="http://linyehui.me/tags/garageband/"/>
     
   </entry>
   

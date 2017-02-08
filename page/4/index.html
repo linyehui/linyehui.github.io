@@ -248,6 +248,175 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/17/cocos2d-js-ndk-debug/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/03/17/cocos2d-js-ndk-debug/" itemprop="url">
+                  cocos2d-js 配置NDK调试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-17T00:00:00+08:00">
+                2015-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/03/17/cocos2d-js-ndk-debug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/17/cocos2d-js-ndk-debug/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&gt;Android Native Application。</p>
+<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Android Developer Tools</div><div class="line">Build: v22.3.0-887826</div><div class="line"></div><div class="line">NDK </div><div class="line">D:\android-ndk-r9d</div></pre></td></tr></table></figure>
+<p>为了说明这个问题，我用cocos code IDE创建了一个工程NativeDemo，下面中的.\NativeDemo就是这个工程的根目录</p>
+<h3 id="Add-Native-Support"><a href="#Add-Native-Support" class="headerlink" title="Add Native Support"></a>Add Native Support</h3><h4 id="默认生成的工程是找不到Add-Native-Support的"><a href="#默认生成的工程是找不到Add-Native-Support的" class="headerlink" title="默认生成的工程是找不到Add Native Support的"></a>默认生成的工程是找不到Add Native Support的</h4><p>用ADT打开工程后，没有办法使用Native来调试，这样就没办法调试NDK了，排查了下：  </p>
+<p>1.右键工程Android Tools中没有Add Native Support菜单  </p>
+<p>2.到工程属性中查看，有C/C++ Build这个Tab页，但是点开却提示这不是一个CDT工程  </p>
+<p>3.对比之前的CDT工程，发现了下面的区别，而根目录下并没有.cproject文件存在：  </p>
+<p><img src="/media/files/2015/03/17/cproject.png" alt="cproject"></p>
+<h4 id="使用cocos-console和cocos-studio创建的工程有什么不同"><a href="#使用cocos-console和cocos-studio创建的工程有什么不同" class="headerlink" title="使用cocos console和cocos studio创建的工程有什么不同"></a>使用cocos console和cocos studio创建的工程有什么不同</h4><p>首先，这两种方式创建的工程，都有上面的这个问题，也就是缺失了.cproject这个文件；  </p>
+<p>除此之外cocos console创建的工程是个empty project，而cocos studio创建工程的时候会有一个简单的向导，帮你生成第一个页面。</p>
+<h4 id="出现这个问题的原因："><a href="#出现这个问题的原因：" class="headerlink" title="出现这个问题的原因："></a>出现这个问题的原因：</h4><p>工程创建的时候生成的.project已经添加了”Add Native Support”支持，但是同时生成的.cproject文件却没有入库，从而导致了上面的问题</p>
+<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p>打开.\NativeDemo\frameworks\runtime-src\proj.android.project，查找并删除cdt相关的两部分配置：<br>1.BuildCommand  </p>
+<p>2.natures</p>
+<p>删除成功的标准就是右键工程-》Android Tools的菜单下可以看到Add Native Support；    </p>
+<p>另外删除成功后工程属性下也看不到C/C++ Build的Tab页；    </p>
+<p>而工程属性的Builder下会看不到 Scanner Configuration Builder。    </p>
+<p>修改好了之后，右键工程，Android Tools，Add Native Support </p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.cocos2d-x.org/wiki/How_to_build_and_run_HelloWorld_on_Android_NDK_r5_and_above" target="_blank" rel="external">How to build and run HelloWorld on Android NDK r5 and above</a>  </p>
+<p><a href="http://www.cnblogs.com/sw926/p/3232311.html" target="_blank" rel="external">无需cygwin，使用NDK进行开发</a>  </p>
+<h3 id="配置NDK-build"><a href="#配置NDK-build" class="headerlink" title="配置NDK build"></a>配置NDK build</h3><h4 id="添加一个C-变量"><a href="#添加一个C-变量" class="headerlink" title="添加一个C++变量"></a>添加一个C++变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">COCOS2DX_HOME</div><div class="line">../../js-bindings/cocos2d-x</div></pre></td></tr></table></figure>
+<p><img src="/media/files/2015/03/17/build_var.png" alt="build var"></p>
+<h4 id="配置NDK-build的命令行"><a href="#配置NDK-build的命令行" class="headerlink" title="配置NDK build的命令行"></a>配置NDK build的命令行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#Windows</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..;$&#123;COCOS2DX_HOME&#125;;$&#123;COCOS2DX_HOME&#125;/external;$&#123;COCOS2DX_HOME&#125;/cocos;../Classes&quot;</div><div class="line"></div><div class="line">#Mac</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..:$&#123;COCOS2DX_HOME&#125;:$&#123;COCOS2DX_HOME&#125;/external:$&#123;COCOS2DX_HOME&#125;/cocos:../Classes&quot;</div></pre></td></tr></table></figure>
+<p><img src="/media/files/2015/03/17/ndk_build.png" alt="ndk build"></p>
+<ul>
+<li>NDK_DEBUG=1这个参数记得加上</li>
+</ul>
+<h3 id="R-ARM-THM-CALL"><a href="#R-ARM-THM-CALL" class="headerlink" title="R_ARM_THM_CALL"></a>R_ARM_THM_CALL</h3><p>C++编译过程中出现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed Android build: “error: relocation overflow in R_ARM_THM_CALL”</div></pre></td></tr></table></figure></p>
+<h4 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h4><p>/runtime-scr/proj.android/jni/Android.mk 中添加一行：</p>
+<blockquote>
+<p>LOCAL_ARM_MODE := arm</p>
+</blockquote>
+<p>参考：<a href="http://blog.csdn.net/mingzznet/article/details/41120551" target="_blank" rel="external">http://blog.csdn.net/mingzznet/article/details/41120551</a></p>
+<h3 id="SDK版本号导致的Unknown-Application-ABI"><a href="#SDK版本号导致的Unknown-Application-ABI" class="headerlink" title="SDK版本号导致的Unknown Application ABI"></a>SDK版本号导致的Unknown Application ABI</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unknown Application ABI: </div><div class="line">Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 9 in ./AndroidManifest.xml</div></pre></td></tr></table></figure>
+<h4 id="解决方案：-2"><a href="#解决方案：-2" class="headerlink" title="解决方案："></a>解决方案：</h4><p>手机上的版本需要和安装了的SDK已经配置的SDK版本一致，以我的小米2S为例，我的系统版本是4.1，也就是对应SDK 的API Level 16；  </p>
+<p>下面这两个文件需要对应的都修改成16：  </p>
+<h5 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-sdk android:minSdkVersion=&quot;16&quot;/&gt;</div></pre></td></tr></table></figure>
+<h5 id="project-properties"><a href="#project-properties" class="headerlink" title="project.properties"></a>project.properties</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">target=android-16</div></pre></td></tr></table></figure>
+<h3 id="NDK-MODULE-PATH"><a href="#NDK-MODULE-PATH" class="headerlink" title="NDK_MODULE_PATH"></a>NDK_MODULE_PATH</h3><p>切换到Mac下，使用SDK 16来编译，提示NDK Module找不到，想起来之前做过类似的事情，NDK build命令行设置的NDK_MODULE_PATH适用于编译，但是调试的时候还是会提示找不到路径，解决方案是在Android.mk中加上调试用的配置，不调试的时候关掉：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 调试NDK用的定义，平常不要打开 linyhui</div><div class="line">$(call import-add-path, ../../js-bindings)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/external)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/cocos)</div><div class="line">$(call import-add-path, ../Classes)</div></pre></td></tr></table></figure>
+<p><a href="http://blog.sina.com.cn/s/blog_4057ab62010197z8.html" target="_blank" rel="external">import-module的注意事项与NDK_MODULE_PATH的配置</a>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果NDK_MODULE_PATH 没有设置或者设置不正确。编译时都是报错 Are you sure your NDK_MODULE_PATH variable is properly defined。</div></pre></td></tr></table></figure>
+<h3 id="bindings目录下的Android-mk有语法错误"><a href="#bindings目录下的Android-mk有语法错误" class="headerlink" title="bindings目录下的Android.mk有语法错误"></a>bindings目录下的Android.mk有语法错误</h3><p>排查了半天发现是这个文件有语法错误，导致无法调试，但不知道为什么编译是没有问题的，这个算是cocos2d的一个Bug：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./NativeDemo/frameworks/js-bindings/bindings/Android.mk</div><div class="line"></div><div class="line">#### 注释掉这个文件末尾中的这一行：</div><div class="line"></div><div class="line">#$(call import-module,.)</div></pre></td></tr></table></figure>
+<p>注释后，Build下C++，就可以Debug As-&gt;Android Native Application</p>
+<h3 id="搞定了"><a href="#搞定了" class="headerlink" title="搞定了"></a>搞定了</h3><p>可以Debug As-&gt;Android Native Application</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/04/douya/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1507,191 +1676,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/09/27/fts-world-tips/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/27/fts-world-tips/" itemprop="url">
-                  FTS World入门指南
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-27T00:00:00+08:00">
-                2014-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/09/27/fts-world-tips/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/27/fts-world-tips/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="First-Touch-足球系列"><a href="#First-Touch-足球系列" class="headerlink" title="First Touch 足球系列"></a>First Touch 足球系列</h1><p>iOS下的足球游戏，如果要从操作性的角度选出一系列最好的，不是FIFA系列也不是Real Football系列，而是First Touch系列。</p>
-<p>第一次接触到First Touch的足球系列游戏，是《Dream League Soccer》，这款游戏虽然画面比较粗糙，但是操作感十足，特别是各种各样的进球方式让人赏心悦目，比赛的节奏很流畅，和起华而不实的FIFA和Real系列比起来，有种早期实况 VS FIFA的感觉。</p>
-<p>这款游戏我已经不记得自己多少次“通关”，自己组建的切尔西也已经把我想买的所有球员都给买下了，而且所有球员的数值我都已经训练到了90以上，其中几个能力值是100。</p>
-<p>不过《Dream League Soccer》的玩法还是简陋，比如连助攻数都不统计，联赛形式也比较单一，在这个时候我发现了同系列的另一款新游戏：《First Touch Soccer World Edition》。</p>
-<h1 id="First-Touch-Soccer-World-Edition-与前作的差别"><a href="#First-Touch-Soccer-World-Edition-与前作的差别" class="headerlink" title="First Touch Soccer World Edition 与前作的差别"></a>First Touch Soccer World Edition 与前作的差别</h1><ul>
-<li>游戏引擎和上一款没有大的变化，所以操作上完全一致</li>
-<li>游戏部分玩法和设置必须要VIP才可以玩，而VIP需要4000金币</li>
-<li>游戏的联赛使用了真实名字，而上一代都是类似“北伦敦”一样的替代名字</li>
-<li>游戏的“Manager Mode”，让你自己当Manager，你不仅要操作游戏比赛，还要考虑球员买卖，更有教练自己的转会，这个是新版本的精华所在</li>
-<li>新增了世界杯模式，世界球队随便选，夺取世界杯</li>
-<li>新增了俱乐部的营收体系，使用独立的货币，球队买卖球员，升级体育场都要使用货币进行，但货币不足时可以使用金币兑换，美其名曰：投资俱乐部</li>
-<li>FTS新增了Star Player Mode（VIP功能），比赛的时候你只控制一个球员，可以呼叫你的队友传球给你</li>
-<li>新增了TOURNAMENT MODE（VIP功能），其实就是各大联赛和杯赛，想体验每个联赛的话不用在Manager Mode下进行，解锁VIP后就可以随便选队了  </li>
-</ul>
-<h1 id="First-Touch-Soccer-World-Edition-入门指引"><a href="#First-Touch-Soccer-World-Edition-入门指引" class="headerlink" title="First Touch Soccer World Edition 入门指引"></a>First Touch Soccer World Edition 入门指引</h1><ul>
-<li>刚开始玩，推荐从世界杯模式入手，熟悉下操作，同时也赚点金币</li>
-<li>对于不想花钱的用户，世界杯通关后的下一个游戏目标是赚够4000金币，买下VIP  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">有了VIP你的每局游戏经验和金币都会翻倍，  </div><div class="line"></div><div class="line">可以随便挑选球队进行比赛，联赛或杯赛，  </div><div class="line"></div><div class="line">还可以设置比赛时长（想不到这个都是VIP功能……）  </div><div class="line"></div><div class="line">比赛开始前可以选择使用Star Player Mode</div></pre></td></tr></table></figure>
-<h2 id="Manager-Mode技巧和窍门"><a href="#Manager-Mode技巧和窍门" class="headerlink" title="Manager Mode技巧和窍门"></a>Manager Mode技巧和窍门</h2><h3 id="比赛操作"><a href="#比赛操作" class="headerlink" title="比赛操作"></a>比赛操作</h3><ul>
-<li>玩Manager Mode，一开始可以把游戏难度调成“Low”，因为一开始你能选到的球队真的很搓</li>
-<li>初始的时候要选一个球队，尽量选个星级高一点的，球队收益好点</li>
-<li>头球大法好用</li>
-<li>挑球需要球员数值比较高，没有大牌球星还是不要尝试了</li>
-</ul>
-<h3 id="维持俱乐部的收支平衡"><a href="#维持俱乐部的收支平衡" class="headerlink" title="维持俱乐部的收支平衡"></a>维持俱乐部的收支平衡</h3><ul>
-<li>小球会不要买大球星，其实70-79能力值的球员已经可以打遍五大联赛了</li>
-<li>实在缺钱的时候，可以玩一轮世界杯模式，刷一刷金币</li>
-<li>球队连续5周财政赤字会自动解雇球员（被解雇的球员不给选的，不小心好球员被裁掉会很吃亏）</li>
-<li>但是有一种情况就算财政赤字也不会自动解雇球员：球队有且只有16个球员，因为游戏规定一直球队至少必须有16个球员</li>
-<li>省钱大法  </li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">守门员只保留一个</div><div class="line">球员保持游戏最低人数：16个（教练转会的时候要注意这一点，下文有说明）</div><div class="line">比赛要赢球，冠军联赛这种钱比较多</div></pre></td></tr></table></figure>
-<h3 id="球员转会"><a href="#球员转会" class="headerlink" title="球员转会"></a>球员转会</h3><ul>
-<li>联赛开始后马上开始转会运作，把不好的球员全部加入转会名单，然后买入一些物美价廉的球员</li>
-<li>物美价廉的好球员：OVERALL能力值在70-79之间，身体素质的三个属性均超过80  </li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">球员最重要的是身体素质的三个属性：SPEED，ACCELERATION，STAMINA</div><div class="line">而这三个中STAMINA（耐力）又是最重要的，因为你也不想踢了半场就得换人吧</div><div class="line">球员比赛过程中状态差的情况下最好换人，不然会被电脑抛在后面几米</div><div class="line">STAMINA 80以上的球员可以保证这个球员整个赛季可以比较完整的完成，而不是踢一场休息两场</div><div class="line">同样身体素质的球员中，球员的价格：守门员 &lt; 后卫 &lt; 前锋 &lt; 中场</div></pre></td></tr></table></figure>
-<ul>
-<li>球队还是要有一两个数值比较高，性价比高的核心球员，有两个球员值得推荐：特雷泽盖和里克尔梅</li>
-<li>缺钱的话，先买个好前锋或前腰，剩下的都买后卫（身体素质好的边后卫打前锋也不错的）</li>
-<li>多说一句，在有核心球员的前提下，其他球员只要有体力在场上跑就够了，所以转会的时候一定要买STAMINA值高于80的球员</li>
-</ul>
-<h3 id="教练转会"><a href="#教练转会" class="headerlink" title="教练转会"></a>教练转会</h3><ul>
-<li>在你的带队成绩出来后，邀请你转会的球队会越来越好，球队的好坏主要看他的收益，以及是否可以参加欧洲联赛（上面说过的：钱多）</li>
-<li>转会后的球队收益比较好会让你有更多的资金购买球员</li>
-<li>我一般在赛季结束后会看看有没有合适的转会邀请，看情况选择换家俱乐部</li>
-<li>赛季中间走的话我这个联赛的GameCenter成就就没法达成多可惜</li>
-<li>如果准备教练转会，就没必要花金币投资俱乐部了，什么请教练，升级球场统统不要</li>
-<li>每个月的目标只挑好完成的实现，不用在意有没有完成</li>
-<li>带着自己的弟子转会  </li>
-</ul>
-<p>由于我都是保存一只球队16个球员的最高性价比配置，所以如果我的教练想要转会，而我又想把我心爱的弟子给一起带走，那么这件事情你必须要做：</p>
-<blockquote>
-<p>教练转会之前，买几个球员充数，不要让这个球队只有16个球员，否则你回头想买你的弟子，多少钱老东家都不卖（卖不了啊）</p>
-</blockquote>
-<h2 id="Star-Player-Mode"><a href="#Star-Player-Mode" class="headerlink" title="Star Player Mode"></a>Star Player Mode</h2><ul>
-<li>比较坑爹，特别是视角只能是球员视角，球队里有大牌球星的情况下可以玩玩</li>
-<li>有单独的Start Player Mode</li>
-<li>在其他模式下，开始比赛前也可以选择使用“Star Player Mode”进行游戏（双方阵容界面，中下部分的VIP功能按钮）</li>
-</ul>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>不经意间竟然写了这么长，不过确实是款好游戏，游戏好玩，还没有各种坑爹的收费道具，而我自己玩了这么久竟然没花过钱，做下广告还下人情也是应该的：  <a href="https://itunes.apple.com/cn/app/first-touch-soccer-world-edition/id472344174" target="_blank" rel="external">First Touch Soccer World Edition</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1737,7 +1721,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">138</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1747,7 +1731,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-count">173</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

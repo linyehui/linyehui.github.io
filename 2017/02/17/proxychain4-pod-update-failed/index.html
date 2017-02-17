@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mac,pod,proxychains," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/media/favicon.gif?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="问题我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：
+
+[proxychains] preloading ./libproxychains4.dylibdyld: warning: could not load inserted library ‘./libproxychains4.dylib’ int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="升级到Sierra后proxychains4 pod update失败">
+<meta property="og:url" content="http://linyehui.me/2017/02/17/proxychain4-pod-update-failed/index.html">
+<meta property="og:site_name" content="HABIT IS POWSER">
+<meta property="og:description" content="问题我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：
+
+[proxychains] preloading ./libproxychains4.dylibdyld: warning: could not load inserted library ‘./libproxychains4.dylib’ int">
+<meta property="og:updated_time" content="2017-02-17T02:14:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="升级到Sierra后proxychains4 pod update失败">
+<meta name="twitter:description" content="问题我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：
+
+[proxychains] preloading ./libproxychains4.dylibdyld: warning: could not load inserted library ‘./libproxychains4.dylib’ int">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://linyehui.me/2017/02/17/proxychain4-pod-update-failed/"/>
+
+
+
+
+
+  <title> 升级到Sierra后proxychains4 pod update失败 | HABIT IS POWSER </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=59868687";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HABIT IS POWSER</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">习惯就是力量</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2017/02/17/proxychain4-pod-update-failed/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                升级到Sierra后proxychains4 pod update失败
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-17T00:00:00+08:00">
+                2017-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/02/17/proxychain4-pod-update-failed/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/17/proxychain4-pod-update-failed/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：</p>
+<blockquote>
+<p>[proxychains] preloading ./libproxychains4.dylib<br>dyld: warning: could not load inserted library ‘./libproxychains4.dylib’ into library validated process because no suitable image found. Did find:<br>./libproxychains4.dylib: code signing blocked mmap() of ‘./libproxychains4.dylib’</p>
+</blockquote>
+<h3 id="我的环境如下："><a href="#我的环境如下：" class="headerlink" title="我的环境如下："></a>我的环境如下：</h3><ul>
+<li>macOS Sierra 10.12.3</li>
+<li>proxychains-ng 4.12_1</li>
+<li>SIP之前配置过用的是：csrutil enable –without debug，查询的状态如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ csrutil status</div><div class="line">System Integrity Protection status: enabled (Custom Configuration).</div><div class="line"></div><div class="line">Configuration:</div><div class="line">	Apple Internal: disabled</div><div class="line">	Kext Signing: enabled</div><div class="line">	Filesystem Protections: enabled</div><div class="line">	Debugging Restrictions: disabled</div><div class="line">	DTrace Restrictions: enabled</div><div class="line">	NVRAM Protections: enabled</div><div class="line">	BaseSystem Verification: enabled</div><div class="line"></div><div class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="寻找原因"><a href="#寻找原因" class="headerlink" title="寻找原因"></a>寻找原因</h2><p>一开始是找到了这篇issues:<a href="https://github.com/rofl0r/proxychains-ng/issues/109" target="_blank" rel="external">Proxychains4 with brew for MacOs error #109</a>，以为是我的proxychains4版本问题或者是我的SIP问题，所以做了以下尝试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># 进入系统的recovery mode，禁用SIP</div><div class="line">csrutil disable</div><div class="line">reboot</div><div class="line"></div><div class="line"># 重启后卸载老的proxychains</div><div class="line">brew tap beeftornado/rmtree</div><div class="line">brew rmtree proxychains-ng</div><div class="line"></div><div class="line"># 重新安装</div><div class="line">proxychains-ng --universal</div><div class="line"></div><div class="line"># 确认下proxychains-ng的配置是否正确，如果不正确就再配置下proxychains.conf</div><div class="line"># 确认下telnet是否正常</div><div class="line">proxychains4 telnet google.com 80</div><div class="line"></div><div class="line"># 再尝试下pod update</div><div class="line">proxychains4 pod update</div><div class="line"></div><div class="line"># 问题依旧：code signing blocked mmap()</div></pre></td></tr></table></figure></p>
+<h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>在另外一个issue78:<a href="https://github.com/rofl0r/proxychains-ng/issues/78" target="_blank" rel="external">Not working on OS X 10.11 due to SIP #78</a>中看到了被点赞了4次的这个回答，让我最后解决了问题：</p>
+<blockquote>
+<p>It only happens if you execute a system binary using proxychains, e.g. proxychains4 ssh user@server. For now, a workaround is to copy the executable to another location (e.g. cp /usr/bin/ssh ~/XXX), and use it (e.g. proxychains4 ~/XXX/ssh user@server). You can modify the path variable so that ~/XXX/ssh is executed instead of /usr/bin/ssh, when you just type “ssh”.</p>
+</blockquote>
+<h3 id="一句话描述问题："><a href="#一句话描述问题：" class="headerlink" title="一句话描述问题："></a>一句话描述问题：</h3><blockquote>
+<p>proxychain尝试注入系统bin目录下的二进制文件会出现这种情况，解决方案就是换个非系统目录的文件来执行和注入就可以了。</p>
+</blockquote>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>根据上面的问题描述，再考虑pod update的实际操作，其实就是调用git去更新，而我的git用的是系统自带的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ which git</div><div class="line">/usr/bin/git</div></pre></td></tr></table></figure></p>
+<p>这样一来问题就变成了让pod update使用我自己安装的git就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">brew install git</div><div class="line"></div><div class="line"># 修改.bash_profile，增加下面的export配置，优先搜索/usr/local/bin目录</div><div class="line"># 这样修改后，terminal下使用git就会优先使用我们刚刚安装的git版本了</div><div class="line">export PATH=/usr/local/bin:/usr/local/sbin:$&#123;PATH&#125;</div></pre></td></tr></table></figure></p>
+<p>好了，配置好了，再试一下，成功了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxychains4 pod update</div></pre></td></tr></table></figure></p>
+<h3 id="关于SIP"><a href="#关于SIP" class="headerlink" title="关于SIP"></a>关于SIP</h3><p>最后我验证了下，SIP其实不需要disable，csrutil enable –without debug下proxychains也是能正常工作的</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>说下我这里能够正常运行的环境和因素：</p>
+<ul>
+<li>macOS Sierra 10.12.3</li>
+<li>proxychains-ng 4.12_1</li>
+<li><p>进入系统的recovery mode，打开terminal，csrutil enable –without debug<br>可以使用这个命令查询的状态，我的状态如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ csrutil status</div><div class="line">System Integrity Protection status: enabled (Custom Configuration).</div><div class="line"></div><div class="line">Configuration:</div><div class="line">	Apple Internal: disabled</div><div class="line">	Kext Signing: enabled</div><div class="line">	Filesystem Protections: enabled</div><div class="line">	Debugging Restrictions: disabled</div><div class="line">	DTrace Restrictions: enabled</div><div class="line">	NVRAM Protections: enabled</div><div class="line">	BaseSystem Verification: enabled</div><div class="line"></div><div class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</div></pre></td></tr></table></figure>
+</li>
+<li><p>我的git使用的是brew install git的版本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ which git</div><div class="line">/usr/local/bin/git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a href="https://github.com/rofl0r/proxychains-ng/issues/78" target="_blank" rel="external">Not working on OS X 10.11 due to SIP #78</a><br><a href="https://github.com/rofl0r/proxychains-ng/issues/109" target="_blank" rel="external">Proxychains4 with brew for MacOs error #109</a><br><a href="https://github.com/rofl0r/proxychains-ng/issues/159" target="_blank" rel="external">code signing blocked mmap() #159</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mac/" rel="tag"># mac</a>
+          
+            <a href="/tags/pod/" rel="tag"># pod</a>
+          
+            <a href="/tags/proxychains/" rel="tag"># proxychains</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/08/ignore-sigpipe-crash/" rel="next" title="ignore SIGPIPE crash">
+                <i class="fa fa-chevron-left"></i> ignore SIGPIPE crash
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/17/proxychain4-pod-update-failed/"
+           data-title="升级到Sierra后proxychains4 pod update失败" data-url="http://linyehui.me/2017/02/17/proxychain4-pod-update-failed/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="linyehui" />
+          <p class="site-author-name" itemprop="name">linyehui</p>
+          <p class="site-description motion-element" itemprop="description">HABIT IS POWSER</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">140</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">175</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/linyehui" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://twitter.com/linyehui" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我的环境如下："><span class="nav-number">1.1.</span> <span class="nav-text">我的环境如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找原因"><span class="nav-number">2.</span> <span class="nav-text">寻找原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题所在"><span class="nav-number">3.</span> <span class="nav-text">问题所在</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一句话描述问题："><span class="nav-number">3.1.</span> <span class="nav-text">一句话描述问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">3.2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于SIP"><span class="nav-number">3.3.</span> <span class="nav-text">关于SIP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考材料"><span class="nav-number">5.</span> <span class="nav-text">参考材料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2010 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-wifi"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"linyehui"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -248,6 +248,139 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/03/23/winrt-sqlite/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2012/03/23/winrt-sqlite/" itemprop="url">
+                  WinRT下的SQLite使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-03-23T00:00:00+08:00">
+                2012-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2012/03/23/winrt-sqlite/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/03/23/winrt-sqlite/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>由于我们算是世界上最早一批开始进行WinRT第三方应用开发的团队，我们在代码迁移上被迫走在了世界的前面，这其中就包括了SQLite、ZLib等。</p>
+<p>对于开源库的使用，不得赞叹下ZLib的代码优雅程度，纯C，全平台移植没有任何问题，包括刚刚出来的WinRT！  </p>
+<p>相比之下SQLite的代码就没那么漂亮了，2011年的12月份我差不多有一周的时间是专门在做Win32到WinRT的移植，其中最痛苦的就是SQLite部分，在我看来这个代码实在是比较搓，但是为了赶进度，我还是硬着头皮把事情给搞定了。</p>
+<p>随着时间的推移，我们觉得我们有必要更新下我们的SQLite版本，于是下载了最新的稳定代码3.7.10，发现代码还是进行了不少重构，优雅了一点，但是还是一样无法通过WinRT的Application Certification，没办法，我就又准备把之前干过一次的代码移植重来一遍，基本都是写API切换，类似LockFileW改成LockFileEx，CreateFileW改成CreateFile2之类的，这项工作本身没有太大的技术含量，主要就是阅读代码的能力，还有就是要足够细心，剩下的就是体力活了。</p>
+<p>在这期间我突然发现自己放了一个错误，疏忽了一件事情：开源参与者的热情及开源代码的更新速度！我还是太容易陷入一个点，就无法自拔，看不到周围的其他方案。  </p>
+<p>在同事的提醒下，我们发现<a href="http://www.sqlite.org/cgi/src/timeline?r=winrt" target="_blank" rel="external">SQLite WinRT分支</a>其实已经进行了一段时间，我Review下分支上面的代码，基本和我之前的改动是一致的，只是目前还在分支上，没有合入trunk。</p>
+<p>这个事情其实去年我专门找过，但当时还没有这样的分支，但是过了3个月后的现在我竟然没有想到：  按照开源项目的效率，这些事情很可能已经在解决或者已经被解决了。</p>
+<p>感谢开源代码的贡献者们，期待SQLite 3.7.11</p>
+<hr>
+<h3 id="附注："><a href="#附注：" class="headerlink" title="附注："></a>附注：</h3><p>从代码提交记录看，SQLite官方2012-06-06之后的版本就已经支持WinRT了:<a href="http://www.sqlite.org/cgi/src/timeline?r=winrt" target="_blank" rel="external">代码合入信息</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/03/21/appcertkit-crash-at-launch/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1442,150 +1575,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/01/06/smart-team/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2012/01/06/smart-team/" itemprop="url">
-                  小团队大智慧
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-01-06T00:00:00+08:00">
-                2012-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2012/01/06/smart-team/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/01/06/smart-team/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>比较推崇《Rework》中的小团队小公司，其实我自己也是从投入工作开始一直在经意或不经意地探寻着小团队的成功之道</p>
-<p>且不论团队大小，团队成功的要素是什么？  </p>
-<p>成功的团队大多是相似，但失败的团队却各有各的不幸。  </p>
-<p>这些看似相似的成功经验，每个关键字都能写成一本书：定位、执行力、管理、成本控制……</p>
-<p>那么小团队在这些很可能带来成功的因素上有什么优劣势呢？</p>
-<h1 id="1、定位"><a href="#1、定位" class="headerlink" title="1、定位"></a>1、定位</h1><p>决策的团队不可能太多，也不能太多，团队总是要有人来领导，其他人要做的就是100%的信任，或者离开，所以这点上小团队和大团队不会有直接的高下之分。</p>
-<h1 id="2、执行力"><a href="#2、执行力" class="headerlink" title="2、执行力"></a>2、执行力</h1><p>我个人是一个GTD深度中毒者，我会尽可能的把任务分解，然后按优先级排序然后逐个执行，这是我的高效法则；  </p>
-<p>对于一个团队来说只要他还有着生命力，那么工作永远都是做不完的，那么无非还是一样：优先级；  </p>
-<p>假设团队成员的数量决定执行力的话那么小团队的缺点在于会做的比大团的慢，这也许是很多创业小团队在别人下班的时候还在干活的原因，因为他们人少；  </p>
-<p>但是，执行力并不是和人数的多少成正比！所以在这一点上我个人的观点是：取决于团队的目标，目标由小变大，人员也以应该有小变大，然后保持平衡；  </p>
-<p>老板们都希望自己手下有一支短小精干的小团队，就像《24》里的杰克鲍尔，执行力上，CTU的10人小团队，不会差于军队。</p>
-<h1 id="3、管理"><a href="#3、管理" class="headerlink" title="3、管理"></a>3、管理</h1><p>……</p>
-<h1 id="4、成本控制、风险投资"><a href="#4、成本控制、风险投资" class="headerlink" title="4、成本控制、风险投资"></a>4、成本控制、风险投资</h1><p>……</p>
-<hr>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>这篇随笔的草稿很早就写成了，但是一直想不到该如何续笔，也许未完成也是一种完成，完成了记录当时思考状态的文章。  </p>
-<p>我喜欢小团队，希望自己的小团队能够敏捷的输出好的产品和理念，2012年还有很多事情要做，小团队暂时只剩我一个人全职了，但会慢慢好起来的~  </p>
-<p>我调侃的跟lori说，等我一个人把Win8QQ写好了，我就可以升T4了，谁说不是呢！  </p>
-<p>但一个人注定不是团队，期待我的队友们归队的那一天。</p>
-<h3 id="最后，以海贼王的经典台词自勉："><a href="#最后，以海贼王的经典台词自勉：" class="headerlink" title="最后，以海贼王的经典台词自勉："></a>最后，以海贼王的经典台词自勉：</h3><blockquote>
-<p>“白痴!我根本就不会剑术！而且我也不会航海！更不会做菜！也不会说谎！不懂医术！不懂历史！不懂修船！不懂音乐！如果没有他们的帮助我根本活不下去！”</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1631,7 +1620,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1641,7 +1630,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">173</span>
+                <span class="site-state-item-count">175</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

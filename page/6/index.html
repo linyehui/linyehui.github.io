@@ -248,6 +248,228 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/05/make-cocos2dx-samples-as-static-libraries/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/07/05/make-cocos2dx-samples-as-static-libraries/" itemprop="url">
+                  把cocos2dx的Sample工程改成Static Library
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-07-05T00:00:00+08:00">
+                2014-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/07/05/make-cocos2dx-samples-as-static-libraries/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/05/make-cocos2dx-samples-as-static-libraries/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h1><ol>
+<li>我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发；</li>
+<li>我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心</li>
+<li>Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用</li>
+<li>现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调用。</li>
+</ol>
+<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>Mac下已经配置好了cocos2dx的开发环境，Sample中的HelloCpp工程可以在Xcode下成功编译并运行</p>
+<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h3 id="1-把HelloCpp工程从Cocos2dx目录下复制出来"><a href="#1-把HelloCpp工程从Cocos2dx目录下复制出来" class="headerlink" title="1. 把HelloCpp工程从Cocos2dx目录下复制出来"></a>1. 把HelloCpp工程从Cocos2dx目录下复制出来</h3><h4 id="问题：复制出来后会提示cocos2d-h文件找不到"><a href="#问题：复制出来后会提示cocos2d-h文件找不到" class="headerlink" title="问题：复制出来后会提示cocos2d.h文件找不到"></a>问题：复制出来后会提示cocos2d.h文件找不到</h4><h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><p>原因是Sample工程设置的include路径是按照工程再cocos自己的目录下来设置的，把工程复制出来后路径就变了</p>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><ol>
+<li>先添加一个SourceTrees变量<blockquote>
+<p>Perferences-&gt;Locatons-&gt;Source Trees<br>添加一个COCOS2DX_HOME变量，并把path设置成本机的cocos2dx根目录</p>
+</blockquote>
+</li>
+<li><p>修改工程Targets中的Header Search Paths</p>
+<blockquote>
+<p>点击工程-&gt;Targets-&gt;HelloCpp-&gt;Build Settings-&gt;Search Paths-&gt;Header Search Paths<br>把值修改成这个：</p>
+</blockquote>
+<p> “$(SDKROOT)/usr/include/libxml2/“ “$(COCOS2DX_HOME)/cocos2dx/include” “$(COCOS2DX_HOME)/cocos2dx” “$(COCOS2DX_HOME)/cocos2dx/platform/ios” “$(COCOS2DX_HOME)/cocos2dx/kazmath/include” “$(COCOS2DX_HOME)/external/chipmunk/include/chipmunk”</p>
+</li>
+</ol>
+<ol>
+<li>Clean工程，然后再次Build，成功</li>
+</ol>
+<h3 id="2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"><a href="#2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来" class="headerlink" title="2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"></a>2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来</h3><h4 id="先把HelloCpp工程调整成这样"><a href="#先把HelloCpp工程调整成这样" class="headerlink" title="先把HelloCpp工程调整成这样"></a>先把HelloCpp工程调整成这样</h4><p>发现这个文章做了我想做的事情的一部分：<br><a href="http://blog.csdn.net/crayondeng/article/details/16828555" target="_blank" rel="external">Cocos2d-x UIView和Coco2d-x场景之间的相互跳转切换</a></p>
+<p><a href="http://www.raywenderlich.com/zh-hans/24764/%E5%A6%82%E4%BD%95%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8cocos2d%E5%92%8Cuikit-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86" target="_blank" rel="external">如何结合使用Cocos2d和UIKit 第一部分</a></p>
+<h3 id="3-新增HelloCpp-Target：Static-Library"><a href="#3-新增HelloCpp-Target：Static-Library" class="headerlink" title="3. 新增HelloCpp Target：Static Library"></a>3. 新增HelloCpp Target：Static Library</h3><p>在Library的Target中有几个点需要参考默认Target的配置：</p>
+<ol>
+<li>不使用ARC<blockquote>
+<p>Object-C Automatic Reference Counting —–&gt; NO</p>
+</blockquote>
+</li>
+<li><p>Search Path，直接复制默认Target的配置即可</p>
+<p> “$(SDKROOT)/usr/include/libxml2/“ “$(COCOS2DX_HOME)/cocos2dx/include” “$(COCOS2DX_HOME)/cocos2dx” “$(COCOS2DX_HOME)/cocos2dx/platform/ios” “$(COCOS2DX_HOME)/cocos2dx/kazmath/include” “$(COCOS2DX_HOME)/external/chipmunk/include/chipmunk”</p>
+</li>
+<li><p>修改预编译宏定义 Preprocessor Macros，也是直接复制默认的Target配置就可以了</p>
+<blockquote>
+<p>USE_FILE32API CC_TARGET_OS_IPHONE COCOS2D_DEBUG=1<br>USE_FILE32API CC_TARGET_OS_IPHONE</p>
+</blockquote>
+</li>
+<li><p>添加对libcocos2dx.a的依赖</p>
+<blockquote>
+<p>Build Phases-&gt;Link Binary With Libraries</p>
+</blockquote>
+</li>
+<li><p>新的Target配置成功后会编译出.a文件</p>
+</li>
+</ol>
+<h3 id="4-新增工程GamesHall用于调用library"><a href="#4-新增工程GamesHall用于调用library" class="headerlink" title="4. 新增工程GamesHall用于调用library"></a>4. 新增工程GamesHall用于调用library</h3><ul>
+<li>把HelloCpp工程添加到GamesHall下</li>
+<li>在Target中添加对libhellocpp.a的依赖</li>
+<li>不添加任何代码，编译工程，可以运行</li>
+<li>如果不能运行要按照错误提示进行修改，很有可能是libhellocpp.a没有编译出来，那就要检查下上面的步骤，看新增的Static Library的Target是不是配置的有问题</li>
+<li>配置正确的话，GamesHall编译后可以再调试目录(Debug-iphonesimulator)下看到libhellocpp.a和libcocos2dx.a还有include目录都正确复制过来了</li>
+</ul>
+<blockquote>
+<p>/Users/linyehui/Library/Developer/Xcode/DerivedData/GamesHall-ezsoyplchjjurfeznsedhgwywbkr/Build/Products/Debug-iphonesimulator</p>
+</blockquote>
+<h3 id="5-添加代码调用"><a href="#5-添加代码调用" class="headerlink" title="5. 添加代码调用"></a>5. 添加代码调用</h3><ul>
+<li>添加后发现link失败，找了好多原因，最后有效的是这个：<br><a href="http://stackoverflow.com/questions/18959691/ios7-only-stdlibc-linking-issue" target="_blank" rel="external">IOS7 (only) stdlibc++ linking issue</a></li>
+<li>改完stdlib后又提示zlib相关的几个函数找不到<br>工程依赖加上libz.dylib</li>
+</ul>
+<h3 id="6-调用成功，独立成Static-Library没问题"><a href="#6-调用成功，独立成Static-Library没问题" class="headerlink" title="6. 调用成功，独立成Static Library没问题"></a>6. 调用成功，独立成Static Library没问题</h3><h3 id="7-尝试多个游戏一起加入进来"><a href="#7-尝试多个游戏一起加入进来" class="headerlink" title="7. 尝试多个游戏一起加入进来"></a>7. 尝试多个游戏一起加入进来</h3><ul>
+<li>单个HelloCpp是OK的</li>
+<li>两个一起加会编译失败但没有具体失败的项，只有Warning，很奇怪</li>
+<li>两个分别成功加进去，并正确运行后，再把两个加到一起，可以运行，但是第二个游戏错乱了，还要再找下原因</li>
+<li><p>第二个游戏不是乱了，而是显示了第一个游戏的场景；原因是：</p>
+<p>  注册cocos2d::CCApplication用的是一个全局静态变量，而不是注册上去的，我们有两个游戏，其实有两个这个全局变量的实现，用来处理cocos的启动跟暂停；<br>  而且我们的runWithScene是在这个里面调用的，所以导致了，两个游戏启动的时候都调用到了同样的场景。</p>
+</li>
+</ul>
+<ul>
+<li>尝试自己runWithScene，看看能不能把两个游戏分开<br>CCApplication的之类全局自定义一个，然后runWitSenne拿到cocosView中来分别处理，可以做到，但是这个方案并不好，下面单独解释。</li>
+</ul>
+<h1 id="两个工程合在一起的问题"><a href="#两个工程合在一起的问题" class="headerlink" title="两个工程合在一起的问题"></a>两个工程合在一起的问题</h1><h3 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h3><blockquote>
+<p>不要把两个独立的游戏座位Library整合在一个应用内。<br>技术上可以实现，但是Cocos架构不支持，勉强自己改来用的话出现莫名其妙问题的风险很大。</p>
+</blockquote>
+<h3 id="非要实现的细节和缺陷"><a href="#非要实现的细节和缺陷" class="headerlink" title="非要实现的细节和缺陷"></a>非要实现的细节和缺陷</h3><ol>
+<li>Cocos本身的设计没有考虑这种一个进程多个游戏的架构，我们使用会有架构风险<br>比如cocos2d::CCApplication的事件注册并不是Add上去，而是定义一个全局变量来实现，这个设计本身就没考虑多个实例同时存在</li>
+</ol>
+<pre><code>// cocos2d application instance
+    // 两个游戏加到一个工程的时候只能保留一个，否则会从Cocos内部直接异常退出
+    // 变量名不同也没用，因为实际起作用的是父类CCApplication的成员变量
+    // static CCApplication * sm_pSharedApplication;
+
+
+    //static CocosAppDelegate s_sharedApplication;
+
+解决的办法，是多个游戏只保留一个CCApplication之类的全局变量的定义。
+</code></pre><ol>
+<li><p>本来应该每个游戏自己响应CCApplication事件并做出处理，现在这个点不能做了，架构上本身就有问题，和把游戏整个在一个Cocos实例下没有本质的区别，未知的问题还更多</p>
+</li>
+<li><p>Xcode对于这种多个Library依赖同一个Library的编译支持有时候会出错<br>会出现上面提到的：提示编译失败，但是没有列出具体失败的地方，如果这个时候把其中一个游戏工程删掉，错误的地方就能正确被提示</p>
+</li>
+</ol>
+<h1 id="关于静态库对安装包大小的影响"><a href="#关于静态库对安装包大小的影响" class="headerlink" title="关于静态库对安装包大小的影响"></a>关于静态库对安装包大小的影响</h1><p>以下三个包，资源都是一样的，只是库文件上有差异</p>
+<h3 id="只有大厅，不包含游戏库，-app大小235KB"><a href="#只有大厅，不包含游戏库，-app大小235KB" class="headerlink" title="只有大厅，不包含游戏库，.app大小235KB"></a>只有大厅，不包含游戏库，.app大小235KB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/just_hall.png" alt="just_hall.png"></p>
+<h3 id="大厅-一个cocos2dx游戏Library，-app大小3-5MB"><a href="#大厅-一个cocos2dx游戏Library，-app大小3-5MB" class="headerlink" title="大厅+一个cocos2dx游戏Library，.app大小3.5MB"></a>大厅+一个cocos2dx游戏Library，.app大小3.5MB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/one_game.png" alt="one_game.png"></p>
+<h3 id="大厅-两个cocos2dx游戏Library，-app大小3-2MB"><a href="#大厅-两个cocos2dx游戏Library，-app大小3-2MB" class="headerlink" title="大厅+两个cocos2dx游戏Library，.app大小3.2MB"></a>大厅+两个cocos2dx游戏Library，.app大小3.2MB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/two_games.png" alt="two_games.png"></p>
+<p>科学吗？差不多是这个意思</p>
+<h1 id="其他参考文章"><a href="#其他参考文章" class="headerlink" title="其他参考文章"></a>其他参考文章</h1><p><a href="http://www.cnblogs.com/beginor/archive/2012/04/20/2459244.html" target="_blank" rel="external">iOS 静态类库项目的建立与使用</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/02/empty-application-add-interface-builder-on-xcode-5/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1651,218 +1873,6 @@ mediaRecorder.setVideoSize(640, 480);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/05/09/how-to-build-ffmpeg-for-android-on-mac/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/05/09/how-to-build-ffmpeg-for-android-on-mac/" itemprop="url">
-                  在Mac上编译FFmpeg的Android版本
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-05-09T00:00:00+08:00">
-                2014-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/05/09/how-to-build-ffmpeg-for-android-on-mac/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/05/09/how-to-build-ffmpeg-for-android-on-mac/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>How to Build FFmpeg for Android On Mac</p>
-<p>官方文档在这：<a href="https://trac.ffmpeg.org/wiki/CompilationGuide/Android" target="_blank" rel="external">CompilationGuide/Android</a>  </p>
-<p>关于Android上的FFmpeg入门，这个Blog不错：<a href="http://www.roman10.net/category/android-tutorial/ffmpeg-on-android/" target="_blank" rel="external">roman10 ffmpeg on Android</a>  </p>
-<h1 id="关于FFmpeg耻辱名单"><a href="#关于FFmpeg耻辱名单" class="headerlink" title="关于FFmpeg耻辱名单"></a>关于FFmpeg耻辱名单</h1><p>使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。</p>
-<p>特别是暴风影音和QQ影音让大家知道了FFmpeg的耻辱名单：<a href="http://ffmpeg.org/shame.html" target="_blank" rel="external">Hall of Shame</a>，我们更得先研究下FFmpeg的开源协议了。</p>
-<p>被加入这个名单的直接原因是这些产品违反了FFmpeg的开源协议，但具体是违反了那个开源协议呢？这就得从<a href="https://ffmpeg.org/legal.html" target="_blank" rel="external">FFmpeg的开源协议</a>说起了:</p>
-<blockquote>
-<p>FFmpeg is licensed under the GNU Lesser General Public License (LGPL) version 2.1 or later. However, FFmpeg incorporates several optional parts and optimizations that are covered by the GNU General Public License (GPL) version 2 or later. If those parts get used the GPL applies to all of FFmpeg.</p>
-</blockquote>
-<h3 id="怎么的就违反开源协议了呢？"><a href="#怎么的就违反开源协议了呢？" class="headerlink" title="怎么的就违反开源协议了呢？"></a>怎么的就违反开源协议了呢？</h3><ol>
-<li>虽然FFmpeg使用的开源协议是LGPL，但是他用到的部分组件是GPL开源协议;</li>
-<li>LGPL和GPL有着很大的区别，这个可以参考：<a href="http://www.oschina.net/question/12_2663" target="_blank" rel="external">关于开源授权协议 GPL 和 LGPL</a>；<br>简单来说，如果商用产品只是把LGPL的开源代码作为第三方库来使用，商用产品本身是不需要开源的，但GPL就不一样，只要你用了开源代码，整个商用产品就必须开源，这就是常说的“传染性”；</li>
-<li>如果使用FFmpeg没有使用到GPL开源协议的部分组件，那么产品只要遵循LGPL就可以了，哪怕你修改了第三方库，也只需要开源修改后的第三方库代码就不算违反LGPL；</li>
-<li>如果使用到了GPL开源协议的部分组件，如x264，那么商用产品就必须遵循GPL，开源商用产品的所有代码；</li>
-<li>综合上面4点，可以知道如果使用了FFmpeg中使用GPL的部分组件，那么你的商用产品就必须开源，否则就是违反了GPL开源协议，要被加入FFmpeg的Hall of Shame。</li>
-</ol>
-<p>一不小心就上了耻辱名单，有没有什么防范措施呢？可以参考FFmpeg官方的<a href="https://ffmpeg.org/legal.html" target="_blank" rel="external">License Compliance Checklist</a>  </p>
-<h1 id="在Mac下编译FFmpeg-2-1-4"><a href="#在Mac下编译FFmpeg-2-1-4" class="headerlink" title="在Mac下编译FFmpeg-2.1.4"></a>在Mac下编译FFmpeg-2.1.4</h1><h3 id="概要说明"><a href="#概要说明" class="headerlink" title="概要说明"></a>概要说明</h3><p>Mac开发环境，按照这篇文章来的指引编译通过：<a href="http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/" target="_blank" rel="external">How to Build ffmpeg with NDK r9</a>  </p>
-<p>直接按照文章的指引编译通过，只有一个步骤需要特别注意，build_android.sh中：</p>
-<blockquote>
-<p>TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64</p>
-<p>改成</p>
-<p>TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64</p>
-</blockquote>
-<p>./build_android.sh中的路径要从linux-x86_64改成darwin-x86_64，这个我是在编译错误的时候根据提示发现下面这个路径文件找不到，才知道需要改下，修改之后就可以继续调用./build_android.sh编译了</p>
-<h2 id="详细编译步骤"><a href="#详细编译步骤" class="headerlink" title="详细编译步骤"></a>详细编译步骤</h2><p>虽然都是按照<a href="http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/" target="_blank" rel="external">How to Build ffmpeg with NDK r9</a>中的指引来操作的，我还是把操作流程简单记录如下：</p>
-<ol>
-<li><p>我的开发环境</p>
-<blockquote>
-<p>Mac OSX 10.9.2<br>XCode 5.0.2(带的gcc)<br>NDK r9d</p>
-</blockquote>
-</li>
-<li><p>下载并配置好<a href="http://developer.android.com/tools/sdk/ndk/index.html" target="_blank" rel="external">NDK</a>，我之前已经配好了，不清楚的同学自己看Android的官网帮助文档 </p>
-</li>
-<li>下载<a href="http://www.ffmpeg.org/download.html" target="_blank" rel="external">ffmpeg源码</a>，我下载时的最新稳定版本是2.1.4，解压到NDK目录下的sources目录下</li>
-<li><p>修改ffmpeg-2.1.4目录下的configure文件<br>Open ffmpeg-2.0.1/configure file with a text editor, and locate the following lines.</p>
-<blockquote>
-<p>SLIBNAME_WITH_MAJOR=’$(SLIBNAME).$(LIBMAJOR)’<br>LIB_INSTALL_EXTRA_CMD=’$$(RANLIB) “$(LIBDIR)/$(LIBNAME)”‘<br>SLIB_INSTALL_NAME=’$(SLIBNAME_WITH_VERSION)’<br>SLIB_INSTALL_LINKS=’$(SLIBNAME_WITH_MAJOR) $(SLIBNAME)’</p>
-</blockquote>
-<p> This cause ffmpeg shared libraries to be compiled to libavcodec.so.<version> (e.g. libavcodec.so.55), which is not compatible with Android build system. Therefore we’ll need to replace the above lines with the following lines.</version></p>
-<blockquote>
-<p>SLIBNAME_WITH_MAJOR=’$(SLIBPREF)$(FULLNAME)-$(LIBMAJOR)$(SLIBSUF)’<br>LIB_INSTALL_EXTRA_CMD=’$$(RANLIB) “$(LIBDIR)/$(LIBNAME)”‘<br>SLIB_INSTALL_NAME=’$(SLIBNAME_WITH_MAJOR)’<br>SLIB_INSTALL_LINKS=’$(SLIBNAME)’</p>
-</blockquote>
-</li>
-<li><p>新建build_android.sh，下面是使用的配置，主要是开头的三个变量要根据自己机器上的情况修改成对应的路径:</p>
-<p> #!/bin/bash<br> NDK=/Applications/android-ndk-r9d<br> SYSROOT=$NDK/platforms/android-9/arch-arm/<br> TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64<br> function build_one<br> {<br> ./configure \</p>
-<pre><code>--prefix=$PREFIX \
---enable-shared \
---disable-static \
---disable-doc \
---disable-ffmpeg \
---disable-ffplay \
---disable-ffprobe \
---disable-ffserver \
---disable-avdevice \
---disable-doc \
---disable-symver \
---cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \
---target-os=linux \
---arch=arm \
---enable-cross-compile \
---sysroot=$SYSROOT \
---extra-cflags=&quot;-Os -fpic $ADDI_CFLAGS&quot; \
---extra-ldflags=&quot;$ADDI_LDFLAGS&quot; \
-$ADDITIONAL_CONFIGURE_FLAG
-</code></pre><p> make clean<br> make<br> make install<br> }<br> CPU=arm<br> PREFIX=$(pwd)/android/$CPU<br> ADDI_CFLAGS=”-marm”<br> build_one</p>
-</li>
-</ol>
-<pre><code>我一开始没留意TOOLCHAIN的路径，后面发现编译错误，才修改了build_android.sh中TOOLCHAIN的路径定义：
-</code></pre><blockquote>
-<p>TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64</p>
-<p>改成</p>
-<p>TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64</p>
-</blockquote>
-<ol>
-<li><p>保存build_android.sh，并调用执行编译<br>我直接把build_android.sh保存在了ffmpeg-2.1.4根目录下，然后执行：</p>
-<blockquote>
-<p>sudo chmod +x build_android.sh<br>./build_android.sh</p>
-</blockquote>
-</li>
-<li><p>编译通过，在ffmpeg-2.1.4/Android目录下生成了若干.so文件</p>
-</li>
-</ol>
-<h2 id="解压到别的目录下去编译"><a href="#解压到别的目录下去编译" class="headerlink" title="解压到别的目录下去编译"></a>解压到别的目录下去编译</h2><p>文章中把ffmpeg的源代码解压到了NDK的sources目录下，并说明了原因：</p>
-<blockquote>
-<p>The reason we built our ffmpeg source code under $NDK/sources folder is that NDK build system will search for directories under this path for external modules automatically. </p>
-</blockquote>
-<p>其实解压到哪里编译都可以，只是放在NDK目录下其他工程使用ffmpeg时的引用路径配置方便一点。</p>
-<p>– The End –</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1908,7 +1918,7 @@ $ADDITIONAL_CONFIGURE_FLAG
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1918,7 +1928,7 @@ $ADDITIONAL_CONFIGURE_FLAG
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">173</span>
+                <span class="site-state-item-count">175</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

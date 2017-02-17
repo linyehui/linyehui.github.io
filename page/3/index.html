@@ -248,6 +248,157 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/11/05/double-commander-for-mac/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/05/double-commander-for-mac/" itemprop="url">
+                  Double Commander for Mac
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-05T00:00:00+08:00">
+                2015-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/11/05/double-commander-for-mac/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/05/double-commander-for-mac/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h2><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
+<p>TC确实可以替换系统的资源管理器，但是他的目标可不是替换系统资源管理器这么简单。</p>
+<p>无奈之下选择了一款免费的Finder插件XtraFinder，用了一段时间之后，我的Mac升级了OS X 10.11，用不了了：<a href="https://www.trankynam.com/xtrafinder/sip.html" target="_blank" rel="external">如果不关闭System Integrity Protection就无法使用了</a>。</p>
+<p>不能忍，再找找吧，在网上看到了这几个帖子：  </p>
+<p><a href="https://www.v2ex.com/t/66737" target="_blank" rel="external">怎么，Mac 下的诸多文件管理软件还在仰望 Total Commander，在 TC 的阴影下生活么？</a>  </p>
+<p><a href="http://www.zhihu.com/question/19607061" target="_blank" rel="external">Mac 是否有类似Windows上 Total Commander 这样的应用？</a></p>
+<p>几个帖子中都提到了一个我之前没有试用过的软件：<a href="http://doublecmd.sourceforge.net/" target="_blank" rel="external">Double Commander</a></p>
+<p>用了一分钟之后，我只能说：相见恨晚</p>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><h3 id="Mac下的版本选择"><a href="#Mac下的版本选择" class="headerlink" title="Mac下的版本选择"></a>Mac下的版本选择</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Mac OS X &gt;= 10.5</div><div class="line">doublecmd-0.6.6-6327.carbon.i386.dmg</div><div class="line"></div><div class="line">Mac OS X &gt;= 10.8	</div><div class="line">64 bit	doublecmd-0.6.6-6327.qt.x86_64.dmg</div></pre></td></tr></table></figure>
+<h4 id="结论是：选择32位版本"><a href="#结论是：选择32位版本" class="headerlink" title="结论是：选择32位版本"></a>结论是：选择32位版本</h4><h4 id="理由："><a href="#理由：" class="headerlink" title="理由："></a>理由：</h4><p>1、性能上的差别没有做比较，但是两者使用下来没有明显的差异，至少没有卡顿的情况；  </p>
+<p>2、除去性能，64位的界面太毛糙了，无论是图标还是界面的文字显示效果都很差；  </p>
+<p>两者的界面库是不同的，32位下采用carbon，而64位下使用的是Qt，carbon的界面是使用系统原生来适配的，而qt的界面是跨平台的。</p>
+<p>举个简单的例子：carbon可以使用OS X 10.11后的新字体，而Qt没有使用。</p>
+<h3 id="快捷键冲突"><a href="#快捷键冲突" class="headerlink" title="快捷键冲突"></a>快捷键冲突</h3><h4 id="复制、剪切、和粘贴"><a href="#复制、剪切、和粘贴" class="headerlink" title="复制、剪切、和粘贴"></a>复制、剪切、和粘贴</h4><p>为了方便在Finder和DC之间复制文件，对应Ctrl+C、Ctrl+X、Ctrl+V分别多加一个快捷键   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Command+C、Command+X、Command+V</div></pre></td></tr></table></figure>
+<h4 id="左右窗口的复制快捷键Ctrl-左-右和Mac的屏幕切换冲突了"><a href="#左右窗口的复制快捷键Ctrl-左-右和Mac的屏幕切换冲突了" class="headerlink" title="左右窗口的复制快捷键Ctrl+左/右和Mac的屏幕切换冲突了"></a>左右窗口的复制快捷键Ctrl+左/右和Mac的屏幕切换冲突了</h4><p>我的做法是自定义快捷键：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Ctrl+option+左</div><div class="line">Ctrl+option+右</div></pre></td></tr></table></figure>
+<p>其他的快捷键冲突，也使用类似的解决方案</p>
+<h3 id="对键盘党来说必备的小功能"><a href="#对键盘党来说必备的小功能" class="headerlink" title="对键盘党来说必备的小功能"></a>对键盘党来说必备的小功能</h3><p>F5复制，F6移动  </p>
+<p>快速过滤定位文件  </p>
+<p>文件内查找文本  </p>
+<p>批量重命名  </p>
+<p>压缩文件  </p>
+<p>比较文件  </p>
+<p>等等……  </p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Path Finder等收费软件虽然界面很美观，但产品的定位上只是Finder的一个增强或者替代品，和Total Commander没有可比性；  </p>
+<p>作为一个独立的效率工具来说，Double Commander和Total Commander定位非常接近；  </p>
+<p>另外还有一点，作为开源软件的Double Commander，他的版本计划还在继续，非常值得期待。  </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/10/23/ios-garageband-tips/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1446,147 +1597,6 @@ this.addChild(widget);
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/18/sdk-manager-crash/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/18/sdk-manager-crash/" itemprop="url">
-                  Windows下的SDK Manager.exe闪退
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T00:00:00+08:00">
-                2015-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/03/18/sdk-manager-crash/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/18/sdk-manager-crash/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>双击SDK Manager.exe，闪退；  </p>
-<p>网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径</p>
-<h3 id="问题根源"><a href="#问题根源" class="headerlink" title="问题根源"></a>问题根源</h3><p>问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径  </p>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">rem Check we have a valid Java.exe in the path.</span></div><div class="line"><span class="built_in">set</span> java_exe=</div><div class="line"><span class="keyword">call</span> lib\find_java.bat</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> java_exe <span class="keyword">goto</span> :EOF</div></pre></td></tr></table></figure>
-<p>其实问题最终的根源在于find_java.bat中调用的find_java.exe没有返回正确的路径</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="简单粗暴的解决方案"><a href="#简单粗暴的解决方案" class="headerlink" title="简单粗暴的解决方案"></a>简单粗暴的解决方案</h3><ul>
-<li><p>简单的改法就是修改Android.bat中的java_exe路径，直接写死；  </p>
-</li>
-<li><p>当然这是个非常粗暴的解决方案，方案的风险在于：下次你复制这个目录到别的电脑上使用的时候，这里设置的路径需要重新设置。</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set java_exe=C:\Program Files\Java\jdk1.7.0_40\bin\java.exe</div></pre></td></tr></table></figure>
-<h3 id="正确的解决方案"><a href="#正确的解决方案" class="headerlink" title="正确的解决方案"></a>正确的解决方案</h3><p>其实这个更简单，在系统环境变量中，添加一个JAVA_HOME的变量定义  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME</div><div class="line">C:\Program Files\Java\jdk1.7.0_40</div></pre></td></tr></table></figure>
-<h4 id="验证的方法"><a href="#验证的方法" class="headerlink" title="验证的方法"></a>验证的方法</h4><p>直接调用下find_java.exe看看能否返回正确的路径。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/puma004/article/details/11392271" target="_blank" rel="external">64位win7下Android SDK Manager闪退的解决方法</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_6e1ad0cf01013v9u.html" target="_blank" rel="external">解决64位Win7下的android sdk manager一闪而过的问题</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_8a2d5e270101ad3q.html" target="_blank" rel="external">安装Android SDK时，点击SDK Manager.exe闪退</a>  </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/18/debug-spidermonkey-with-cocos2d-js/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1762,7 +1772,7 @@ this.addChild(widget);
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1772,7 +1782,7 @@ this.addChild(widget);
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">173</span>
+                <span class="site-state-item-count">175</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

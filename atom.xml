@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linyehui.me/"/>
-  <updated>2017-02-08T08:23:26.000Z</updated>
+  <updated>2017-02-17T02:14:02.000Z</updated>
   <id>http://linyehui.me/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>升级到Sierra后proxychains4 pod update失败</title>
+    <link href="http://linyehui.me/2017/02/17/proxychain4-pod-update-failed/"/>
+    <id>http://linyehui.me/2017/02/17/proxychain4-pod-update-failed/</id>
+    <published>2017-02-16T16:00:00.000Z</published>
+    <updated>2017-02-17T02:14:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：</p>
+<blockquote>
+<p>[proxychains] preloading ./libproxychains4.dylib<br>dyld: warning: could not load inserted library ‘./libproxychains4.dylib’ into library validated process because no suitable image found. Did find:<br>./libproxychains4.dylib: code signing blocked mmap() of ‘./libproxychains4.dylib’</p>
+</blockquote>
+<h3 id="我的环境如下："><a href="#我的环境如下：" class="headerlink" title="我的环境如下："></a>我的环境如下：</h3><ul>
+<li>macOS Sierra 10.12.3</li>
+<li>proxychains-ng 4.12_1</li>
+<li>SIP之前配置过用的是：csrutil enable –without debug，查询的状态如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ csrutil status</div><div class="line">System Integrity Protection status: enabled (Custom Configuration).</div><div class="line"></div><div class="line">Configuration:</div><div class="line">	Apple Internal: disabled</div><div class="line">	Kext Signing: enabled</div><div class="line">	Filesystem Protections: enabled</div><div class="line">	Debugging Restrictions: disabled</div><div class="line">	DTrace Restrictions: enabled</div><div class="line">	NVRAM Protections: enabled</div><div class="line">	BaseSystem Verification: enabled</div><div class="line"></div><div class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="寻找原因"><a href="#寻找原因" class="headerlink" title="寻找原因"></a>寻找原因</h2><p>一开始是找到了这篇issues:<a href="https://github.com/rofl0r/proxychains-ng/issues/109" target="_blank" rel="external">Proxychains4 with brew for MacOs error #109</a>，以为是我的proxychains4版本问题或者是我的SIP问题，所以做了以下尝试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># 进入系统的recovery mode，禁用SIP</div><div class="line">csrutil disable</div><div class="line">reboot</div><div class="line"></div><div class="line"># 重启后卸载老的proxychains</div><div class="line">brew tap beeftornado/rmtree</div><div class="line">brew rmtree proxychains-ng</div><div class="line"></div><div class="line"># 重新安装</div><div class="line">proxychains-ng --universal</div><div class="line"></div><div class="line"># 确认下proxychains-ng的配置是否正确，如果不正确就再配置下proxychains.conf</div><div class="line"># 确认下telnet是否正常</div><div class="line">proxychains4 telnet google.com 80</div><div class="line"></div><div class="line"># 再尝试下pod update</div><div class="line">proxychains4 pod update</div><div class="line"></div><div class="line"># 问题依旧：code signing blocked mmap()</div></pre></td></tr></table></figure></p>
+<h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>在另外一个issue78:<a href="https://github.com/rofl0r/proxychains-ng/issues/78" target="_blank" rel="external">Not working on OS X 10.11 due to SIP #78</a>中看到了被点赞了4次的这个回答，让我最后解决了问题：</p>
+<blockquote>
+<p>It only happens if you execute a system binary using proxychains, e.g. proxychains4 ssh user@server. For now, a workaround is to copy the executable to another location (e.g. cp /usr/bin/ssh ~/XXX), and use it (e.g. proxychains4 ~/XXX/ssh user@server). You can modify the path variable so that ~/XXX/ssh is executed instead of /usr/bin/ssh, when you just type “ssh”.</p>
+</blockquote>
+<h3 id="一句话描述问题："><a href="#一句话描述问题：" class="headerlink" title="一句话描述问题："></a>一句话描述问题：</h3><blockquote>
+<p>proxychain尝试注入系统bin目录下的二进制文件会出现这种情况，解决方案就是换个非系统目录的文件来执行和注入就可以了。</p>
+</blockquote>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>根据上面的问题描述，再考虑pod update的实际操作，其实就是调用git去更新，而我的git用的是系统自带的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ which git</div><div class="line">/usr/bin/git</div></pre></td></tr></table></figure></p>
+<p>这样一来问题就变成了让pod update使用我自己安装的git就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">brew install git</div><div class="line"></div><div class="line"># 修改.bash_profile，增加下面的export配置，优先搜索/usr/local/bin目录</div><div class="line"># 这样修改后，terminal下使用git就会优先使用我们刚刚安装的git版本了</div><div class="line">export PATH=/usr/local/bin:/usr/local/sbin:$&#123;PATH&#125;</div></pre></td></tr></table></figure></p>
+<p>好了，配置好了，再试一下，成功了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxychains4 pod update</div></pre></td></tr></table></figure></p>
+<h3 id="关于SIP"><a href="#关于SIP" class="headerlink" title="关于SIP"></a>关于SIP</h3><p>最后我验证了下，SIP其实不需要disable，csrutil enable –without debug下proxychains也是能正常工作的</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>说下我这里能够正常运行的环境和因素：</p>
+<ul>
+<li>macOS Sierra 10.12.3</li>
+<li>proxychains-ng 4.12_1</li>
+<li><p>进入系统的recovery mode，打开terminal，csrutil enable –without debug<br>可以使用这个命令查询的状态，我的状态如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ csrutil status</div><div class="line">System Integrity Protection status: enabled (Custom Configuration).</div><div class="line"></div><div class="line">Configuration:</div><div class="line">	Apple Internal: disabled</div><div class="line">	Kext Signing: enabled</div><div class="line">	Filesystem Protections: enabled</div><div class="line">	Debugging Restrictions: disabled</div><div class="line">	DTrace Restrictions: enabled</div><div class="line">	NVRAM Protections: enabled</div><div class="line">	BaseSystem Verification: enabled</div><div class="line"></div><div class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</div></pre></td></tr></table></figure>
+</li>
+<li><p>我的git使用的是brew install git的版本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ which git</div><div class="line">/usr/local/bin/git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a href="https://github.com/rofl0r/proxychains-ng/issues/78" target="_blank" rel="external">Not working on OS X 10.11 due to SIP #78</a><br><a href="https://github.com/rofl0r/proxychains-ng/issues/109" target="_blank" rel="external">Proxychains4 with brew for MacOs error #109</a><br><a href="https://github.com/rofl0r/proxychains-ng/issues/159" target="_blank" rel="external">code signing blocked mmap() #159</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失
+    
+    </summary>
+    
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="pod" scheme="http://linyehui.me/tags/pod/"/>
+    
+      <category term="proxychains" scheme="http://linyehui.me/tags/proxychains/"/>
+    
+  </entry>
   
   <entry>
     <title>ignore SIGPIPE crash</title>
@@ -822,58 +880,6 @@
       <category term="xcode" scheme="http://linyehui.me/tags/xcode/"/>
     
       <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Double Commander for Mac</title>
-    <link href="http://linyehui.me/2015/11/05/double-commander-for-mac/"/>
-    <id>http://linyehui.me/2015/11/05/double-commander-for-mac/</id>
-    <published>2015-11-04T16:00:00.000Z</published>
-    <updated>2016-12-15T04:36:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h2><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
-<p>TC确实可以替换系统的资源管理器，但是他的目标可不是替换系统资源管理器这么简单。</p>
-<p>无奈之下选择了一款免费的Finder插件XtraFinder，用了一段时间之后，我的Mac升级了OS X 10.11，用不了了：<a href="https://www.trankynam.com/xtrafinder/sip.html" target="_blank" rel="external">如果不关闭System Integrity Protection就无法使用了</a>。</p>
-<p>不能忍，再找找吧，在网上看到了这几个帖子：  </p>
-<p><a href="https://www.v2ex.com/t/66737" target="_blank" rel="external">怎么，Mac 下的诸多文件管理软件还在仰望 Total Commander，在 TC 的阴影下生活么？</a>  </p>
-<p><a href="http://www.zhihu.com/question/19607061" target="_blank" rel="external">Mac 是否有类似Windows上 Total Commander 这样的应用？</a></p>
-<p>几个帖子中都提到了一个我之前没有试用过的软件：<a href="http://doublecmd.sourceforge.net/" target="_blank" rel="external">Double Commander</a></p>
-<p>用了一分钟之后，我只能说：相见恨晚</p>
-<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><h3 id="Mac下的版本选择"><a href="#Mac下的版本选择" class="headerlink" title="Mac下的版本选择"></a>Mac下的版本选择</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Mac OS X &gt;= 10.5</div><div class="line">doublecmd-0.6.6-6327.carbon.i386.dmg</div><div class="line"></div><div class="line">Mac OS X &gt;= 10.8	</div><div class="line">64 bit	doublecmd-0.6.6-6327.qt.x86_64.dmg</div></pre></td></tr></table></figure>
-<h4 id="结论是：选择32位版本"><a href="#结论是：选择32位版本" class="headerlink" title="结论是：选择32位版本"></a>结论是：选择32位版本</h4><h4 id="理由："><a href="#理由：" class="headerlink" title="理由："></a>理由：</h4><p>1、性能上的差别没有做比较，但是两者使用下来没有明显的差异，至少没有卡顿的情况；  </p>
-<p>2、除去性能，64位的界面太毛糙了，无论是图标还是界面的文字显示效果都很差；  </p>
-<p>两者的界面库是不同的，32位下采用carbon，而64位下使用的是Qt，carbon的界面是使用系统原生来适配的，而qt的界面是跨平台的。</p>
-<p>举个简单的例子：carbon可以使用OS X 10.11后的新字体，而Qt没有使用。</p>
-<h3 id="快捷键冲突"><a href="#快捷键冲突" class="headerlink" title="快捷键冲突"></a>快捷键冲突</h3><h4 id="复制、剪切、和粘贴"><a href="#复制、剪切、和粘贴" class="headerlink" title="复制、剪切、和粘贴"></a>复制、剪切、和粘贴</h4><p>为了方便在Finder和DC之间复制文件，对应Ctrl+C、Ctrl+X、Ctrl+V分别多加一个快捷键   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Command+C、Command+X、Command+V</div></pre></td></tr></table></figure>
-<h4 id="左右窗口的复制快捷键Ctrl-左-右和Mac的屏幕切换冲突了"><a href="#左右窗口的复制快捷键Ctrl-左-右和Mac的屏幕切换冲突了" class="headerlink" title="左右窗口的复制快捷键Ctrl+左/右和Mac的屏幕切换冲突了"></a>左右窗口的复制快捷键Ctrl+左/右和Mac的屏幕切换冲突了</h4><p>我的做法是自定义快捷键：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Ctrl+option+左</div><div class="line">Ctrl+option+右</div></pre></td></tr></table></figure>
-<p>其他的快捷键冲突，也使用类似的解决方案</p>
-<h3 id="对键盘党来说必备的小功能"><a href="#对键盘党来说必备的小功能" class="headerlink" title="对键盘党来说必备的小功能"></a>对键盘党来说必备的小功能</h3><p>F5复制，F6移动  </p>
-<p>快速过滤定位文件  </p>
-<p>文件内查找文本  </p>
-<p>批量重命名  </p>
-<p>压缩文件  </p>
-<p>比较文件  </p>
-<p>等等……  </p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Path Finder等收费软件虽然界面很美观，但产品的定位上只是Finder的一个增强或者替代品，和Total Commander没有可比性；  </p>
-<p>作为一个独立的效率工具来说，Double Commander和Total Commander定位非常接近；  </p>
-<p>另外还有一点，作为开源软件的Double Commander，他的版本计划还在继续，非常值得期待。  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;相见恨晚&quot;&gt;&lt;a href=&quot;#相见恨晚&quot; class=&quot;headerlink&quot; title=&quot;相见恨晚&quot;&gt;&lt;/a&gt;相见恨晚&lt;/h2&gt;&lt;p&gt;作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，
-    
-    </summary>
-    
-    
-      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
-    
-      <category term="totalcommander" scheme="http://linyehui.me/tags/totalcommander/"/>
-    
-      <category term="doublecommander" scheme="http://linyehui.me/tags/doublecommander/"/>
     
   </entry>
   

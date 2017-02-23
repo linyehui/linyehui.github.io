@@ -248,6 +248,136 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/01/08/soft-keyboard-make-a-black-screen/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2012/01/08/soft-keyboard-make-a-black-screen/" itemprop="url">
+                  WinRT下软键盘导致的“黑屏”
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-01-08T00:00:00+08:00">
+                2012-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2012/01/08/soft-keyboard-make-a-black-screen/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/01/08/soft-keyboard-make-a-black-screen/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在WinRT下使用软键盘可能会出现“黑屏”的Bug，这个时候你需要特别留意下是不是使用错了InputPaneVisibilityEventArgs下面这个属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">EnsuredFocusedElementInView</div><div class="line">Read/write	Identifies whether the application has taken steps to ensure that the input pane doesn&apos;t cover the UI element that has focus.</div></pre></td></tr></table></figure>
+<p>出现黑屏的问题，试试在InputPane的Showing事件处理时将EnsuredFocusedElementInView赋值为false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The InputPane class has the following events. </div><div class="line">Hiding    Occurs when the input pane is about to be hidden by sliding out of view.</div><div class="line">Showing   Occurs when the input pane is about to be displayed by sliding into view.</div></pre></td></tr></table></figure>
+<p>两个相关的MSDN链接：  </p>
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.inputpane.aspx" target="_blank" rel="external">InputPane class</a>  </p>
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.inputpanevisibilityeventargs" target="_blank" rel="external">InputPaneVisibilityEventArgs class</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/01/06/smart-team/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -541,6 +671,147 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2011/12/30/3rdparty-port-to-winrt/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2011/12/30/3rdparty-port-to-winrt/" itemprop="url">
+                  第三方库在WinRT下的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2011-12-30T00:00:00+08:00">
+                2011-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2011/12/30/3rdparty-port-to-winrt/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2011/12/30/3rdparty-port-to-winrt/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>本文发表时Win8和VS2011还没正式发布，处于Developer Preview版本，之后的情况可能不是这样了</p>
+</blockquote>
+<p>很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？  </p>
+<h1 id="推荐的方法："><a href="#推荐的方法：" class="headerlink" title="推荐的方法："></a>推荐的方法：</h1><ul>
+<li>1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接在Metro style apps中使用，用起来和Win32下一摸一样</li>
+<li>2、<strong>这个步骤是必须的：</strong>[<a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230262(v=VS.85).aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/windows/apps/br230262(v=VS.85).aspx</a> Validating your package on your local machine]，你的应用必须通过了”Windows App Certification Kit”里的“Validate Metro style App”，你的第三方库使用才算是正常的</li>
+</ul>
+<h1 id="不推荐的方法"><a href="#不推荐的方法" class="headerlink" title="不推荐的方法"></a>不推荐的方法</h1><p>把.c文件移植成.cpp</p>
+<h1 id="可能存在的疑问："><a href="#可能存在的疑问：" class="headerlink" title="可能存在的疑问："></a>可能存在的疑问：</h1><ul>
+<li>1、VS2011不能新建Win32工程<br>Answer：  </li>
+</ul>
+<p>你用的是系统自带的Express版本，这个是没有的，要用完整版，从这里可以下载到：  </p>
+<p><a href="http://www.microsoft.com/download/en/details.aspx?id=27538" target="_blank" rel="external">Microsoft® Visual Studio® 11 Developer Preview (ISO)</a></p>
+<ul>
+<li>2、认证不通过<br>Answer:  </li>
+</ul>
+<p>照着指引改吧，第三方库写的不好的话，改起来就会很痛苦；或者你等待Win8普及后第三方库作者更新代码。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2011/12/30/win32-and-com-for-metro-style-apps/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -646,147 +917,6 @@
 <hr>
 <h1 id="Win32-and-COM-for-Metro-style-apps-system"><a href="#Win32-and-COM-for-Metro-style-apps-system" class="headerlink" title="Win32 and COM for Metro style apps (system)"></a>Win32 and COM for Metro style apps (system)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div><div class="line">533</div><div class="line">534</div><div class="line">535</div><div class="line">536</div><div class="line">537</div><div class="line">538</div><div class="line">539</div><div class="line">540</div><div class="line">541</div><div class="line">542</div><div class="line">543</div><div class="line">544</div><div class="line">545</div><div class="line">546</div><div class="line">547</div><div class="line">548</div><div class="line">549</div><div class="line">550</div><div class="line">551</div><div class="line">552</div><div class="line">553</div><div class="line">554</div><div class="line">555</div><div class="line">556</div><div class="line">557</div><div class="line">558</div><div class="line">559</div><div class="line">560</div><div class="line">561</div><div class="line">562</div><div class="line">563</div><div class="line">564</div><div class="line">565</div><div class="line">566</div><div class="line">567</div><div class="line">568</div><div class="line">569</div><div class="line">570</div><div class="line">571</div><div class="line">572</div><div class="line">573</div><div class="line">574</div><div class="line">575</div><div class="line">576</div><div class="line">577</div><div class="line">578</div><div class="line">579</div><div class="line">580</div><div class="line">581</div><div class="line">582</div><div class="line">583</div><div class="line">584</div><div class="line">585</div><div class="line">586</div><div class="line">587</div><div class="line">588</div><div class="line">589</div><div class="line">590</div><div class="line">591</div><div class="line">592</div><div class="line">593</div><div class="line">594</div><div class="line">595</div><div class="line">596</div><div class="line">597</div><div class="line">598</div><div class="line">599</div><div class="line">600</div><div class="line">601</div><div class="line">602</div><div class="line">603</div><div class="line">604</div><div class="line">605</div><div class="line">606</div><div class="line">607</div><div class="line">608</div><div class="line">609</div><div class="line">610</div><div class="line">611</div><div class="line">612</div><div class="line">613</div><div class="line">614</div><div class="line">615</div><div class="line">616</div><div class="line">617</div><div class="line">618</div><div class="line">619</div><div class="line">620</div><div class="line">621</div><div class="line">622</div><div class="line">623</div><div class="line">624</div><div class="line">625</div><div class="line">626</div><div class="line">627</div><div class="line">628</div><div class="line">629</div><div class="line">630</div><div class="line">631</div><div class="line">632</div><div class="line">633</div><div class="line">634</div><div class="line">635</div><div class="line">636</div><div class="line">637</div><div class="line">638</div><div class="line">639</div><div class="line">640</div><div class="line">641</div><div class="line">642</div><div class="line">643</div><div class="line">644</div><div class="line">645</div><div class="line">646</div><div class="line">647</div><div class="line">648</div><div class="line">649</div><div class="line">650</div><div class="line">651</div><div class="line">652</div><div class="line">653</div><div class="line">654</div><div class="line">655</div><div class="line">656</div><div class="line">657</div><div class="line">658</div><div class="line">659</div><div class="line">660</div><div class="line">661</div><div class="line">662</div><div class="line">663</div><div class="line">664</div><div class="line">665</div><div class="line">666</div><div class="line">667</div><div class="line">668</div><div class="line">669</div><div class="line">670</div><div class="line">671</div><div class="line">672</div><div class="line">673</div><div class="line">674</div><div class="line">675</div><div class="line">676</div><div class="line">677</div><div class="line">678</div><div class="line">679</div><div class="line">680</div><div class="line">681</div><div class="line">682</div><div class="line">683</div><div class="line">684</div><div class="line">685</div><div class="line">686</div><div class="line">687</div><div class="line">688</div><div class="line">689</div><div class="line">690</div></pre></td><td class="code"><pre><div class="line">[This documentation is preliminary and is subject to change.]</div><div class="line">The following system APIs are supported for developing Metro style apps.</div><div class="line">COM</div><div class="line">BindMoniker</div><div class="line">BSTR_UserFree</div><div class="line">BSTR_UserFree64</div><div class="line">BSTR_UserMarshal</div><div class="line">BSTR_UserMarshal64</div><div class="line">BSTR_UserSize</div><div class="line">BSTR_UserSize64</div><div class="line">BSTR_UserUnmarshal</div><div class="line">BSTR_UserUnmarshal64</div><div class="line">CLSIDFromString</div><div class="line">CoCreateFreeThreadedMarshaler</div><div class="line">CoCreateGuid</div><div class="line">CoCreateInstanceFromApp</div><div class="line">CoDisconnectObject</div><div class="line">CoFreeUnusedLibraries</div><div class="line">CoFreeUnusedLibrariesEx</div><div class="line">CoGetApartmentType</div><div class="line">CoGetCurrentLogicalThreadId</div><div class="line">CoGetInterfaceAndReleaseStream</div><div class="line">CoGetMarshalSizeMax</div><div class="line">CoGetObject</div><div class="line">CoGetStandardMarshal</div><div class="line">CoInitializeEx</div><div class="line">CoInitializeSecurity</div><div class="line">CoMarshalInterface</div><div class="line">CoMarshalInterThreadInterfaceInStream</div><div class="line">CoRegisterClassObject</div><div class="line">CoReleaseMarshalData</div><div class="line">CoReleaseServerProcess</div><div class="line">CoResumeClassObjects</div><div class="line">CoRevokeClassObject</div><div class="line">CoSuspendClassObjects</div><div class="line">CoSwitchCallContext</div><div class="line">CoTaskMemAlloc</div><div class="line">CoTaskMemFree</div><div class="line">CoTaskMemRealloc</div><div class="line">CoUninitialize</div><div class="line">CoUnmarshalInterface</div><div class="line">CoWaitForMultipleHandles</div><div class="line">CreateAntiMoniker</div><div class="line">CreateBindCtx</div><div class="line">CreateClassMoniker</div><div class="line">CreateFileMoniker</div><div class="line">CreateGenericComposite</div><div class="line">CreateILockBytesOnHGlobal</div><div class="line">CreateItemMoniker</div><div class="line">CreateObjrefMoniker</div><div class="line">CreatePointerMoniker</div><div class="line">CreateStreamOnHGlobal</div><div class="line">DispInvoke</div><div class="line">FmtIdToPropStgName</div><div class="line">GetClassFile</div><div class="line">GetConvertStg</div><div class="line">GetHGlobalFromILockBytes</div><div class="line">GetHGlobalFromStream</div><div class="line">IBindCtx</div><div class="line">IClassFactory</div><div class="line">IClientSecurity</div><div class="line">IConnectionPoint</div><div class="line">IConnectionPointContainer</div><div class="line">IDirectWriterLock</div><div class="line">IDispatch</div><div class="line">IEnumConnectionPoints</div><div class="line">IEnumConnections</div><div class="line">IEnumMoniker</div><div class="line">IEnumSTATDATA</div><div class="line">IEnumSTATPROPSETSTG</div><div class="line">IEnumSTATPROPSTG</div><div class="line">IEnumSTATSTG</div><div class="line">IEnumString</div><div class="line">IEnumUnknown</div><div class="line">IEnumVARIANT</div><div class="line">IFillLockBytes</div><div class="line">IGlobalInterfaceTable</div><div class="line">IGlobalOptions</div><div class="line">IIDFromString</div><div class="line">ILayoutStorage</div><div class="line">ILockBytes</div><div class="line">IMalloc</div><div class="line">IMallocSpy</div><div class="line">IMultiQI</div><div class="line">IPropertyBag2</div><div class="line">IPropertySetStorage</div><div class="line">IPropertyStorage</div><div class="line">IPSFactoryBuffer</div><div class="line">IQuickActivate</div><div class="line">IRootStorage</div><div class="line">IRpcStubBuffer</div><div class="line">IRpcChannelBuffer</div><div class="line">IsEqualGUID</div><div class="line">ISequentialStream</div><div class="line">IStorage</div><div class="line">IStream</div><div class="line">ISurrogate</div><div class="line">IUnknown</div><div class="line">LPSAFEARRAY_Marshal</div><div class="line">LPSAFEARRAY_Size</div><div class="line">LPSAFEARRAY_Unmarshal</div><div class="line">LPSAFEARRAY_UserFree</div><div class="line">LPSAFEARRAY_UserFree64</div><div class="line">LPSAFEARRAY_UserMarshal</div><div class="line">LPSAFEARRAY_UserMarshal64</div><div class="line">LPSAFEARRAY_UserSize</div><div class="line">LPSAFEARRAY_UserSize64</div><div class="line">LPSAFEARRAY_UserUnmarshal</div><div class="line">LPSAFEARRAY_UserUnmarshal64</div><div class="line">MkParseDisplayName</div><div class="line">MonikerCommonPrefixWith</div><div class="line">MonikerRelativePathTo</div><div class="line">ReadClassStg</div><div class="line">ReadClassStm</div><div class="line">SafeArrayAccessData</div><div class="line">SafeArrayAllocData</div><div class="line">SafeArrayAllocDescriptor</div><div class="line">SafeArrayAllocDescriptorEx</div><div class="line">SafeArrayCopy</div><div class="line">SafeArrayCopyData</div><div class="line">SafeArrayCreate</div><div class="line">SafeArrayCreateEx</div><div class="line">SafeArrayCreateVector</div><div class="line">SafeArrayCreateVectorEx</div><div class="line">SafeArrayDestroy</div><div class="line">SafeArrayDestroyData</div><div class="line">SafeArrayDestroyDescriptor</div><div class="line">SafeArrayGetDim</div><div class="line">SafeArrayGetElement</div><div class="line">SafeArrayGetElemsize</div><div class="line">SafeArrayGetIID</div><div class="line">SafeArrayGetLBound</div><div class="line">SafeArrayGetRecordInfo</div><div class="line">SafeArrayGetUBound</div><div class="line">SafeArrayGetVartype</div><div class="line">SafeArrayLock</div><div class="line">SafeArrayPtrOfIndex</div><div class="line">SafeArrayPutElement</div><div class="line">SafeArrayRedim</div><div class="line">SafeArraySetIID</div><div class="line">SafeArraySetRecordInfo</div><div class="line">SafeArrayUnaccessData</div><div class="line">SafeArrayUnlock</div><div class="line">StgCreateDocfile</div><div class="line">StgCreateDocfileOnILockBytes</div><div class="line">StgCreatePropSetStg</div><div class="line">StgCreatePropStg</div><div class="line">StgCreateStorageEx</div><div class="line">StgGetIFillLockBytesOnFile</div><div class="line">StgGetIFillLockBytesOnILockBytes</div><div class="line">StgIsStorageFile</div><div class="line">StgIsStorageILockBytes</div><div class="line">StgOpenAsyncDocfileOnIFillLockBytes</div><div class="line">StgOpenPropStg</div><div class="line">StgOpenStorage</div><div class="line">StgOpenStorageEx</div><div class="line">StgOpenStorageOnILockBytes</div><div class="line">StgPropertyLengthAsVariant</div><div class="line">StgSetTimes</div><div class="line">StringFromCLSID</div><div class="line">StringFromGUID2</div><div class="line">StringFromIID</div><div class="line">SysAllocString</div><div class="line">SysAllocStringByteLen</div><div class="line">SysAllocStringLen</div><div class="line">SysFreeString</div><div class="line">SysReAllocString</div><div class="line">SysReAllocStringLen</div><div class="line">SysStringByteLen</div><div class="line">SysStringLen</div><div class="line">SystemTimeToVariantTime</div><div class="line">VarAbs</div><div class="line">VarAdd</div><div class="line">VarAnd</div><div class="line">VarBoolFromCy</div><div class="line">VarBoolFromDate</div><div class="line">VarBoolFromDec</div><div class="line">VarBoolFromDisp</div><div class="line">VarBoolFromI1</div><div class="line">VarBoolFromI2</div><div class="line">VarBoolFromI4</div><div class="line">VarBoolFromI8</div><div class="line">VarBoolFromR4</div><div class="line">VarBoolFromR8</div><div class="line">VarBoolFromStr</div><div class="line">VarBoolFromUI1</div><div class="line">VarBoolFromUI2</div><div class="line">VarBoolFromUI4</div><div class="line">VarBoolFromUI8</div><div class="line">VarBstrCat</div><div class="line">VarBstrCmp</div><div class="line">VarBstrFromBool</div><div class="line">VarBstrFromCy</div><div class="line">VarBstrFromDate</div><div class="line">VarBstrFromDec</div><div class="line">VarBstrFromDisp</div><div class="line">VarBstrFromI1</div><div class="line">VarBstrFromI2</div><div class="line">VarBstrFromI4</div><div class="line">VarBstrFromI8</div><div class="line">VarBstrFromR4</div><div class="line">VarBstrFromR8</div><div class="line">VarBstrFromUI1</div><div class="line">VarBstrFromUI2</div><div class="line">VarBstrFromUI4</div><div class="line">VarBstrFromUI8</div><div class="line">VarCat</div><div class="line">VarCmp</div><div class="line">VarCyAbs</div><div class="line">VarCyAdd</div><div class="line">VarCyCmp</div><div class="line">VarCyCmpR8</div><div class="line">VarCyFix</div><div class="line">VarCyFromBool</div><div class="line">VarCyFromDate</div><div class="line">VarCyFromDec</div><div class="line">VarCyFromDisp</div><div class="line">VarCyFromI1</div><div class="line">VarCyFromI2</div><div class="line">VarCyFromI4</div><div class="line">VarCyFromI8</div><div class="line">VarCyFromR4</div><div class="line">VarCyFromR8</div><div class="line">VarCyFromStr</div><div class="line">VarCyFromUI1</div><div class="line">VarCyFromUI2</div><div class="line">VarCyFromUI4</div><div class="line">VarCyFromUI8</div><div class="line">VarCyInt</div><div class="line">VarCyMul</div><div class="line">VarCyMulI4</div><div class="line">VarCyMulI8</div><div class="line">VarCyNeg</div><div class="line">VarCyRound</div><div class="line">VarCySub</div><div class="line">VarDateFromBool</div><div class="line">VarDateFromCy</div><div class="line">VarDateFromDec</div><div class="line">VarDateFromDisp</div><div class="line">VarDateFromI1</div><div class="line">VarDateFromI2</div><div class="line">VarDateFromI4</div><div class="line">VarDateFromI8</div><div class="line">VarDateFromR4</div><div class="line">VarDateFromR8</div><div class="line">VarDateFromStr</div><div class="line">VarDateFromUdate</div><div class="line">VarDateFromUdateEx</div><div class="line">VarDateFromUI1</div><div class="line">VarDateFromUI2</div><div class="line">VarDateFromUI4</div><div class="line">VarDateFromUI8</div><div class="line">VarDecAbs</div><div class="line">VarDecAdd</div><div class="line">VarDecCmp</div><div class="line">VarDecCmpR8</div><div class="line">VarDecDiv</div><div class="line">VarDecFix</div><div class="line">VarDecFromBool</div><div class="line">VarDecFromCy</div><div class="line">VarDecFromDate</div><div class="line">VarDecFromDisp</div><div class="line">VarDecFromI1</div><div class="line">VarDecFromI2</div><div class="line">VarDecFromI4</div><div class="line">VarDecFromI8</div><div class="line">VarDecFromR4</div><div class="line">VarDecFromR8</div><div class="line">VarDecFromStr</div><div class="line">VarDecFromUI1</div><div class="line">VarDecFromUI2</div><div class="line">VarDecFromUI4</div><div class="line">VarDecFromUI8</div><div class="line">VarDecInt</div><div class="line">VarDecMul</div><div class="line">VarDecNeg</div><div class="line">VarDecRound</div><div class="line">VarDecSub</div><div class="line">VarDiv</div><div class="line">VarEqv</div><div class="line">VarFix</div><div class="line">VarFormat</div><div class="line">VarFormatCurrency</div><div class="line">VarFormatDateTime</div><div class="line">VarFormatFromTokens</div><div class="line">VarFormatNumber</div><div class="line">VarFormatPercent</div><div class="line">VarI1FromBool</div><div class="line">VarI1FromCy</div><div class="line">VarI1FromDate</div><div class="line">VarI1FromDec</div><div class="line">VarI1FromDisp</div><div class="line">VarI1FromI2</div><div class="line">VarI1FromI4</div><div class="line">VarI1FromI8</div><div class="line">VarI1FromR4</div><div class="line">VarI1FromR8</div><div class="line">VarI1FromStr</div><div class="line">VarI1FromUI1</div><div class="line">VarI1FromUI2</div><div class="line">VarI1FromUI4</div><div class="line">VarI1FromUI8</div><div class="line">VarI2FromBool</div><div class="line">VarI2FromCy</div><div class="line">VarI2FromDate</div><div class="line">VarI2FromDec</div><div class="line">VarI2FromDisp</div><div class="line">VarI2FromI1</div><div class="line">VarI2FromI4</div><div class="line">VarI2FromI8</div><div class="line">VarI2FromR4</div><div class="line">VarI2FromR8</div><div class="line">VarI2FromStr</div><div class="line">VarI2FromUI1</div><div class="line">VarI2FromUI2</div><div class="line">VarI2FromUI4</div><div class="line">VarI2FromUI8</div><div class="line">VarI4FromBool</div><div class="line">VarI4FromCy</div><div class="line">VarI4FromDate</div><div class="line">VarI4FromDec</div><div class="line">VarI4FromDisp</div><div class="line">VarI4FromI1</div><div class="line">VarI4FromI2</div><div class="line">VarI4FromI8</div><div class="line">VarI4FromInt</div><div class="line">VarI4FromR4</div><div class="line">VarI4FromR8</div><div class="line">VarI4FromStr</div><div class="line">VarI4FromUI1</div><div class="line">VarI4FromUI2</div><div class="line">VarI4FromUI4</div><div class="line">VarI4FromUI8</div><div class="line">VarI8FromBool</div><div class="line">VarI8FromCy</div><div class="line">VarI8FromDate</div><div class="line">VarI8FromDec</div><div class="line">VarI8FromDisp</div><div class="line">VarI8FromI1</div><div class="line">VarI8FromI2</div><div class="line">VarI8FromR4</div><div class="line">VarI8FromR8</div><div class="line">VarI8FromStr</div><div class="line">VarI8FromUI1</div><div class="line">VarI8FromUI2</div><div class="line">VarI8FromUI4</div><div class="line">VarI8FromUI8</div><div class="line">VARIANT_UserFree</div><div class="line">VARIANT_UserFree64</div><div class="line">VARIANT_UserMarshal</div><div class="line">VARIANT_UserMarshal64</div><div class="line">VARIANT_UserSize</div><div class="line">VARIANT_UserSize64</div><div class="line">VARIANT_UserUnmarshal</div><div class="line">VARIANT_UserUnmarshal64</div><div class="line">VariantChangeType</div><div class="line">VariantChangeTypeEx</div><div class="line">VariantClear</div><div class="line">VariantCopy</div><div class="line">VariantCopyInd</div><div class="line">VariantInit</div><div class="line">VariantTimeToSystemTime</div><div class="line">VarIdiv</div><div class="line">VarImp</div><div class="line">VarInt</div><div class="line">VarMod</div><div class="line">VarMonthName</div><div class="line">VarMul</div><div class="line">VarNeg</div><div class="line">VarNot</div><div class="line">VarNumFromParseNum</div><div class="line">VarOr</div><div class="line">VarParseNumFromStr</div><div class="line">VarPow</div><div class="line">VarR4CmpR8</div><div class="line">VarR4FromBool</div><div class="line">VarR4FromCy</div><div class="line">VarR4FromDate</div><div class="line">VarR4FromDec</div><div class="line">VarR4FromDisp</div><div class="line">VarR4FromI1</div><div class="line">VarR4FromI2</div><div class="line">VarR4FromI4</div><div class="line">VarR4FromI8</div><div class="line">VarR4FromR8</div><div class="line">VarR4FromStr</div><div class="line">VarR4FromUI1</div><div class="line">VarR4FromUI2</div><div class="line">VarR4FromUI4</div><div class="line">VarR4FromUI8</div><div class="line">VarR8FromBool</div><div class="line">VarR8FromCy</div><div class="line">VarR8FromDate</div><div class="line">VarR8FromDec</div><div class="line">VarR8FromDisp</div><div class="line">VarR8FromI1</div><div class="line">VarR8FromI2</div><div class="line">VarR8FromI4</div><div class="line">VarR8FromI8</div><div class="line">VarR8FromR4</div><div class="line">VarR8FromStr</div><div class="line">VarR8FromUI1</div><div class="line">VarR8FromUI2</div><div class="line">VarR8FromUI4</div><div class="line">VarR8FromUI8</div><div class="line">VarR8Pow</div><div class="line">VarR8Round</div><div class="line">VarRound</div><div class="line">VarSub</div><div class="line">VarTokenizeFormatString</div><div class="line">VarUdateFromDate</div><div class="line">VarUI1FromBool</div><div class="line">VarUI1FromCy</div><div class="line">VarUI1FromDate</div><div class="line">VarUI1FromDec</div><div class="line">VarUI1FromDisp</div><div class="line">VarUI1FromI1</div><div class="line">VarUI1FromI2</div><div class="line">VarUI1FromI4</div><div class="line">VarUI1FromI8</div><div class="line">VarUI1FromR4</div><div class="line">VarUI1FromR8</div><div class="line">VarUI1FromStr</div><div class="line">VarUI1FromUI2</div><div class="line">VarUI1FromUI4</div><div class="line">VarUI1FromUI8</div><div class="line">VarUI2FromBool</div><div class="line">VarUI2FromCy</div><div class="line">VarUI2FromDate</div><div class="line">VarUI2FromDec</div><div class="line">VarUI2FromDisp</div><div class="line">VarUI2FromI1</div><div class="line">VarUI2FromI2</div><div class="line">VarUI2FromI4</div><div class="line">VarUI2FromI8</div><div class="line">VarUI2FromR4</div><div class="line">VarUI2FromR8</div><div class="line">VarUI2FromStr</div><div class="line">VarUI2FromUI1</div><div class="line">VarUI2FromUI4</div><div class="line">VarUI2FromUI8</div><div class="line">VarUI4FromBool</div><div class="line">VarUI4FromCy</div><div class="line">VarUI4FromDate</div><div class="line">VarUI4FromDec</div><div class="line">VarUI4FromDisp</div><div class="line">VarUI4FromI1</div><div class="line">VarUI4FromI2</div><div class="line">VarUI4FromI4</div><div class="line">VarUI4FromI8</div><div class="line">VarUI4FromR4</div><div class="line">VarUI4FromR8</div><div class="line">VarUI4FromStr</div><div class="line">VarUI4FromUI1</div><div class="line">VarUI4FromUI2</div><div class="line">VarUI4FromUI8</div><div class="line">VarUI8FromBool</div><div class="line">VarUI8FromCy</div><div class="line">VarUI8FromDate</div><div class="line">VarUI8FromDec</div><div class="line">VarUI8FromDisp</div><div class="line">VarUI8FromI1</div><div class="line">VarUI8FromI2</div><div class="line">VarUI8FromI8</div><div class="line">VarUI8FromR4</div><div class="line">VarUI8FromR8</div><div class="line">VarUI8FromStr</div><div class="line">VarUI8FromUI1</div><div class="line">VarUI8FromUI2</div><div class="line">VarUI8FromUI4</div><div class="line">VarWeekdayName</div><div class="line">VarXor</div><div class="line">WriteClassStg</div><div class="line">WriteClassStm</div><div class="line">DLLs</div><div class="line">DisableThreadLibraryCalls</div><div class="line">FreeLibrary</div><div class="line">GetProcAddress</div><div class="line">LoadPackagedLibrary</div><div class="line">Memory</div><div class="line">GetProcessHeap</div><div class="line">HeapAlloc</div><div class="line">HeapFree</div><div class="line">HeapReAlloc</div><div class="line">HeapSize</div><div class="line">Processes</div><div class="line">CloseHandle</div><div class="line">DecodePointer</div><div class="line">DuplicateHandle</div><div class="line">EncodePointer</div><div class="line">GetCurrentProcess</div><div class="line">GetCurrentProcessId</div><div class="line">Processor</div><div class="line">IsProcessorFeaturePresent</div><div class="line">Thread and Synchronization</div><div class="line">AcquireSRWLockExclusive</div><div class="line">AcquireSRWLockShared</div><div class="line">CreateEventExW</div><div class="line">CreateMutexExW</div><div class="line">CreateSemaphoreExW</div><div class="line">DeleteCriticalSection</div><div class="line">EnterCriticalSection</div><div class="line">FlsAlloc</div><div class="line">FlsFree</div><div class="line">FlsGetValue</div><div class="line">FlsSetValue</div><div class="line">GetCurrentThread</div><div class="line">GetCurrentThreadId</div><div class="line">GetTickCount64</div><div class="line">InitializeConditionVariable</div><div class="line">InitializeCriticalSectionEx</div><div class="line">InitializeSListHead</div><div class="line">InitializeSRWLock</div><div class="line">InitOnceBeginInitialize</div><div class="line">InitOnceComplete</div><div class="line">InitOnceExecuteOnce</div><div class="line">InitOnceInitialize</div><div class="line">InterlockedAdd</div><div class="line">InterlockedAdd64</div><div class="line">InterlockedAddAcquire</div><div class="line">InterlockedAddAcquire64</div><div class="line">InterlockedAddRelease</div><div class="line">InterlockedAddRelease64</div><div class="line">InterlockedAnd</div><div class="line">InterlockedAnd16</div><div class="line">InterlockedAnd16Acquire</div><div class="line">InterlockedAnd16Release</div><div class="line">InterlockedAnd64</div><div class="line">InterlockedAnd64Acquire</div><div class="line">InterlockedAnd64Release</div><div class="line">InterlockedAnd8</div><div class="line">InterlockedAnd8Acquire</div><div class="line">InterlockedAnd8Release</div><div class="line">InterlockedAndAcquire</div><div class="line">InterlockedAndRelease</div><div class="line">InterlockedBitTestAndReset</div><div class="line">InterlockedBitTestAndReset64</div><div class="line">InterlockedBitTestAndSet</div><div class="line">InterlockedBitTestAndSet64</div><div class="line">InterlockedCompare64Exchange128</div><div class="line">InterlockedCompare64ExchangeAcquire128</div><div class="line">InterlockedCompare64ExchangeRelease128</div><div class="line">InterlockedCompareExchange</div><div class="line">InterlockedCompareExchange64</div><div class="line">InterlockedCompareExchangeAcquire</div><div class="line">InterlockedCompareExchangeAcquire64</div><div class="line">InterlockedCompareExchangePointer</div><div class="line">InterlockedCompareExchangePointerAcquire</div><div class="line">InterlockedCompareExchangePointerRelease</div><div class="line">InterlockedCompareExchangeRelease</div><div class="line">InterlockedCompareExchangeRelease64</div><div class="line">InterlockedDecrement</div><div class="line">InterlockedDecrement64</div><div class="line">InterlockedDecrementAcquire</div><div class="line">InterlockedDecrementAcquire64</div><div class="line">InterlockedDecrementRelease</div><div class="line">InterlockedDecrementRelease64</div><div class="line">InterlockedExchange</div><div class="line">InterlockedExchange64</div><div class="line">InterlockedExchangeAcquire</div><div class="line">InterlockedExchangeAcquire64</div><div class="line">InterlockedExchangeAdd</div><div class="line">InterlockedExchangeAdd64</div><div class="line">InterlockedExchangeAddAcquire</div><div class="line">InterlockedExchangeAddAcquire64</div><div class="line">InterlockedExchangeAddRelease</div><div class="line">InterlockedExchangeAddRelease64</div><div class="line">InterlockedFlushSList</div><div class="line">InterlockedIncrement</div><div class="line">InterlockedIncrement64</div><div class="line">InterlockedIncrementAcquire</div><div class="line">InterlockedIncrementAcquire64</div><div class="line">InterlockedIncrementRelease</div><div class="line">InterlockedIncrementRelease64</div><div class="line">InterlockedOr</div><div class="line">InterlockedOr16</div><div class="line">InterlockedOr16Acquire</div><div class="line">InterlockedOr16Release</div><div class="line">InterlockedOr64</div><div class="line">InterlockedOr64Acquire</div><div class="line">InterlockedOr64Release</div><div class="line">InterlockedOr8</div><div class="line">InterlockedOr8Acquire</div><div class="line">InterlockedOr8Release</div><div class="line">InterlockedOrAcquire</div><div class="line">InterlockedOrRelease</div><div class="line">InterlockedPopEntrySList</div><div class="line">InterlockedPushEntrySList</div><div class="line">InterlockedPushListSList</div><div class="line">InterlockedXor</div><div class="line">InterlockedXor16</div><div class="line">InterlockedXor16Acquire</div><div class="line">InterlockedXor16Release</div><div class="line">InterlockedXor64</div><div class="line">InterlockedXor64Acquire</div><div class="line">InterlockedXor64Release</div><div class="line">InterlockedXor8</div><div class="line">InterlockedXor8Acquire</div><div class="line">InterlockedXor8Release</div><div class="line">InterlockedXorAcquire</div><div class="line">InterlockedXorRelease</div><div class="line">LeaveCriticalSection</div><div class="line">OpenEventW</div><div class="line">OpenMutexW</div><div class="line">OpenSemaphoreW</div><div class="line">QueryDepthSList</div><div class="line">QueryPerformanceCounter</div><div class="line">QueryPerformanceFrequency</div><div class="line">ReleaseMutex</div><div class="line">ReleaseSemaphore</div><div class="line">ReleaseSRWLockExclusive</div><div class="line">ReleaseSRWLockShared</div><div class="line">ResetEvent</div><div class="line">SetEvent</div><div class="line">SleepConditionVariableCS</div><div class="line">SleepConditionVariableSRW</div><div class="line">TryAcquireSRWLockExclusive</div><div class="line">TryAcquireSRWLockShared</div><div class="line">TryEnterCriticalSection</div><div class="line">WaitForMultipleObjectsEx</div><div class="line">WaitForSingleObjectEx</div><div class="line">WakeAllConditionVariable</div><div class="line">WakeConditionVariable</div><div class="line">Time</div><div class="line">FileTimeToSystemTime</div><div class="line">GetDynamicTimeZoneInformation</div><div class="line">GetLocalTime</div><div class="line">GetSystemTime</div><div class="line">GetSystemTimeAsFileTime</div><div class="line">GetTimeZoneInformation</div><div class="line">GetTimeZoneInformationForYear</div><div class="line">SystemTimeToFileTime</div><div class="line">SystemTimeToTzSpecificLocalTime</div><div class="line">TzSpecificLocalTimeToSystemTime</div><div class="line">Windows Runtime</div><div class="line">IActivationFactory</div><div class="line">IAsyncInfo</div><div class="line">IBuffer</div><div class="line">IInputStream</div><div class="line">IInspectable</div><div class="line">IOutputStream</div><div class="line">IRandomAccessStream</div><div class="line">IRestrictedErrorInfo</div><div class="line">IWeakReference</div><div class="line">IWeakReferenceSource</div><div class="line">MetaDataGetDispenser</div><div class="line">RoActivateInstance</div><div class="line">RoFreeParameterizedTypeExtra</div><div class="line">RoGetActivatableClassRegistration</div><div class="line">RoGetActivationFactory</div><div class="line">RoGetBufferMarshaler</div><div class="line">RoGetErrorReportingFlags</div><div class="line">RoGetMetaDataFile</div><div class="line">RoGetParameterizedTypeInstanceIID</div><div class="line">RoGetServerActivatableClasses</div><div class="line">RoInitialize</div><div class="line">RoOriginateError</div><div class="line">RoOriginateErrorW</div><div class="line">RoParameterizedTypeExtraGetTypeSignature</div><div class="line">RoParseTypeName</div><div class="line">RoRegisterActivationFactories</div><div class="line">RoResolveNamespace</div><div class="line">RoResolveRestrictedErrorInfoReference</div><div class="line">RoRevokeActivationFactories</div><div class="line">RoSetErrorReportingFlags</div><div class="line">RoTransformError</div><div class="line">RoTransformErrorW</div><div class="line">RoUninitialize</div><div class="line">WindowsCompareStringOrdinal</div><div class="line">WindowsConcatString</div><div class="line">WindowsCreateString</div><div class="line">WindowsCreateStringReference</div><div class="line">WindowsDeleteString</div><div class="line">WindowsDeleteStringBuffer</div><div class="line">WindowsDuplicateString</div><div class="line">WindowsGetStringLen</div><div class="line">WindowsGetStringRawBuffer</div><div class="line">WindowsInspectString</div><div class="line">WindowsIsStringEmpty</div><div class="line">WindowsPreallocateStringBuffer</div><div class="line">WindowsPromoteStringBuffer</div><div class="line">WindowsReplaceString</div><div class="line">WindowsStringHasEmbeddedNull</div><div class="line">WindowsSubstring</div><div class="line">WindowsSubstringWithSpecifiedLength</div><div class="line">WindowsTrimStringEnd</div><div class="line">WindowsTrimStringStart</div><div class="line"> </div><div class="line"> </div><div class="line">Build date: 9/9/2011</div></pre></td></tr></table></figure>
 <h1 id="Win32-and-COM-for-Metro-style-apps-user-interface"><a href="#Win32-and-COM-for-Metro-style-apps-user-interface" class="headerlink" title="Win32 and COM for Metro style apps (user interface)"></a>Win32 and COM for Metro style apps (user interface)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div></pre></td><td class="code"><pre><div class="line">[This documentation is preliminary and is subject to change.]</div><div class="line">The following user interface APIs are supported for developing Metro style apps.</div><div class="line">Accessibility</div><div class="line">CLSID_CUIAutomationRegistrar</div><div class="line">IAccessibleEx</div><div class="line">IAnnotationProvider</div><div class="line">IDockProvider</div><div class="line">IExpandCollapseProvider</div><div class="line">IGridItemProvider</div><div class="line">IGridProvider</div><div class="line">IInvokeProvider</div><div class="line">IItemContainerProvider</div><div class="line">ILegacyIAccessibleProvider</div><div class="line">IMultipleViewProvider</div><div class="line">IObjectModelProvider</div><div class="line">IProxyProviderWinEventHandler</div><div class="line">IProxyProviderWinEventSink</div><div class="line">IRangeValueProvider</div><div class="line">IRawElementProviderAdviseEvents</div><div class="line">IRawElementProviderFragment</div><div class="line">IRawElementProviderFragmentRoot</div><div class="line">IRawElementProviderHwndOverride</div><div class="line">IRawElementProviderSimple</div><div class="line">IScrollItemProvider</div><div class="line">IScrollProvider</div><div class="line">ISelectionItemProvider</div><div class="line">ISelectionProvider</div><div class="line">ISpreadsheetItemProvider</div><div class="line">ISpreadsheetProvider</div><div class="line">IStylesProvider</div><div class="line">ISynchronizedInputProvider</div><div class="line">ITableItemProvider</div><div class="line">ITableProvider</div><div class="line">ITextProvider</div><div class="line">ITextProvider2</div><div class="line">ITextRangeProvider</div><div class="line">IToggleProvider</div><div class="line">ITransformProvider</div><div class="line">ITransformProvider2</div><div class="line">IUIAutomationPatternHandler</div><div class="line">IUIAutomationPatternInstance</div><div class="line">IUIAutomationRegistrar</div><div class="line">IValueProvider</div><div class="line">IVirtualizedItemProvider</div><div class="line">IWindowProvider</div><div class="line">UiaClientsAreListening</div><div class="line">UiaDisconnectAllProviders</div><div class="line">UiaDisconnectProvider</div><div class="line">UiaHostProviderFromHwnd</div><div class="line">UiaProviderForNonClient</div><div class="line">UiaProviderFromIAccessible</div><div class="line">UiaRaiseAsyncContentLoadedEvent</div><div class="line">UiaRaiseAutomationEvent</div><div class="line">UiaRaiseAutomationPropertyChangedEvent</div><div class="line">UiaRaiseStructureChangedEvent</div><div class="line">UiaReturnRawElementProvider</div><div class="line">DirectManipulation</div><div class="line">CLSID_DirectManipulationManager</div><div class="line">CLSID_DirectManipulationTilingManager</div><div class="line">IDirectManipulationCompositor</div><div class="line">IDirectManipulationContent</div><div class="line">IDirectManipulationEventHandler</div><div class="line">IDirectManipulationLayer</div><div class="line">IDirectManipulationManager</div><div class="line">IDirectManipulationMotion</div><div class="line">IDirectManipulationMotionEventHandler</div><div class="line">IDirectManipulationRegion</div><div class="line">IDirectManipulationTilingEventHandler</div><div class="line">IDirectManipulationTilingManager</div><div class="line">IDirectManipulationUpdateManager</div><div class="line">Globalization</div><div class="line">CompareStringEx</div><div class="line">CompareStringOrdinal</div><div class="line">EnumCalendarInfoExEx</div><div class="line">EnumDateFormatsExEx</div><div class="line">EnumSystemCodePagesW</div><div class="line">EnumSystemGeoID</div><div class="line">EnumSystemLocalesEx</div><div class="line">EnumTimeFormatsEx</div><div class="line">FindNLSStringEx</div><div class="line">FindStringOrdinal</div><div class="line">GetCalendarInfoEx</div><div class="line">GetCPInfoExW</div><div class="line">GetCurrencyFormatEx</div><div class="line">GetDateFormatEx</div><div class="line">GetDurationFormatEx</div><div class="line">GetGeoInfoW</div><div class="line">GetLocaleInfoEx</div><div class="line">GetNLSVersionEx</div><div class="line">GetNumberFormatEx</div><div class="line">GetStringScripts</div><div class="line">GetStringTypeExW</div><div class="line">GetStringTypeW</div><div class="line">GetSystemDefaultLocaleName</div><div class="line">GetTimeFormatEx</div><div class="line">GetUserDefaultLocaleName</div><div class="line">GetUserGeoID</div><div class="line">IdnToAscii</div><div class="line">IdnToNameprepUnicode</div><div class="line">IdnToUnicode</div><div class="line">IEnumCodePage</div><div class="line">IEnumRfc1766</div><div class="line">IEnumScript</div><div class="line">IMLangConvertCharset</div><div class="line">IMultiLanguage</div><div class="line">IMultiLanguage2</div><div class="line">IsNormalizedString</div><div class="line">IsValidCodePage</div><div class="line">IsValidLocaleName</div><div class="line">LCIDToLocaleName</div><div class="line">LCMapStringEx</div><div class="line">LocaleNameToLCID</div><div class="line">MappingFreePropertyBag</div><div class="line">MappingFreeServices</div><div class="line">MappingGetServices</div><div class="line">MappingRecognizeText</div><div class="line">MultiByteToWideChar</div><div class="line">NormalizeString</div><div class="line">ResolveLocaleName</div><div class="line">VerifyScripts</div><div class="line">WideCharToMultiByte</div><div class="line">Other</div><div class="line">IGetFrameAsyncCompletedHandler</div><div class="line">IGetFrameAsyncOperation</div><div class="line">IGetFrameCountAsyncCompletedHandler</div><div class="line">IGetFrameCountAsyncOperation</div><div class="line">IKeyEventHandler</div><div class="line">Strings</div><div class="line">StringCbCat</div><div class="line">StringCbCatEx</div><div class="line">StringCbCatN</div><div class="line">StringCbCatNEx</div><div class="line">StringCbCopy</div><div class="line">StringCbCopyEx</div><div class="line">StringCbCopyN</div><div class="line">StringCbCopyNEx</div><div class="line">StringCbGets</div><div class="line">StringCbGetsEx</div><div class="line">StringCbLength</div><div class="line">StringCbPrintf_l</div><div class="line">StringCbPrintf_lEx</div><div class="line">StringCbPrintf</div><div class="line">StringCbPrintfEx</div><div class="line">StringCbVPrintf_l</div><div class="line">StringCbVPrintf_lEx</div><div class="line">StringCbVPrintf</div><div class="line">StringCbVPrintfEx</div><div class="line">StringCchCat</div><div class="line">StringCchCatEx</div><div class="line">StringCchCatN</div><div class="line">StringCchCatNEx</div><div class="line">StringCchCopy</div><div class="line">StringCchCopyEx</div><div class="line">StringCchCopyN</div><div class="line">StringCchCopyNEx</div><div class="line">StringCchGets</div><div class="line">StringCchGetsEx</div><div class="line">StringCchLength</div><div class="line">StringCchPrintf_l</div><div class="line">StringCchPrintf_lEx</div><div class="line">StringCchPrintf</div><div class="line">StringCchPrintfEx</div><div class="line">StringCchVPrintf_l</div><div class="line">StringCchVPrintf_lEx</div><div class="line">StringCchVPrintf</div><div class="line">StringCchVPrintfEx</div><div class="line">UnalignedStringCbLengthW</div><div class="line">UnalignedStringCchLengthW</div><div class="line">Text Services Framework</div><div class="line">CLSID_TF_DisplayAttributeMgr</div><div class="line">CLSID_TF_InputProcessorProfiles</div><div class="line">CLSID_TF_ThreadMgr</div><div class="line">IEnumITfCompositionView</div><div class="line">IEnumTfCandidates</div><div class="line">IEnumTfContexts</div><div class="line">IEnumTfContextViews</div><div class="line">IEnumTfDisplayAttributeInfo</div><div class="line">IEnumTfDocumentMgrs</div><div class="line">IEnumTfFunctionProviders</div><div class="line">IEnumTfInputProcessorProfiles</div><div class="line">IEnumTfProperties</div><div class="line">IEnumTfPropertyValue</div><div class="line">IEnumTfRanges</div><div class="line">IEnumTfUIElements</div><div class="line">ITextStoreACP</div><div class="line">ITextStoreACPServices</div><div class="line">ITextStoreACPSink</div><div class="line">ITextStoreAnchor</div><div class="line">ITextStoreAnchorSink</div><div class="line">ITfCandidateList</div><div class="line">ITfCandidateListUIElement</div><div class="line">ITfCandidateListUIElementBehavior</div><div class="line">ITfCandidateString</div><div class="line">ITfCompartment</div><div class="line">ITfCompartmentEventSink</div><div class="line">ITfCompartmentMgr</div><div class="line">ITfComposition</div><div class="line">ITfCompositionSink</div><div class="line">ITfCompositionView</div><div class="line">ITfConfigureSystemKeystrokeFeed</div><div class="line">ITfContextComposition</div><div class="line">ITfContext</div><div class="line">ITfContextOwnerCompositionServices</div><div class="line">ITfContextOwnerCompositionSink</div><div class="line">ITfContextOwnerServices</div><div class="line">ITfContextView</div><div class="line">ITfDisplayAttributeInfo</div><div class="line">ITfDisplayAttributeMgr</div><div class="line">ITfDisplayAttributeNotifySink</div><div class="line">ITfDisplayAttributeProvider</div><div class="line">ITfDocumentMgr</div><div class="line">ITfEditRecord</div><div class="line">ITfFnGetSAPIObject</div><div class="line">ITfFnReconversion</div><div class="line">ITfFunction</div><div class="line">ITfFunctionProvider</div><div class="line">ITfInputProcessorProfileActivationSink</div><div class="line">ITfInputProcessorProfileMgr</div><div class="line">ITfInputScope</div><div class="line">ITfInputScope2</div><div class="line">ITfKeyEventSink</div><div class="line">ITfKeystrokeMgr</div><div class="line">ITfKeyTraceEventSink</div><div class="line">ITfLanguageProfileNotifySink</div><div class="line">ITfPersistentPropertyLoaderACP</div><div class="line">ITfPreservedKeyNotifySink</div><div class="line">ITfProperty</div><div class="line">ITfPropertyStore</div><div class="line">ITfRange</div><div class="line">ITfRangeACP</div><div class="line">ITfRangeBackup</div><div class="line">ITfReadingInformationUIElement</div><div class="line">ITfReadOnlyProperty</div><div class="line">ITfSource</div><div class="line">ITfSourceSingle</div><div class="line">ITfTextEditSink</div><div class="line">ITfThreadMgr</div><div class="line">ITfUIElement</div><div class="line">ITfUIElementMgr</div><div class="line">ITfUIElementSink</div><div class="line">Touch</div><div class="line">RegisterPointerDeviceNotifications</div><div class="line">Windows and Messages</div><div class="line">IActivatedEventHandler</div><div class="line">IDragCompletedEventHandler</div><div class="line">IDragDeltaEventHandler</div><div class="line">IDragStartedEventHandler</div><div class="line">IEventHandler</div><div class="line">IManipulationCompletedEventHandler</div><div class="line">IManipulationDeltaEventHandler</div><div class="line">IManipulationStartedEventHandler</div><div class="line">IMouseButtonEventHandler</div><div class="line">IMouseEventHandler</div><div class="line">IMouseWheelEventHandler</div><div class="line">IPointerEventHandler</div><div class="line">IPositionChangedHandler</div><div class="line">IRoutedEventHandler</div><div class="line">IRoutedPropertyChangedEventHandler</div><div class="line">IScrollEventHandler</div><div class="line">ISelectionChangedEventHandler</div><div class="line">ISizeChangedEventHandler</div><div class="line">IStatusChangedHandler</div><div class="line">ITextChangedEventHandler</div><div class="line">Windows Animation</div><div class="line">CLSID_UIAnimationManager</div><div class="line">CLSID_UIAnimationManager2</div><div class="line">CLSID_UIAnimationTimer</div><div class="line">CLSID_UIAnimationTransitionFactory</div><div class="line">CLSID_UIAnimationTransitionFactory2</div><div class="line">CLSID_UIAnimationTransitionLibrary</div><div class="line">CLSID_UIAnimationTransitionLibrary2</div><div class="line">IUIAnimationInterpolator</div><div class="line">IUIAnimationInterpolator2</div><div class="line">IUIAnimationManager</div><div class="line">IUIAnimationManager2</div><div class="line">IUIAnimationManagerEventHandler</div><div class="line">IUIAnimationPrimitiveInterpolation</div><div class="line">IUIAnimationPriorityComparison</div><div class="line">IUIAnimationPriorityComparison2</div><div class="line">IUIAnimationStoryboard</div><div class="line">IUIAnimationStoryboard2</div><div class="line">IUIAnimationStoryboardEventHandler</div><div class="line">IUIAnimationStoryboardEventHandler2</div><div class="line">IUIAnimationTimer</div><div class="line">IUIAnimationTimerClientEventHandler</div><div class="line">IUIAnimationTimerEventHandler</div><div class="line">IUIAnimationTimerUpdateHandler</div><div class="line">IUIAnimationTransition</div><div class="line">IUIAnimationTransition2</div><div class="line">IUIAnimationTransitionFactory</div><div class="line">IUIAnimationTransitionFactory2</div><div class="line">IUIAnimationTransitionLibrary</div><div class="line">IUIAnimationTransitionLibrary2</div><div class="line">IUIAnimationVariable</div><div class="line">IUIAnimationVariable2</div><div class="line">IUIAnimationVariableChangeHandler</div><div class="line">IUIAnimationVariableChangeHandler2</div><div class="line">IUIAnimationVariableCurveChangeHandler2</div><div class="line">IUIAnimationVariableIntegerChangeHandler</div><div class="line">IUIAnimationVariableIntegerChangeHandler2</div><div class="line">Windows Shell</div><div class="line">ICollectionChangedEventHandler</div><div class="line">IFileItemCountHandler</div><div class="line">IFileItemDocumentPropertiesHandler</div><div class="line">IFileItemGetIndexedStateHandler</div><div class="line">IFileItemGetStreamHandler</div><div class="line">IFileItemGetThumbnailHandler</div><div class="line">IFileItemImagePropertiesHandler</div><div class="line">IFileItemMusicPropertiesHandler</div><div class="line">IFileItemRetrievalHandler</div><div class="line">IFileItemRetrievePropertiesHandler</div><div class="line">IFileItemStatusHandler</div><div class="line">IFileItemVideoPropertiesHandler</div><div class="line">IFileItemViewHandler</div><div class="line">IUserImageChangedHandler</div><div class="line">IWriteUserImageCompletedEventHandler</div><div class="line"> </div><div class="line"> </div><div class="line">Build date: 9/9/2011</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2011/12/30/3rdparty-port-to-winrt/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2011/12/30/3rdparty-port-to-winrt/" itemprop="url">
-                  第三方库在WinRT下的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2011-12-30T00:00:00+08:00">
-                2011-12-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2011/12/30/3rdparty-port-to-winrt/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2011/12/30/3rdparty-port-to-winrt/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>本文发表时Win8和VS2011还没正式发布，处于Developer Preview版本，之后的情况可能不是这样了</p>
-</blockquote>
-<p>很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？  </p>
-<h1 id="推荐的方法："><a href="#推荐的方法：" class="headerlink" title="推荐的方法："></a>推荐的方法：</h1><ul>
-<li>1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接在Metro style apps中使用，用起来和Win32下一摸一样</li>
-<li>2、<strong>这个步骤是必须的：</strong>[<a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230262(v=VS.85).aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/windows/apps/br230262(v=VS.85).aspx</a> Validating your package on your local machine]，你的应用必须通过了”Windows App Certification Kit”里的“Validate Metro style App”，你的第三方库使用才算是正常的</li>
-</ul>
-<h1 id="不推荐的方法"><a href="#不推荐的方法" class="headerlink" title="不推荐的方法"></a>不推荐的方法</h1><p>把.c文件移植成.cpp</p>
-<h1 id="可能存在的疑问："><a href="#可能存在的疑问：" class="headerlink" title="可能存在的疑问："></a>可能存在的疑问：</h1><ul>
-<li>1、VS2011不能新建Win32工程<br>Answer：  </li>
-</ul>
-<p>你用的是系统自带的Express版本，这个是没有的，要用完整版，从这里可以下载到：  </p>
-<p><a href="http://www.microsoft.com/download/en/details.aspx?id=27538" target="_blank" rel="external">Microsoft® Visual Studio® 11 Developer Preview (ISO)</a></p>
-<ul>
-<li>2、认证不通过<br>Answer:  </li>
-</ul>
-<p>照着指引改吧，第三方库写的不好的话，改起来就会很痛苦；或者你等待Win8普及后第三方库作者更新代码。</p>
-
           
         
       
@@ -1507,158 +1637,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2011/12/01/shenzhen-gongjijin/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2011/12/01/shenzhen-gongjijin/" itemprop="url">
-                  深圳公积金提取攻略之租房、异地购房
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2011-12-01T00:00:00+08:00">
-                2011-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2011/12/01/shenzhen-gongjijin/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2011/12/01/shenzhen-gongjijin/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="说在前面"><a href="#说在前面" class="headerlink" title="说在前面"></a>说在前面</h1><p><strong>最准确的信息在<a href="http://szzfgjj.com/" target="_blank" rel="external">深圳住房公积金中心网站</a>，如果本文的说明或解释和公积金网站上的有出入，请以公积金中心网站为准。</strong>  </p>
-<p>网站的使用就不单独介绍了，官方网站一如既往的烂，要是访问过程中遇到莫名其妙的问题，大家要有点耐性。  </p>
-<p>和提取相关的指南其实应该是大家最关心的，本文其实就是对指南的一个“取后感”。  </p>
-<p>指南在这里：<a href="http://szzfgjj.com/tiqu/index.htm" target="_blank" rel="external">深圳公积金-网上办事-提取指南</a></p>
-<h1 id="租房提取"><a href="#租房提取" class="headerlink" title="租房提取"></a>租房提取</h1><p>官方指南：<a href="http://szzfgjj.com/tiqu/1261.htm" target="_blank" rel="external">支付自住住房租金提取业务办理指南（试行）</a></p>
-<p><strong>我的心得：</strong>  </p>
-<p>0、租房提取可以选择一个你自己最方便的银行进行，当然要是你的公积金银行卡的所属银行  </p>
-<p>1、租房提取一年可以提取两次，可以累积提取，暂时不缺钱的话可以以后一起提取  </p>
-<p>2、提取需要网上预约，先到<a href="https://nbp.szzfgjj.com/nbp/pri.jsp" target="_blank" rel="external">网上登录</a>，然后修改下网上的登录密码(这个相当于是激活网上账户，进行过一次就可以了)，然后进行预约  </p>
-<p>3、提取需要事先激活公积金银行卡，最好事先到银行激活，取公积金的窗口是独立的，和激活银行卡的窗口不是同一个  </p>
-<p>4、<strong>需要带的材料：</strong>身份证、公积金银行卡  </p>
-<p>5、到预约的银行进行提取，5分钟之内搞定  </p>
-<h1 id="异地购房提取"><a href="#异地购房提取" class="headerlink" title="异地购房提取"></a>异地购房提取</h1><p>官方指南：<a href="http://www.szzfgjj.com/tiqu/1259.htm" target="_blank" rel="external">异地购房提取业务办理指南（试行）</a></p>
-<p><strong>我的心得：</strong>  </p>
-<p>0、异地购房提取必须到公积金中心办事大厅才能提取，在福田，具体地址：<a href="http://www.szzfgjj.com/tzgg/408.htm" target="_blank" rel="external">深圳市住房公积金管理中心交通路线</a>  </p>
-<p>1、异地购房提取只能提取一次，购房后两年内有效，以契税上的日期为准，如果你想取的最多就在契税上的日期推后两年的时间点<strong>之前</strong>去提取（会保留一个月的钱在卡里）  </p>
-<p>2、提取需要网上预约，先到<a href="https://nbp.szzfgjj.com/nbp/pri.jsp" target="_blank" rel="external">网上登录</a>，然后修改下网上的登录密码(这个相当于是激活网上账户，进行过一次就可以了)，然后进行预约  </p>
-<p>3、提取需要事先激活公积金银行卡，公积金办事大厅应该是不能激活银行卡的，所以要实现去银行激活  </p>
-<p>4、<strong>没有按照配偶和未成年子女份额提取的（我的理解就是只提取自己的）需要带的材料：</strong>身份证、公积金银行卡、房产证、契税发票（复印什么的看自己方不方便，办事大厅那里也会帮你复印），每个家庭的情况不一样，需要按XXX份额提取的话，最好看下<a href="http://www.szzfgjj.com/tiqu/1259.htm" target="_blank" rel="external">官方指南</a>  </p>
-<p>5、到福田的公积金办事大厅提取，20分钟之内搞定  </p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>我本来也是很没信心能从ZF手中把自己的钱给取了，但是情况所逼，再烂的网站，再难懂的条例我也要看下去，看明白，然后把自己的钱给取了。  </p>
-<p>事实证明：虽然麻烦点，但还是可以做到的。</p>
-<p>我的租房提取是在招商银行进行的，招行的MM很热心，但是对业务不熟，导致效率很低，有问题她们也说的不是很清楚；  </p>
-<p>异地购房提取是在公积金中心办事大厅提取的，服务态度挺好，小伙子对业务很熟悉，问的问题都能马上解答清楚，稍微有点欣慰。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1699,7 +1682,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">140</span>
+              <span class="site-state-item-count">141</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1709,7 +1692,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">175</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

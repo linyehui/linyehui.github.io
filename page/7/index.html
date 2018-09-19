@@ -248,6 +248,180 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/05/15/mediarecorder-start-failed-19/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/05/15/mediarecorder-start-failed-19/" itemprop="url">
+                  MediaRecorder.start failed: -19
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-05-15T00:00:00+08:00">
+                2014-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/05/15/mediarecorder-start-failed-19/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/05/15/mediarecorder-start-failed-19/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S下代码运行正常，但是在Nexux S下会直接异常退出，log如下：</p>
+<blockquote>
+<p>05-15 16:22:21.631: E/MediaRecorder(9265): start failed: -19<br>05-15 16:22:21.635: W/System.err(9265): java.lang.RuntimeException: start failed.<br>05-15 16:22:21.639: W/System.err(9265):     at android.media.MediaRecorder.start(Native Method)</p>
+</blockquote>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><h3 id="去掉对VideoFrameRate的设置："><a href="#去掉对VideoFrameRate的设置：" class="headerlink" title="去掉对VideoFrameRate的设置："></a>去掉对VideoFrameRate的设置：</h3><blockquote>
+<p>mediaRecorder.setVideoFrameRate(24);<br>或者<br>profile.videoFrameRate = Math.min(24);</p>
+</blockquote>
+<p><strong>参考这个</strong>：<a href="http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19" target="_blank" rel="external">Mediarecorder start failed -19</a></p>
+<h3 id="不过我这还遇到了比其他网友更奇怪的问题："><a href="#不过我这还遇到了比其他网友更奇怪的问题：" class="headerlink" title="不过我这还遇到了比其他网友更奇怪的问题："></a>不过我这还遇到了比其他网友更奇怪的问题：</h3><p>直接使用MediaRecorer的set方法会异常退出，但是get CamcorderProfile后进行相应的修改就能正常运行</p>
+<p>下面这两份代码的视频和音频格式参数都是一样的，但是上面这种写法会导致异常退出：</p>
+<blockquote>
+<p>05-15 16:22:21.631: E/MediaRecorder(9265): start failed: -19<br>05-15 16:22:21.635: W/System.err(9265): java.lang.RuntimeException: start failed.<br>05-15 16:22:21.639: W/System.err(9265):     at android.media.MediaRecorder.start(Native Method)</p>
+</blockquote>
+<h4 id="失败"><a href="#失败" class="headerlink" title="失败"></a>失败</h4><pre><code>// 失败 -19 异常退出
+CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
+mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+//mediaRecorder.setVideoFrameRate(24);
+mediaRecorder.setVideoEncodingBitRate(1000 * 1024);
+mediaRecorder.setAudioEncodingBitRate(42 * 1024);
+mediaRecorder.setAudioSamplingRate(44100);
+mediaRecorder.setAudioChannels(2);
+mediaRecorder.setVideoSize(640, 480);
+</code></pre><h4 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h4><pre><code>// 成功
+CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);            
+profile.fileFormat = MediaRecorder.OutputFormat.MPEG_4;
+profile.videoCodec = MediaRecorder.VideoEncoder.H264;
+profile.audioCodec = MediaRecorder.AudioEncoder.AAC;
+
+// 设置videoFrameRate会导致Nexus S下异常退出-19 @linyehui
+//profile.videoFrameRate = 24;
+profile.videoBitRate = 1000 * 1024;
+profile.audioBitRate = 42 * 1024;
+profile.audioSampleRate = 44100;
+profile.audioChannels = 2;        
+
+mediaRecorder.setProfile(profile);
+mediaRecorder.setVideoSize(640, 480);
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>会导致MediaRecorder start时-19异常退出，主要有两个原因：</p>
+<ol>
+<li><p>mediaRecorder.setVideoSize设置的大小硬件不支持<br><strong>解决方案</strong>：<br>先用getSupportedPreviewSizes获取硬件支持的分辨率再使用</p>
+</li>
+<li><p>mediaRecorder.setVideoFrameRate设置的参数硬件不支持<br><strong>解决方案</strong>：<br>暂时没找到好的办法，我的方法是先不用<br>（应该有方法可以获取硬件支持的这个信息，然后根据硬件支持的参数来设置就可以了）</p>
+</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://stackoverflow.com/questions/9271349/error-when-using-camera-on-android-4-nexus-s" target="_blank" rel="external">Error when Using Camera on Android 4/Nexus s</a>  </p>
+<p><a href="http://stackoverflow.com/questions/10496969/android-mediarecorder-start-failed-19" target="_blank" rel="external">Android MediaRecorder - “start failed: -19”</a>  </p>
+<p><a href="http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19" target="_blank" rel="external">Mediarecorder start failed -19</a>  </p>
+<p><a href="http://blog.csdn.net/netwalk/article/details/17686993" target="_blank" rel="external">Error处理： android.media.MediaRecorder.start(Native Method) 报错：start failed: -19</a>  </p>
+<p>– End –</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/05/09/keystone-habits/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1622,142 +1796,6 @@ mediaRecorder.setOrientationHint(90);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/01/20/qrcode-launch-app-or-download-app/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/01/20/qrcode-launch-app-or-download-app/" itemprop="url">
-                  使用二维码启动应用或下载应用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-01-20T00:00:00+08:00">
-                2014-01-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/01/20/qrcode-launch-app-or-download-app/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/20/qrcode-launch-app-or-download-app/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h4><p>用手机拍下二维码，调用起应用，如果应用没有安装就提示下载应用</p>
-<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p>手机淘宝就是个现成的例子</p>
-<p>1、手机淘宝的原始二维码链接：<a href="http://ma.taobao.com/311fY" target="_blank" rel="external">http://ma.taobao.com/311fY</a>  </p>
-<p>2、跳转后：<a href="http://h5.m.taobao.com/1212/express-pcqr.html?_qr=http%3A%2F%2Fma.taobao.com%2F311fY" target="_blank" rel="external">http://h5.m.taobao.com/1212/express-pcqr.html?_qr=http%3A%2F%2Fma.taobao.com%2F311fY</a>  </p>
-<p>3、查看这个页面的代码你能直接发现实现的原理</p>
-<pre><code>&lt;!DOCTYPE HTML&gt; &lt;html&gt; &lt;head&gt; &lt;meta charset=&quot;utf-8&quot;/&gt; &lt;meta content=&quot;yes&quot; name=&quot;apple-mobile-web-app-capable&quot;/&gt; &lt;meta content=&quot;yes&quot; name=&quot;apple-touch-fullscreen&quot;/&gt; &lt;meta content=&quot;telephone=no,email=no&quot; name=&quot;format-detection&quot;/&gt; &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;favicon.png&quot;/&gt; &lt;link rel=&quot;Shortcut Icon&quot; href=&quot;favicon.png&quot; type=&quot;image/x-icon&quot;/&gt; &lt;title&gt;手机淘宝购物送刮免单&lt;/title&gt; &lt;/head&gt; &lt;body&gt;&lt;script type=&quot;text/javascript&quot;&gt;
-with(document)with(body)with(insertBefore(createElement(&quot;script&quot;),firstChild))setAttribute(&quot;exparams&quot;,&quot;req_url=http%3a%2f%2fh5%2em%2etaobao%2ecom%2f1212%2fexpress%2dpcqr%2ehtml&amp;amp;category=&amp;amp;userid=&amp;amp;b2c_orid=&amp;amp;b2c_auction=&amp;amp;at_isb=&amp;amp;atp_isdpp=&amp;amp;at_ssid=&amp;amp;bbid=&amp;amp;aplus&amp;amp;at_cart=&amp;amp;at_udid=&quot;,id=&quot;tb-beacon-aplus&quot;,src=(location&gt;&quot;https&quot;?&quot;//s&quot;:&quot;//a&quot;)+&quot;.tbcdn.cn/s/aplus_wap.js&quot;)
-&lt;/script&gt;
- &lt;script src=&quot;http://g.tbcdn.cn/mtb/lib-smartbanner/0.3.1/function.js&quot;&gt;&lt;/script&gt; &lt;script src=&quot;http://g.tbcdn.cn/mtb/lib-httpurl/1.0.0/httpurl.js&quot;&gt;&lt;/script&gt; &lt;script&gt;var smartbanner=lib.smartbanner;var HttpUrl=lib.httpurl();var redirect=&quot;http://m.taobao.com/go/act/scrapoutfree.html&quot;;var param=new HttpUrl(location.href);var ttid=param.search&amp;&amp;param.search.ttid;if(smartbanner.ttidInTaobaoApp()||smartbanner.uaInTaobaoApp()){if(ttid){redirect+=&quot;?ttid=&quot;;redirect+=ttid}location.href=redirect}else{redirect=&quot;taobaowebview://m.taobao.com/?weburl=&quot;+encodeURIComponent(redirect);var sbInstance=smartbanner.getInstance({href:redirect,url:&quot;http://m.taobao.com/go/act/other/1212pcwuliuerweima.html&quot;,crossplat:true});sbInstance&amp;&amp;sbInstance.install()};&lt;/script&gt; &lt;/body&gt; &lt;/html&gt;
-</code></pre><p><strong>核心的JS文件是：<a href="http://g.tbcdn.cn/mtb/lib-smartbanner/0.3.1/function.js" target="_blank" rel="external">http://g.tbcdn.cn/mtb/lib-smartbanner/0.3.1/function.js</a>  </strong></p>
-<pre><code>!function(a,b){function c(){var a={},b=location.search.slice(1).split(&quot;&amp;&quot;);if(b[0].length)for(var c=0;c&lt;b.length;c++){var d=b[c].split(&quot;=&quot;);a[d[0]]=d[1]}return a}function d(a){a&amp;&amp;a.apuri&amp;&amp;(a.ap_uri=a.apuri,delete a.apuri);var b=a||{},c=g.getElementById(&quot;buried&quot;);ttid=c&amp;&amp;c.value,href=location.href.toString(),ttid&amp;&amp;-1==href.indexOf(&quot;ttid&quot;)&amp;&amp;(href.indexOf(&quot;?&quot;)&gt;-1?href=href.replace(&quot;?&quot;,&quot;?ttid=&quot;+ttid):href.indexOf(&quot;#&quot;)&gt;-1?href=href.replace(&quot;#&quot;,&quot;?ttid=&quot;+ttid+&quot;#&quot;):href+=&quot;?ttid=&quot;+ttid),b.ap_ref=encodeURIComponent(href),h&amp;&amp;h.length&gt;1&amp;&amp;(b.ap_cna=h[1]);var d=[];for(var e in b)d.push(e+&quot;=&quot;+encodeURIComponent(b[e]));var f=g.createElement(&quot;script&quot;);f.src=&quot;http://log.m.taobao.com/js.do?&quot;+d.join(&quot;&amp;&quot;).replace(/%20/g,&quot;+&quot;),g.body.appendChild(f)}function e(){var a=c(),b=a.ttid,d=/.+@taobao_(iphone|android|apad|ipad)_.+/i;return b=b?decodeURIComponent(b):&quot;&quot;,d.test(b)}function f(){var a=navigator.userAgent;return null!=a.match(/WindVane/i)?!0:!1}var g=a.document,h=g.cookie.match(/(?:^|\s)cna=([^;]+)(?:;|$)/),i=g.createElement(&quot;frame&quot;),j=function(a){var b=this,c=navigator.standalone,d=navigator.userAgent;return null!=d.match(/iPhone|iPod|iPad/i)?(this.platform=&quot;ios&quot;,this.isIpad=null!=d.match(/iPad/i)):null!=d.match(/Android/i)?null!=d.match(/Mobile/i)&amp;&amp;(this.platform=&quot;android&quot;,this.isChrome=null!=d.match(/Chrome/i)&amp;&amp;null==d.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i)):null!=d.match(/Linux/i)&amp;&amp;(this.platform=&quot;android&quot;),!this.platform||c?(this.invaliable=!0,null):(this.init(a)&amp;&amp;(this.create(),window.onblur=function(){clearTimeout(b.timeload),b.timeload=null}),this)};j.prototype={constructor:j,init:function(a){var b=this.options=a,d=b.isInstance||function(){return f()||e()};if(d())return this.invaliable=!0,null;a.version||(a.version=&quot;v1&quot;),this.cover=b.cover||!1,this.isDownload=b.download||!1,this.timeout=b.timeout||600;var h=b.from||&quot;h5&quot;,i=b.crossplat||!1;if(this.bannerUrl=&quot;ios&quot;!=this.platform||i?b.url||&quot;http://m.taobao.com/channel/act/sale/tbdl1.html&quot;:b.appstoreUrl||(this.isIpad?&quot;https://itunes.apple.com/app/id438865278&quot;:&quot;http://itunes.apple.com/cn/app/id387682726?mt=8&quot;),b.href){var j=b.href,k=c(),l=g.getElementById(&quot;buried&quot;),m=k.ttid||l&amp;&amp;l.value,n=k.sprefer,o=k.ali_trackid,p=location.href;p=-1!=p.indexOf(&quot;?&quot;)?p.split(&quot;?&quot;)[0]:p,p=-1!=p.indexOf(&quot;#&quot;)?p.split(&quot;#&quot;)[0]:p;var q={from:h,url:encodeURIComponent(p)},r=b.point;if(r)for(var s in r)q[s]=r[s];m&amp;&amp;(q.ttid=m),n&amp;&amp;(q.sprefer=n),o&amp;&amp;(q.ali_trackid=o),q.ap_uri=&quot;&quot;,q=encodeURIComponent(JSON.stringify(q));var t,u=j.indexOf(&quot;#&quot;);if(-1!=u&amp;&amp;(t=j.slice(u),j=j.replace(t,&quot;&quot;)),-1==j.indexOf(&quot;?&quot;)?j+=&quot;?&quot;:j.indexOf(&quot;?&quot;)!=j.length-1&amp;&amp;(j+=&quot;&amp;&quot;),j+=&quot;point=&quot;+q+(t?t:&quot;&quot;),j=-1!=j.indexOf(&quot;://&quot;)?j:&quot;taobao://&quot;+j,this.isChrome){var v=j.split(&quot;://&quot;),w=v[0],x=v[1],y=b.package||&quot;com.taobao.taobao&quot;;j=&quot;intent://&quot;+x+&quot;#Intent;scheme=&quot;+w+&quot;;package=&quot;+y+&quot;;end&quot;}this.paramUrl=j}return!0},reset:function(a){this.iClose||(this.init(a),this.resetHtml&amp;&amp;this.resetHtml(a))},create:function(){this.iClose||(i.parentNode||(i.setAttribute(&quot;id&quot;,&quot;J_smartFrame&quot;),i.style.cssText=&quot;display:none&quot;,g.body.appendChild(i)),this.frame=i)},download:function(b){var c=Date.now();(!b||c-b&lt;this.timeout+200)&amp;&amp;(this.cover?a.location.replace(this.bannerUrl):a.location.href=this.bannerUrl)},redirect:function(b){var c=this.options&amp;&amp;this.options.version,e=this.frame,f=b?&quot;click_sb_&quot;+c+&quot;_manual&quot;:&quot;click_sb_&quot;+c+&quot;_auto&quot;;this.paramUrl&amp;&amp;(d({ap_uri:f}),this.paramUrl=this.paramUrl.replace(&quot;%22ap_uri%22%3A%22%22&quot;,encodeURIComponent(&apos;&quot;ap_uri&quot;:&quot;&apos;+f+&apos;&quot;&apos;)),this.isChrome?a.location.href=this.paramUrl:e&amp;&amp;e.setAttribute(&quot;src&quot;,this.paramUrl))},install:function(a){var b=this,c=Date.now();b.isDownload||(b.timeload=setTimeout(function(){b.download(c)},b.timeout)),b.redirect(a)}},b.smartbanner=function(a){var c=a.type,d=b.smartbanner.BannerUI,e=b.smartbanner.PopUI;if(&quot;banner&quot;!==c&amp;&amp;c){if(&quot;pop&quot;===c){if(e)return new e(a)}else if(&quot;func&quot;===c)return b.smartbanner.getInstance(a)}else if(d)return new d(a)},b.smartbanner.getInstance=function(a,b){b||(b=Object.create({}));for(var c in j.prototype)b[c]=j.prototype[c];return j.call(b,a)},b.smartbanner.aplus=d,b.smartbanner.getParam=c,b.smartbanner.ttidInTaobaoApp=e,b.smartbanner.uaInTaobaoApp=f}(window,window.lib||(window.lib={}));
-</code></pre><p>看了下，github上有这个库：<br><a href="https://github.com/jasny/jquery.smartbanner" target="_blank" rel="external">jquery.smartbanner</a></p>
-<p>有现成的方案可以参考真好 :)</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1803,7 +1841,7 @@ with(document)with(body)with(insertBefore(createElement(&quot;script&quot;),firs
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">141</span>
+              <span class="site-state-item-count">142</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1813,7 +1851,7 @@ with(document)with(body)with(insertBefore(createElement(&quot;script&quot;),firs
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">176</span>
+                <span class="site-state-item-count">177</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1873,7 +1911,7 @@ with(document)with(body)with(insertBefore(createElement(&quot;script&quot;),firs
         <div class="copyright" >
   
   &copy;  2010 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-wifi"></i>
   </span>

@@ -248,7 +248,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/18/sdk-manager-crash/">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/27/ios-provisioning-profiles/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="linyehui">
@@ -273,8 +273,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/03/18/sdk-manager-crash/" itemprop="url">
-                  Windows下的SDK Manager.exe闪退
+                <a class="post-title-link" href="/2015/03/27/ios-provisioning-profiles/" itemprop="url">
+                  iOS Provisioning Profiles
                 </a>
               
             
@@ -288,8 +288,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T00:00:00+08:00">
-                2015-03-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-27T00:00:00+08:00">
+                2015-03-27
               </time>
             
 
@@ -304,8 +304,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/03/18/sdk-manager-crash/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/18/sdk-manager-crash/" itemprop="commentCount"></span>
+                <a href="/2015/03/27/ios-provisioning-profiles/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/27/ios-provisioning-profiles/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -333,24 +333,31 @@
       
         
           
-            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>双击SDK Manager.exe，闪退；  </p>
-<p>网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径</p>
-<h3 id="问题根源"><a href="#问题根源" class="headerlink" title="问题根源"></a>问题根源</h3><p>问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径  </p>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">rem Check we have a valid Java.exe in the path.</span></div><div class="line"><span class="built_in">set</span> java_exe=</div><div class="line"><span class="keyword">call</span> lib\find_java.bat</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> java_exe <span class="keyword">goto</span> :EOF</div></pre></td></tr></table></figure>
-<p>其实问题最终的根源在于find_java.bat中调用的find_java.exe没有返回正确的路径</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="简单粗暴的解决方案"><a href="#简单粗暴的解决方案" class="headerlink" title="简单粗暴的解决方案"></a>简单粗暴的解决方案</h3><ul>
-<li><p>简单的改法就是修改Android.bat中的java_exe路径，直接写死；  </p>
+            <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。</p>
+<h2 id="解决方案-一切重头再来"><a href="#解决方案-一切重头再来" class="headerlink" title="解决方案:一切重头再来"></a>解决方案:一切重头再来</h2><p>重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是：</p>
+<h3 id="如何清除本地的证书信息"><a href="#如何清除本地的证书信息" class="headerlink" title="如何清除本地的证书信息"></a>如何清除本地的证书信息</h3><ol>
+<li>打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书</li>
+<li>打开XCode，Performance,Account,删除之前的登录信息，重新登录开发者账号</li>
+<li>删除本地的证书，服务器上配置的iOS Provisioning Profiles (Development)其实也是可以删除的，不删除也没问题，因为使用XCode重新申请证书的话，会自动把老的配置置为无效<br><img src="/media/files/2015/03/27/12_revoke_certificate_2_2x.png" alt="证书"></li>
+</ol>
+<p>做了上面的事情，你就可以安装各种教程，重新申请下证书了，这时你应该已经可以成功了。  </p>
+<p>参考：<a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW26" target="_blank" rel="external">Maintaining Your Signing Identities and Certificates</a><br><a href="http://www.cocoachina.com/bbs/read.php?tid=256724" target="_blank" rel="external">Valid signing identity not found（有关真机调试）</a>  </p>
+<p>这里有一点需要特别说的是：</p>
+<h3 id="No-signing-identity-found-不影响真机调试"><a href="#No-signing-identity-found-不影响真机调试" class="headerlink" title="No signing identity found 不影响真机调试"></a>No signing identity found 不影响真机调试</h3><p>如果你已经重新来过了，而且Build Setting-》Code Signing-》Provisioning Profiles已经有了正确的配置文件了，那么这个时候你看到  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No signing identity found</div></pre></td></tr></table></figure>
+<p>这个提示是可以忽略的，已经可以真机调试了。</p>
+<h2 id="Certificates-Identifiers-amp-Profiles"><a href="#Certificates-Identifiers-amp-Profiles" class="headerlink" title="Certificates, Identifiers &amp; Profiles"></a>Certificates, Identifiers &amp; Profiles</h2><p>Provisioning Profiles 到底是干什么的？  </p>
+<p>简单说，这个配置文件做的事情就是校验调试流程的三个主体的合法性：苹果开发者，XCode使用者，iPhone使用者。</p>
+<p>所以在developer.apple.com后台生成Provisioning Profiles的时候，你需要分别选择：</p>
+<ol>
+<li><p>开发者的证书（手动生成的时候是需要本地调用钥匙串来生成秘钥的）  </p>
 </li>
-<li><p>当然这是个非常粗暴的解决方案，方案的风险在于：下次你复制这个目录到别的电脑上使用的时候，这里设置的路径需要重新设置。</p>
+<li><p>App ID，应用的名称，可以使用通配符  </p>
 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set java_exe=C:\Program Files\Java\jdk1.7.0_40\bin\java.exe</div></pre></td></tr></table></figure>
-<h3 id="正确的解决方案"><a href="#正确的解决方案" class="headerlink" title="正确的解决方案"></a>正确的解决方案</h3><p>其实这个更简单，在系统环境变量中，添加一个JAVA_HOME的变量定义  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME</div><div class="line">C:\Program Files\Java\jdk1.7.0_40</div></pre></td></tr></table></figure>
-<h4 id="验证的方法"><a href="#验证的方法" class="headerlink" title="验证的方法"></a>验证的方法</h4><p>直接调用下find_java.exe看看能否返回正确的路径。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/puma004/article/details/11392271" target="_blank" rel="external">64位win7下Android SDK Manager闪退的解决方法</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_6e1ad0cf01013v9u.html" target="_blank" rel="external">解决64位Win7下的android sdk manager一闪而过的问题</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_8a2d5e270101ad3q.html" target="_blank" rel="external">安装Android SDK时，点击SDK Manager.exe闪退</a>  </p>
+<li><p>Deviece ID，设备ID  </p>
+</li>
+</ol>
+<h2 id="我为什么会遇到这个问题"><a href="#我为什么会遇到这个问题" class="headerlink" title="我为什么会遇到这个问题"></a>我为什么会遇到这个问题</h2><p>公司的开发者账号很容易满员，所以我加入了三个开发者账号……</p>
 
           
         
@@ -490,6 +497,147 @@
 <h5 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h5><p>进入js/src/build-android，执行./build.sh -r<br>对比生成的apidermonkey-android中的include文件和cocos2d-js目录下的文件，一致，看来应该是这个版本了</p>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>cocos2d-js-3.1 使用的spidermonkey版本是v28，可以从这里下载到:<br><a href="https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96" target="_blank" rel="external">https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96</a></p>
 <p>进入js/src/build-android目录下执行./build.sh -r后将生成的三个目录覆盖到工程目录就可以调试了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/18/sdk-manager-crash/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/03/18/sdk-manager-crash/" itemprop="url">
+                  Windows下的SDK Manager.exe闪退
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T00:00:00+08:00">
+                2015-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/03/18/sdk-manager-crash/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/18/sdk-manager-crash/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>双击SDK Manager.exe，闪退；  </p>
+<p>网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径</p>
+<h3 id="问题根源"><a href="#问题根源" class="headerlink" title="问题根源"></a>问题根源</h3><p>问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径  </p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">rem Check we have a valid Java.exe in the path.</span></div><div class="line"><span class="built_in">set</span> java_exe=</div><div class="line"><span class="keyword">call</span> lib\find_java.bat</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> java_exe <span class="keyword">goto</span> :EOF</div></pre></td></tr></table></figure>
+<p>其实问题最终的根源在于find_java.bat中调用的find_java.exe没有返回正确的路径</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="简单粗暴的解决方案"><a href="#简单粗暴的解决方案" class="headerlink" title="简单粗暴的解决方案"></a>简单粗暴的解决方案</h3><ul>
+<li><p>简单的改法就是修改Android.bat中的java_exe路径，直接写死；  </p>
+</li>
+<li><p>当然这是个非常粗暴的解决方案，方案的风险在于：下次你复制这个目录到别的电脑上使用的时候，这里设置的路径需要重新设置。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set java_exe=C:\Program Files\Java\jdk1.7.0_40\bin\java.exe</div></pre></td></tr></table></figure>
+<h3 id="正确的解决方案"><a href="#正确的解决方案" class="headerlink" title="正确的解决方案"></a>正确的解决方案</h3><p>其实这个更简单，在系统环境变量中，添加一个JAVA_HOME的变量定义  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME</div><div class="line">C:\Program Files\Java\jdk1.7.0_40</div></pre></td></tr></table></figure>
+<h4 id="验证的方法"><a href="#验证的方法" class="headerlink" title="验证的方法"></a>验证的方法</h4><p>直接调用下find_java.exe看看能否返回正确的路径。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/puma004/article/details/11392271" target="_blank" rel="external">64位win7下Android SDK Manager闪退的解决方法</a>  </p>
+<p><a href="http://blog.sina.com.cn/s/blog_6e1ad0cf01013v9u.html" target="_blank" rel="external">解决64位Win7下的android sdk manager一闪而过的问题</a>  </p>
+<p><a href="http://blog.sina.com.cn/s/blog_8a2d5e270101ad3q.html" target="_blank" rel="external">安装Android SDK时，点击SDK Manager.exe闪退</a>  </p>
 
           
         
@@ -1534,149 +1682,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/10/31/mac-sudo-port-80/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/10/31/mac-sudo-port-80/" itemprop="url">
-                  Mac OS X下的80端口问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-10-31T00:00:00+08:00">
-                2014-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/10/31/mac-sudo-port-80/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/31/mac-sudo-port-80/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>Mac OS X下调试iOS模拟器中的服务端API请求，想通过修改host来使用本地web.py替换远程服务器，为了让手机端的代码不需要修改，需要让web.py跑在80端口.</p>
-<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><blockquote>
-<p>python code.py 80</p>
-</blockquote>
-<p>提示错误如下，但是如果把80改成别的端口就是好的  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">http://0.0.0.0:80/</div><div class="line">Traceback (most recent call last):</div><div class="line">  File &quot;hello.py&quot;, line 15, in &lt;module&gt;</div><div class="line">    app.run()</div><div class="line">  File &quot;/Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg/web/application.py&quot;, line 313, in run</div><div class="line">    return wsgi.runwsgi(self.wsgifunc(*middleware))</div><div class="line">  File &quot;/Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg/web/wsgi.py&quot;, line 54, in runwsgi</div><div class="line">    return httpserver.runsimple(func, validip(listget(sys.argv, 1, &apos;&apos;)))</div><div class="line">  File &quot;/Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg/web/httpserver.py&quot;, line 157, in runsimple</div><div class="line">    server.start()</div><div class="line">  File &quot;/Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg/web/wsgiserver/__init__.py&quot;, line 1753, in start</div><div class="line">    raise socket.error(msg)</div><div class="line">socket.error: No socket could be created</div></pre></td></tr></table></figure>
-<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><h2 id="是不是端口占用的问题？"><a href="#是不是端口占用的问题？" class="headerlink" title="是不是端口占用的问题？"></a>是不是端口占用的问题？</h2><p>用下面的命令查看了下，并没有进程占用80端口啊！  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">MAC下查看端口是否被占用的方法：</div><div class="line"></div><div class="line">方法一：</div><div class="line">//查看80口是否被占用</div><div class="line">sudo lsof -i :80</div><div class="line"></div><div class="line">方法二：</div><div class="line">netstat -anp tcp | grep 80</div><div class="line"></div><div class="line">如下命令可以直接结束占用端口的所有进程：</div><div class="line">lsof -P | grep &apos;:80&apos; | awk &apos;&#123;print $2&#125;&apos; | xargs kill -9</div></pre></td></tr></table></figure>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h4><p><a href="http://www.qinbin.me/mac%E4%B8%8B%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E6%98%AF%E5%90%A6%E8%A2%AB%E5%8D%A0%E7%94%A8/" target="_blank" rel="external">MAC下查看端口是否被占用</a>  </p>
-<p><a href="http://www.teanie.com/how-to-solve-mac-os-port-80-is-already-in-use-problem.html" target="_blank" rel="external">关闭Web共享</a>  </p>
-<h2 id="权限问题！"><a href="#权限问题！" class="headerlink" title="权限问题！"></a>权限问题！</h2><p>找到一篇文章后才知道，原来是类Linux系统下的安全策略设计就是这样的，自己对Linux的使用还是太少了！</p>
-<blockquote>
-<p>Normally only root processes can bind to port 80 (or to any port below 1024).</p>
-</blockquote>
-<h4 id="参考-1"><a href="#参考-1" class="headerlink" title="参考:"></a>参考:</h4><p><a href="http://superuser.com/questions/304206/how-do-i-start-nginx-on-port-80-at-os-x-login" target="_blank" rel="external">How can I open port 80 so a non-root process can bind to it?</a>  </p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>试了下sudo，成功了 囧rz</p>
-<blockquote>
-<p>sudo python code.py 80</p>
-</blockquote>
-<p>我只是为了本地调试，用sudu是最方便的方法，如果是服务器上的话可以尝试<a href="http://superuser.com/questions/304206/how-do-i-start-nginx-on-port-80-at-os-x-login" target="_blank" rel="external">上面那个问答</a>中的方案。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1722,7 +1727,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">141</span>
+              <span class="site-state-item-count">142</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1732,7 +1737,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">176</span>
+                <span class="site-state-item-count">177</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1792,7 +1797,7 @@
         <div class="copyright" >
   
   &copy;  2010 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-wifi"></i>
   </span>

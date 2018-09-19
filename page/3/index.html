@@ -248,6 +248,152 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/12/11/weixin-js-sdk-tips/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/11/weixin-js-sdk-tips/" itemprop="url">
+                  微信JS-SDK联调
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-11T00:00:00+08:00">
+                2015-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/12/11/weixin-js-sdk-tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/11/weixin-js-sdk-tips/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在微信中打开我们的网页，网页能够使用微信提供的JS-SDK，比如使用chooseImage，选择图片等等</p>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="AppID"><a href="#AppID" class="headerlink" title="AppID"></a>AppID</h3><p>要使用公众账号的开发AppID，而不是微信开发平台下的应用AppID</p>
+<h3 id="业务域名和JS接口安全域名"><a href="#业务域名和JS接口安全域名" class="headerlink" title="业务域名和JS接口安全域名"></a>业务域名和JS接口安全域名</h3><p>1、不设置会导致签名失败  </p>
+<p>2、设置方法  </p>
+<p>在微信公众平台的后台，公众设置，功能设置中进行设置，业务域名和JS接口安全域名都是需要设置的  </p>
+<h3 id="签名失败"><a href="#签名失败" class="headerlink" title="签名失败"></a>签名失败</h3><p>遇到签名失败，首先根据微信官方的指引：<a href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html#.E9.99.84.E5.BD.955-.E5.B8.B8.E8.A7.81.E9.94.99.E8.AF.AF.E5.8F.8A.E8.A7.A3.E5.86.B3.E6.96.B9.E6.B3.95" target="_blank" rel="external">《附录5-常见错误及解决方法》</a>，看看能不能解决。</p>
+<h4 id="我自己踩坑之后的理解如下："><a href="#我自己踩坑之后的理解如下：" class="headerlink" title="我自己踩坑之后的理解如下："></a>我自己踩坑之后的理解如下：</h4><p>1、签名用的url要动态获取  </p>
+<blockquote>
+<p>location.href.split(‘#’)[0]</p>
+</blockquote>
+<p>2、appID不要用错了，要用公众平台的开发appID  </p>
+<p>3、怀疑签名算法有问题，可以用微信提供的签名校验网址来确认：<a href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign" target="_blank" rel="external">微信 JS 接口签名校验工具</a>  </p>
+<p>4、文档中说了“出于安全考虑，开发者必须在服务器端实现签名的逻辑。”，这个不是强制的，在前端静态页面直接获取到token后再去获取ticket，然后直接生成签名，也是可以的。    </p>
+<p>当然这样做并不安全，只是说可以这样子，微信并没有做代码级的限制。  </p>
+<p>5、JS-SDK的调通跟公众平台后台的”开发-》基本配置-》服务器配置(未启用)”没有关系。    </p>
+<h2 id="参考的材料"><a href="#参考的材料" class="headerlink" title="参考的材料"></a>参考的材料</h2><p><a href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html" target="_blank" rel="external">微信JS-SDK说明文档</a>  </p>
+<p><a href="http://pigerla.com/wechat-api/2015-06-23/using-js-sdk-of-WeChat/" target="_blank" rel="external">如何接入微信公众平台（nodejs）</a>  </p>
+<p><a href="http://m.oschina.net/blog/384705" target="_blank" rel="external">微信JS-SDK分享功能开发实例</a>  </p>
+<p><a href="http://www.smallerpig.com/889.html" target="_blank" rel="external">微信JSSDK Python版本讲解</a>  </p>
+<p><a href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#JSSDK.E4.BD.BF.E7.94.A8.E6.AD.A5.E9.AA.A4" target="_blank" rel="external">微信JS-SDK 接入步骤</a>  </p>
+<p><a href="http://www.cocoachina.com/webapp/20150708/12465.html" target="_blank" rel="external">基于node.js的微信JS-SDK简单应用</a>  </p>
+<p><a href="http://203.195.235.76/jssdk/sample.zip" target="_blank" rel="external">微信官方提供的sample</a>  </p>
+<p><a href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign" target="_blank" rel="external">微信 JS 接口签名校验工具</a>  </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/11/05/unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1575,154 +1721,6 @@ this.addChild(widget);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/27/ios-provisioning-profiles/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/27/ios-provisioning-profiles/" itemprop="url">
-                  iOS Provisioning Profiles
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-27T00:00:00+08:00">
-                2015-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/03/27/ios-provisioning-profiles/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/27/ios-provisioning-profiles/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。</p>
-<h2 id="解决方案-一切重头再来"><a href="#解决方案-一切重头再来" class="headerlink" title="解决方案:一切重头再来"></a>解决方案:一切重头再来</h2><p>重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是：</p>
-<h3 id="如何清除本地的证书信息"><a href="#如何清除本地的证书信息" class="headerlink" title="如何清除本地的证书信息"></a>如何清除本地的证书信息</h3><ol>
-<li>打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书</li>
-<li>打开XCode，Performance,Account,删除之前的登录信息，重新登录开发者账号</li>
-<li>删除本地的证书，服务器上配置的iOS Provisioning Profiles (Development)其实也是可以删除的，不删除也没问题，因为使用XCode重新申请证书的话，会自动把老的配置置为无效<br><img src="/media/files/2015/03/27/12_revoke_certificate_2_2x.png" alt="证书"></li>
-</ol>
-<p>做了上面的事情，你就可以安装各种教程，重新申请下证书了，这时你应该已经可以成功了。  </p>
-<p>参考：<a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW26" target="_blank" rel="external">Maintaining Your Signing Identities and Certificates</a><br><a href="http://www.cocoachina.com/bbs/read.php?tid=256724" target="_blank" rel="external">Valid signing identity not found（有关真机调试）</a>  </p>
-<p>这里有一点需要特别说的是：</p>
-<h3 id="No-signing-identity-found-不影响真机调试"><a href="#No-signing-identity-found-不影响真机调试" class="headerlink" title="No signing identity found 不影响真机调试"></a>No signing identity found 不影响真机调试</h3><p>如果你已经重新来过了，而且Build Setting-》Code Signing-》Provisioning Profiles已经有了正确的配置文件了，那么这个时候你看到  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No signing identity found</div></pre></td></tr></table></figure>
-<p>这个提示是可以忽略的，已经可以真机调试了。</p>
-<h2 id="Certificates-Identifiers-amp-Profiles"><a href="#Certificates-Identifiers-amp-Profiles" class="headerlink" title="Certificates, Identifiers &amp; Profiles"></a>Certificates, Identifiers &amp; Profiles</h2><p>Provisioning Profiles 到底是干什么的？  </p>
-<p>简单说，这个配置文件做的事情就是校验调试流程的三个主体的合法性：苹果开发者，XCode使用者，iPhone使用者。</p>
-<p>所以在developer.apple.com后台生成Provisioning Profiles的时候，你需要分别选择：</p>
-<ol>
-<li><p>开发者的证书（手动生成的时候是需要本地调用钥匙串来生成秘钥的）  </p>
-</li>
-<li><p>App ID，应用的名称，可以使用通配符  </p>
-</li>
-<li><p>Deviece ID，设备ID  </p>
-</li>
-</ol>
-<h2 id="我为什么会遇到这个问题"><a href="#我为什么会遇到这个问题" class="headerlink" title="我为什么会遇到这个问题"></a>我为什么会遇到这个问题</h2><p>公司的开发者账号很容易满员，所以我加入了三个开发者账号……</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1768,7 +1766,7 @@ this.addChild(widget);
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">141</span>
+              <span class="site-state-item-count">142</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1778,7 +1776,7 @@ this.addChild(widget);
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">176</span>
+                <span class="site-state-item-count">177</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1838,7 +1836,7 @@ this.addChild(widget);
         <div class="copyright" >
   
   &copy;  2010 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-wifi"></i>
   </span>

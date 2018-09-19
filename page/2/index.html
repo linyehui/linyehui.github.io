@@ -248,6 +248,147 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/09/22/avaudiopcmbuffer-to-cmsamplebufferref/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/22/avaudiopcmbuffer-to-cmsamplebufferref/" itemprop="url">
+                  AVAudioPCMBuffer to CMSampleBufferRef
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-22T00:00:00+08:00">
+                2016-09-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/22/avaudiopcmbuffer-to-cmsamplebufferref/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/22/avaudiopcmbuffer-to-cmsamplebufferref/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>把AVAudioPCMBuffer转换层CMSampleBufferRef，同理也可以从AudioBufferList加上AudioStreamBasicDescription转换成CMSampleBufferRef</p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><p>实现代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (CMSampleBufferRef)createAudioSampleBufferFrom:(AVAudioPCMBuffer *) pcmBuffer &#123;</div><div class="line">	AudioBufferList *audioBufferList = [pcmBuffer mutableAudioBufferList];</div><div class="line">	AudioStreamBasicDescription asbd = *pcmBuffer.format.streamDescription;</div><div class="line"></div><div class="line">	CMSampleBufferRef sampleBuffer = NULL;</div><div class="line">	CMFormatDescriptionRef format = NULL;</div><div class="line"></div><div class="line">	OSStatus error = CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &amp;asbd, 0, NULL, 0, NULL, NULL, &amp;format);</div><div class="line">	if (error != noErr) &#123;</div><div class="line">		return nil;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	CMSampleTimingInfo timing = &#123; CMTimeMake(1, asbd.mSampleRate), kCMTimeZero, kCMTimeInvalid &#125;;</div><div class="line">	error = CMSampleBufferCreate(kCFAllocatorDefault,</div><div class="line">								 NULL, false, NULL, NULL, format,</div><div class="line">								 pcmBuffer.frameLength,</div><div class="line">								 1, &amp;timing, 0, NULL, &amp;sampleBuffer);</div><div class="line">	if (error != noErr) &#123;</div><div class="line">		CFRelease(format);</div><div class="line">		NSLog(@&quot;CMSampleBufferCreate returned error: %d&quot;, (int)error);</div><div class="line">		return nil;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	error = CMSampleBufferSetDataBufferFromAudioBufferList(sampleBuffer, kCFAllocatorDefault, kCFAllocatorDefault, 0, audioBufferList);</div><div class="line">	if (error != noErr) &#123;</div><div class="line">		CFRelease(format);</div><div class="line">		NSLog(@&quot;CMSampleBufferSetDataBufferFromAudioBufferList returned error: %d&quot;, (int)error);</div><div class="line">		return nil;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	CFRelease(format);</div><div class="line">	return sampleBuffer;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="内存释放"><a href="#内存释放" class="headerlink" title="内存释放"></a>内存释放</h2><p>生成的CMSampleBufferRef引用计数为1，记得释放，类似：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CMSampleBufferRef sampleBuffer = [self createAudioSampleBufferFrom:pcmBuffer];</div><div class="line"></div><div class="line">// do somthing with sampleBuffer</div><div class="line"></div><div class="line">CFRelease(sampleBuffer);</div></pre></td></tr></table></figure>
+<h2 id="AudioBufferList"><a href="#AudioBufferList" class="headerlink" title="AudioBufferList"></a>AudioBufferList</h2><p>关于AudioBufferList，需要说的是PCM中的双通道，对应到AudioBufferList就是mNumberBuffers</p>
+<p>假定存在</p>
+<blockquote>
+<p>AudioBufferList *ioData = …<br>AudioStreamBasicDescription asbd = …</p>
+</blockquote>
+<p>如果ioData-&gt;mNumberBuffers为2，那么有以下几个推导：</p>
+<ul>
+<li>1、ioData-&gt;mBuffers[0]有数据外，ioData-&gt;mBuffers[1]也有数据；</li>
+<li>2、跟AudioBufferList对应的asbd-&gt;mChannelsPerFrame == 2</li>
+<li>3、还要补充一点的是，asbd.mChannelsPerFrame == 2的时候，asbd.mBytesPerFrame并不会包含2个channel的数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">asbd.mBytesPerFrame = asbd.mBitsPerChannel/8; // 正确</div><div class="line">asbd.mBytesPerFrame = asbd.mBitsPerChannel/8 * mChannelsPerFrame; // 错误</div></pre></td></tr></table></figure>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://developer.apple.com/reference/coremedia/1669345-cmsamplebuffer?language=objc" target="_blank" rel="external">CMSampleBuffer</a><br><a href="http://blog.csdn.net/wnnvv/article/details/50865201" target="_blank" rel="external">iOS 音频采集 AudioBufferList转CMSampleBufferRef</a><br><a href="https://forums.developer.apple.com/thread/11418" target="_blank" rel="external">CMSampleBufferSetDataBufferFromAudioBufferList returning -12731</a><br><a href="https://www.osstatus.com/search/results?platform=all&amp;framework=all&amp;search=-12737" target="_blank" rel="external">osstatus</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/08/12/build-srs-librtmp-for-ios/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1518,152 +1659,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/12/11/weixin-js-sdk-tips/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/11/weixin-js-sdk-tips/" itemprop="url">
-                  微信JS-SDK联调
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-11T00:00:00+08:00">
-                2015-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/12/11/weixin-js-sdk-tips/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/11/weixin-js-sdk-tips/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在微信中打开我们的网页，网页能够使用微信提供的JS-SDK，比如使用chooseImage，选择图片等等</p>
-<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="AppID"><a href="#AppID" class="headerlink" title="AppID"></a>AppID</h3><p>要使用公众账号的开发AppID，而不是微信开发平台下的应用AppID</p>
-<h3 id="业务域名和JS接口安全域名"><a href="#业务域名和JS接口安全域名" class="headerlink" title="业务域名和JS接口安全域名"></a>业务域名和JS接口安全域名</h3><p>1、不设置会导致签名失败  </p>
-<p>2、设置方法  </p>
-<p>在微信公众平台的后台，公众设置，功能设置中进行设置，业务域名和JS接口安全域名都是需要设置的  </p>
-<h3 id="签名失败"><a href="#签名失败" class="headerlink" title="签名失败"></a>签名失败</h3><p>遇到签名失败，首先根据微信官方的指引：<a href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html#.E9.99.84.E5.BD.955-.E5.B8.B8.E8.A7.81.E9.94.99.E8.AF.AF.E5.8F.8A.E8.A7.A3.E5.86.B3.E6.96.B9.E6.B3.95" target="_blank" rel="external">《附录5-常见错误及解决方法》</a>，看看能不能解决。</p>
-<h4 id="我自己踩坑之后的理解如下："><a href="#我自己踩坑之后的理解如下：" class="headerlink" title="我自己踩坑之后的理解如下："></a>我自己踩坑之后的理解如下：</h4><p>1、签名用的url要动态获取  </p>
-<blockquote>
-<p>location.href.split(‘#’)[0]</p>
-</blockquote>
-<p>2、appID不要用错了，要用公众平台的开发appID  </p>
-<p>3、怀疑签名算法有问题，可以用微信提供的签名校验网址来确认：<a href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign" target="_blank" rel="external">微信 JS 接口签名校验工具</a>  </p>
-<p>4、文档中说了“出于安全考虑，开发者必须在服务器端实现签名的逻辑。”，这个不是强制的，在前端静态页面直接获取到token后再去获取ticket，然后直接生成签名，也是可以的。    </p>
-<p>当然这样做并不安全，只是说可以这样子，微信并没有做代码级的限制。  </p>
-<p>5、JS-SDK的调通跟公众平台后台的”开发-》基本配置-》服务器配置(未启用)”没有关系。    </p>
-<h2 id="参考的材料"><a href="#参考的材料" class="headerlink" title="参考的材料"></a>参考的材料</h2><p><a href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html" target="_blank" rel="external">微信JS-SDK说明文档</a>  </p>
-<p><a href="http://pigerla.com/wechat-api/2015-06-23/using-js-sdk-of-WeChat/" target="_blank" rel="external">如何接入微信公众平台（nodejs）</a>  </p>
-<p><a href="http://m.oschina.net/blog/384705" target="_blank" rel="external">微信JS-SDK分享功能开发实例</a>  </p>
-<p><a href="http://www.smallerpig.com/889.html" target="_blank" rel="external">微信JSSDK Python版本讲解</a>  </p>
-<p><a href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#JSSDK.E4.BD.BF.E7.94.A8.E6.AD.A5.E9.AA.A4" target="_blank" rel="external">微信JS-SDK 接入步骤</a>  </p>
-<p><a href="http://www.cocoachina.com/webapp/20150708/12465.html" target="_blank" rel="external">基于node.js的微信JS-SDK简单应用</a>  </p>
-<p><a href="http://203.195.235.76/jssdk/sample.zip" target="_blank" rel="external">微信官方提供的sample</a>  </p>
-<p><a href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign" target="_blank" rel="external">微信 JS 接口签名校验工具</a>  </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1709,7 +1704,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">141</span>
+              <span class="site-state-item-count">142</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1719,7 +1714,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">176</span>
+                <span class="site-state-item-count">177</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1779,7 +1774,7 @@
         <div class="copyright" >
   
   &copy;  2010 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-wifi"></i>
   </span>

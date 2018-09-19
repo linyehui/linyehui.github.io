@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="win8,winrt,sqlite,port,3rdparty,zlib," />
+  <meta name="keywords" content="win8,winrt,3rdparty,port,sqlite,zlib," />
 
 
 
@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="本文发表时Win8和VS2011还没正式发布，处于Developer Preview版本，之后的情况可能不是这样了
-
-很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？  
-推荐的方法：
-1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接">
+<meta name="description" content="本文发表时Win8和VS2011还没正式发布，处于Developer Preview版本，之后的情况可能不是这样了  很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？   推荐的方法： 1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接">
+<meta name="keywords" content="win8,winrt,3rdparty,port,sqlite,zlib">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第三方库在WinRT下的使用">
 <meta property="og:url" content="http://linyehui.me/2011/12/30/3rdparty-port-to-winrt/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="本文发表时Win8和VS2011还没正式发布，处于Developer Preview版本，之后的情况可能不是这样了
-
-很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？  
-推荐的方法：
-1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接">
+<meta property="og:description" content="本文发表时Win8和VS2011还没正式发布，处于Developer Preview版本，之后的情况可能不是这样了  很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？   推荐的方法： 1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三方库在WinRT下的使用">
-<meta name="twitter:description" content="本文发表时Win8和VS2011还没正式发布，处于Developer Preview版本，之后的情况可能不是这样了
-
-很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？  
-推荐的方法：
-1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接">
+<meta name="twitter:description" content="本文发表时Win8和VS2011还没正式发布，处于Developer Preview版本，之后的情况可能不是这样了  很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？   推荐的方法： 1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接">
 
 
 
@@ -345,14 +335,14 @@
 <p>很多第三方库类似zlib,sqlite都是.c实现的，这些库如何用到WinRT中呢？  </p>
 <h1 id="推荐的方法："><a href="#推荐的方法：" class="headerlink" title="推荐的方法："></a>推荐的方法：</h1><ul>
 <li>1、在VS2011下新建一个Win32 Static lib工程，比如，我自己就是新建了一个叫做“3rdparty”的工程，然后把所有的第三方库添加进去，编译成一个lib，直接在Metro style apps中使用，用起来和Win32下一摸一样</li>
-<li>2、<strong>这个步骤是必须的：</strong>[<a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230262(v=VS.85).aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/windows/apps/br230262(v=VS.85).aspx</a> Validating your package on your local machine]，你的应用必须通过了”Windows App Certification Kit”里的“Validate Metro style App”，你的第三方库使用才算是正常的</li>
+<li>2、<strong>这个步骤是必须的：</strong>[<a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230262(v=VS.85).aspx" target="_blank" rel="noopener">http://msdn.microsoft.com/en-us/library/windows/apps/br230262(v=VS.85).aspx</a> Validating your package on your local machine]，你的应用必须通过了”Windows App Certification Kit”里的“Validate Metro style App”，你的第三方库使用才算是正常的</li>
 </ul>
 <h1 id="不推荐的方法"><a href="#不推荐的方法" class="headerlink" title="不推荐的方法"></a>不推荐的方法</h1><p>把.c文件移植成.cpp</p>
 <h1 id="可能存在的疑问："><a href="#可能存在的疑问：" class="headerlink" title="可能存在的疑问："></a>可能存在的疑问：</h1><ul>
 <li>1、VS2011不能新建Win32工程<br>Answer：  </li>
 </ul>
 <p>你用的是系统自带的Express版本，这个是没有的，要用完整版，从这里可以下载到：  </p>
-<p><a href="http://www.microsoft.com/download/en/details.aspx?id=27538" target="_blank" rel="external">Microsoft® Visual Studio® 11 Developer Preview (ISO)</a></p>
+<p><a href="http://www.microsoft.com/download/en/details.aspx?id=27538" target="_blank" rel="noopener">Microsoft® Visual Studio® 11 Developer Preview (ISO)</a></p>
 <ul>
 <li>2、认证不通过<br>Answer:  </li>
 </ul>
@@ -384,11 +374,11 @@
           
             <a href="/tags/winrt/" rel="tag"># winrt</a>
           
-            <a href="/tags/sqlite/" rel="tag"># sqlite</a>
+            <a href="/tags/3rdparty/" rel="tag"># 3rdparty</a>
           
             <a href="/tags/port/" rel="tag"># port</a>
           
-            <a href="/tags/3rdparty/" rel="tag"># 3rdparty</a>
+            <a href="/tags/sqlite/" rel="tag"># sqlite</a>
           
             <a href="/tags/zlib/" rel="tag"># zlib</a>
           

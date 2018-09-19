@@ -84,37 +84,18 @@
 
 
 
-<meta name="description" content="重现步骤：
-0、开发环境：Windows 7 SP1 64bit, VS2008 SP1
-1、进程中修改了stdout这个句柄的值：调用了prinft和cout都会修改stdout，TRACE不会修改stdout
-2、使用curl请求一个会跳转的url（HTTP 跳转的话curl会收到包含302的response header）
-3、crash
-
-问题影响
-curl版本7.21.7和7.28.1都">
+<meta name="description" content="重现步骤： 0、开发环境：Windows 7 SP1 64bit, VS2008 SP1 1、进程中修改了stdout这个句柄的值：调用了prinft和cout都会修改stdout，TRACE不会修改stdout 2、使用curl请求一个会跳转的url（HTTP 跳转的话curl会收到包含302的response header） 3、crash  问题影响 curl版本7.21.7和7.28.1都">
+<meta name="keywords" content="302,curl,stdout">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stdout引发的curl 302跳转 crash">
 <meta property="og:url" content="http://linyehui.me/2013/12/06/stdout-make-curl-302-crash/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="重现步骤：
-0、开发环境：Windows 7 SP1 64bit, VS2008 SP1
-1、进程中修改了stdout这个句柄的值：调用了prinft和cout都会修改stdout，TRACE不会修改stdout
-2、使用curl请求一个会跳转的url（HTTP 跳转的话curl会收到包含302的response header）
-3、crash
-
-问题影响
-curl版本7.21.7和7.28.1都">
+<meta property="og:description" content="重现步骤： 0、开发环境：Windows 7 SP1 64bit, VS2008 SP1 1、进程中修改了stdout这个句柄的值：调用了prinft和cout都会修改stdout，TRACE不会修改stdout 2、使用curl请求一个会跳转的url（HTTP 跳转的话curl会收到包含302的response header） 3、crash  问题影响 curl版本7.21.7和7.28.1都">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:27:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="stdout引发的curl 302跳转 crash">
-<meta name="twitter:description" content="重现步骤：
-0、开发环境：Windows 7 SP1 64bit, VS2008 SP1
-1、进程中修改了stdout这个句柄的值：调用了prinft和cout都会修改stdout，TRACE不会修改stdout
-2、使用curl请求一个会跳转的url（HTTP 跳转的话curl会收到包含302的response header）
-3、crash
-
-问题影响
-curl版本7.21.7和7.28.1都">
+<meta name="twitter:description" content="重现步骤： 0、开发环境：Windows 7 SP1 64bit, VS2008 SP1 1、进程中修改了stdout这个句柄的值：调用了prinft和cout都会修改stdout，TRACE不会修改stdout 2、使用curl请求一个会跳转的url（HTTP 跳转的话curl会收到包含302的response header） 3、crash  问题影响 curl版本7.21.7和7.28.1都">
 
 
 

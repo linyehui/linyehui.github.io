@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="char is different in iOS and Android!跨平台开发时很容易忽略的非常坑爹的一个区别。
-
-我的需求是实现一个算法，这个算法在iOS和Android下需要保持一致的结果，很自然的我用C++实现了一份跨平台(cross-platform)代码，在两个平台都可以用，但这份代码在iOS和Android下竟然出现了不同的结果，排查了很久后发现了这个不同：
-
-iOS下char">
+<meta name="description" content="char is different in iOS and Android!跨平台开发时很容易忽略的非常坑爹的一个区别。  我的需求是实现一个算法，这个算法在iOS和Android下需要保持一致的结果，很自然的我用C++实现了一份跨平台(cross-platform)代码，在两个平台都可以用，但这份代码在iOS和Android下竟然出现了不同的结果，排查了很久后发现了这个不同：  iOS下char">
+<meta name="keywords" content="ios,android,c++,cross-platform">
 <meta property="og:type" content="article">
 <meta property="og:title" content="char的定义在iOS和Android下是不同的">
 <meta property="og:url" content="http://linyehui.me/2014/04/09/char-is-different-in-ios-and-android/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="char is different in iOS and Android!跨平台开发时很容易忽略的非常坑爹的一个区别。
-
-我的需求是实现一个算法，这个算法在iOS和Android下需要保持一致的结果，很自然的我用C++实现了一份跨平台(cross-platform)代码，在两个平台都可以用，但这份代码在iOS和Android下竟然出现了不同的结果，排查了很久后发现了这个不同：
-
-iOS下char">
+<meta property="og:description" content="char is different in iOS and Android!跨平台开发时很容易忽略的非常坑爹的一个区别。  我的需求是实现一个算法，这个算法在iOS和Android下需要保持一致的结果，很自然的我用C++实现了一份跨平台(cross-platform)代码，在两个平台都可以用，但这份代码在iOS和Android下竟然出现了不同的结果，排查了很久后发现了这个不同：  iOS下char">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2014-07-06T12:28:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="char的定义在iOS和Android下是不同的">
-<meta name="twitter:description" content="char is different in iOS and Android!跨平台开发时很容易忽略的非常坑爹的一个区别。
-
-我的需求是实现一个算法，这个算法在iOS和Android下需要保持一致的结果，很自然的我用C++实现了一份跨平台(cross-platform)代码，在两个平台都可以用，但这份代码在iOS和Android下竟然出现了不同的结果，排查了很久后发现了这个不同：
-
-iOS下char">
+<meta name="twitter:description" content="char is different in iOS and Android!跨平台开发时很容易忽略的非常坑爹的一个区别。  我的需求是实现一个算法，这个算法在iOS和Android下需要保持一致的结果，很自然的我用C++实现了一份跨平台(cross-platform)代码，在两个平台都可以用，但这份代码在iOS和Android下竟然出现了不同的结果，排查了很久后发现了这个不同：  iOS下char">
 
 
 
@@ -355,7 +345,7 @@ iOS下char">
 <p>char cNum = 0x80;<br>float fResult = cNum + 80;</p>
 </blockquote>
 <p><strong>解决方案：</strong><br>声明char类型的变量时，明确写上是signed char还是unsigned char。</p>
-<p>发现了问题之后，再反过来找资料的时候发现了这个，不得不感慨：问题总在解决之后突然就变得简单了：<br><a href="http://stackoverflow.com/questions/21467195/c-compiler-differences-for-ios-and-android-development" target="_blank" rel="external">C Compiler differences for iOS and Android development</a></p>
+<p>发现了问题之后，再反过来找资料的时候发现了这个，不得不感慨：问题总在解决之后突然就变得简单了：<br><a href="http://stackoverflow.com/questions/21467195/c-compiler-differences-for-ios-and-android-development" target="_blank" rel="noopener">C Compiler differences for iOS and Android development</a></p>
 <blockquote>
 <p>In your Android C implementation, char is unsigned, and the conversion from -7 in double to char is producing zero. (The behavior of this conversion when the value cannot be represented in the destination type is not defined by the C standard.)</p>
 <p>In iOS, char is signed, and the conversion of -7 in double to char produces -7.</p>

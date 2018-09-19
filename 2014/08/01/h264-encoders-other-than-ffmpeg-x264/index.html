@@ -84,40 +84,18 @@
 
 
 
-<meta name="description" content="1. 需求描述Android手机拍摄的视频在PC上查看，视觉效果是被旋转了90度的；  
-于是我们想要使用ffmpeg对视频进行90度旋转，并要求保持视频的编码格式：AVC/AAC；  
-解决了这个问题后，还想用ffmpeg来进行更多的视频处理。
-1.1 细化下来的需求点
-视频旋转后大小不变
-视频的编码格式和音频的编码格式不变
-视频旋转后还可以继续在Chrome等HTML5浏览器中直接播放
-
-1.">
+<meta name="description" content="1. 需求描述Android手机拍摄的视频在PC上查看，视觉效果是被旋转了90度的；   于是我们想要使用ffmpeg对视频进行90度旋转，并要求保持视频的编码格式：AVC/AAC；   解决了这个问题后，还想用ffmpeg来进行更多的视频处理。 1.1 细化下来的需求点 视频旋转后大小不变 视频的编码格式和音频的编码格式不变 视频旋转后还可以继续在Chrome等HTML5浏览器中直接播放  1.">
+<meta name="keywords" content="ffmpeg,h264,x264,rotate">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用ffmpeg对H.264/AAC视频进行处理">
+<meta property="og:title" content="使用ffmpeg对H.264&#x2F;AAC视频进行处理">
 <meta property="og:url" content="http://linyehui.me/2014/08/01/h264-encoders-other-than-ffmpeg-x264/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="1. 需求描述Android手机拍摄的视频在PC上查看，视觉效果是被旋转了90度的；  
-于是我们想要使用ffmpeg对视频进行90度旋转，并要求保持视频的编码格式：AVC/AAC；  
-解决了这个问题后，还想用ffmpeg来进行更多的视频处理。
-1.1 细化下来的需求点
-视频旋转后大小不变
-视频的编码格式和音频的编码格式不变
-视频旋转后还可以继续在Chrome等HTML5浏览器中直接播放
-
-1.">
+<meta property="og:description" content="1. 需求描述Android手机拍摄的视频在PC上查看，视觉效果是被旋转了90度的；   于是我们想要使用ffmpeg对视频进行90度旋转，并要求保持视频的编码格式：AVC/AAC；   解决了这个问题后，还想用ffmpeg来进行更多的视频处理。 1.1 细化下来的需求点 视频旋转后大小不变 视频的编码格式和音频的编码格式不变 视频旋转后还可以继续在Chrome等HTML5浏览器中直接播放  1.">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:33:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用ffmpeg对H.264/AAC视频进行处理">
-<meta name="twitter:description" content="1. 需求描述Android手机拍摄的视频在PC上查看，视觉效果是被旋转了90度的；  
-于是我们想要使用ffmpeg对视频进行90度旋转，并要求保持视频的编码格式：AVC/AAC；  
-解决了这个问题后，还想用ffmpeg来进行更多的视频处理。
-1.1 细化下来的需求点
-视频旋转后大小不变
-视频的编码格式和音频的编码格式不变
-视频旋转后还可以继续在Chrome等HTML5浏览器中直接播放
-
-1.">
+<meta name="twitter:title" content="使用ffmpeg对H.264&#x2F;AAC视频进行处理">
+<meta name="twitter:description" content="1. 需求描述Android手机拍摄的视频在PC上查看，视觉效果是被旋转了90度的；   于是我们想要使用ffmpeg对视频进行90度旋转，并要求保持视频的编码格式：AVC/AAC；   解决了这个问题后，还想用ffmpeg来进行更多的视频处理。 1.1 细化下来的需求点 视频旋转后大小不变 视频的编码格式和音频的编码格式不变 视频旋转后还可以继续在Chrome等HTML5浏览器中直接播放  1.">
 
 
 
@@ -359,9 +337,9 @@
 <li>视频的编码格式和音频的编码格式不变</li>
 <li>视频旋转后还可以继续在Chrome等HTML5浏览器中直接播放</li>
 </ul>
-<h2 id="1-2-视频的编码格式"><a href="#1-2-视频的编码格式" class="headerlink" title="1.2 视频的编码格式"></a>1.2 视频的编码格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">视频流信息</div><div class="line">+编码格式: AVC</div><div class="line">+视频码率: 1065 kbps</div><div class="line">+视频帧率：24 fps</div><div class="line">+分 辨 率: 640 x 480</div><div class="line">+显示比率: 1.333</div><div class="line"></div><div class="line">音频流信息</div><div class="line">+编码格式: A_AAC/MPEG4/LC</div><div class="line">+音频码率: 57 kbps</div><div class="line">+声 道 数: 2 channels</div><div class="line">+采 样 数: 44100 Hz</div><div class="line">+音频位数: 0 bits</div></pre></td></tr></table></figure>
-<p>这里要提下为什么使用这个格式，因为<a href="http://www.w3schools.com/html/html5_video.asp" target="_blank" rel="external">HTML 5支持的视频格式就是这几个</a>，而其中最通用的就是上面这个：H.264/AAC</p>
-<h1 id="2-最后有用的命令行是这个："><a href="#2-最后有用的命令行是这个：" class="headerlink" title="2. 最后有用的命令行是这个："></a>2. 最后有用的命令行是这个：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 视频转码成H.264，并旋转90度，音频格式保存不变</span></div><div class="line">ffmpeg -i test.mp4 -vcodec h264 -c:a copy -vf <span class="string">"transpose=1"</span> -strict -2 -y out.mp4</div><div class="line"></div><div class="line"><span class="comment"># 去掉rotate属性</span></div><div class="line">ffmpeg -i test.mp4 -metadata:s:v rotate=<span class="string">"0"</span> -strict -2 -y r.mp4</div><div class="line"></div><div class="line"><span class="comment"># 裁剪视频</span></div><div class="line"></div><div class="line"><span class="comment"># 视频裁剪的宽高分别是(480,480)，裁剪视频的起始点是(0,0)</span></div><div class="line">ffmpeg -i test.mp4 -vcodec h264 -c:a copy -filter:v <span class="string">"crop=480:480:0:0"</span> -strict -2 -y ret.mp4</div></pre></td></tr></table></figure>
+<h2 id="1-2-视频的编码格式"><a href="#1-2-视频的编码格式" class="headerlink" title="1.2 视频的编码格式"></a>1.2 视频的编码格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">视频流信息</span><br><span class="line">+编码格式: AVC</span><br><span class="line">+视频码率: 1065 kbps</span><br><span class="line">+视频帧率：24 fps</span><br><span class="line">+分 辨 率: 640 x 480</span><br><span class="line">+显示比率: 1.333</span><br><span class="line"></span><br><span class="line">音频流信息</span><br><span class="line">+编码格式: A_AAC/MPEG4/LC</span><br><span class="line">+音频码率: 57 kbps</span><br><span class="line">+声 道 数: 2 channels</span><br><span class="line">+采 样 数: 44100 Hz</span><br><span class="line">+音频位数: 0 bits</span><br></pre></td></tr></table></figure>
+<p>这里要提下为什么使用这个格式，因为<a href="http://www.w3schools.com/html/html5_video.asp" target="_blank" rel="noopener">HTML 5支持的视频格式就是这几个</a>，而其中最通用的就是上面这个：H.264/AAC</p>
+<h1 id="2-最后有用的命令行是这个："><a href="#2-最后有用的命令行是这个：" class="headerlink" title="2. 最后有用的命令行是这个："></a>2. 最后有用的命令行是这个：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 视频转码成H.264，并旋转90度，音频格式保存不变</span></span><br><span class="line">ffmpeg -i test.mp4 -vcodec h264 -c:a copy -vf <span class="string">"transpose=1"</span> -strict -2 -y out.mp4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 去掉rotate属性</span></span><br><span class="line">ffmpeg -i test.mp4 -metadata:s:v rotate=<span class="string">"0"</span> -strict -2 -y r.mp4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 裁剪视频</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 视频裁剪的宽高分别是(480,480)，裁剪视频的起始点是(0,0)</span></span><br><span class="line">ffmpeg -i test.mp4 -vcodec h264 -c:a copy -filter:v <span class="string">"crop=480:480:0:0"</span> -strict -2 -y ret.mp4</span><br></pre></td></tr></table></figure>
 <h1 id="3-GPL的担忧和解决方案"><a href="#3-GPL的担忧和解决方案" class="headerlink" title="3. GPL的担忧和解决方案"></a>3. GPL的担忧和解决方案</h1><p>使用命令行已经解决了我们的问题了，但是如果我们先使用ffmpeg作为库整合到我们的产品中会不会有开源协议上的风险呢？  </p>
 <p>我们使用的视频编码格式-vcodec 是h264，突然想到一个念头，如果我们的产品中使用了ffmpeg进行视频旋转，那么会不会导致我们的产品需要遵循GPL全部开源呢？因为好像H.264的开源协议是GPL的！  </p>
 <p>其实上面这句话是有问题的，因为没有区分清楚H.264和x264的关系：  </p>
@@ -374,10 +352,10 @@
 <h2 id="3-2-ffmpeg如果不使用x264能支持H-264编解码吗？不行"><a href="#3-2-ffmpeg如果不使用x264能支持H-264编解码吗？不行" class="headerlink" title="3.2 ffmpeg如果不使用x264能支持H.264编解码吗？不行"></a>3.2 ffmpeg如果不使用x264能支持H.264编解码吗？不行</h2><h4 id="ffmpeg的解码是LGPL的，编码是GPL的-x264"><a href="#ffmpeg的解码是LGPL的，编码是GPL的-x264" class="headerlink" title="ffmpeg的解码是LGPL的，编码是GPL的(x264)"></a>ffmpeg的解码是LGPL的，编码是GPL的(x264)</h4><blockquote>
 <p>The ffmpeg H.264 decoder is LGPL. Only the encoders are GPL, and x264 does not provide a decoder.<br>It also has the advantage over Framewave and IPP of actually being usable.</p>
 </blockquote>
-<h4 id="这一部分参考了下面的文章："><a href="#这一部分参考了下面的文章：" class="headerlink" title="这一部分参考了下面的文章："></a>这一部分参考了下面的文章：</h4><p><a href="http://stackoverflow.com/questions/1968790/h264-encoders-other-than-ffmpeg-x264" target="_blank" rel="external">H264 Encoders other than ffmpeg x264</a>  </p>
-<p><a href="http://ffmpeg-users.933282.n4.nabble.com/Does-using-H-264-with-ffmpeg-make-my-software-GPL-and-if-so-are-there-workarounds-td934364.html" target="_blank" rel="external">Does using H.264 with ffmpeg make my software GPL and if so are there workarounds?</a>  </p>
-<p><a href="http://comments.gmane.org/gmane.comp.video.ffmpeg.libav.user/10274" target="_blank" rel="external">Libav, licensing, h.264</a>  </p>
-<p><a href="http://stackoverflow.com/questions/668494/free-open-h-264-video-decoding-libraries-non-gpl" target="_blank" rel="external">Free/Open h.264 video decoding libraries? (Non-GPL)</a>  </p>
+<h4 id="这一部分参考了下面的文章："><a href="#这一部分参考了下面的文章：" class="headerlink" title="这一部分参考了下面的文章："></a>这一部分参考了下面的文章：</h4><p><a href="http://stackoverflow.com/questions/1968790/h264-encoders-other-than-ffmpeg-x264" target="_blank" rel="noopener">H264 Encoders other than ffmpeg x264</a>  </p>
+<p><a href="http://ffmpeg-users.933282.n4.nabble.com/Does-using-H-264-with-ffmpeg-make-my-software-GPL-and-if-so-are-there-workarounds-td934364.html" target="_blank" rel="noopener">Does using H.264 with ffmpeg make my software GPL and if so are there workarounds?</a>  </p>
+<p><a href="http://comments.gmane.org/gmane.comp.video.ffmpeg.libav.user/10274" target="_blank" rel="noopener">Libav, licensing, h.264</a>  </p>
+<p><a href="http://stackoverflow.com/questions/668494/free-open-h-264-video-decoding-libraries-non-gpl" target="_blank" rel="noopener">Free/Open h.264 video decoding libraries? (Non-GPL)</a>  </p>
 <h2 id="3-3-如果视频格式使用H-264，又想对视频进行处理，应该怎么办？"><a href="#3-3-如果视频格式使用H-264，又想对视频进行处理，应该怎么办？" class="headerlink" title="3.3 如果视频格式使用H.264，又想对视频进行处理，应该怎么办？"></a>3.3 如果视频格式使用H.264，又想对视频进行处理，应该怎么办？</h2><h3 id="3-3-1-服务端使用"><a href="#3-3-1-服务端使用" class="headerlink" title="3.3.1 服务端使用"></a>3.3.1 服务端使用</h3><p>服务端使用ffmpeg进行视频处理，由于没有分发，不受GPL的限制，可以自由使用。  </p>
 <h3 id="3-3-2-终端使用"><a href="#3-3-2-终端使用" class="headerlink" title="3.3.2 终端使用"></a>3.3.2 终端使用</h3><p>要对视频进行处理，就必然需要编码解码，而解码的话ffmpeg只能使用x264；  </p>
 <p>使用了x264的ffmpeg必须遵循GPL进行软件分发，这对商业软件来说是个很大的门槛；  </p>
@@ -433,8 +411,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/08/21/adb-shell-vi/" rel="prev" title="adb shell下使用vi修改hosts">
-                adb shell下使用vi修改hosts <i class="fa fa-chevron-right"></i>
+              <a href="/2014/08/21/cocoapods-cause-undefined-symbols-for-architecture-i386/" rel="prev" title="使用CocoaPods引入第三方库导致的Undefined symbols for architecture i386">
+                使用CocoaPods引入第三方库导致的Undefined symbols for architecture i386 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

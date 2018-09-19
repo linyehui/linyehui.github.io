@@ -84,19 +84,18 @@
 
 
 
-<meta name="description" content="需求通过CocoaPods使用VideoCore，出现编译错误：1&amp;apos;type_half.inl&amp;apos; file not found
-解决方案I solved this problem by change the search path setting in Pods project. Just remove all “”${PODS_ROOT}/Headers/Private” i">
+<meta name="description" content="需求通过CocoaPods使用VideoCore，出现编译错误：1&amp;apos;type_half.inl&amp;apos; file not found 解决方案I solved this problem by change the search path setting in Pods project. Just remove all “”${PODS_ROOT}/Headers/Private” i">
+<meta name="keywords" content="ios,cocoapods">
 <meta property="og:type" content="article">
 <meta property="og:title" content="type_half.inl file not found">
 <meta property="og:url" content="http://linyehui.me/2016/07/29/video-core-glm-include-error/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求通过CocoaPods使用VideoCore，出现编译错误：1&amp;apos;type_half.inl&amp;apos; file not found
-解决方案I solved this problem by change the search path setting in Pods project. Just remove all “”${PODS_ROOT}/Headers/Private” i">
+<meta property="og:description" content="需求通过CocoaPods使用VideoCore，出现编译错误：1&amp;apos;type_half.inl&amp;apos; file not found 解决方案I solved this problem by change the search path setting in Pods project. Just remove all “”${PODS_ROOT}/Headers/Private” i">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-08-10T07:49:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="type_half.inl file not found">
-<meta name="twitter:description" content="需求通过CocoaPods使用VideoCore，出现编译错误：1&amp;apos;type_half.inl&amp;apos; file not found
-解决方案I solved this problem by change the search path setting in Pods project. Just remove all “”${PODS_ROOT}/Headers/Private” i">
+<meta name="twitter:description" content="需求通过CocoaPods使用VideoCore，出现编译错误：1&amp;apos;type_half.inl&amp;apos; file not found 解决方案I solved this problem by change the search path setting in Pods project. Just remove all “”${PODS_ROOT}/Headers/Private” i">
 
 
 
@@ -330,10 +329,10 @@
       
 
       
-        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>通过CocoaPods使用VideoCore，出现编译错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;type_half.inl&apos; file not found</div></pre></td></tr></table></figure></p>
+        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>通过CocoaPods使用VideoCore，出现编译错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;type_half.inl&apos; file not found</span><br></pre></td></tr></table></figure></p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>I solved this problem by change the search path setting in Pods project. Just remove all “”${PODS_ROOT}/Headers/Private” in “Header Search Paths”</p>
 <p>记得选着Pod工程下的VideoCore这个Target进行配置，这个不是最优的方案，但是算是比较简单的方案。</p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/jgh-/VideoCore/issues/209" target="_blank" rel="external">GLM Include Error #209</a></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://github.com/jgh-/VideoCore/issues/209" target="_blank" rel="noopener">GLM Include Error #209</a></p>
 
       
     </div>

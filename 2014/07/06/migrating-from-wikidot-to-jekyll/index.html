@@ -84,46 +84,18 @@
 
 
 
-<meta name="description" content="目标
-把Wikidot的Blog数据迁移到Jekyll
-
-目标分解：
-Blog原文从之前的Wiki格式转换成Markdown
-保持原有的文章发布时间，标题，文章的Url，tag信息
-
-PS.  
-为什么把博客从Wikidot迁移出来？为什么选择Github Pages + Jekyll 而不是Farbox或者其他？这个先沉淀下，同时也用段时间验证下，过段时间再和大家分享。
-问题分析基本情况介绍
-W">
+<meta name="description" content="目标 把Wikidot的Blog数据迁移到Jekyll  目标分解： Blog原文从之前的Wiki格式转换成Markdown 保持原有的文章发布时间，标题，文章的Url，tag信息  PS.   为什么把博客从Wikidot迁移出来？为什么选择Github Pages + Jekyll 而不是Farbox或者其他？这个先沉淀下，同时也用段时间验证下，过段时间再和大家分享。 问题分析基本情况介绍 W">
+<meta name="keywords" content="wikidot,jekyll,blog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="把Blog数据从Wikidot迁移到Jekyll">
 <meta property="og:url" content="http://linyehui.me/2014/07/06/migrating-from-wikidot-to-jekyll/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="目标
-把Wikidot的Blog数据迁移到Jekyll
-
-目标分解：
-Blog原文从之前的Wiki格式转换成Markdown
-保持原有的文章发布时间，标题，文章的Url，tag信息
-
-PS.  
-为什么把博客从Wikidot迁移出来？为什么选择Github Pages + Jekyll 而不是Farbox或者其他？这个先沉淀下，同时也用段时间验证下，过段时间再和大家分享。
-问题分析基本情况介绍
-W">
+<meta property="og:description" content="目标 把Wikidot的Blog数据迁移到Jekyll  目标分解： Blog原文从之前的Wiki格式转换成Markdown 保持原有的文章发布时间，标题，文章的Url，tag信息  PS.   为什么把博客从Wikidot迁移出来？为什么选择Github Pages + Jekyll 而不是Farbox或者其他？这个先沉淀下，同时也用段时间验证下，过段时间再和大家分享。 问题分析基本情况介绍 W">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="把Blog数据从Wikidot迁移到Jekyll">
-<meta name="twitter:description" content="目标
-把Wikidot的Blog数据迁移到Jekyll
-
-目标分解：
-Blog原文从之前的Wiki格式转换成Markdown
-保持原有的文章发布时间，标题，文章的Url，tag信息
-
-PS.  
-为什么把博客从Wikidot迁移出来？为什么选择Github Pages + Jekyll 而不是Farbox或者其他？这个先沉淀下，同时也用段时间验证下，过段时间再和大家分享。
-问题分析基本情况介绍
-W">
+<meta name="twitter:description" content="目标 把Wikidot的Blog数据迁移到Jekyll  目标分解： Blog原文从之前的Wiki格式转换成Markdown 保持原有的文章发布时间，标题，文章的Url，tag信息  PS.   为什么把博客从Wikidot迁移出来？为什么选择Github Pages + Jekyll 而不是Farbox或者其他？这个先沉淀下，同时也用段时间验证下，过段时间再和大家分享。 问题分析基本情况介绍 W">
 
 
 
@@ -375,48 +347,48 @@ W">
 <li>如果想从RSS导入的话，Wikidot导出的RSS又不全</li>
 <li>无奈放弃</li>
 </ul>
-<h2 id="尝试-2：能不能曲线救国，先转成Wordpress再转"><a href="#尝试-2：能不能曲线救国，先转成Wordpress再转" class="headerlink" title="尝试 2：能不能曲线救国，先转成Wordpress再转"></a>尝试 2：能不能曲线救国，先转成Wordpress再转</h2><p>看了下，有位哥们脚本实现了：<a href="https://github.com/vLj2/wikidot-to-markdown" target="_blank" rel="external">wikidot-to-markdown</a>，但是他只是对格式的转换，这个代码我可以复用，但是……</p>
+<h2 id="尝试-2：能不能曲线救国，先转成Wordpress再转"><a href="#尝试-2：能不能曲线救国，先转成Wordpress再转" class="headerlink" title="尝试 2：能不能曲线救国，先转成Wordpress再转"></a>尝试 2：能不能曲线救国，先转成Wordpress再转</h2><p>看了下，有位哥们脚本实现了：<a href="https://github.com/vLj2/wikidot-to-markdown" target="_blank" rel="noopener">wikidot-to-markdown</a>，但是他只是对格式的转换，这个代码我可以复用，但是……</p>
 <h4 id="但是来了："><a href="#但是来了：" class="headerlink" title="但是来了："></a>但是来了：</h4><ul>
 <li>前提是我得先有数据给他转换，从上面介绍Wikidot直接提供给我们的数据是不够的</li>
 <li>我的目的是放到Jekyll上，也就是说我的文件头需要加上Jakyll的配置，这个我还得另外写个脚本来做</li>
 <li><p>需求描述变成了：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 从Wikidot拿到所有文章的索引信息（Title，Url，tags，Date），和backup中的文件关联起来；</div><div class="line">2. 再处理下backup中的文件，加上文件头，把正文从Wiki转成Mardown</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 从Wikidot拿到所有文章的索引信息（Title，Url，tags，Date），和backup中的文件关联起来；</span><br><span class="line">2. 再处理下backup中的文件，加上文件头，把正文从Wiki转成Mardown</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>到此，问题分析的七七八八了，结论是我要写个脚本来做这个事情。</p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="拿到WIkidot所有文章的索引"><a href="#拿到WIkidot所有文章的索引" class="headerlink" title="拿到WIkidot所有文章的索引"></a>拿到WIkidot所有文章的索引</h2><p>没能拿到全的RSS，但是全的索引还是可以拿到的，但是需要再wikidot下页面单独来做这个事情，比如我的：</p>
 <blockquote>
-<p><a href="http://www.linyehui.com/misc:rss" target="_blank" rel="external">http://www.linyehui.com/misc:rss</a></p>
+<p><a href="http://www.linyehui.com/misc:rss" target="_blank" rel="noopener">http://www.linyehui.com/misc:rss</a></p>
 </blockquote>
 <p>这个Wikidot页面的源码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[[module ListPages category=&quot;_default&quot; perPage=&quot;500&quot; date=&quot;@URL&quot; separate=&quot;false&quot; prependLine=&quot;||~ Page||~ Date created||~ Tags ||&quot;]]</div><div class="line">|| %%linked_title%% || %%date%% || %%tags%% ||</div><div class="line">[[/module]]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[module ListPages category=&quot;_default&quot; perPage=&quot;500&quot; date=&quot;@URL&quot; separate=&quot;false&quot; prependLine=&quot;||~ Page||~ Date created||~ Tags ||&quot;]]</span><br><span class="line">|| %%linked_title%% || %%date%% || %%tags%% ||</span><br><span class="line">[[/module]]</span><br></pre></td></tr></table></figure>
 <h2 id="从Wikidot后台Backup并下载Zip包"><a href="#从Wikidot后台Backup并下载Zip包" class="headerlink" title="从Wikidot后台Backup并下载Zip包"></a>从Wikidot后台Backup并下载Zip包</h2><p>解压后的文件路径类似：</p>
 <blockquote>
 <p>~/backup_linyehui_20140705_1759UTC/source/system_recent-changes.txt</p>
 </blockquote>
 <h2 id="写脚本"><a href="#写脚本" class="headerlink" title="写脚本"></a>写脚本</h2><p>有了上面两步，我就能拿到全索引，并用索引把backup目录下的文件关联起来了<br>对脚本感兴趣的可以直接看代码：</p>
 <blockquote>
-<p><a href="https://github.com/linyehui/migrating-from-wikidot-to-jekyll" target="_blank" rel="external">https://github.com/linyehui/migrating-from-wikidot-to-jekyll</a></p>
+<p><a href="https://github.com/linyehui/migrating-from-wikidot-to-jekyll" target="_blank" rel="noopener">https://github.com/linyehui/migrating-from-wikidot-to-jekyll</a></p>
 </blockquote>
 <h3 id="这里说下脚本的使用方式："><a href="#这里说下脚本的使用方式：" class="headerlink" title="这里说下脚本的使用方式："></a>这里说下脚本的使用方式：</h3><ol>
 <li>git clone 得到两个脚本文件 <blockquote>
-<p>git clone <a href="https://github.com/linyehui/migrating-from-wikidot-to-jekyll" target="_blank" rel="external">https://github.com/linyehui/migrating-from-wikidot-to-jekyll</a></p>
+<p>git clone <a href="https://github.com/linyehui/migrating-from-wikidot-to-jekyll" target="_blank" rel="noopener">https://github.com/linyehui/migrating-from-wikidot-to-jekyll</a></p>
 </blockquote>
 </li>
 <li>从Wikidot 管理后台备份Blog，并下载下来，解压后得到source目录，放到脚本下的wikidot根目录（是的，我的脚本不对文件进行处理）</li>
 <li><p>新建一个Wikidot页面，用于生成所有文章的RSS（我这文章数上限设置的是500，你可以自己调整），生成的RSS保存成rss.html，把文件复制到脚本下的wikidot根目录</p>
 <p> 我新建了这个页面：</p>
 <blockquote>
-<p><a href="http://www.linyehui.com/misc:rss" target="_blank" rel="external">http://www.linyehui.com/misc:rss</a></p>
+<p><a href="http://www.linyehui.com/misc:rss" target="_blank" rel="noopener">http://www.linyehui.com/misc:rss</a></p>
 </blockquote>
 </li>
 </ol>
 <pre><code>页面代码如下（点击Edit就能编辑）：
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[[module ListPages category=&quot;_default&quot; perPage=&quot;500&quot; date=&quot;@URL&quot; separate=&quot;false&quot; prependLine=&quot;||~ Page||~ Date created||~ Tags ||&quot;]]</div><div class="line">|| %%linked_title%% || %%date%% || %%tags%% ||</div><div class="line">[[/module]]</div></pre></td></tr></table></figure>
-</code></pre><ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[module ListPages category=&quot;_default&quot; perPage=&quot;500&quot; date=&quot;@URL&quot; separate=&quot;false&quot; prependLine=&quot;||~ Page||~ Date created||~ Tags ||&quot;]]</span><br><span class="line">|| %%linked_title%% || %%date%% || %%tags%% ||</span><br><span class="line">[[/module]]</span><br></pre></td></tr></table></figure>
+</code></pre><ol start="4">
 <li><p>现在的脚本目录结构如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">|----wikidot</div><div class="line">|    |-convert.py</div><div class="line">|    |-wikidot.py</div><div class="line">|    |-rss.html</div><div class="line">|    |-source</div><div class="line">|        |- xxxx-xxx1.txt</div><div class="line">|        |- xxxx-xxx2.txt</div></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">|----wikidot</span><br><span class="line">|    |-convert.py</span><br><span class="line">|    |-wikidot.py</span><br><span class="line">|    |-rss.html</span><br><span class="line">|    |-source</span><br><span class="line">|        |- xxxx-xxx1.txt</span><br><span class="line">|        |- xxxx-xxx2.txt</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>执行convert.py，不带参数会使用默认的目录结构进行执行，执行后你就能再脚本旁边的./jekyll目录下得到你所需要的转换后的.markdown文件们</p>
 </li>

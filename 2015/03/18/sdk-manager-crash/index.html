@@ -84,25 +84,18 @@
 
 
 
-<meta name="description" content="问题描述双击SDK Manager.exe，闪退；  
-网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径
-问题根源问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径  
-1234rem Check we have a">
+<meta name="description" content="问题描述双击SDK Manager.exe，闪退；   网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径 问题根源问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径   1234rem Check we have a">
+<meta name="keywords" content="android,windows,sdk-manager">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows下的SDK Manager.exe闪退">
 <meta property="og:url" content="http://linyehui.me/2015/03/18/sdk-manager-crash/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="问题描述双击SDK Manager.exe，闪退；  
-网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径
-问题根源问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径  
-1234rem Check we have a">
+<meta property="og:description" content="问题描述双击SDK Manager.exe，闪退；   网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径 问题根源问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径   1234rem Check we have a">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows下的SDK Manager.exe闪退">
-<meta name="twitter:description" content="问题描述双击SDK Manager.exe，闪退；  
-网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径
-问题根源问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径  
-1234rem Check we have a">
+<meta name="twitter:description" content="问题描述双击SDK Manager.exe，闪退；   网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径 问题根源问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径   1234rem Check we have a">
 
 
 
@@ -339,7 +332,7 @@
         <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>双击SDK Manager.exe，闪退；  </p>
 <p>网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径</p>
 <h3 id="问题根源"><a href="#问题根源" class="headerlink" title="问题根源"></a>问题根源</h3><p>问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径  </p>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">rem Check we have a valid Java.exe in the path.</span></div><div class="line"><span class="built_in">set</span> java_exe=</div><div class="line"><span class="keyword">call</span> lib\find_java.bat</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> java_exe <span class="keyword">goto</span> :EOF</div></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">rem Check we have a valid Java.exe in the path.</span></span><br><span class="line"><span class="built_in">set</span> java_exe=</span><br><span class="line"><span class="keyword">call</span> lib\find_java.bat</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> java_exe <span class="keyword">goto</span> :EOF</span><br></pre></td></tr></table></figure>
 <p>其实问题最终的根源在于find_java.bat中调用的find_java.exe没有返回正确的路径</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="简单粗暴的解决方案"><a href="#简单粗暴的解决方案" class="headerlink" title="简单粗暴的解决方案"></a>简单粗暴的解决方案</h3><ul>
 <li><p>简单的改法就是修改Android.bat中的java_exe路径，直接写死；  </p>
@@ -347,13 +340,13 @@
 <li><p>当然这是个非常粗暴的解决方案，方案的风险在于：下次你复制这个目录到别的电脑上使用的时候，这里设置的路径需要重新设置。</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set java_exe=C:\Program Files\Java\jdk1.7.0_40\bin\java.exe</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set java_exe=C:\Program Files\Java\jdk1.7.0_40\bin\java.exe</span><br></pre></td></tr></table></figure>
 <h3 id="正确的解决方案"><a href="#正确的解决方案" class="headerlink" title="正确的解决方案"></a>正确的解决方案</h3><p>其实这个更简单，在系统环境变量中，添加一个JAVA_HOME的变量定义  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME</div><div class="line">C:\Program Files\Java\jdk1.7.0_40</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME</span><br><span class="line">C:\Program Files\Java\jdk1.7.0_40</span><br></pre></td></tr></table></figure>
 <h4 id="验证的方法"><a href="#验证的方法" class="headerlink" title="验证的方法"></a>验证的方法</h4><p>直接调用下find_java.exe看看能否返回正确的路径。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/puma004/article/details/11392271" target="_blank" rel="external">64位win7下Android SDK Manager闪退的解决方法</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_6e1ad0cf01013v9u.html" target="_blank" rel="external">解决64位Win7下的android sdk manager一闪而过的问题</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_8a2d5e270101ad3q.html" target="_blank" rel="external">安装Android SDK时，点击SDK Manager.exe闪退</a>  </p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/puma004/article/details/11392271" target="_blank" rel="noopener">64位win7下Android SDK Manager闪退的解决方法</a>  </p>
+<p><a href="http://blog.sina.com.cn/s/blog_6e1ad0cf01013v9u.html" target="_blank" rel="noopener">解决64位Win7下的android sdk manager一闪而过的问题</a>  </p>
+<p><a href="http://blog.sina.com.cn/s/blog_8a2d5e270101ad3q.html" target="_blank" rel="noopener">安装Android SDK时，点击SDK Manager.exe闪退</a>  </p>
 
       
     </div>
@@ -390,8 +383,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/03/17/cocos2d-js-ndk-debug/" rel="next" title="cocos2d-js 配置NDK调试">
-                <i class="fa fa-chevron-left"></i> cocos2d-js 配置NDK调试
+              <a href="/2015/03/18/debug-spidermonkey-with-cocos2d-js/" rel="next" title="cocos2d-js调试Spidermonkey代码">
+                <i class="fa fa-chevron-left"></i> cocos2d-js调试Spidermonkey代码
               </a>
             
           </div>
@@ -400,8 +393,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/03/18/debug-spidermonkey-with-cocos2d-js/" rel="prev" title="cocos2d-js调试Spidermonkey代码">
-                cocos2d-js调试Spidermonkey代码 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/03/27/ios-provisioning-profiles/" rel="prev" title="iOS Provisioning Profiles">
+                iOS Provisioning Profiles <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

@@ -84,20 +84,13 @@
 
 
 
-<meta name="description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。
-
-引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！  
-还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。  
-我这么说是有原因的，且听我一一道来，先来看看">
+<meta name="description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。  引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！   还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。   我这么说是有原因的，且听我一一道来，先来看看">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WinRT for Win32 programmers, Part II-Win32代码移植">
 <meta property="og:url" content="http://linyehui.me/2012/05/07/winrt-for-win32-programmers-part-ii-port-code-to-winrt-html/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。
-
-引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！  
-还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。  
-我这么说是有原因的，且听我一一道来，先来看看">
+<meta property="og:description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。  引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！   还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。   我这么说是有原因的，且听我一一道来，先来看看">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723263913.png">
 <meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723282777.png">
 <meta property="og:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723285063.png">
@@ -114,11 +107,7 @@
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WinRT for Win32 programmers, Part II-Win32代码移植">
-<meta name="twitter:description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。
-
-引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！  
-还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。  
-我这么说是有原因的，且听我一一道来，先来看看">
+<meta name="twitter:description" content="本文首发于 http://www.cnblogs.com/linyehui/   这里是我的Blog备份。  引子说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！   还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。   我这么说是有原因的，且听我一一道来，先来看看">
 <meta name="twitter:image" content="http://pic002.cnblogs.com/images/2012/347098/2012050723263913.png">
 
 
@@ -354,7 +343,7 @@
 
       
         <blockquote>
-<p>本文首发于 <a href="http://www.cnblogs.com/linyehui/" target="_blank" rel="external">http://www.cnblogs.com/linyehui/</a>   这里是我的Blog备份。</p>
+<p>本文首发于 <a href="http://www.cnblogs.com/linyehui/" target="_blank" rel="noopener">http://www.cnblogs.com/linyehui/</a>   这里是我的Blog备份。</p>
 </blockquote>
 <h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>说好了这节要介绍Windows Store上架前的准备工作，怎么标题变成了Win32代码移植？这不是坑爹么！  </p>
 <p>还真不是，对于Win32程序员来说，提交应用到Windows Store，你可能遇到的最大的问题就是Win32代码移植。  </p>
@@ -376,12 +365,12 @@
 <h2 id="二、认证结果的分析"><a href="#二、认证结果的分析" class="headerlink" title="二、认证结果的分析"></a>二、认证结果的分析</h2><p>认证过程其实比较简单，认证结果是一个xml文件，我们需要的是全部PASS。<br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723380747.png" alt="2012050723380747.png"><br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723345174.png" alt="2012050723345174.png"></p>
 <p>如果有Failed的项就需要根据提示来进行修正，然后重新编包，重新认证，直到认证通过为止。<br>而今天我们要说的最重要的部分，就在于，认证结果中的Use of Supported Platform </p>
 <h4 id="APIs这个部分，如果认证不通过应该怎么处理？"><a href="#APIs这个部分，如果认证不通过应该怎么处理？" class="headerlink" title="APIs这个部分，如果认证不通过应该怎么处理？"></a>APIs这个部分，如果认证不通过应该怎么处理？</h4><p><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723384590.png" alt="2012050723384590.png"><br><img src="http://pic002.cnblogs.com/images/2012/347098/2012050723385716.png" alt="2012050723385716.png"></p>
-<h4 id="1、为什么认证会不通过"><a href="#1、为什么认证会不通过" class="headerlink" title="1、为什么认证会不通过"></a>1、为什么认证会不通过</h4><p>其实字面意思已经很清楚了，就是使用了这些不被支持的API导致的，那究竟哪些函数是被支持的呢？<br>微软的网站上面有详细的API列表，大家可以查阅：<br><a href="http://msdn.microsoft.com/zh-cn/library/windows/apps/br205757" target="_blank" rel="external">Win32 and COM for Metro style apps</a><br>上面的链接比较分散，我当初在做移植时专门做了个简单的拼接，方便查阅：[<a href="http://www.linyehui.com/win32-and-com-for-metro-style-apps" target="_blank" rel="external">转载</a>[合集]Win32 and COM for Metro style apps]</p>
+<h4 id="1、为什么认证会不通过"><a href="#1、为什么认证会不通过" class="headerlink" title="1、为什么认证会不通过"></a>1、为什么认证会不通过</h4><p>其实字面意思已经很清楚了，就是使用了这些不被支持的API导致的，那究竟哪些函数是被支持的呢？<br>微软的网站上面有详细的API列表，大家可以查阅：<br><a href="http://msdn.microsoft.com/zh-cn/library/windows/apps/br205757" target="_blank" rel="noopener">Win32 and COM for Metro style apps</a><br>上面的链接比较分散，我当初在做移植时专门做了个简单的拼接，方便查阅：[<a href="http://www.linyehui.com/win32-and-com-for-metro-style-apps" target="_blank" rel="noopener">转载</a>[合集]Win32 and COM for Metro style apps]</p>
 <h4 id="2、怎样认证通过"><a href="#2、怎样认证通过" class="headerlink" title="2、怎样认证通过"></a>2、怎样认证通过</h4><p>把不被支持的函数换成被支持的，或者去掉不被支持的函数调用，改用WinRT自己的API。  </p>
 <p>说的很简单，有些事情做起来可能那么轻松，我这里列出一些简单的函数移植对应关系：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">CreateEvent-&gt;CreateEventEx</div><div class="line">CreateFileW-&gt;CreateFile2</div><div class="line">CreateMutexW-&gt;CreateMutexEx</div><div class="line">WaitForSingleObject-&gt;WaitForSingleObjectEx</div><div class="line">GetTickCount-&gt;(DWORD)GetTickCount64</div><div class="line">DeleteFileA-&gt;DeleteFileW</div><div class="line">FormatMessageA-&gt;FormatMessageW</div><div class="line">GetDiskFreeSpaceA-&gt;GetDiskFreeSpaceW</div><div class="line">GetFileAttributes-&gt;GetFileAttributesEx</div><div class="line">GetFileSize-&gt;GetFileInformationByHandleEx</div><div class="line">GetFullPathName-&gt; :(</div><div class="line">GetTempPathA-&gt; :(</div><div class="line">GetVersionExW-&gt; :(</div><div class="line">InitializeCriticalSection-&gt;InitializeCriticalSectionEx</div><div class="line">LoadLibrary-&gt;don&apos;t use this at best,alothough ther is LoadPackagedLibrary can use</div><div class="line">LockFile-&gt;LockFileEx</div><div class="line">UnLockFile-&gt;UnLockFileEx</div><div class="line">OutputDebugStringA-&gt; don&apos;t use</div><div class="line">SetFilePointer-&gt;SetFilePointerEx</div><div class="line">SetThreadPriority-&gt; :(</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">CreateEvent-&gt;CreateEventEx</span><br><span class="line">CreateFileW-&gt;CreateFile2</span><br><span class="line">CreateMutexW-&gt;CreateMutexEx</span><br><span class="line">WaitForSingleObject-&gt;WaitForSingleObjectEx</span><br><span class="line">GetTickCount-&gt;(DWORD)GetTickCount64</span><br><span class="line">DeleteFileA-&gt;DeleteFileW</span><br><span class="line">FormatMessageA-&gt;FormatMessageW</span><br><span class="line">GetDiskFreeSpaceA-&gt;GetDiskFreeSpaceW</span><br><span class="line">GetFileAttributes-&gt;GetFileAttributesEx</span><br><span class="line">GetFileSize-&gt;GetFileInformationByHandleEx</span><br><span class="line">GetFullPathName-&gt; :(</span><br><span class="line">GetTempPathA-&gt; :(</span><br><span class="line">GetVersionExW-&gt; :(</span><br><span class="line">InitializeCriticalSection-&gt;InitializeCriticalSectionEx</span><br><span class="line">LoadLibrary-&gt;don&apos;t use this at best,alothough ther is LoadPackagedLibrary can use</span><br><span class="line">LockFile-&gt;LockFileEx</span><br><span class="line">UnLockFile-&gt;UnLockFileEx</span><br><span class="line">OutputDebugStringA-&gt; don&apos;t use</span><br><span class="line">SetFilePointer-&gt;SetFilePointerEx</span><br><span class="line">SetThreadPriority-&gt; :(</span><br></pre></td></tr></table></figure>
 <p>可以看到，不是所有函数都有直接可以替换的函数，更有像socket这类API，整套API WinRT都不允许你使用，这种你只能使用WinRT自己提供的那套新API来替换了。</p>
-<h1 id="关于Win32下的开源代码库"><a href="#关于Win32下的开源代码库" class="headerlink" title="关于Win32下的开源代码库"></a>关于Win32下的开源代码库</h1><p>类似ZLib这种优秀的开源代码，一个字都不用改就能直接在WinRT下编译通过且顺利通过认证，他们的优势在于代码使用纯C标准库实现；<br>而像SQLite这样的使用了部分Windows API的开源库，想要通过WinRT认证就得费点心思了，好在SQLite团队已经开始进行这件事情，大家着急的话可以自己从这里找到并下载SQLite的WinRT分支代码：<a href="http://www.sqlite.org/src/timeline?r=winrt" target="_blank" rel="external">http://www.sqlite.org/src/timeline?r=winrt</a>  　截至目前(2012/5/7 11:55)SQLite的WinRT分支还没合入trunk</p>
+<h1 id="关于Win32下的开源代码库"><a href="#关于Win32下的开源代码库" class="headerlink" title="关于Win32下的开源代码库"></a>关于Win32下的开源代码库</h1><p>类似ZLib这种优秀的开源代码，一个字都不用改就能直接在WinRT下编译通过且顺利通过认证，他们的优势在于代码使用纯C标准库实现；<br>而像SQLite这样的使用了部分Windows API的开源库，想要通过WinRT认证就得费点心思了，好在SQLite团队已经开始进行这件事情，大家着急的话可以自己从这里找到并下载SQLite的WinRT分支代码：<a href="http://www.sqlite.org/src/timeline?r=winrt" target="_blank" rel="noopener">http://www.sqlite.org/src/timeline?r=winrt</a>  　截至目前(2012/5/7 11:55)SQLite的WinRT分支还没合入trunk</p>
 <h2 id="自己的开发的代码库就更得自己移植了"><a href="#自己的开发的代码库就更得自己移植了" class="headerlink" title="自己的开发的代码库就更得自己移植了"></a>自己的开发的代码库就更得自己移植了</h2><p>我们当时移植的过程中，被折磨的最残的是对socket的支持，上面说到WinRT不允许使用WinSock，而我们的底层是基于异步socket的，为了平滑的移植我们的底层库，我们用StreamSocket这样的“高级”API适配出了“低级”的socket，这个恶心的过程以及这块的代码另外找机会再和大家分享交流。</p>
 <h1 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h1><p>很多跨平台移植性好的代码还是能很容易的移植到WinRT上，对于Win32程序员来说绝对是个好消息，这里也提醒大家在写跨平台代码时还是尽可能的使用C标准库的函数，这样在进行跨平台移植时才能做到事半功倍。</p>
 <p>更详细的提交应用到Windows Store的细节和注意事项，都可以参考微软的官方文档：<br>Selling apps<br>Certification requirements for Windows apps</p>

@@ -84,37 +84,18 @@
 
 
 
-<meta name="description" content="需求在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm
-
-原来的解决方案用的挺好的：https://github.com/coreybutler/nvm-windows
-
-今天更新node版本遇到了问题：之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来
-
-
-nvm root看了下安装路径是在AppDa">
+<meta name="description" content="需求在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm  原来的解决方案用的挺好的：https://github.com/coreybutler/nvm-windows  今天更新node版本遇到了问题：之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来   nvm root看了下安装路径是在AppDa">
+<meta name="keywords" content="windows,nvm,npm,node">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows下使用nvm管理node版本">
 <meta property="og:url" content="http://linyehui.me/2018/09/19/nvm-windows/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm
-
-原来的解决方案用的挺好的：https://github.com/coreybutler/nvm-windows
-
-今天更新node版本遇到了问题：之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来
-
-
-nvm root看了下安装路径是在AppDa">
+<meta property="og:description" content="需求在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm  原来的解决方案用的挺好的：https://github.com/coreybutler/nvm-windows  今天更新node版本遇到了问题：之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来   nvm root看了下安装路径是在AppDa">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-09-19T02:10:58.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows下使用nvm管理node版本">
-<meta name="twitter:description" content="需求在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm
-
-原来的解决方案用的挺好的：https://github.com/coreybutler/nvm-windows
-
-今天更新node版本遇到了问题：之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来
-
-
-nvm root看了下安装路径是在AppDa">
+<meta name="twitter:description" content="需求在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm  原来的解决方案用的挺好的：https://github.com/coreybutler/nvm-windows  今天更新node版本遇到了问题：之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来   nvm root看了下安装路径是在AppDa">
 
 
 
@@ -350,16 +331,16 @@ nvm root看了下安装路径是在AppDa">
       
         <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm</p>
 <ul>
-<li><p>原来的解决方案用的挺好的：<br><a href="https://github.com/coreybutler/nvm-windows" target="_blank" rel="external">https://github.com/coreybutler/nvm-windows</a></p>
+<li><p>原来的解决方案用的挺好的：<br><a href="https://github.com/coreybutler/nvm-windows" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows</a></p>
 </li>
 <li><p>今天更新node版本遇到了问题：<br>之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来</p>
 </li>
 </ul>
 <p>nvm root看了下安装路径是在AppData下，虚拟链接是在%Program Files%目录下，nvm use的时候会弹出UAC提示，照理应该也不会出错，不过nvm的对应版本目录下并没有下载到npm文件。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>github上看了下，最近（2018-08-02）更新了一个版本1.1.7：<br><a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="external">https://github.com/coreybutler/nvm-windows/releases</a></p>
-<p>我把老的版本卸载干净，然后重新安装了下新版本，然后重新安装，重新安装的时候我把安装目录和软连接目录都放到的我的非系统盘D盘的根目录下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">D:\nodejs\</div><div class="line">D:\nvm\</div></pre></td></tr></table></figure></p>
-<p>重新使用nvm安装下最新版本的node：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">nvm list available</div><div class="line">nvm install 10.10.0</div><div class="line">nvm use 10.10.0</div><div class="line"></div><div class="line">node --version</div><div class="line">npm --version</div></pre></td></tr></table></figure></p>
-<p>验证了下版本，没问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">D:\&gt;npm --version</div><div class="line">6.4.1</div><div class="line"></div><div class="line">D:\&gt;node --version</div><div class="line">v10.10.0</div></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>github上看了下，最近（2018-08-02）更新了一个版本1.1.7：<br><a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows/releases</a></p>
+<p>我把老的版本卸载干净，然后重新安装了下新版本，然后重新安装，重新安装的时候我把安装目录和软连接目录都放到的我的非系统盘D盘的根目录下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\nodejs\</span><br><span class="line">D:\nvm\</span><br></pre></td></tr></table></figure></p>
+<p>重新使用nvm安装下最新版本的node：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nvm list available</span><br><span class="line">nvm install 10.10.0</span><br><span class="line">nvm use 10.10.0</span><br><span class="line"></span><br><span class="line">node --version</span><br><span class="line">npm --version</span><br></pre></td></tr></table></figure></p>
+<p>验证了下版本，没问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;npm --version</span><br><span class="line">6.4.1</span><br><span class="line"></span><br><span class="line">D:\&gt;node --version</span><br><span class="line">v10.10.0</span><br></pre></td></tr></table></figure></p>
 
       
     </div>

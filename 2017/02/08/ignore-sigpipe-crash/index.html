@@ -84,43 +84,18 @@
 
 
 
-<meta name="description" content="问题由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：
-
-Signal 13 was raised. SIGPIPE
-
-查找资料后，发现最简单的解决方案就是忽略这个错误：
-
-signal(SIGPIPE, SIG_IGN);
-
-但实际的结果是我们设置了还是会继续出现闪退
-原因排查了很久后才发现，问题的原因是">
+<meta name="description" content="问题由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：  Signal 13 was raised. SIGPIPE  查找资料后，发现最简单的解决方案就是忽略这个错误：  signal(SIGPIPE, SIG_IGN);  但实际的结果是我们设置了还是会继续出现闪退 原因排查了很久后才发现，问题的原因是">
+<meta name="keywords" content="ios,SIGPIPE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ignore SIGPIPE crash">
 <meta property="og:url" content="http://linyehui.me/2017/02/08/ignore-sigpipe-crash/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="问题由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：
-
-Signal 13 was raised. SIGPIPE
-
-查找资料后，发现最简单的解决方案就是忽略这个错误：
-
-signal(SIGPIPE, SIG_IGN);
-
-但实际的结果是我们设置了还是会继续出现闪退
-原因排查了很久后才发现，问题的原因是">
+<meta property="og:description" content="问题由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：  Signal 13 was raised. SIGPIPE  查找资料后，发现最简单的解决方案就是忽略这个错误：  signal(SIGPIPE, SIG_IGN);  但实际的结果是我们设置了还是会继续出现闪退 原因排查了很久后才发现，问题的原因是">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-02-08T08:23:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ignore SIGPIPE crash">
-<meta name="twitter:description" content="问题由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：
-
-Signal 13 was raised. SIGPIPE
-
-查找资料后，发现最简单的解决方案就是忽略这个错误：
-
-signal(SIGPIPE, SIG_IGN);
-
-但实际的结果是我们设置了还是会继续出现闪退
-原因排查了很久后才发现，问题的原因是">
+<meta name="twitter:description" content="问题由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：  Signal 13 was raised. SIGPIPE  查找资料后，发现最简单的解决方案就是忽略这个错误：  signal(SIGPIPE, SIG_IGN);  但实际的结果是我们设置了还是会继续出现闪退 原因排查了很久后才发现，问题的原因是">
 
 
 
@@ -363,10 +338,10 @@ signal(SIGPIPE, SIG_IGN);
 <p>signal(SIGPIPE, SIG_IGN);</p>
 </blockquote>
 <p>但实际的结果是我们设置了还是会继续出现闪退</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>排查了很久后才发现，问题的原因是BugTags也会控制这个开头，默认是不忽略，而且这个默认显然代码是主动调用了，而不是我们期望的不调用就不设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 是否忽略 PIPE Signal (SIGPIPE) 闪退，默认 NO</div><div class="line"> */</div><div class="line">@property(nonatomic, assign) BOOL ignorePIPESignalCrash;</div></pre></td></tr></table></figure></p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>设置BugTags的对应开关即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// Bugtags</div><div class="line">BugtagsOptions *options = [[BugtagsOptions alloc] init];</div><div class="line">options.ignorePIPESignalCrash = YES;</div><div class="line">[Bugtags startWithAppKey:BugTagsAPPKEY invocationEvent:BTGInvocationEventNone options:options];</div></pre></td></tr></table></figure></p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>排查了很久后才发现，问题的原因是BugTags也会控制这个开头，默认是不忽略，而且这个默认显然代码是主动调用了，而不是我们期望的不调用就不设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 是否忽略 PIPE Signal (SIGPIPE) 闪退，默认 NO</span><br><span class="line"> */</span><br><span class="line">@property(nonatomic, assign) BOOL ignorePIPESignalCrash;</span><br></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>设置BugTags的对应开关即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Bugtags</span><br><span class="line">BugtagsOptions *options = [[BugtagsOptions alloc] init];</span><br><span class="line">options.ignorePIPESignalCrash = YES;</span><br><span class="line">[Bugtags startWithAppKey:BugTagsAPPKEY invocationEvent:BTGInvocationEventNone options:options];</span><br></pre></td></tr></table></figure></p>
 <h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这个问题我们排查了很久，一直在找我们自己的原因，但其实这种bug因为跟网络环境有关系不容易重现；<br>其实反思后发现，排查这个问题我们应该先做一个事情，就是手动出发SIGNAL 13，看闪退是否被正确忽略；<br>而我们恰恰没做这个事情，思路上的疏漏导致了之前的大量工作变成了无用功。</p>
-<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a href="http://www.jianshu.com/p/1957d2b18d2c" target="_blank" rel="external">如何在 iOS 上避免 SIGPIPE 信号导致的 crash (Avoiding SIGPIPE signal crash in iOS)</a><br><a href="https://developer.apple.com/reference/foundation/nsstream/1410399-close?language=objc" target="_blank" rel="external">NSStream close</a><br><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Streams/Articles/WritingOutputStreams.html" target="_blank" rel="external">Writing OutputStreams</a><br><a href="http://www.cnblogs.com/kesalin/archive/2013/04/29/ios_network_nsstream.html" target="_blank" rel="external">[深入浅出Cocoa]iOS网络编程之NSStream</a><br><a href="http://iphonedevsdk.com/forum/iphone-sdk-development/21065-how-to-make-a-nsstream-instance-reusable.html" target="_blank" rel="external">How to make a NSStream instance reusable?</a></p>
+<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a href="http://www.jianshu.com/p/1957d2b18d2c" target="_blank" rel="noopener">如何在 iOS 上避免 SIGPIPE 信号导致的 crash (Avoiding SIGPIPE signal crash in iOS)</a><br><a href="https://developer.apple.com/reference/foundation/nsstream/1410399-close?language=objc" target="_blank" rel="noopener">NSStream close</a><br><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Streams/Articles/WritingOutputStreams.html" target="_blank" rel="noopener">Writing OutputStreams</a><br><a href="http://www.cnblogs.com/kesalin/archive/2013/04/29/ios_network_nsstream.html" target="_blank" rel="noopener">[深入浅出Cocoa]iOS网络编程之NSStream</a><br><a href="http://iphonedevsdk.com/forum/iphone-sdk-development/21065-how-to-make-a-nsstream-instance-reusable.html" target="_blank" rel="noopener">How to make a NSStream instance reusable?</a></p>
 
       
     </div>

@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的DuiEngine，在从老的库升级到新版本时遇到了下面这些问题。
-DuiEngine版本http://duiengine.googlecode.com/svn/trunk
-Revision: 246
-Author: setoutsoft@qq.com
-Da">
+<meta name="description" content="在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的DuiEngine，在从老的库升级到新版本时遇到了下面这些问题。 DuiEngine版本http://duiengine.googlecode.com/svn/trunk Revision: 246 Author: setoutsoft@qq.com Da">
+<meta name="keywords" content="duiengine,ui,wtl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="升级DuiEngine到2013">
 <meta property="og:url" content="http://linyehui.me/2013/09/26/update-duiengine/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的DuiEngine，在从老的库升级到新版本时遇到了下面这些问题。
-DuiEngine版本http://duiengine.googlecode.com/svn/trunk
-Revision: 246
-Author: setoutsoft@qq.com
-Da">
+<meta property="og:description" content="在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的DuiEngine，在从老的库升级到新版本时遇到了下面这些问题。 DuiEngine版本http://duiengine.googlecode.com/svn/trunk Revision: 246 Author: setoutsoft@qq.com Da">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="升级DuiEngine到2013">
-<meta name="twitter:description" content="在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的DuiEngine，在从老的库升级到新版本时遇到了下面这些问题。
-DuiEngine版本http://duiengine.googlecode.com/svn/trunk
-Revision: 246
-Author: setoutsoft@qq.com
-Da">
+<meta name="twitter:description" content="在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的DuiEngine，在从老的库升级到新版本时遇到了下面这些问题。 DuiEngine版本http://duiengine.googlecode.com/svn/trunk Revision: 246 Author: setoutsoft@qq.com Da">
 
 
 
@@ -339,7 +329,7 @@ Da">
       
 
       
-        <p>在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的<a href="http://duiengine.googlecode.com/" target="_blank" rel="external">DuiEngine</a>，在从老的库升级到新版本时遇到了下面这些问题。</p>
+        <p>在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的<a href="http://duiengine.googlecode.com/" target="_blank" rel="noopener">DuiEngine</a>，在从老的库升级到新版本时遇到了下面这些问题。</p>
 <h3 id="DuiEngine版本"><a href="#DuiEngine版本" class="headerlink" title="DuiEngine版本"></a>DuiEngine版本</h3><pre><code>http://duiengine.googlecode.com/svn/trunk
 Revision: 246
 Author: setoutsoft@qq.com
@@ -356,7 +346,7 @@ Message:
 <p>1.3 resid type=”PNG”被resid type=”IMGX”替代，直接查找替换即可</p>
 <p>1.4 header=“1”属性被去掉了，改成新的标签了，具体使用方法可以在DuiEngine Demo中搜索<caption><br>解决方案：删除header=”1”属性，改成用<caption></caption></caption></p>
 <p>1.5 如果对应的xml文件是布局类型的xml，那么记得在index.xml中加个属性layer=”1”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;resid type=&quot;XML&quot;  id_name=&quot;IDR_MAIN_DIALOG&quot; id=&quot;103&quot; layer=&quot;1&quot; file=&quot;xml\dlg_main.xml&quot;  /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;resid type=&quot;XML&quot;  id_name=&quot;IDR_MAIN_DIALOG&quot; id=&quot;103&quot; layer=&quot;1&quot; file=&quot;xml\dlg_main.xml&quot;  /&gt;</span><br></pre></td></tr></table></figure>
 <p>1.6 duiedit改名成了edit，需要在xml添加几个配置，照着Demo工程COPY就好了</p>
 <p>1.7 imgframe替换了原来的imghorzex,png等skin类型</p>
 <h4 id="2-编译中对ATL的依赖"><a href="#2-编译中对ATL的依赖" class="headerlink" title="2.编译中对ATL的依赖"></a>2.编译中对ATL的依赖</h4><p>我个人比较喜欢WTL，但是新版本中用WTL.mini进行了替换，好在可以用USING_ATL预编译宏进行开关选择继续使用WTL，使用的时候DuiEngine和使用的工程都需要使用这个预编译宏，否则会出现link error</p>

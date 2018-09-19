@@ -84,31 +84,18 @@
 
 
 
-<meta name="description" content="问题
-新建一个Windows Metro style的Project(Application/Grid Application/WinRT Component DLL……)
-#include 
-编译，发现一堆错误，类似：
-
-1231&amp;gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(110): error">
+<meta name="description" content="问题 新建一个Windows Metro style的Project(Application/Grid Application/WinRT Component DLL……) #include &amp;lt;wrl.h&amp;gt; 编译，发现一堆错误，类似：  1231&amp;gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h">
+<meta name="keywords" content="win8,winrt,wrl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="#include &lt;wrl.h&gt;引发的C2872编译错误">
+<meta property="og:title" content="#include &amp;lt;wrl.h&amp;gt;引发的C2872编译错误">
 <meta property="og:url" content="http://linyehui.me/2011/12/02/wrl-error-c2872/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="问题
-新建一个Windows Metro style的Project(Application/Grid Application/WinRT Component DLL……)
-#include 
-编译，发现一堆错误，类似：
-
-1231&amp;gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(110): error">
+<meta property="og:description" content="问题 新建一个Windows Metro style的Project(Application/Grid Application/WinRT Component DLL……) #include &amp;lt;wrl.h&amp;gt; 编译，发现一堆错误，类似：  1231&amp;gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2014-07-07T13:44:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="#include &lt;wrl.h&gt;引发的C2872编译错误">
-<meta name="twitter:description" content="问题
-新建一个Windows Metro style的Project(Application/Grid Application/WinRT Component DLL……)
-#include 
-编译，发现一堆错误，类似：
-
-1231&amp;gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(110): error">
+<meta name="twitter:title" content="#include &amp;lt;wrl.h&amp;gt;引发的C2872编译错误">
+<meta name="twitter:description" content="问题 新建一个Windows Metro style的Project(Application/Grid Application/WinRT Component DLL……) #include &amp;lt;wrl.h&amp;gt; 编译，发现一堆错误，类似：  1231&amp;gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h">
 
 
 
@@ -344,10 +331,10 @@
       
         <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol>
 <li>新建一个Windows Metro style的Project(Application/Grid Application/WinRT Component DLL……)</li>
-<li>#include <wrl.h></wrl.h></li>
+<li>#include &lt;wrl.h&gt;</li>
 <li>编译，发现一堆错误，类似：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1&gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(110): error C2872: &apos;TrustLevel&apos; : ambiguous symbol</div><div class="line">1&gt;          could be &apos;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(76) : TrustLevel&apos;</div><div class="line">1&gt;          or       &apos;c:\program files (x86)\microsoft visual studio 11.0\vc\lib\platform.winmd : Platform::TrustLevel&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(110): error C2872: &apos;TrustLevel&apos; : ambiguous symbol</span><br><span class="line">1&gt;          could be &apos;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(76) : TrustLevel&apos;</span><br><span class="line">1&gt;          or       &apos;c:\program files (x86)\microsoft visual studio 11.0\vc\lib\platform.winmd : Platform::TrustLevel&apos;</span><br></pre></td></tr></table></figure>
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
 <li>错误原因很明显，两个命名空间下的类型定义冲突了</li>
 <li>所以解决问题的方法其实就是二选一</li>

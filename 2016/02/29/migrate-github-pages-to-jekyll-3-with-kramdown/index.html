@@ -84,25 +84,18 @@
 
 
 
-<meta name="description" content="需求需求来自Github的一条公告:
-GitHub Pages now faster and simpler with Jekyll 3.0
-1Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&amp;apos;s default Markdown engine.
-GitHub宣布从 2016 年 5 月 1 日">
+<meta name="description" content="需求需求来自Github的一条公告: GitHub Pages now faster and simpler with Jekyll 3.0 1Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&amp;apos;s default Markdown engine. GitHub宣布从 2016 年 5 月 1 日">
+<meta name="keywords" content="markdown,jekyll,github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="将 GitHub Pages 从 rdiscount 切换到 kramdown">
 <meta property="og:url" content="http://linyehui.me/2016/02/29/migrate-github-pages-to-jekyll-3-with-kramdown/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求需求来自Github的一条公告:
-GitHub Pages now faster and simpler with Jekyll 3.0
-1Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&amp;apos;s default Markdown engine.
-GitHub宣布从 2016 年 5 月 1 日">
+<meta property="og:description" content="需求需求来自Github的一条公告: GitHub Pages now faster and simpler with Jekyll 3.0 1Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&amp;apos;s default Markdown engine. GitHub宣布从 2016 年 5 月 1 日">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T09:01:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="将 GitHub Pages 从 rdiscount 切换到 kramdown">
-<meta name="twitter:description" content="需求需求来自Github的一条公告:
-GitHub Pages now faster and simpler with Jekyll 3.0
-1Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&amp;apos;s default Markdown engine.
-GitHub宣布从 2016 年 5 月 1 日">
+<meta name="twitter:description" content="需求需求来自Github的一条公告: GitHub Pages now faster and simpler with Jekyll 3.0 1Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&amp;apos;s default Markdown engine. GitHub宣布从 2016 年 5 月 1 日">
 
 
 
@@ -337,21 +330,21 @@ GitHub宣布从 2016 年 5 月 1 日">
 
       
         <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>需求来自Github的一条公告:</p>
-<p><a href="https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0" target="_blank" rel="external">GitHub Pages now faster and simpler with Jekyll 3.0</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&apos;s default Markdown engine.</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0" target="_blank" rel="noopener">GitHub Pages now faster and simpler with Jekyll 3.0</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Starting May 1st, 2016, GitHub Pages will only support kramdown, Jekyll&apos;s default Markdown engine.</span><br></pre></td></tr></table></figure>
 <p>GitHub宣布从 2016 年 5 月 1 日起，GitHub Pages 将只支持 kramdown 作为唯一的 Markdown 引擎，而我之前使用的rdiscount需要做迁移。</p>
-<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><h3 id="升级本地Jekyll到3-0方便调试"><a href="#升级本地Jekyll到3-0方便调试" class="headerlink" title="升级本地Jekyll到3.0方便调试"></a>升级本地Jekyll到3.0方便调试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem install jekyll</div></pre></td></tr></table></figure>
-<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><h4 id="老的配置文件"><a href="#老的配置文件" class="headerlink" title="老的配置文件"></a>老的配置文件</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">markdown: rdiscount</div><div class="line">highlighter: pygments</div><div class="line">permalink: /:year/:month/:day/:title.html</div><div class="line">name: "HABIT IS POWER"</div><div class="line"></div><div class="line">author: "linyehui"</div><div class="line">atom-baseurl: "http://linyehui.github.io"</div><div class="line">disqus: "linyehui"</div><div class="line"></div><div class="line">navigations:</div></pre></td></tr></table></figure>
-<h4 id="更新后的配置文件"><a href="#更新后的配置文件" class="headerlink" title="更新后的配置文件"></a>更新后的配置文件</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">markdown: kramdown</div><div class="line">kramdown:</div><div class="line">    input: GFM</div><div class="line">highlighter: rouge</div><div class="line">permalink: /:year/:month/:day/:title.html</div><div class="line">name: "HABIT IS POWER"</div><div class="line"></div><div class="line">author: "linyehui"</div><div class="line">atom-baseurl: "http://linyehui.github.io"</div><div class="line">disqus: "linyehui"</div><div class="line"></div><div class="line">navigations:</div></pre></td></tr></table></figure>
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><h3 id="升级本地Jekyll到3-0方便调试"><a href="#升级本地Jekyll到3-0方便调试" class="headerlink" title="升级本地Jekyll到3.0方便调试"></a>升级本地Jekyll到3.0方便调试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gem install jekyll</span><br></pre></td></tr></table></figure>
+<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><h4 id="老的配置文件"><a href="#老的配置文件" class="headerlink" title="老的配置文件"></a>老的配置文件</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">markdown: rdiscount</span><br><span class="line">highlighter: pygments</span><br><span class="line">permalink: /:year/:month/:day/:title.html</span><br><span class="line">name: "HABIT IS POWER"</span><br><span class="line"></span><br><span class="line">author: "linyehui"</span><br><span class="line">atom-baseurl: "http://linyehui.github.io"</span><br><span class="line">disqus: "linyehui"</span><br><span class="line"></span><br><span class="line">navigations:</span><br></pre></td></tr></table></figure>
+<h4 id="更新后的配置文件"><a href="#更新后的配置文件" class="headerlink" title="更新后的配置文件"></a>更新后的配置文件</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">markdown: kramdown</span><br><span class="line">kramdown:</span><br><span class="line">    input: GFM</span><br><span class="line">highlighter: rouge</span><br><span class="line">permalink: /:year/:month/:day/:title.html</span><br><span class="line">name: "HABIT IS POWER"</span><br><span class="line"></span><br><span class="line">author: "linyehui"</span><br><span class="line">atom-baseurl: "http://linyehui.github.io"</span><br><span class="line">disqus: "linyehui"</span><br><span class="line"></span><br><span class="line">navigations:</span><br></pre></td></tr></table></figure>
 <h2 id="升级后的格式问题"><a href="#升级后的格式问题" class="headerlink" title="升级后的格式问题"></a>升级后的格式问题</h2><p>升级之后，最大的问题就是换行问题，再有就是代码格式问题</p>
 <h3 id="换行问题"><a href="#换行问题" class="headerlink" title="换行问题"></a>换行问题</h3><p>这个麻烦一点，找了下，没办法从配置上修改，只好用正则表达式全局搜索替换</p>
-<h4 id="连续两行-开头的话中间加一个空行"><a href="#连续两行-开头的话中间加一个空行" class="headerlink" title="连续两行#开头的话中间加一个空行"></a>连续两行#开头的话中间加一个空行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(#.+\s)(^#)</div><div class="line">$1\n$2</div></pre></td></tr></table></figure>
-<h4 id="行末尾两个空格替换成一个空行"><a href="#行末尾两个空格替换成一个空行" class="headerlink" title="行末尾两个空格替换成一个空行"></a>行末尾两个空格替换成一个空行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(  $)</div><div class="line">$1\n</div></pre></td></tr></table></figure>
-<h3 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h3><p>我涉及到的代码格式主要是这几种，代码块的左<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<h4 id="连续两行-开头的话中间加一个空行"><a href="#连续两行-开头的话中间加一个空行" class="headerlink" title="连续两行#开头的话中间加一个空行"></a>连续两行#开头的话中间加一个空行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(#.+\s)(^#)</span><br><span class="line">$1\n$2</span><br></pre></td></tr></table></figure>
+<h4 id="行末尾两个空格替换成一个空行"><a href="#行末尾两个空格替换成一个空行" class="headerlink" title="行末尾两个空格替换成一个空行"></a>行末尾两个空格替换成一个空行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(  $)</span><br><span class="line">$1\n</span><br></pre></td></tr></table></figure>
+<h3 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h3><p>我涉及到的代码格式主要是这几种，代码块的左<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <p>object-c<br>objc</p>
 <p>C++<br>cpp</p>
 <p>c#<br>csharp</p>
-<p>```</p>
+<p><code>`</code></p>
 
       
     </div>

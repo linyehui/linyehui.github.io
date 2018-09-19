@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="WinRT下异步操作很多，所以Lambda也很多，如果要让Lambda部分的函数递归如何实现？  
-这个需求其实在C++下会比较突出一点，因为C#和VB下是managed的代码，比较容易实现回调事件。
-其实也是一个小的“奇技淫巧”，不见得是什么好东西：
-缓存下这个Lambda表达式的地址：opRead-&amp;gt;Completed = (Type sender){Lambda};  
-在op-&amp;gt">
+<meta name="description" content="WinRT下异步操作很多，所以Lambda也很多，如果要让Lambda部分的函数递归如何实现？   这个需求其实在C++下会比较突出一点，因为C#和VB下是managed的代码，比较容易实现回调事件。 其实也是一个小的“奇技淫巧”，不见得是什么好东西： 缓存下这个Lambda表达式的地址：opRead-&amp;gt;Completed = (Type sender){Lambda};   在op-&amp;gt">
+<meta name="keywords" content="winrt,lambda">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lambda表达式的递归">
 <meta property="og:url" content="http://linyehui.me/2011/11/28/recursive-lambda/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="WinRT下异步操作很多，所以Lambda也很多，如果要让Lambda部分的函数递归如何实现？  
-这个需求其实在C++下会比较突出一点，因为C#和VB下是managed的代码，比较容易实现回调事件。
-其实也是一个小的“奇技淫巧”，不见得是什么好东西：
-缓存下这个Lambda表达式的地址：opRead-&amp;gt;Completed = (Type sender){Lambda};  
-在op-&amp;gt">
+<meta property="og:description" content="WinRT下异步操作很多，所以Lambda也很多，如果要让Lambda部分的函数递归如何实现？   这个需求其实在C++下会比较突出一点，因为C#和VB下是managed的代码，比较容易实现回调事件。 其实也是一个小的“奇技淫巧”，不见得是什么好东西： 缓存下这个Lambda表达式的地址：opRead-&amp;gt;Completed = (Type sender){Lambda};   在op-&amp;gt">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lambda表达式的递归">
-<meta name="twitter:description" content="WinRT下异步操作很多，所以Lambda也很多，如果要让Lambda部分的函数递归如何实现？  
-这个需求其实在C++下会比较突出一点，因为C#和VB下是managed的代码，比较容易实现回调事件。
-其实也是一个小的“奇技淫巧”，不见得是什么好东西：
-缓存下这个Lambda表达式的地址：opRead-&amp;gt;Completed = (Type sender){Lambda};  
-在op-&amp;gt">
+<meta name="twitter:description" content="WinRT下异步操作很多，所以Lambda也很多，如果要让Lambda部分的函数递归如何实现？   这个需求其实在C++下会比较突出一点，因为C#和VB下是managed的代码，比较容易实现回调事件。 其实也是一个小的“奇技淫巧”，不见得是什么好东西： 缓存下这个Lambda表达式的地址：opRead-&amp;gt;Completed = (Type sender){Lambda};   在op-&amp;gt">
 
 
 

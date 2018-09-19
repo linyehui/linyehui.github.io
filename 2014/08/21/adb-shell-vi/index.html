@@ -84,34 +84,18 @@
 
 
 
-<meta name="description" content="需求原始需求Android应用测试的时候经常需要修改/system/etc/hosts，有这么几种常见方法：  
-
-1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦）
-2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作）
-3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）
-
-落地需求ad">
+<meta name="description" content="需求原始需求Android应用测试的时候经常需要修改/system/etc/hosts，有这么几种常见方法：    1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦） 2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作） 3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）  落地需求ad">
+<meta name="keywords" content="android,busybox,vi,adb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="adb shell下使用vi修改hosts">
 <meta property="og:url" content="http://linyehui.me/2014/08/21/adb-shell-vi/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求原始需求Android应用测试的时候经常需要修改/system/etc/hosts，有这么几种常见方法：  
-
-1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦）
-2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作）
-3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）
-
-落地需求ad">
+<meta property="og:description" content="需求原始需求Android应用测试的时候经常需要修改/system/etc/hosts，有这么几种常见方法：    1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦） 2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作） 3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）  落地需求ad">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:33:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="adb shell下使用vi修改hosts">
-<meta name="twitter:description" content="需求原始需求Android应用测试的时候经常需要修改/system/etc/hosts，有这么几种常见方法：  
-
-1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦）
-2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作）
-3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）
-
-落地需求ad">
+<meta name="twitter:description" content="需求原始需求Android应用测试的时候经常需要修改/system/etc/hosts，有这么几种常见方法：    1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦） 2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作） 3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）  落地需求ad">
 
 
 
@@ -353,7 +337,7 @@
 </ul>
 <h2 id="落地需求"><a href="#落地需求" class="headerlink" title="落地需求"></a>落地需求</h2><p>adb shell vi这个方案无疑是操作起来最高效的，那怎样才能可以在adb shell下使用vi命令呢？</p>
 <h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="0-前提：你的手机已经ROOT过了"><a href="#0-前提：你的手机已经ROOT过了" class="headerlink" title="0. 前提：你的手机已经ROOT过了"></a>0. 前提：你的手机已经ROOT过了</h2><h2 id="1-手机上下载并安装BusyBox"><a href="#1-手机上下载并安装BusyBox" class="headerlink" title="1. 手机上下载并安装BusyBox"></a>1. 手机上下载并安装BusyBox</h2><ul>
-<li>我用的是这个：<a href="http://www.wandoujia.com/apps/stericson.busybox.donate" target="_blank" rel="external">BusyBox工具箱 汉化版</a></li>
+<li>我用的是这个：<a href="http://www.wandoujia.com/apps/stericson.busybox.donate" target="_blank" rel="noopener">BusyBox工具箱 汉化版</a></li>
 <li>我安装的版本是1.22.1</li>
 <li>安装的时候直接安装到/system/bin，这样敲命令行的时候就不需要这么敲了：<blockquote>
 <p>busybox vi</p>
@@ -362,12 +346,12 @@
 </ul>
 <h2 id="2-adb-shell-vi"><a href="#2-adb-shell-vi" class="headerlink" title="2. adb shell vi"></a>2. adb shell vi</h2><h3 id="2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用"><a href="#2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用" class="headerlink" title="2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用"></a>2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用</h3><h3 id="2-2-Windows下的-adb-shell-vi"><a href="#2-2-Windows下的-adb-shell-vi" class="headerlink" title="2.2 Windows下的 adb shell vi"></a>2.2 Windows下的 adb shell vi</h3><ul>
 <li>Windows下直接使用CDM连接后使用vi会出现乱码，解决的方案是使用：adbputty</li>
-<li>从这里下载：<a href="https://github.com/sztupy/adbputty/downloads" target="_blank" rel="external">adb putty</a></li>
+<li>从这里下载：<a href="https://github.com/sztupy/adbputty/downloads" target="_blank" rel="noopener">adb putty</a></li>
 <li>putty配置：主机填写transport-usb ，连接类型选择Adb（对应5037端口）  </li>
 </ul>
-<p>配置可以参考这个：<a href="http://yesokay.herokuapp.com/2012-07-31-adbputty.html" target="_blank" rel="external">adb putty</a></p>
+<p>配置可以参考这个：<a href="http://yesokay.herokuapp.com/2012-07-31-adbputty.html" target="_blank" rel="noopener">adb putty</a></p>
 <h2 id="3-vi-保存文件时提示：Read-only-file-system"><a href="#3-vi-保存文件时提示：Read-only-file-system" class="headerlink" title="3. vi 保存文件时提示：Read-only file system."></a>3. vi 保存文件时提示：Read-only file system.</h2><p>都是mount R/W的问题，同一个问题两个解决方案：</p>
-<h3 id="3-1-mount-R-W"><a href="#3-1-mount-R-W" class="headerlink" title="3.1 mount R/W"></a>3.1 mount R/W</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Simply change ro to rw and add the remount option</div><div class="line"># mount -o rw,remount /system</div><div class="line"></div><div class="line">Once you are done making changes, you should remount with the original readonly.</div><div class="line"># mount -o ro,remount /system</div></pre></td></tr></table></figure>
+<h3 id="3-1-mount-R-W"><a href="#3-1-mount-R-W" class="headerlink" title="3.1 mount R/W"></a>3.1 mount R/W</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Simply change ro to rw and add the remount option</span><br><span class="line"># mount -o rw,remount /system</span><br><span class="line"></span><br><span class="line">Once you are done making changes, you should remount with the original readonly.</span><br><span class="line"># mount -o ro,remount /system</span><br></pre></td></tr></table></figure>
 <h3 id="3-2-还有个比较鸡肋，但是偷懒的解决方案"><a href="#3-2-还有个比较鸡肋，但是偷懒的解决方案" class="headerlink" title="3.2 还有个比较鸡肋，但是偷懒的解决方案"></a>3.2 还有个比较鸡肋，但是偷懒的解决方案</h3><p>不记得命令行的时候可以使用下 :)</p>
 <ol>
 <li>使用Root Exporler等工具，点击Mount R/W按钮</li>
@@ -411,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/08/01/h264-encoders-other-than-ffmpeg-x264/" rel="next" title="使用ffmpeg对H.264/AAC视频进行处理">
-                <i class="fa fa-chevron-left"></i> 使用ffmpeg对H.264/AAC视频进行处理
+              <a href="/2014/08/21/cocoapods-cause-undefined-symbols-for-architecture-i386/" rel="next" title="使用CocoaPods引入第三方库导致的Undefined symbols for architecture i386">
+                <i class="fa fa-chevron-left"></i> 使用CocoaPods引入第三方库导致的Undefined symbols for architecture i386
               </a>
             
           </div>
@@ -421,8 +405,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/08/21/cocoapods-cause-undefined-symbols-for-architecture-i386/" rel="prev" title="使用CocoaPods引入第三方库导致的Undefined symbols for architecture i386">
-                使用CocoaPods引入第三方库导致的Undefined symbols for architecture i386 <i class="fa fa-chevron-right"></i>
+              <a href="/2014/08/29/cross-platform-indent-style/" rel="prev" title="跨平台代码缩进">
+                跨平台代码缩进 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

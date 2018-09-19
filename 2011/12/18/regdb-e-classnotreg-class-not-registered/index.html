@@ -84,25 +84,18 @@
 
 
 
-<meta name="description" content="一个诡异的问题：WinRT多工程情况下，调用另一个DLL中的接口，构造那个类型的时候就会直接抛出异常，错误码为0x80040154，REGDB_E_CLASSNOTREG，注释是：Class not registered
-最终在MSDN上找到相关的解答是：Creating Windows Runtime Components in C# and Visual Basic
-
-Visual Studi">
+<meta name="description" content="一个诡异的问题：WinRT多工程情况下，调用另一个DLL中的接口，构造那个类型的时候就会直接抛出异常，错误码为0x80040154，REGDB_E_CLASSNOTREG，注释是：Class not registered 最终在MSDN上找到相关的解答是：Creating Windows Runtime Components in C# and Visual Basic  Visual Studi">
+<meta name="keywords" content="winrt,vs2011">
 <meta property="og:type" content="article">
 <meta property="og:title" content="REGDB_E_CLASSNOTREG Class not registered">
 <meta property="og:url" content="http://linyehui.me/2011/12/18/regdb-e-classnotreg-class-not-registered/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="一个诡异的问题：WinRT多工程情况下，调用另一个DLL中的接口，构造那个类型的时候就会直接抛出异常，错误码为0x80040154，REGDB_E_CLASSNOTREG，注释是：Class not registered
-最终在MSDN上找到相关的解答是：Creating Windows Runtime Components in C# and Visual Basic
-
-Visual Studi">
+<meta property="og:description" content="一个诡异的问题：WinRT多工程情况下，调用另一个DLL中的接口，构造那个类型的时候就会直接抛出异常，错误码为0x80040154，REGDB_E_CLASSNOTREG，注释是：Class not registered 最终在MSDN上找到相关的解答是：Creating Windows Runtime Components in C# and Visual Basic  Visual Studi">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="REGDB_E_CLASSNOTREG Class not registered">
-<meta name="twitter:description" content="一个诡异的问题：WinRT多工程情况下，调用另一个DLL中的接口，构造那个类型的时候就会直接抛出异常，错误码为0x80040154，REGDB_E_CLASSNOTREG，注释是：Class not registered
-最终在MSDN上找到相关的解答是：Creating Windows Runtime Components in C# and Visual Basic
-
-Visual Studi">
+<meta name="twitter:description" content="一个诡异的问题：WinRT多工程情况下，调用另一个DLL中的接口，构造那个类型的时候就会直接抛出异常，错误码为0x80040154，REGDB_E_CLASSNOTREG，注释是：Class not registered 最终在MSDN上找到相关的解答是：Creating Windows Runtime Components in C# and Visual Basic  Visual Studi">
 
 
 
@@ -337,10 +330,14 @@ Visual Studi">
 
       
         <h1 id="一个诡异的问题："><a href="#一个诡异的问题：" class="headerlink" title="一个诡异的问题："></a>一个诡异的问题：</h1><p>WinRT多工程情况下，调用另一个DLL中的接口，构造那个类型的时候就会直接抛出异常，错误码为0x80040154，REGDB_E_CLASSNOTREG，注释是：Class not registered</p>
-<h1 id="最终在MSDN上找到相关的解答是："><a href="#最终在MSDN上找到相关的解答是：" class="headerlink" title="最终在MSDN上找到相关的解答是："></a>最终在MSDN上找到相关的解答是：</h1><p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230301.aspx" target="_blank" rel="external">Creating Windows Runtime Components in C# and Visual Basic</a></p>
+<h1 id="最终在MSDN上找到相关的解答是："><a href="#最终在MSDN上找到相关的解答是：" class="headerlink" title="最终在MSDN上找到相关的解答是："></a>最终在MSDN上找到相关的解答是：</h1><p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230301.aspx" target="_blank" rel="noopener">Creating Windows Runtime Components in C# and Visual Basic</a></p>
 <blockquote>
 <p>Visual Studio 11 Express for Windows Developer Preview fails to add classes to the app manifest if they don’t have default constructors. </p>
+</blockquote>
+<blockquote>
 <p> This causes a “Class not registered” error at run time, when JavaScript code tries to instantiate the class. The workaround is to add a default constructor.</p>
+</blockquote>
+<blockquote>
 <p> ‘’’Important’’’  </p>
 </blockquote>
 <p>When you encounter this error, simply adding a default constructor to the class doesn’t fix the problem. Stop the debugger and then delete the AppXManifest.xml file from the Debug folder, forcing Visual Studio to regenerate the file and add the class. Alternatively, you can manually add the class to the extensions section of the manifest.</p>

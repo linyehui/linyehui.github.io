@@ -84,31 +84,18 @@
 
 
 
-<meta name="description" content="有人说在Windows上Ruby是件很虐心的事情，这段时间实践了下，其实一点也不然，有了RubyInstaller，纯Ruby的学习找就是无障碍一步到位了。
-当然闹心的事情还是有的 :)  
-1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。解决方案：  
-http://ruby.taobao.org/    
-按照首页上的指引操作就好了
-2、公司代理问题（公司网络只能通过http">
+<meta name="description" content="有人说在Windows上Ruby是件很虐心的事情，这段时间实践了下，其实一点也不然，有了RubyInstaller，纯Ruby的学习找就是无障碍一步到位了。 当然闹心的事情还是有的 :)   1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。解决方案：   http://ruby.taobao.org/     按照首页上的指引操作就好了 2、公司代理问题（公司网络只能通过http">
+<meta name="keywords" content="ruby">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello Ruby on Windows">
 <meta property="og:url" content="http://linyehui.me/2012/12/22/hello-ruby-on-windows/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="有人说在Windows上Ruby是件很虐心的事情，这段时间实践了下，其实一点也不然，有了RubyInstaller，纯Ruby的学习找就是无障碍一步到位了。
-当然闹心的事情还是有的 :)  
-1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。解决方案：  
-http://ruby.taobao.org/    
-按照首页上的指引操作就好了
-2、公司代理问题（公司网络只能通过http">
+<meta property="og:description" content="有人说在Windows上Ruby是件很虐心的事情，这段时间实践了下，其实一点也不然，有了RubyInstaller，纯Ruby的学习找就是无障碍一步到位了。 当然闹心的事情还是有的 :)   1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。解决方案：   http://ruby.taobao.org/     按照首页上的指引操作就好了 2、公司代理问题（公司网络只能通过http">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello Ruby on Windows">
-<meta name="twitter:description" content="有人说在Windows上Ruby是件很虐心的事情，这段时间实践了下，其实一点也不然，有了RubyInstaller，纯Ruby的学习找就是无障碍一步到位了。
-当然闹心的事情还是有的 :)  
-1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。解决方案：  
-http://ruby.taobao.org/    
-按照首页上的指引操作就好了
-2、公司代理问题（公司网络只能通过http">
+<meta name="twitter:description" content="有人说在Windows上Ruby是件很虐心的事情，这段时间实践了下，其实一点也不然，有了RubyInstaller，纯Ruby的学习找就是无障碍一步到位了。 当然闹心的事情还是有的 :)   1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。解决方案：   http://ruby.taobao.org/     按照首页上的指引操作就好了 2、公司代理问题（公司网络只能通过http">
 
 
 
@@ -345,24 +332,24 @@ http://ruby.taobao.org/
         <p>有人说在Windows上Ruby是件很虐心的事情，这段时间实践了下，其实一点也不然，有了RubyInstaller，纯Ruby的学习找就是无障碍一步到位了。</p>
 <p><strong>当然闹心的事情还是有的 :)</strong>  </p>
 <h3 id="1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。"><a href="#1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。" class="headerlink" title="1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。"></a>1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。</h3><p><strong>解决方案：</strong>  </p>
-<p><a href="http://ruby.taobao.org/" target="_blank" rel="external">http://ruby.taobao.org/</a>    </p>
+<p><a href="http://ruby.taobao.org/" target="_blank" rel="noopener">http://ruby.taobao.org/</a>    </p>
 <p>按照首页上的指引操作就好了</p>
 <h3 id="2、公司代理问题（公司网络只能通过http代理来上网）"><a href="#2、公司代理问题（公司网络只能通过http代理来上网）" class="headerlink" title="2、公司代理问题（公司网络只能通过http代理来上网）"></a>2、公司代理问题（公司网络只能通过http代理来上网）</h3><p>gem也是可以设置代理的，不过有个简单的方法是给系统变量添加一个http_proxy，这样在CMD中运行gem   install就能直接使用代理来安装了 :)  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set http_proxy=&lt;http://proxy.yourdomain.com:8080&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set http_proxy=&lt;http://proxy.yourdomain.com:8080&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="3、给IDE增加Debug功能"><a href="#3、给IDE增加Debug功能" class="headerlink" title="3、给IDE增加Debug功能"></a>3、给IDE增加Debug功能</h3><p>你需要执行下面这个命令：  </p>
 <blockquote>
 <p>gem install ruby-debug-base19x</p>
 </blockquote>
 <p>如果你发现失败了？而且错误提示中提到了“DevKit”，那么你需要先安装、配置好DevKit。  </p>
-<p>从[<a href="http://rubyinstaller.org/downloads/" target="_blank" rel="external">http://rubyinstaller.org/downloads/</a>   这里]下载，解压，到解压出来的目录下执行：  </p>
+<p>从[<a href="http://rubyinstaller.org/downloads/" target="_blank" rel="noopener">http://rubyinstaller.org/downloads/</a>   这里]下载，解压，到解压出来的目录下执行：  </p>
 <blockquote>
 <p>ruby dk.rb init<br>ruby dk.rb review<br>ruby dk.rb install<br>搞定，DevKit就安装好了，可以再执行下这个命令行，运气不是很差的话你，你已经可以在IDE中Debug Ruby了<br>gem install ruby-debug-base19x</p>
 </blockquote>
-<p>这里其实还有个更简便的方法：使用<a href="http://railsinstaller.org/" target="_blank" rel="external">RailsInstaller</a></p>
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="http://www.cnblogs.com/varlxj/archive/2011/10/16/2211004.html" target="_blank" rel="external">解决Rubygems被墙，GEM无法更新</a>  </p>
-<p><a href="http://44ux.com/blog/2012/10/13/proxy-setting-in-cmd/" target="_blank" rel="external">CMD 和 Git 中的代理设置</a>  </p>
-<p><a href="http://rubyer.me/blog/134/" target="_blank" rel="external">Windows下安装DevKit</a>  </p>
-<p>RubyInstaller和DevKit都可以从这里下载到：<a href="http://rubyinstaller.org/downloads/" target="_blank" rel="external">http://rubyinstaller.org/downloads/</a></p>
+<p>这里其实还有个更简便的方法：使用<a href="http://railsinstaller.org/" target="_blank" rel="noopener">RailsInstaller</a></p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="http://www.cnblogs.com/varlxj/archive/2011/10/16/2211004.html" target="_blank" rel="noopener">解决Rubygems被墙，GEM无法更新</a>  </p>
+<p><a href="http://44ux.com/blog/2012/10/13/proxy-setting-in-cmd/" target="_blank" rel="noopener">CMD 和 Git 中的代理设置</a>  </p>
+<p><a href="http://rubyer.me/blog/134/" target="_blank" rel="noopener">Windows下安装DevKit</a>  </p>
+<p>RubyInstaller和DevKit都可以从这里下载到：<a href="http://rubyinstaller.org/downloads/" target="_blank" rel="noopener">http://rubyinstaller.org/downloads/</a></p>
 
       
     </div>

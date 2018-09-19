@@ -84,25 +84,18 @@
 
 
 
-<meta name="description" content="问题描述iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。
-问题排查各种尝试后，发现了这篇文章：调用录音后，游戏音效播放不出来的问题，这篇给了我们一个新的解决思路：  
-会不会是iOS下AVAudioSession的category导致的问题？
-在语音使用麦克风录音的前后">
+<meta name="description" content="问题描述iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。 问题排查各种尝试后，发现了这篇文章：调用录音后，游戏音效播放不出来的问题，这篇给了我们一个新的解决思路：   会不会是iOS下AVAudioSession的category导致的问题？ 在语音使用麦克风录音的前后">
+<meta name="keywords" content="ios,cocos2d,playEffect">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cocos2d下语音聊天和游戏音效冲突，导致playEffect没声音">
 <meta property="og:url" content="http://linyehui.me/2015/04/29/cocos2dx-playeffect-failed/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="问题描述iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。
-问题排查各种尝试后，发现了这篇文章：调用录音后，游戏音效播放不出来的问题，这篇给了我们一个新的解决思路：  
-会不会是iOS下AVAudioSession的category导致的问题？
-在语音使用麦克风录音的前后">
+<meta property="og:description" content="问题描述iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。 问题排查各种尝试后，发现了这篇文章：调用录音后，游戏音效播放不出来的问题，这篇给了我们一个新的解决思路：   会不会是iOS下AVAudioSession的category导致的问题？ 在语音使用麦克风录音的前后">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2d下语音聊天和游戏音效冲突，导致playEffect没声音">
-<meta name="twitter:description" content="问题描述iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。
-问题排查各种尝试后，发现了这篇文章：调用录音后，游戏音效播放不出来的问题，这篇给了我们一个新的解决思路：  
-会不会是iOS下AVAudioSession的category导致的问题？
-在语音使用麦克风录音的前后">
+<meta name="twitter:description" content="问题描述iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。 问题排查各种尝试后，发现了这篇文章：调用录音后，游戏音效播放不出来的问题，这篇给了我们一个新的解决思路：   会不会是iOS下AVAudioSession的category导致的问题？ 在语音使用麦克风录音的前后">
 
 
 
@@ -337,7 +330,7 @@
 
       
         <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。</p>
-<h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><p>各种尝试后，发现了这篇文章：<a href="http://www.imgeek.org/forum.php?mod=viewthread&amp;tid=651" target="_blank" rel="external">调用录音后，游戏音效播放不出来的问题</a>，这篇给了我们一个新的解决思路：  </p>
+<h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><p>各种尝试后，发现了这篇文章：<a href="http://www.imgeek.org/forum.php?mod=viewthread&amp;tid=651" target="_blank" rel="noopener">调用录音后，游戏音效播放不出来的问题</a>，这篇给了我们一个新的解决思路：  </p>
 <p>会不会是iOS下AVAudioSession的category导致的问题？</p>
 <p>在语音使用麦克风录音的前后，已经播放音效的前后，都将AVAudioSession的category属性Log打印出来，发现一旦我们使用了cocos2d-js提供的cc.audioEngine.playEffect方法，category就会变成kAudioSessionCategory_SoloAmbientSound，而像我们这种既有语音又有音效的情况，我们需要的其实是：AVAudioSessionCategoryPlayAndRecord。  </p>
 <p>好了，找到直接的原因了，但是怎么改呢？</p>
@@ -345,15 +338,15 @@
 <ul>
 <li>如果没有设置或CDaudioManager的configured，会使用默认的mode：kAMM_FxPlusMusicIfNoOtherAudio</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># ./frameworks/js-bindings/cocos2d-x/cocos/audio/ios/CDAudioManager.m</div><div class="line"></div><div class="line">// Init</div><div class="line">+ (CDAudioManager *) sharedManager</div><div class="line">&#123;</div><div class="line">    @synchronized(self)     &#123;</div><div class="line">        if (!sharedManager) &#123;</div><div class="line">            if (!configured) &#123;</div><div class="line">                //Set defaults here</div><div class="line">                configuredMode = kAMM_FxPlusMusicIfNoOtherAudio;</div><div class="line">            &#125;</div><div class="line">            sharedManager = [[CDAudioManager alloc] init:configuredMode];</div><div class="line">            _sharedManagerState = kAMStateInitialised;//This is only really relevant when using asynchronous initialisation</div><div class="line">            [[NSNotificationCenter defaultCenter] postNotificationName:kCDN_AudioManagerInitialised object:nil];</div><div class="line">        &#125;    </div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return sharedManager;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># ./frameworks/js-bindings/cocos2d-x/cocos/audio/ios/CDAudioManager.m</span><br><span class="line"></span><br><span class="line">// Init</span><br><span class="line">+ (CDAudioManager *) sharedManager</span><br><span class="line">&#123;</span><br><span class="line">    @synchronized(self)     &#123;</span><br><span class="line">        if (!sharedManager) &#123;</span><br><span class="line">            if (!configured) &#123;</span><br><span class="line">                //Set defaults here</span><br><span class="line">                configuredMode = kAMM_FxPlusMusicIfNoOtherAudio;</span><br><span class="line">            &#125;</span><br><span class="line">            sharedManager = [[CDAudioManager alloc] init:configuredMode];</span><br><span class="line">            _sharedManagerState = kAMStateInitialised;//This is only really relevant when using asynchronous initialisation</span><br><span class="line">            [[NSNotificationCenter defaultCenter] postNotificationName:kCDN_AudioManagerInitialised object:nil];</span><br><span class="line">        &#125;    </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return sharedManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>而默认的这个mode对应的正是AVAudioSessionCategorySoloAmbient  </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-(void) setMode:(tAudioManagerMode) mode &#123;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void) setMode:(tAudioManagerMode) mode &#123;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>解决方案出来了  </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 调用下CDAudioManager的这个方法，初始化下我们的mode</div><div class="line">+ (void) configure: (tAudioManagerMode) mode;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 调用下CDAudioManager的这个方法，初始化下我们的mode</span><br><span class="line">+ (void) configure: (tAudioManagerMode) mode;</span><br></pre></td></tr></table></figure>
 <h2 id="最终的解决方案"><a href="#最终的解决方案" class="headerlink" title="最终的解决方案"></a>最终的解决方案</h2><ol>
 <li><p>确认工程配置的Header目录包含CDAudioManager.h所在的目录  </p>
 </li>

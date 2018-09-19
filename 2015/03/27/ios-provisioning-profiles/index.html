@@ -84,29 +84,19 @@
 
 
 
-<meta name="description" content="问题如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。
-解决方案:一切重头再来重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是：
-如何清除本地的证书信息
-打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书
-打开XCod">
+<meta name="description" content="问题如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。 解决方案:一切重头再来重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是： 如何清除本地的证书信息 打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书 打开XCod">
+<meta name="keywords" content="ios,mac,debug">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS Provisioning Profiles">
 <meta property="og:url" content="http://linyehui.me/2015/03/27/ios-provisioning-profiles/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="问题如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。
-解决方案:一切重头再来重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是：
-如何清除本地的证书信息
-打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书
-打开XCod">
+<meta property="og:description" content="问题如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。 解决方案:一切重头再来重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是： 如何清除本地的证书信息 打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书 打开XCod">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://linyehui.me/media/files/2015/03/27/12_revoke_certificate_2_2x.png">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS Provisioning Profiles">
-<meta name="twitter:description" content="问题如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。
-解决方案:一切重头再来重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是：
-如何清除本地的证书信息
-打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书
-打开XCod">
+<meta name="twitter:description" content="问题如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。 解决方案:一切重头再来重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是： 如何清除本地的证书信息 打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书 打开XCod">
 <meta name="twitter:image" content="http://linyehui.me/media/files/2015/03/27/12_revoke_certificate_2_2x.png">
 
 
@@ -349,10 +339,10 @@
 <li>删除本地的证书，服务器上配置的iOS Provisioning Profiles (Development)其实也是可以删除的，不删除也没问题，因为使用XCode重新申请证书的话，会自动把老的配置置为无效<br><img src="/media/files/2015/03/27/12_revoke_certificate_2_2x.png" alt="证书"></li>
 </ol>
 <p>做了上面的事情，你就可以安装各种教程，重新申请下证书了，这时你应该已经可以成功了。  </p>
-<p>参考：<a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW26" target="_blank" rel="external">Maintaining Your Signing Identities and Certificates</a><br><a href="http://www.cocoachina.com/bbs/read.php?tid=256724" target="_blank" rel="external">Valid signing identity not found（有关真机调试）</a>  </p>
+<p>参考：<a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW26" target="_blank" rel="noopener">Maintaining Your Signing Identities and Certificates</a><br><a href="http://www.cocoachina.com/bbs/read.php?tid=256724" target="_blank" rel="noopener">Valid signing identity not found（有关真机调试）</a>  </p>
 <p>这里有一点需要特别说的是：</p>
 <h3 id="No-signing-identity-found-不影响真机调试"><a href="#No-signing-identity-found-不影响真机调试" class="headerlink" title="No signing identity found 不影响真机调试"></a>No signing identity found 不影响真机调试</h3><p>如果你已经重新来过了，而且Build Setting-》Code Signing-》Provisioning Profiles已经有了正确的配置文件了，那么这个时候你看到  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No signing identity found</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No signing identity found</span><br></pre></td></tr></table></figure>
 <p>这个提示是可以忽略的，已经可以真机调试了。</p>
 <h2 id="Certificates-Identifiers-amp-Profiles"><a href="#Certificates-Identifiers-amp-Profiles" class="headerlink" title="Certificates, Identifiers &amp; Profiles"></a>Certificates, Identifiers &amp; Profiles</h2><p>Provisioning Profiles 到底是干什么的？  </p>
 <p>简单说，这个配置文件做的事情就是校验调试流程的三个主体的合法性：苹果开发者，XCode使用者，iPhone使用者。</p>
@@ -402,8 +392,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/03/18/debug-spidermonkey-with-cocos2d-js/" rel="next" title="cocos2d-js调试Spidermonkey代码">
-                <i class="fa fa-chevron-left"></i> cocos2d-js调试Spidermonkey代码
+              <a href="/2015/03/18/sdk-manager-crash/" rel="next" title="Windows下的SDK Manager.exe闪退">
+                <i class="fa fa-chevron-left"></i> Windows下的SDK Manager.exe闪退
               </a>
             
           </div>
@@ -551,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案-一切重头再来"><span class="nav-number">2.</span> <span class="nav-text">解决方案:一切重头再来</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何清除本地的证书信息"><span class="nav-number">2.1.</span> <span class="nav-text">如何清除本地的证书信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#No-signing-identity-found-不影响真机调试"><span class="nav-number">2.2.</span> <span class="nav-text">No signing identity found 不影响真机调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Certificates-Identifiers-amp-Profiles"><span class="nav-number">3.</span> <span class="nav-text">Certificates, Identifiers & Profiles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我为什么会遇到这个问题"><span class="nav-number">4.</span> <span class="nav-text">我为什么会遇到这个问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案-一切重头再来"><span class="nav-number">2.</span> <span class="nav-text">解决方案:一切重头再来</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何清除本地的证书信息"><span class="nav-number">2.1.</span> <span class="nav-text">如何清除本地的证书信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#No-signing-identity-found-不影响真机调试"><span class="nav-number">2.2.</span> <span class="nav-text">No signing identity found 不影响真机调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Certificates-Identifiers-amp-Profiles"><span class="nav-number">3.</span> <span class="nav-text">Certificates, Identifiers &amp; Profiles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我为什么会遇到这个问题"><span class="nav-number">4.</span> <span class="nav-text">我为什么会遇到这个问题</span></a></li></ol></div>
             
 
           </div>

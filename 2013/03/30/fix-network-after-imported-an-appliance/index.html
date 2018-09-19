@@ -84,37 +84,18 @@
 
 
 
-<meta name="description" content="问题：  
-使用了VirtualBox的导入和导出功能，用来实现类似VM的“克隆”功能，但是发现导出后，再次导入的虚拟机，如果我选择了
-
-“Reinitialize the MAC address of all network cards”（重新初始化所有网卡的MAC地址），
-
-那么在导入完成后你会发现系统无法找到网卡eth0了
-解决方法：  
-1234$cd /etc/udev/rules.d$">
+<meta name="description" content="问题：   使用了VirtualBox的导入和导出功能，用来实现类似VM的“克隆”功能，但是发现导出后，再次导入的虚拟机，如果我选择了  “Reinitialize the MAC address of all network cards”（重新初始化所有网卡的MAC地址），  那么在导入完成后你会发现系统无法找到网卡eth0了 解决方法：   1234$cd /etc/udev/rules.d$">
+<meta name="keywords" content="virtualbox">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VirtualBox导入虚拟电脑后找不到网卡">
 <meta property="og:url" content="http://linyehui.me/2013/03/30/fix-network-after-imported-an-appliance/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="问题：  
-使用了VirtualBox的导入和导出功能，用来实现类似VM的“克隆”功能，但是发现导出后，再次导入的虚拟机，如果我选择了
-
-“Reinitialize the MAC address of all network cards”（重新初始化所有网卡的MAC地址），
-
-那么在导入完成后你会发现系统无法找到网卡eth0了
-解决方法：  
-1234$cd /etc/udev/rules.d$">
+<meta property="og:description" content="问题：   使用了VirtualBox的导入和导出功能，用来实现类似VM的“克隆”功能，但是发现导出后，再次导入的虚拟机，如果我选择了  “Reinitialize the MAC address of all network cards”（重新初始化所有网卡的MAC地址），  那么在导入完成后你会发现系统无法找到网卡eth0了 解决方法：   1234$cd /etc/udev/rules.d$">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:33:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VirtualBox导入虚拟电脑后找不到网卡">
-<meta name="twitter:description" content="问题：  
-使用了VirtualBox的导入和导出功能，用来实现类似VM的“克隆”功能，但是发现导出后，再次导入的虚拟机，如果我选择了
-
-“Reinitialize the MAC address of all network cards”（重新初始化所有网卡的MAC地址），
-
-那么在导入完成后你会发现系统无法找到网卡eth0了
-解决方法：  
-1234$cd /etc/udev/rules.d$">
+<meta name="twitter:description" content="问题：   使用了VirtualBox的导入和导出功能，用来实现类似VM的“克隆”功能，但是发现导出后，再次导入的虚拟机，如果我选择了  “Reinitialize the MAC address of all network cards”（重新初始化所有网卡的MAC地址），  那么在导入完成后你会发现系统无法找到网卡eth0了 解决方法：   1234$cd /etc/udev/rules.d$">
 
 
 
@@ -355,10 +336,10 @@
 </blockquote>
 <p>那么在导入完成后你会发现系统无法找到网卡eth0了</p>
 <p><strong>解决方法：</strong>  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$cd /etc/udev/rules.d</div><div class="line">$sudo mkdir backup</div><div class="line">$sudo mv * backup</div><div class="line">#sudo reboot</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>cd /etc/udev/rules.d</span><br><span class="line"><span class="meta">$</span>sudo mkdir backup</span><br><span class="line"><span class="meta">$</span>sudo mv * backup</span><br><span class="line"><span class="meta">#</span>sudo reboot</span><br></pre></td></tr></table></figure>
 <p><strong>参考：</strong>  </p>
-<p><a href="http://www.cnitblog.com/luofuchong/archive/2007/12/18/37831.html" target="_blank" rel="external">【转】跟我一起写udev规则(译)</a>  </p>
-<p><a href="http://www.blogjava.net/zhyiwww/archive/2010/12/31/312612.html" target="_blank" rel="external">VirtualBox虚拟机Ubuntu找不到网卡的解决方法</a>  </p>
+<p><a href="http://www.cnitblog.com/luofuchong/archive/2007/12/18/37831.html" target="_blank" rel="noopener">【转】跟我一起写udev规则(译)</a>  </p>
+<p><a href="http://www.blogjava.net/zhyiwww/archive/2010/12/31/312612.html" target="_blank" rel="noopener">VirtualBox虚拟机Ubuntu找不到网卡的解决方法</a>  </p>
 
       
     </div>

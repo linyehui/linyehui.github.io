@@ -84,25 +84,21 @@
 
 
 
-<meta name="description" content="需求cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&amp;gt;Android Native Application。
-解决过程环境配置Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。
-12345An">
+<meta name="description" content="需求cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&amp;gt;Android Native Application。 解决过程环境配置Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。 12345An">
+<meta name="keywords" content="android,ndk,cocos2d-js,cocos2d">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cocos2d-js 配置NDK调试">
 <meta property="og:url" content="http://linyehui.me/2015/03/17/cocos2d-js-ndk-debug/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&amp;gt;Android Native Application。
-解决过程环境配置Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。
-12345An">
+<meta property="og:description" content="需求cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&amp;gt;Android Native Application。 解决过程环境配置Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。 12345An">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://linyehui.me/media/files/2015/03/17/cproject.png">
 <meta property="og:image" content="http://linyehui.me/media/files/2015/03/17/build_var.png">
 <meta property="og:image" content="http://linyehui.me/media/files/2015/03/17/ndk_build.png">
 <meta property="og:updated_time" content="2016-12-15T04:41:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2d-js 配置NDK调试">
-<meta name="twitter:description" content="需求cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&amp;gt;Android Native Application。
-解决过程环境配置Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。
-12345An">
+<meta name="twitter:description" content="需求cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&amp;gt;Android Native Application。 解决过程环境配置Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。 12345An">
 <meta name="twitter:image" content="http://linyehui.me/media/files/2015/03/17/cproject.png">
 
 
@@ -339,7 +335,7 @@
       
         <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&gt;Android Native Application。</p>
 <h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Android Developer Tools</div><div class="line">Build: v22.3.0-887826</div><div class="line"></div><div class="line">NDK </div><div class="line">D:\android-ndk-r9d</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Android Developer Tools</span><br><span class="line">Build: v22.3.0-887826</span><br><span class="line"></span><br><span class="line">NDK </span><br><span class="line">D:\android-ndk-r9d</span><br></pre></td></tr></table></figure>
 <p>为了说明这个问题，我用cocos code IDE创建了一个工程NativeDemo，下面中的.\NativeDemo就是这个工程的根目录</p>
 <h3 id="Add-Native-Support"><a href="#Add-Native-Support" class="headerlink" title="Add Native Support"></a>Add Native Support</h3><h4 id="默认生成的工程是找不到Add-Native-Support的"><a href="#默认生成的工程是找不到Add-Native-Support的" class="headerlink" title="默认生成的工程是找不到Add Native Support的"></a>默认生成的工程是找不到Add Native Support的</h4><p>用ADT打开工程后，没有办法使用Native来调试，这样就没办法调试NDK了，排查了下：  </p>
 <p>1.右键工程Android Tools中没有Add Native Support菜单  </p>
@@ -355,32 +351,32 @@
 <p>另外删除成功后工程属性下也看不到C/C++ Build的Tab页；    </p>
 <p>而工程属性的Builder下会看不到 Scanner Configuration Builder。    </p>
 <p>修改好了之后，右键工程，Android Tools，Add Native Support </p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.cocos2d-x.org/wiki/How_to_build_and_run_HelloWorld_on_Android_NDK_r5_and_above" target="_blank" rel="external">How to build and run HelloWorld on Android NDK r5 and above</a>  </p>
-<p><a href="http://www.cnblogs.com/sw926/p/3232311.html" target="_blank" rel="external">无需cygwin，使用NDK进行开发</a>  </p>
-<h3 id="配置NDK-build"><a href="#配置NDK-build" class="headerlink" title="配置NDK build"></a>配置NDK build</h3><h4 id="添加一个C-变量"><a href="#添加一个C-变量" class="headerlink" title="添加一个C++变量"></a>添加一个C++变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">COCOS2DX_HOME</div><div class="line">../../js-bindings/cocos2d-x</div></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.cocos2d-x.org/wiki/How_to_build_and_run_HelloWorld_on_Android_NDK_r5_and_above" target="_blank" rel="noopener">How to build and run HelloWorld on Android NDK r5 and above</a>  </p>
+<p><a href="http://www.cnblogs.com/sw926/p/3232311.html" target="_blank" rel="noopener">无需cygwin，使用NDK进行开发</a>  </p>
+<h3 id="配置NDK-build"><a href="#配置NDK-build" class="headerlink" title="配置NDK build"></a>配置NDK build</h3><h4 id="添加一个C-变量"><a href="#添加一个C-变量" class="headerlink" title="添加一个C++变量"></a>添加一个C++变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COCOS2DX_HOME</span><br><span class="line">../../js-bindings/cocos2d-x</span><br></pre></td></tr></table></figure>
 <p><img src="/media/files/2015/03/17/build_var.png" alt="build var"></p>
-<h4 id="配置NDK-build的命令行"><a href="#配置NDK-build的命令行" class="headerlink" title="配置NDK build的命令行"></a>配置NDK build的命令行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#Windows</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..;$&#123;COCOS2DX_HOME&#125;;$&#123;COCOS2DX_HOME&#125;/external;$&#123;COCOS2DX_HOME&#125;/cocos;../Classes&quot;</div><div class="line"></div><div class="line">#Mac</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..:$&#123;COCOS2DX_HOME&#125;:$&#123;COCOS2DX_HOME&#125;/external:$&#123;COCOS2DX_HOME&#125;/cocos:../Classes&quot;</div></pre></td></tr></table></figure>
+<h4 id="配置NDK-build的命令行"><a href="#配置NDK-build的命令行" class="headerlink" title="配置NDK build的命令行"></a>配置NDK build的命令行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#Windows</span><br><span class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..;$&#123;COCOS2DX_HOME&#125;;$&#123;COCOS2DX_HOME&#125;/external;$&#123;COCOS2DX_HOME&#125;/cocos;../Classes&quot;</span><br><span class="line"></span><br><span class="line">#Mac</span><br><span class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..:$&#123;COCOS2DX_HOME&#125;:$&#123;COCOS2DX_HOME&#125;/external:$&#123;COCOS2DX_HOME&#125;/cocos:../Classes&quot;</span><br></pre></td></tr></table></figure>
 <p><img src="/media/files/2015/03/17/ndk_build.png" alt="ndk build"></p>
 <ul>
 <li>NDK_DEBUG=1这个参数记得加上</li>
 </ul>
-<h3 id="R-ARM-THM-CALL"><a href="#R-ARM-THM-CALL" class="headerlink" title="R_ARM_THM_CALL"></a>R_ARM_THM_CALL</h3><p>C++编译过程中出现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed Android build: “error: relocation overflow in R_ARM_THM_CALL”</div></pre></td></tr></table></figure></p>
+<h3 id="R-ARM-THM-CALL"><a href="#R-ARM-THM-CALL" class="headerlink" title="R_ARM_THM_CALL"></a>R_ARM_THM_CALL</h3><p>C++编译过程中出现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed Android build: “error: relocation overflow in R_ARM_THM_CALL”</span><br></pre></td></tr></table></figure></p>
 <h4 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h4><p>/runtime-scr/proj.android/jni/Android.mk 中添加一行：</p>
 <blockquote>
 <p>LOCAL_ARM_MODE := arm</p>
 </blockquote>
-<p>参考：<a href="http://blog.csdn.net/mingzznet/article/details/41120551" target="_blank" rel="external">http://blog.csdn.net/mingzznet/article/details/41120551</a></p>
-<h3 id="SDK版本号导致的Unknown-Application-ABI"><a href="#SDK版本号导致的Unknown-Application-ABI" class="headerlink" title="SDK版本号导致的Unknown Application ABI"></a>SDK版本号导致的Unknown Application ABI</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unknown Application ABI: </div><div class="line">Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 9 in ./AndroidManifest.xml</div></pre></td></tr></table></figure>
+<p>参考：<a href="http://blog.csdn.net/mingzznet/article/details/41120551" target="_blank" rel="noopener">http://blog.csdn.net/mingzznet/article/details/41120551</a></p>
+<h3 id="SDK版本号导致的Unknown-Application-ABI"><a href="#SDK版本号导致的Unknown-Application-ABI" class="headerlink" title="SDK版本号导致的Unknown Application ABI"></a>SDK版本号导致的Unknown Application ABI</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Unknown Application ABI: </span><br><span class="line">Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 9 in ./AndroidManifest.xml</span><br></pre></td></tr></table></figure>
 <h4 id="解决方案：-2"><a href="#解决方案：-2" class="headerlink" title="解决方案："></a>解决方案：</h4><p>手机上的版本需要和安装了的SDK已经配置的SDK版本一致，以我的小米2S为例，我的系统版本是4.1，也就是对应SDK 的API Level 16；  </p>
 <p>下面这两个文件需要对应的都修改成16：  </p>
-<h5 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-sdk android:minSdkVersion=&quot;16&quot;/&gt;</div></pre></td></tr></table></figure>
-<h5 id="project-properties"><a href="#project-properties" class="headerlink" title="project.properties"></a>project.properties</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">target=android-16</div></pre></td></tr></table></figure>
+<h5 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-sdk android:minSdkVersion=&quot;16&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="project-properties"><a href="#project-properties" class="headerlink" title="project.properties"></a>project.properties</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">target=android-16</span><br></pre></td></tr></table></figure>
 <h3 id="NDK-MODULE-PATH"><a href="#NDK-MODULE-PATH" class="headerlink" title="NDK_MODULE_PATH"></a>NDK_MODULE_PATH</h3><p>切换到Mac下，使用SDK 16来编译，提示NDK Module找不到，想起来之前做过类似的事情，NDK build命令行设置的NDK_MODULE_PATH适用于编译，但是调试的时候还是会提示找不到路径，解决方案是在Android.mk中加上调试用的配置，不调试的时候关掉：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 调试NDK用的定义，平常不要打开 linyhui</div><div class="line">$(call import-add-path, ../../js-bindings)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/external)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/cocos)</div><div class="line">$(call import-add-path, ../Classes)</div></pre></td></tr></table></figure>
-<p><a href="http://blog.sina.com.cn/s/blog_4057ab62010197z8.html" target="_blank" rel="external">import-module的注意事项与NDK_MODULE_PATH的配置</a>  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果NDK_MODULE_PATH 没有设置或者设置不正确。编译时都是报错 Are you sure your NDK_MODULE_PATH variable is properly defined。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 调试NDK用的定义，平常不要打开 linyhui</span><br><span class="line">$(call import-add-path, ../../js-bindings)</span><br><span class="line">$(call import-add-path, ../../js-bindings/cocos2d-x)</span><br><span class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/external)</span><br><span class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/cocos)</span><br><span class="line">$(call import-add-path, ../Classes)</span><br></pre></td></tr></table></figure>
+<p><a href="http://blog.sina.com.cn/s/blog_4057ab62010197z8.html" target="_blank" rel="noopener">import-module的注意事项与NDK_MODULE_PATH的配置</a>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果NDK_MODULE_PATH 没有设置或者设置不正确。编译时都是报错 Are you sure your NDK_MODULE_PATH variable is properly defined。</span><br></pre></td></tr></table></figure>
 <h3 id="bindings目录下的Android-mk有语法错误"><a href="#bindings目录下的Android-mk有语法错误" class="headerlink" title="bindings目录下的Android.mk有语法错误"></a>bindings目录下的Android.mk有语法错误</h3><p>排查了半天发现是这个文件有语法错误，导致无法调试，但不知道为什么编译是没有问题的，这个算是cocos2d的一个Bug：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./NativeDemo/frameworks/js-bindings/bindings/Android.mk</div><div class="line"></div><div class="line">#### 注释掉这个文件末尾中的这一行：</div><div class="line"></div><div class="line">#$(call import-module,.)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./NativeDemo/frameworks/js-bindings/bindings/Android.mk</span><br><span class="line"></span><br><span class="line">#### 注释掉这个文件末尾中的这一行：</span><br><span class="line"></span><br><span class="line">#$(call import-module,.)</span><br></pre></td></tr></table></figure>
 <p>注释后，Build下C++，就可以Debug As-&gt;Android Native Application</p>
 <h3 id="搞定了"><a href="#搞定了" class="headerlink" title="搞定了"></a>搞定了</h3><p>可以Debug As-&gt;Android Native Application</p>
 
@@ -431,8 +427,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/03/18/sdk-manager-crash/" rel="prev" title="Windows下的SDK Manager.exe闪退">
-                Windows下的SDK Manager.exe闪退 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/03/18/debug-spidermonkey-with-cocos2d-js/" rel="prev" title="cocos2d-js调试Spidermonkey代码">
+                cocos2d-js调试Spidermonkey代码 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

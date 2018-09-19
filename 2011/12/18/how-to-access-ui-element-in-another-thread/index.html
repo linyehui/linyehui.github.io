@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="我的问题是：WinRT下如何在另外一个线程中访问UI线程 How To Access UI Element In Another Thread在UI所属线程之外的线程调用UI元素的方法或者属性会导致异常，怎样解决这样的问题呢？
-微软为我们提供了这样的方法：
-Windows::UI::Core::CoreDispatcher-&amp;gt;Invoke
-
-这个方法会将函数调用放到CoreDispatche">
+<meta name="description" content="我的问题是：WinRT下如何在另外一个线程中访问UI线程 How To Access UI Element In Another Thread在UI所属线程之外的线程调用UI元素的方法或者属性会导致异常，怎样解决这样的问题呢？ 微软为我们提供了这样的方法： Windows::UI::Core::CoreDispatcher-&amp;gt;Invoke  这个方法会将函数调用放到CoreDispatche">
+<meta name="keywords" content="winrt,async">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WinRT下如何在另外一个线程中访问UI线程">
 <meta property="og:url" content="http://linyehui.me/2011/12/18/how-to-access-ui-element-in-another-thread/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="我的问题是：WinRT下如何在另外一个线程中访问UI线程 How To Access UI Element In Another Thread在UI所属线程之外的线程调用UI元素的方法或者属性会导致异常，怎样解决这样的问题呢？
-微软为我们提供了这样的方法：
-Windows::UI::Core::CoreDispatcher-&amp;gt;Invoke
-
-这个方法会将函数调用放到CoreDispatche">
+<meta property="og:description" content="我的问题是：WinRT下如何在另外一个线程中访问UI线程 How To Access UI Element In Another Thread在UI所属线程之外的线程调用UI元素的方法或者属性会导致异常，怎样解决这样的问题呢？ 微软为我们提供了这样的方法： Windows::UI::Core::CoreDispatcher-&amp;gt;Invoke  这个方法会将函数调用放到CoreDispatche">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:35:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WinRT下如何在另外一个线程中访问UI线程">
-<meta name="twitter:description" content="我的问题是：WinRT下如何在另外一个线程中访问UI线程 How To Access UI Element In Another Thread在UI所属线程之外的线程调用UI元素的方法或者属性会导致异常，怎样解决这样的问题呢？
-微软为我们提供了这样的方法：
-Windows::UI::Core::CoreDispatcher-&amp;gt;Invoke
-
-这个方法会将函数调用放到CoreDispatche">
+<meta name="twitter:description" content="我的问题是：WinRT下如何在另外一个线程中访问UI线程 How To Access UI Element In Another Thread在UI所属线程之外的线程调用UI元素的方法或者属性会导致异常，怎样解决这样的问题呢？ 微软为我们提供了这样的方法： Windows::UI::Core::CoreDispatcher-&amp;gt;Invoke  这个方法会将函数调用放到CoreDispatche">
 
 
 
@@ -348,13 +338,13 @@ Windows::UI::Core::CoreDispatcher-&amp;gt;Invoke
 <p>Window::Current-&gt;CoreWindows-&gt;Dispatcher</p>
 </blockquote>
 <h1 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h1><p>假设存在一个回调接口的实现类CXXCallback，专门用于接收别的线程的回调消息，然后负责通知界面更新</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> CXXCallback::OnUIChange()</div><div class="line">&#123;</div><div class="line">   <span class="keyword">auto</span> callback = ref <span class="keyword">new</span> Windows::UI::Core::InvokedHandler([<span class="keyword">this</span>](Platform::Object^ sender, Windows::UI::Core::InvokedHandlerArgs^ eInvoke)&#123;</div><div class="line">   *** 进行界面更新，调用界面元素的方法**</div><div class="line">   *** ……**</div><div class="line">   &#125;,Platform::CallbackContext::Any);</div><div class="line">   **m_coreDispatcher**-&gt;Invoke(Windows::UI::Core::CoreDispatcherPriority::Normal, callback, m_coreDispatcher, <span class="literal">nullptr</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CXXCallback::OnUIChange()</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">auto</span> callback = ref <span class="keyword">new</span> Windows::UI::Core::InvokedHandler([<span class="keyword">this</span>](Platform::Object^ sender, Windows::UI::Core::InvokedHandlerArgs^ eInvoke)&#123;</span><br><span class="line">   *** 进行界面更新，调用界面元素的方法**</span><br><span class="line">   *** ……**</span><br><span class="line">   &#125;,Platform::CallbackContext::Any);</span><br><span class="line">   **m_coreDispatcher**-&gt;Invoke(Windows::UI::Core::CoreDispatcherPriority::Normal, callback, m_coreDispatcher, <span class="literal">nullptr</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>m_coreDispatcher</strong> 可以从任何CoreWindows的派生类型中获取到，可以想象到WinRT的API在底下帮我们做了什么事情？</p>
 <h2 id="我们猜测底层的实现机制可能类似："><a href="#我们猜测底层的实现机制可能类似：" class="headerlink" title="我们猜测底层的实现机制可能类似："></a>我们猜测底层的实现机制可能类似：</h2><p>1、一个窗口，用来PostMessage  </p>
 <p>2、帮我们维护一些全局变量，让我们无缝的使用CXXCallback的类成员变量和OnUIChange()函数内的临时变量</p>
-<h1 id="比较有用的参考资料："><a href="#比较有用的参考资料：" class="headerlink" title="比较有用的参考资料："></a>比较有用的参考资料：</h1><p><a href="http://channel9.msdn.com/Events/BUILD/BUILD2011/PLAT-203T" target="_blank" rel="external">Async everywhere: creating responsive APIs &amp; apps</a>PPT的第31页的位置  </p>
+<h1 id="比较有用的参考资料："><a href="#比较有用的参考资料：" class="headerlink" title="比较有用的参考资料："></a>比较有用的参考资料：</h1><p><a href="http://channel9.msdn.com/Events/BUILD/BUILD2011/PLAT-203T" target="_blank" rel="noopener">Async everywhere: creating responsive APIs &amp; apps</a>PPT的第31页的位置  </p>
 <p>4 Don’t worry about Dispatcher.Invoke…</p>
-<p><a href="http://social.msdn.microsoft.com/Forums/en/winappswithnativecode/thread/e36f84be-db95-4764-951e-bfa662cdd11d" target="_blank" rel="external">How to Access UI Element in a Thread Routine? </a></p>
+<p><a href="http://social.msdn.microsoft.com/Forums/en/winappswithnativecode/thread/e36f84be-db95-4764-951e-bfa662cdd11d" target="_blank" rel="noopener">How to Access UI Element in a Thread Routine? </a></p>
 
       
     </div>

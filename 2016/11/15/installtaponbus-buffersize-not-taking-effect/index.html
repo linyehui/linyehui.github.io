@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="需求1、使用AudioEngine进行音频采集，并加入部分EQ等效果器
-2、将混音后的音频输出为PCM的Buffer
-3、将PCM Buffer编码为AAC
-遇到的坑AudioEngine的这个方法有Bug: installTapOnBus
-1- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)buff">
+<meta name="description" content="需求1、使用AudioEngine进行音频采集，并加入部分EQ等效果器 2、将混音后的音频输出为PCM的Buffer 3、将PCM Buffer编码为AAC 遇到的坑AudioEngine的这个方法有Bug: installTapOnBus 1- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)buff">
+<meta name="keywords" content="ios,audioengine,installtaponbus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用AudioEngine时installTapOnBus的bufferSize设置无效">
 <meta property="og:url" content="http://linyehui.me/2016/11/15/installtaponbus-buffersize-not-taking-effect/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求1、使用AudioEngine进行音频采集，并加入部分EQ等效果器
-2、将混音后的音频输出为PCM的Buffer
-3、将PCM Buffer编码为AAC
-遇到的坑AudioEngine的这个方法有Bug: installTapOnBus
-1- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)buff">
+<meta property="og:description" content="需求1、使用AudioEngine进行音频采集，并加入部分EQ等效果器 2、将混音后的音频输出为PCM的Buffer 3、将PCM Buffer编码为AAC 遇到的坑AudioEngine的这个方法有Bug: installTapOnBus 1- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)buff">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-11-21T06:54:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用AudioEngine时installTapOnBus的bufferSize设置无效">
-<meta name="twitter:description" content="需求1、使用AudioEngine进行音频采集，并加入部分EQ等效果器
-2、将混音后的音频输出为PCM的Buffer
-3、将PCM Buffer编码为AAC
-遇到的坑AudioEngine的这个方法有Bug: installTapOnBus
-1- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)buff">
+<meta name="twitter:description" content="需求1、使用AudioEngine进行音频采集，并加入部分EQ等效果器 2、将混音后的音频输出为PCM的Buffer 3、将PCM Buffer编码为AAC 遇到的坑AudioEngine的这个方法有Bug: installTapOnBus 1- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)buff">
 
 
 
@@ -342,16 +332,16 @@
         <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>1、使用AudioEngine进行音频采集，并加入部分EQ等效果器</p>
 <p>2、将混音后的音频输出为PCM的Buffer</p>
 <p>3、将PCM Buffer编码为AAC</p>
-<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><p>AudioEngine的这个方法有Bug: <a href="https://developer.apple.com/reference/avfoundation/avaudionode/1387122-installtaponbus" target="_blank" rel="external">installTapOnBus</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)bufferSize format:(AVAudioFormat * __nullable)format block:(AVAudioNodeTapBlock)tapBlock;</div></pre></td></tr></table></figure>
+<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><p>AudioEngine的这个方法有Bug: <a href="https://developer.apple.com/reference/avfoundation/avaudionode/1387122-installtaponbus" target="_blank" rel="noopener">installTapOnBus</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)bufferSize format:(AVAudioFormat * __nullable)format block:(AVAudioNodeTapBlock)tapBlock;</span><br></pre></td></tr></table></figure>
 <p>iOS 10一下的版本，installTapOnBus的第二个参数bufferSize设置是无效的，<br>比如我设置bufferSize为1024，如果我的format中的bytePerFrame是4，那么最后出来的bufferSize应该是1024*4=4096才对，但是在iOS 10一下的版本，出来的bufferSize每次都是66148</p>
 <p>如果我们要进行AAC编码，那么AAC编码的bufferSize必须是能够被1024整除的，而66148是无法被1024整除</p>
 <p>如果AAC编码的时候没有对齐bufferSize和1024，就会出现音频数据丢失的情况</p>
 <h3 id="解决这个问题的两个角度"><a href="#解决这个问题的两个角度" class="headerlink" title="解决这个问题的两个角度"></a>解决这个问题的两个角度</h3><p>1、让installTapOnBus出来的数据能够被1024整除</p>
 <p>2、自己用做对齐的事情，那么部分音频数据的采集时间戳就需要自己构造</p>
 <p>我个人比较偏向第一种，这样就不存在构造时间戳的问题。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="第一步：installTapOnBus的Block中设置frameLength"><a href="#第一步：installTapOnBus的Block中设置frameLength" class="headerlink" title="第一步：installTapOnBus的Block中设置frameLength"></a>第一步：installTapOnBus的Block中设置frameLength</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">const uint32_t frameLength = 1024;</div><div class="line">[_inputNode installTapOnBus:0 bufferSize:frameLength format:[_inputNode outputFormatForBus:0] block:</div><div class="line">	^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) &#123;</div><div class="line">		// iOS 10以下需要这么设置才可以缩短Block回调的Buffer大小和同时也能缩短Block回调的时间间隔</div><div class="line">		// linyehui 2016-11-11</div><div class="line">		buffer.frameLength = frameLength;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<h4 id="参考：I-want-to-call-20-times-per-second-the-installTapOnBus-bufferSize-format-block"><a href="#参考：I-want-to-call-20-times-per-second-the-installTapOnBus-bufferSize-format-block" class="headerlink" title="参考：I want to call 20 times per second the installTapOnBus:bufferSize:format:block:"></a>参考：<a href="http://stackoverflow.com/questions/26115626/i-want-to-call-20-times-per-second-the-installtaponbusbuffersizeformatblock" target="_blank" rel="external">I want to call 20 times per second the installTapOnBus:bufferSize:format:block:</a></h4><h3 id="第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList"><a href="#第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList" class="headerlink" title="第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList"></a>第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList</h3><p>如果你使用了步骤一的代码，那么installTapOnBus回调出来的AVAudioPCMBuffer，不要使用mutableAudioBufferList，必须使用audioBufferList。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="第一步：installTapOnBus的Block中设置frameLength"><a href="#第一步：installTapOnBus的Block中设置frameLength" class="headerlink" title="第一步：installTapOnBus的Block中设置frameLength"></a>第一步：installTapOnBus的Block中设置frameLength</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const uint32_t frameLength = 1024;</span><br><span class="line">[_inputNode installTapOnBus:0 bufferSize:frameLength format:[_inputNode outputFormatForBus:0] block:</span><br><span class="line">	^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) &#123;</span><br><span class="line">		// iOS 10以下需要这么设置才可以缩短Block回调的Buffer大小和同时也能缩短Block回调的时间间隔</span><br><span class="line">		// linyehui 2016-11-11</span><br><span class="line">		buffer.frameLength = frameLength;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<h4 id="参考：I-want-to-call-20-times-per-second-the-installTapOnBus-bufferSize-format-block"><a href="#参考：I-want-to-call-20-times-per-second-the-installTapOnBus-bufferSize-format-block" class="headerlink" title="参考：I want to call 20 times per second the installTapOnBus:bufferSize:format:block:"></a>参考：<a href="http://stackoverflow.com/questions/26115626/i-want-to-call-20-times-per-second-the-installtaponbusbuffersizeformatblock" target="_blank" rel="noopener">I want to call 20 times per second the installTapOnBus:bufferSize:format:block:</a></h4><h3 id="第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList"><a href="#第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList" class="headerlink" title="第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList"></a>第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList</h3><p>如果你使用了步骤一的代码，那么installTapOnBus回调出来的AVAudioPCMBuffer，不要使用mutableAudioBufferList，必须使用audioBufferList。</p>
 <p>因为mutableAudioBufferList的mDataByteSize是frameCapacity，而audioBufferList的mDataByteSize是真实的frameLength</p>
 
       

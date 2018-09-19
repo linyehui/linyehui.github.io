@@ -84,31 +84,21 @@
 
 
 
-<meta name="description" content="需求描述
-我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发；
-我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心
-Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用
-现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调">
+<meta name="description" content="需求描述 我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发； 我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心 Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用 现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调">
+<meta name="keywords" content="ios,cocos2dx,library">
 <meta property="og:type" content="article">
 <meta property="og:title" content="把cocos2dx的Sample工程改成Static Library">
 <meta property="og:url" content="http://linyehui.me/2014/07/05/make-cocos2dx-samples-as-static-libraries/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求描述
-我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发；
-我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心
-Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用
-现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调">
+<meta property="og:description" content="需求描述 我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发； 我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心 Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用 现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/just_hall.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/one_game.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/two_games.png">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="把cocos2dx的Sample工程改成Static Library">
-<meta name="twitter:description" content="需求描述
-我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发；
-我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心
-Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用
-现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调">
+<meta name="twitter:description" content="需求描述 我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发； 我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心 Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用 现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/just_hall.png">
 
 
@@ -363,11 +353,11 @@ Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library
 <p> “$(SDKROOT)/usr/include/libxml2/“ “$(COCOS2DX_HOME)/cocos2dx/include” “$(COCOS2DX_HOME)/cocos2dx” “$(COCOS2DX_HOME)/cocos2dx/platform/ios” “$(COCOS2DX_HOME)/cocos2dx/kazmath/include” “$(COCOS2DX_HOME)/external/chipmunk/include/chipmunk”</p>
 </li>
 </ol>
-<ol>
+<ol start="3">
 <li>Clean工程，然后再次Build，成功</li>
 </ol>
-<h3 id="2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"><a href="#2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来" class="headerlink" title="2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"></a>2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来</h3><h4 id="先把HelloCpp工程调整成这样"><a href="#先把HelloCpp工程调整成这样" class="headerlink" title="先把HelloCpp工程调整成这样"></a>先把HelloCpp工程调整成这样</h4><p>发现这个文章做了我想做的事情的一部分：<br><a href="http://blog.csdn.net/crayondeng/article/details/16828555" target="_blank" rel="external">Cocos2d-x UIView和Coco2d-x场景之间的相互跳转切换</a></p>
-<p><a href="http://www.raywenderlich.com/zh-hans/24764/%E5%A6%82%E4%BD%95%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8cocos2d%E5%92%8Cuikit-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86" target="_blank" rel="external">如何结合使用Cocos2d和UIKit 第一部分</a></p>
+<h3 id="2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"><a href="#2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来" class="headerlink" title="2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"></a>2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来</h3><h4 id="先把HelloCpp工程调整成这样"><a href="#先把HelloCpp工程调整成这样" class="headerlink" title="先把HelloCpp工程调整成这样"></a>先把HelloCpp工程调整成这样</h4><p>发现这个文章做了我想做的事情的一部分：<br><a href="http://blog.csdn.net/crayondeng/article/details/16828555" target="_blank" rel="noopener">Cocos2d-x UIView和Coco2d-x场景之间的相互跳转切换</a></p>
+<p><a href="http://www.raywenderlich.com/zh-hans/24764/%E5%A6%82%E4%BD%95%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8cocos2d%E5%92%8Cuikit-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86" target="_blank" rel="noopener">如何结合使用Cocos2d和UIKit 第一部分</a></p>
 <h3 id="3-新增HelloCpp-Target：Static-Library"><a href="#3-新增HelloCpp-Target：Static-Library" class="headerlink" title="3. 新增HelloCpp Target：Static Library"></a>3. 新增HelloCpp Target：Static Library</h3><p>在Library的Target中有几个点需要参考默认Target的配置：</p>
 <ol>
 <li>不使用ARC<blockquote>
@@ -401,7 +391,7 @@ Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library
 <p>/Users/linyehui/Library/Developer/Xcode/DerivedData/GamesHall-ezsoyplchjjurfeznsedhgwywbkr/Build/Products/Debug-iphonesimulator</p>
 </blockquote>
 <h3 id="5-添加代码调用"><a href="#5-添加代码调用" class="headerlink" title="5. 添加代码调用"></a>5. 添加代码调用</h3><ul>
-<li>添加后发现link失败，找了好多原因，最后有效的是这个：<br><a href="http://stackoverflow.com/questions/18959691/ios7-only-stdlibc-linking-issue" target="_blank" rel="external">IOS7 (only) stdlibc++ linking issue</a></li>
+<li>添加后发现link失败，找了好多原因，最后有效的是这个：<br><a href="http://stackoverflow.com/questions/18959691/ios7-only-stdlibc-linking-issue" target="_blank" rel="noopener">IOS7 (only) stdlibc++ linking issue</a></li>
 <li>改完stdlib后又提示zlib相关的几个函数找不到<br>工程依赖加上libz.dylib</li>
 </ul>
 <h3 id="6-调用成功，独立成Static-Library没问题"><a href="#6-调用成功，独立成Static-Library没问题" class="headerlink" title="6. 调用成功，独立成Static Library没问题"></a>6. 调用成功，独立成Static Library没问题</h3><h3 id="7-尝试多个游戏一起加入进来"><a href="#7-尝试多个游戏一起加入进来" class="headerlink" title="7. 尝试多个游戏一起加入进来"></a>7. 尝试多个游戏一起加入进来</h3><ul>
@@ -430,7 +420,7 @@ Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library
     //static CocosAppDelegate s_sharedApplication;
 
 解决的办法，是多个游戏只保留一个CCApplication之类的全局变量的定义。
-</code></pre><ol>
+</code></pre><ol start="2">
 <li><p>本来应该每个游戏自己响应CCApplication事件并做出处理，现在这个点不能做了，架构上本身就有问题，和把游戏整个在一个Cocos实例下没有本质的区别，未知的问题还更多</p>
 </li>
 <li><p>Xcode对于这种多个Library依赖同一个Library的编译支持有时候会出错<br>会出现上面提到的：提示编译失败，但是没有列出具体失败的地方，如果这个时候把其中一个游戏工程删掉，错误的地方就能正确被提示</p>
@@ -441,7 +431,7 @@ Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library
 <h3 id="大厅-一个cocos2dx游戏Library，-app大小3-5MB"><a href="#大厅-一个cocos2dx游戏Library，-app大小3-5MB" class="headerlink" title="大厅+一个cocos2dx游戏Library，.app大小3.5MB"></a>大厅+一个cocos2dx游戏Library，.app大小3.5MB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/one_game.png" alt="one_game.png"></p>
 <h3 id="大厅-两个cocos2dx游戏Library，-app大小3-2MB"><a href="#大厅-两个cocos2dx游戏Library，-app大小3-2MB" class="headerlink" title="大厅+两个cocos2dx游戏Library，.app大小3.2MB"></a>大厅+两个cocos2dx游戏Library，.app大小3.2MB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/two_games.png" alt="two_games.png"></p>
 <p>科学吗？差不多是这个意思</p>
-<h1 id="其他参考文章"><a href="#其他参考文章" class="headerlink" title="其他参考文章"></a>其他参考文章</h1><p><a href="http://www.cnblogs.com/beginor/archive/2012/04/20/2459244.html" target="_blank" rel="external">iOS 静态类库项目的建立与使用</a></p>
+<h1 id="其他参考文章"><a href="#其他参考文章" class="headerlink" title="其他参考文章"></a>其他参考文章</h1><p><a href="http://www.cnblogs.com/beginor/archive/2012/04/20/2459244.html" target="_blank" rel="noopener">iOS 静态类库项目的建立与使用</a></p>
 
       
     </div>

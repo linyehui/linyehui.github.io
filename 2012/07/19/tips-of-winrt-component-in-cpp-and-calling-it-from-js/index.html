@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="tips,winrt,component,javascript," />
+  <meta name="keywords" content="winrt,tips,component,javascript," />
 
 
 
@@ -84,25 +84,18 @@
 
 
 
-<meta name="description" content="有段时间没有写WinRT相关的文章了，这段时间还会继续，因为我们目前在进行界面应用层的HTML5化 :)
-今天要和大家分享的是：WinRT下，使用HTML+JavaScript实现的界面应用层，调用C++实现的底层WinRT组件（Windows Runtime component）的相关注意事项
-嗯，标题很长，下面我们来干货：
-0、提供给JS工程调用的C++类必须是ref类，这个好像不用说吧？:)">
+<meta name="description" content="有段时间没有写WinRT相关的文章了，这段时间还会继续，因为我们目前在进行界面应用层的HTML5化 :) 今天要和大家分享的是：WinRT下，使用HTML+JavaScript实现的界面应用层，调用C++实现的底层WinRT组件（Windows Runtime component）的相关注意事项 嗯，标题很长，下面我们来干货： 0、提供给JS工程调用的C++类必须是ref类，这个好像不用说吧？:)">
+<meta name="keywords" content="winrt,tips,component,javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WinRT下JavaScript调用C++ WinRT组件的注意事项">
 <meta property="og:url" content="http://linyehui.me/2012/07/19/tips-of-winrt-component-in-cpp-and-calling-it-from-js/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="有段时间没有写WinRT相关的文章了，这段时间还会继续，因为我们目前在进行界面应用层的HTML5化 :)
-今天要和大家分享的是：WinRT下，使用HTML+JavaScript实现的界面应用层，调用C++实现的底层WinRT组件（Windows Runtime component）的相关注意事项
-嗯，标题很长，下面我们来干货：
-0、提供给JS工程调用的C++类必须是ref类，这个好像不用说吧？:)">
+<meta property="og:description" content="有段时间没有写WinRT相关的文章了，这段时间还会继续，因为我们目前在进行界面应用层的HTML5化 :) 今天要和大家分享的是：WinRT下，使用HTML+JavaScript实现的界面应用层，调用C++实现的底层WinRT组件（Windows Runtime component）的相关注意事项 嗯，标题很长，下面我们来干货： 0、提供给JS工程调用的C++类必须是ref类，这个好像不用说吧？:)">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WinRT下JavaScript调用C++ WinRT组件的注意事项">
-<meta name="twitter:description" content="有段时间没有写WinRT相关的文章了，这段时间还会继续，因为我们目前在进行界面应用层的HTML5化 :)
-今天要和大家分享的是：WinRT下，使用HTML+JavaScript实现的界面应用层，调用C++实现的底层WinRT组件（Windows Runtime component）的相关注意事项
-嗯，标题很长，下面我们来干货：
-0、提供给JS工程调用的C++类必须是ref类，这个好像不用说吧？:)">
+<meta name="twitter:description" content="有段时间没有写WinRT相关的文章了，这段时间还会继续，因为我们目前在进行界面应用层的HTML5化 :) 今天要和大家分享的是：WinRT下，使用HTML+JavaScript实现的界面应用层，调用C++实现的底层WinRT组件（Windows Runtime component）的相关注意事项 嗯，标题很长，下面我们来干货： 0、提供给JS工程调用的C++类必须是ref类，这个好像不用说吧？:)">
 
 
 
@@ -369,7 +362,7 @@
 <li><p>9、还有什么回头想到我再补上</p>
 </li>
 </ul>
-<h1 id="微软官方提供的例子其实还是挺不错的，只是说的没那么清楚："><a href="#微软官方提供的例子其实还是挺不错的，只是说的没那么清楚：" class="headerlink" title="微软官方提供的例子其实还是挺不错的，只是说的没那么清楚："></a>微软官方提供的例子其实还是挺不错的，只是说的没那么清楚：</h1><p>[<a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh755833(v=vs.110).aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/windows/apps/hh755833(v=vs.110).aspx</a> MSDN：Walkthrough: Creating a basic Windows Runtime component in C++ and calling it from JavaScript]</p>
+<h1 id="微软官方提供的例子其实还是挺不错的，只是说的没那么清楚："><a href="#微软官方提供的例子其实还是挺不错的，只是说的没那么清楚：" class="headerlink" title="微软官方提供的例子其实还是挺不错的，只是说的没那么清楚："></a>微软官方提供的例子其实还是挺不错的，只是说的没那么清楚：</h1><p>[<a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh755833(v=vs.110).aspx" target="_blank" rel="noopener">http://msdn.microsoft.com/en-us/library/windows/apps/hh755833(v=vs.110).aspx</a> MSDN：Walkthrough: Creating a basic Windows Runtime component in C++ and calling it from JavaScript]</p>
 
       
     </div>
@@ -393,9 +386,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tips/" rel="tag"># tips</a>
-          
             <a href="/tags/winrt/" rel="tag"># winrt</a>
+          
+            <a href="/tags/tips/" rel="tag"># tips</a>
           
             <a href="/tags/component/" rel="tag"># component</a>
           

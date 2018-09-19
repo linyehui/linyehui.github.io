@@ -84,43 +84,18 @@
 
 
 
-<meta name="description" content="cygwin安装
-正确的安装步骤其实很简单：
-
-下载setup-86_64.exe
-直接从网上下载安装，选择包时，顶部选择“default”不变
-搜索make，勾选make，cmake，emacs-cmake,libjepg
-Shells这个二级目录选择“install”
-下一步，开始安装
-安装完成后调用下make命令看下是否已经安装成功（其实最直接的是测试下ndk-build）
-上面提到的这些包">
+<meta name="description" content="cygwin安装 正确的安装步骤其实很简单：  下载setup-86_64.exe 直接从网上下载安装，选择包时，顶部选择“default”不变 搜索make，勾选make，cmake，emacs-cmake,libjepg Shells这个二级目录选择“install” 下一步，开始安装 安装完成后调用下make命令看下是否已经安装成功（其实最直接的是测试下ndk-build） 上面提到的这些包">
+<meta name="keywords" content="ndk,cygwin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows下配置cygwin和ndk编译环境">
 <meta property="og:url" content="http://linyehui.me/2014/04/12/config-cygwin-and-ndk-build/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="cygwin安装
-正确的安装步骤其实很简单：
-
-下载setup-86_64.exe
-直接从网上下载安装，选择包时，顶部选择“default”不变
-搜索make，勾选make，cmake，emacs-cmake,libjepg
-Shells这个二级目录选择“install”
-下一步，开始安装
-安装完成后调用下make命令看下是否已经安装成功（其实最直接的是测试下ndk-build）
-上面提到的这些包">
+<meta property="og:description" content="cygwin安装 正确的安装步骤其实很简单：  下载setup-86_64.exe 直接从网上下载安装，选择包时，顶部选择“default”不变 搜索make，勾选make，cmake，emacs-cmake,libjepg Shells这个二级目录选择“install” 下一步，开始安装 安装完成后调用下make命令看下是否已经安装成功（其实最直接的是测试下ndk-build） 上面提到的这些包">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2014-07-06T12:28:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows下配置cygwin和ndk编译环境">
-<meta name="twitter:description" content="cygwin安装
-正确的安装步骤其实很简单：
-
-下载setup-86_64.exe
-直接从网上下载安装，选择包时，顶部选择“default”不变
-搜索make，勾选make，cmake，emacs-cmake,libjepg
-Shells这个二级目录选择“install”
-下一步，开始安装
-安装完成后调用下make命令看下是否已经安装成功（其实最直接的是测试下ndk-build）
-上面提到的这些包">
+<meta name="twitter:description" content="cygwin安装 正确的安装步骤其实很简单：  下载setup-86_64.exe 直接从网上下载安装，选择包时，顶部选择“default”不变 搜索make，勾选make，cmake，emacs-cmake,libjepg Shells这个二级目录选择“install” 下一步，开始安装 安装完成后调用下make命令看下是否已经安装成功（其实最直接的是测试下ndk-build） 上面提到的这些包">
 
 
 
@@ -379,7 +354,7 @@ Shells这个二级目录选择“install”
 <p>一开始的时候会提示一个bash错误，后面我发现是我装msysgit时带的bash冲突了，我就先吧msysgit卸载了再安装cygwin就好了。<br>然后重新安装msysgit时记得选择默认的bash选项：Git Bash only</p>
 <p>网上还有文章说ndk编译需要依赖devel和editors，要是傻傻勾选了这两个包目录，那就有得你下载了，其实只需要其中的make相关的几个包就够了，不用整个二级目录都“install”。</p>
 <p>Shells目录因为比较小，直接勾选上问题不大。</p>
-<h4 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h4><p><a href="http://my.oschina.net/tonywolf/blog/49214" target="_blank" rel="external">android-ndk-r7b编译环境Cygwin工具搭建及配置</a></p>
+<h4 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h4><p><a href="http://my.oschina.net/tonywolf/blog/49214" target="_blank" rel="noopener">android-ndk-r7b编译环境Cygwin工具搭建及配置</a></p>
 <h1 id="ndk-build解压并配置"><a href="#ndk-build解压并配置" class="headerlink" title="ndk-build解压并配置"></a>ndk-build解压并配置</h1><ol>
 <li>解压ndk压缩包</li>
 <li><p>配置环境变量，在C:\cygwin64\home\linyehui.bash_profile最后添加两行</p>

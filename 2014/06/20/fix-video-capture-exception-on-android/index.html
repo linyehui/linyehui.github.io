@@ -84,19 +84,17 @@
 
 
 
-<meta name="description" content="遇到了好多异常，逐一介绍解决方案如下。
-java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
+<meta name="description" content="遇到了好多异常，逐一介绍解决方案如下。 java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android拍摄视频异常处理">
 <meta property="og:url" content="http://linyehui.me/2014/06/20/fix-video-capture-exception-on-android/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="遇到了好多异常，逐一介绍解决方案如下。
-java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
+<meta property="og:description" content="遇到了好多异常，逐一介绍解决方案如下。 java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android拍摄视频异常处理">
-<meta name="twitter:description" content="遇到了好多异常，逐一介绍解决方案如下。
-java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
+<meta name="twitter:description" content="遇到了好多异常，逐一介绍解决方案如下。 java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocusautoFocus 时机不对导致的Crash，异常信息:java.lang.RuntimeException: autoFocus failed at android.hardware">
 
 
 
@@ -332,7 +330,7 @@ java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_a
       
         <p>遇到了好多异常，逐一介绍解决方案如下。</p>
 <h1 id="java-lang-RuntimeException-autoFocus-failed-at-android-hardware-Camera-native-autoFocus"><a href="#java-lang-RuntimeException-autoFocus-failed-at-android-hardware-Camera-native-autoFocus" class="headerlink" title="java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus"></a>java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus</h1><h3 id="autoFocus-时机不对导致的Crash，异常信息"><a href="#autoFocus-时机不对导致的Crash，异常信息" class="headerlink" title="autoFocus 时机不对导致的Crash，异常信息:"></a>autoFocus 时机不对导致的Crash，异常信息:</h3><pre><code>java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus
-</code></pre><h3 id="得到的用户反馈描述："><a href="#得到的用户反馈描述：" class="headerlink" title="得到的用户反馈描述："></a>得到的用户反馈描述：</h3><p>Sony s39h 一点拍摄视频就crash，从他们上传上来的log看是autoFocus的时候crash了，找了下资料，这个比较接近：<a href="http://www.hitziger.net/blog/android-camera-autofocus-failed/" target="_blank" rel="external">Android Camera.autoFocus() failed</a></p>
+</code></pre><h3 id="得到的用户反馈描述："><a href="#得到的用户反馈描述：" class="headerlink" title="得到的用户反馈描述："></a>得到的用户反馈描述：</h3><p>Sony s39h 一点拍摄视频就crash，从他们上传上来的log看是autoFocus的时候crash了，找了下资料，这个比较接近：<a href="http://www.hitziger.net/blog/android-camera-autofocus-failed/" target="_blank" rel="noopener">Android Camera.autoFocus() failed</a></p>
 <h3 id="参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus-，去掉，搞定。"><a href="#参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus-，去掉，搞定。" class="headerlink" title="参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus()，去掉，搞定。"></a>参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus()，去掉，搞定。</h3><h1 id="java-lang-RuntimeException-startPreview-failed"><a href="#java-lang-RuntimeException-startPreview-failed" class="headerlink" title="java.lang.RuntimeException: startPreview failed"></a>java.lang.RuntimeException: startPreview failed</h1><h3 id="老的系统版本需要调用SurfaceView的-setType，异常信息："><a href="#老的系统版本需要调用SurfaceView的-setType，异常信息：" class="headerlink" title="老的系统版本需要调用SurfaceView的 setType，异常信息："></a>老的系统版本需要调用SurfaceView的 setType，异常信息：</h3><pre><code>06-19 21:25:28.730: E/AndroidRuntime(1082): FATAL EXCEPTION: main
     06-19 21:25:28.730: E/AndroidRuntime(1082): java.lang.RuntimeException: startPreview failed
     06-19 21:25:28.730: E/AndroidRuntime(1082):     at android.hardware.Camera.startPreview(Native Method)
@@ -341,8 +339,8 @@ java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_a
 <pre><code>getHolder().addCallback(this);
 getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 </code></pre><h2 id="心路历程"><a href="#心路历程" class="headerlink" title="心路历程"></a>心路历程</h2><p>解决问题的过程比结果更优价值 :)</p>
-<h3 id="搜索到描述最接近的一文章："><a href="#搜索到描述最接近的一文章：" class="headerlink" title="搜索到描述最接近的一文章："></a>搜索到描述最接近的一文章：</h3><p><a href="http://stackoverflow.com/questions/7942378/android-camera-will-not-work-startpreview-fails" target="_blank" rel="external">Android Camera will not work. startPreview fails</a><br>试了下里面的代码，没有解决</p>
-<h3 id="其他的参考文章："><a href="#其他的参考文章：" class="headerlink" title="其他的参考文章："></a>其他的参考文章：</h3><p><a href="http://code.google.com/p/android/issues/detail?id=7909" target="_blank" rel="external">Issue 7909:Camera preview does not work on HTC Desire</a><br><a href="http://www.cnblogs.com/dyingbleed/archive/2012/12/04/2801621.html" target="_blank" rel="external">java.lang.RuntimeException: startPreview failed</a></p>
+<h3 id="搜索到描述最接近的一文章："><a href="#搜索到描述最接近的一文章：" class="headerlink" title="搜索到描述最接近的一文章："></a>搜索到描述最接近的一文章：</h3><p><a href="http://stackoverflow.com/questions/7942378/android-camera-will-not-work-startpreview-fails" target="_blank" rel="noopener">Android Camera will not work. startPreview fails</a><br>试了下里面的代码，没有解决</p>
+<h3 id="其他的参考文章："><a href="#其他的参考文章：" class="headerlink" title="其他的参考文章："></a>其他的参考文章：</h3><p><a href="http://code.google.com/p/android/issues/detail?id=7909" target="_blank" rel="noopener">Issue 7909:Camera preview does not work on HTC Desire</a><br><a href="http://www.cnblogs.com/dyingbleed/archive/2012/12/04/2801621.html" target="_blank" rel="noopener">java.lang.RuntimeException: startPreview failed</a></p>
 <h3 id="再试下这个："><a href="#再试下这个：" class="headerlink" title="再试下这个："></a>再试下这个：</h3><pre><code>#34 paul.won...@gmail.com
 Hi everyone,
 
@@ -397,7 +395,7 @@ getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     06-20 12:36:06.410: E/AndroidRuntime(1613):     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:841)
     06-20 12:36:06.410: E/AndroidRuntime(1613):     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:599)
     06-20 12:36:06.410: E/AndroidRuntime(1613):     at dalvik.system.NativeStart.main(Native Method)
-</code></pre><h3 id="参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError"><a href="#参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError" class="headerlink" title="参考这个文章解决了：Android 2.3.3 AsyncTask call throws NoSuchFieldError"></a>参考这个文章解决了：<a href="http://stackoverflow.com/questions/12227682/android-2-3-3-asynctask-call-throws-nosuchfielderror" target="_blank" rel="external">Android 2.3.3 AsyncTask call throws NoSuchFieldError</a></h3><pre><code>@TargetApi(11)
+</code></pre><h3 id="参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError"><a href="#参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError" class="headerlink" title="参考这个文章解决了：Android 2.3.3 AsyncTask call throws NoSuchFieldError"></a>参考这个文章解决了：<a href="http://stackoverflow.com/questions/12227682/android-2-3-3-asynctask-call-throws-nosuchfielderror" target="_blank" rel="noopener">Android 2.3.3 AsyncTask call throws NoSuchFieldError</a></h3><pre><code>@TargetApi(11)
   static public &lt;T&gt; void executeAsyncTask(AsyncTask&lt;T, ?, ?&gt; task,
                                           T... params) {
     if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.HONEYCOMB) {

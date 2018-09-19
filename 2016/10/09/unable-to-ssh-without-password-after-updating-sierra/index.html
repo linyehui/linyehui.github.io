@@ -84,25 +84,18 @@
 
 
 
-<meta name="description" content="需求把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：发现 Gitlab 的一个权限问题中描述的那样，要求我输入密码；
-不过后面突然想到今天升级了系统，所以加上了Sierra关键字又搜索了下，发现了同类中人：  
-Unable to ssh without password after installing Sierra
-苹果系统升级到s">
+<meta name="description" content="需求把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：发现 Gitlab 的一个权限问题中描述的那样，要求我输入密码； 不过后面突然想到今天升级了系统，所以加上了Sierra关键字又搜索了下，发现了同类中人：   Unable to ssh without password after installing Sierra 苹果系统升级到s">
+<meta name="keywords" content="mac,sierra,ssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac升级到Sierra后SSH自动登录提示输入密码">
 <meta property="og:url" content="http://linyehui.me/2016/10/09/unable-to-ssh-without-password-after-updating-sierra/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：发现 Gitlab 的一个权限问题中描述的那样，要求我输入密码；
-不过后面突然想到今天升级了系统，所以加上了Sierra关键字又搜索了下，发现了同类中人：  
-Unable to ssh without password after installing Sierra
-苹果系统升级到s">
+<meta property="og:description" content="需求把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：发现 Gitlab 的一个权限问题中描述的那样，要求我输入密码； 不过后面突然想到今天升级了系统，所以加上了Sierra关键字又搜索了下，发现了同类中人：   Unable to ssh without password after installing Sierra 苹果系统升级到s">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-10-09T11:01:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac升级到Sierra后SSH自动登录提示输入密码">
-<meta name="twitter:description" content="需求把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：发现 Gitlab 的一个权限问题中描述的那样，要求我输入密码；
-不过后面突然想到今天升级了系统，所以加上了Sierra关键字又搜索了下，发现了同类中人：  
-Unable to ssh without password after installing Sierra
-苹果系统升级到s">
+<meta name="twitter:description" content="需求把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：发现 Gitlab 的一个权限问题中描述的那样，要求我输入密码； 不过后面突然想到今天升级了系统，所以加上了Sierra关键字又搜索了下，发现了同类中人：   Unable to ssh without password after installing Sierra 苹果系统升级到s">
 
 
 
@@ -336,18 +329,18 @@ Unable to ssh without password after installing Sierra
       
 
       
-        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：<br><a href="http://i.am.simonkuang.com/2015/12/05/%E5%8F%91%E7%8E%B0-Gitlab-%E7%9A%84%E4%B8%80%E4%B8%AA%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/" target="_blank" rel="external">发现 Gitlab 的一个权限问题</a>中描述的那样，要求我输入密码；</p>
+        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>把Mac升级到了Sierra，发现我的git无法ssh登录了，一开始还以为是服务器的问题，因为问题的现象很像：<br><a href="http://i.am.simonkuang.com/2015/12/05/%E5%8F%91%E7%8E%B0-Gitlab-%E7%9A%84%E4%B8%80%E4%B8%AA%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">发现 Gitlab 的一个权限问题</a>中描述的那样，要求我输入密码；</p>
 <p>不过后面突然想到今天升级了系统，所以加上了Sierra关键字又搜索了下，发现了同类中人：  </p>
-<p><a href="https://forums.developer.apple.com/thread/48794" target="_blank" rel="external">Unable to ssh without password after installing Sierra</a></p>
-<p><a href="https://www.oschina.net/question/1262012_2199479" target="_blank" rel="external">苹果系统升级到sierra后，ssh远程证书免密码登录出错了</a></p>
+<p><a href="https://forums.developer.apple.com/thread/48794" target="_blank" rel="noopener">Unable to ssh without password after installing Sierra</a></p>
+<p><a href="https://www.oschina.net/question/1262012_2199479" target="_blank" rel="noopener">苹果系统升级到sierra后，ssh远程证书免密码登录出错了</a></p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>上面两个帖子里的办法没有能解决我的问题，我最终的解决方案是：</p>
 <blockquote>
 <p>在Sierra系统下重新生成id_rsa和id_rsa.pub，重新设置服务端的id_rsa.pub证书</p>
 </blockquote>
-<h3 id="一个小问题"><a href="#一个小问题" class="headerlink" title="一个小问题"></a>一个小问题</h3><p>一开始我生成的证书没有命名为默认的名字：id_rsa，会出现这个错误：<br><a href="https://www.zhihu.com/question/21402411" target="_blank" rel="external">github提示Permission denied (publickey)，如何才能解决？</a></p>
+<h3 id="一个小问题"><a href="#一个小问题" class="headerlink" title="一个小问题"></a>一个小问题</h3><p>一开始我生成的证书没有命名为默认的名字：id_rsa，会出现这个错误：<br><a href="https://www.zhihu.com/question/21402411" target="_blank" rel="noopener">github提示Permission denied (publickey)，如何才能解决？</a></p>
 <h4 id="这个问题其实好解决，两个方案："><a href="#这个问题其实好解决，两个方案：" class="headerlink" title="这个问题其实好解决，两个方案："></a>这个问题其实好解决，两个方案：</h4><ul>
 <li>方案一，把老的id_ras和id_rsa.pub备份起来，把新的证书改成默认名字</li>
-<li>方案二，<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="external">adding SSH key to the ssh-agent</a></li>
+<li>方案二，<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="noopener">adding SSH key to the ssh-agent</a></li>
 </ul>
 
       

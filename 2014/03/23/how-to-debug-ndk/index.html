@@ -84,19 +84,18 @@
 
 
 
-<meta name="description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。
-我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
+<meta name="description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。 我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
+<meta name="keywords" content="android,ndk">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何调试NDK">
 <meta property="og:url" content="http://linyehui.me/2014/03/23/how-to-debug-ndk/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。
-我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
+<meta property="og:description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。 我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何调试NDK">
-<meta name="twitter:description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。
-我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
+<meta name="twitter:description" content="使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。 我遇到的问题首先我照着这个教程:利用JNI技术在Android中调用、调试C++代码写了个HelloWorld，而且可以“Debug As Android Ap">
 
 
 
@@ -331,7 +330,7 @@
 
       
         <p>使用C++编写跨平台lib，提供给iOS和Android使用，那么NDK是必然要用到的，那么怎么调试NDK呢？<br>网上的教程挺多的，但是跟着做下来后还是遇到了不少诡异的问题，对于Android新手的我来说还是有点摸不着头脑，解决后在这备忘下。</p>
-<h4 id="我遇到的问题"><a href="#我遇到的问题" class="headerlink" title="我遇到的问题"></a>我遇到的问题</h4><p>首先我照着这个教程:<a href="http://blog.micro-studios.com/?p=4212" target="_blank" rel="external">利用JNI技术在Android中调用、调试C++代码</a>写了个HelloWorld，而且可以“Debug As Android Application”跑起来，但是我想要“Debug As Android Native Application” 的时候就遇到了下面这些问题：</p>
+<h4 id="我遇到的问题"><a href="#我遇到的问题" class="headerlink" title="我遇到的问题"></a>我遇到的问题</h4><p>首先我照着这个教程:<a href="http://blog.micro-studios.com/?p=4212" target="_blank" rel="noopener">利用JNI技术在Android中调用、调试C++代码</a>写了个HelloWorld，而且可以“Debug As Android Application”跑起来，但是我想要“Debug As Android Native Application” 的时候就遇到了下面这些问题：</p>
 <h5 id="1-提示-Unknown-Application-ABI"><a href="#1-提示-Unknown-Application-ABI" class="headerlink" title="1.提示 Unknown Application ABI:"></a>1.提示 Unknown Application ABI:</h5><p>你会发现Console中有很多行这个提示，但是其实这个提示是可以先忽略掉的，你可以拿个文本编辑器把重复的这些提示过滤掉，这样你就能看到真正的错误提示了；<br>我看到的是我的第二个问题</p>
 <h5 id="2-提示-Android-NDK-WARNING-APP-PLATFORM-android-19-is-larger-than-android-minSdkVersion-16"><a href="#2-提示-Android-NDK-WARNING-APP-PLATFORM-android-19-is-larger-than-android-minSdkVersion-16" class="headerlink" title="2.提示 Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 16"></a>2.提示 Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 16</h5><p>解决方案1，这个提示我暂时还没弄明白原理，但是有个最简单的方法来解决：<br>到AndroidManifest.xml中把这两个字段都改成最大的版本号</p>
 <blockquote>
@@ -345,10 +344,10 @@
 <h5 id="4-提示"><a href="#4-提示" class="headerlink" title="4.提示"></a>4.提示</h5><p>[2013-06-25 15:25:22 - TestNDK2] gdbserver output:<br>[2013-06-25 15:25:22 - TestNDK2] run-as: exec failed for lib/gdbserver Error:No such file or directory<br>[2013-06-25 15:25:22 - TestNDK2] Verify if the application was built with NDK_DEBUG=1</p>
 <p><strong>解决方案：</strong>  </p>
 <p>1.确认编译选项是否加了NDK_DEBUG=1  </p>
-<p>2.已经加了还是不行，终端中输入下adb看看是不是adb命令不可用，是的话，配置下.bash_profile，把adb的路径加进去，加PATH可以参考<a href="http://gushedaoren.blog.163.com/blog/static/17366340520124300630343/" target="_blank" rel="external">这个</a>  </p>
+<p>2.已经加了还是不行，终端中输入下adb看看是不是adb命令不可用，是的话，配置下.bash_profile，把adb的路径加进去，加PATH可以参考<a href="http://gushedaoren.blog.163.com/blog/static/17366340520124300630343/" target="_blank" rel="noopener">这个</a>  </p>
 <p>3.用这个命令把gdb_server push到Android手机或模拟器上  </p>
 <blockquote>
-<p>adb push /Applications/android-ndk-r9d/prebuilt/android-arm/gdbserver/gdbserver /data<br>参考这个：<a href="http://hi.baidu.com/linuxcfan/item/4d6a07ee9fcdb2255b2d64df" target="_blank" rel="external">通过gdbserver实现远程调试</a>   </p>
+<p>adb push /Applications/android-ndk-r9d/prebuilt/android-arm/gdbserver/gdbserver /data<br>参考这个：<a href="http://hi.baidu.com/linuxcfan/item/4d6a07ee9fcdb2255b2d64df" target="_blank" rel="noopener">通过gdbserver实现远程调试</a>   </p>
 </blockquote>
 <h5 id="5-NDK调试提示错误："><a href="#5-NDK调试提示错误：" class="headerlink" title="5.NDK调试提示错误："></a>5.NDK调试提示错误：</h5><blockquote>
 <p>No symbol table is loaded.  Use the “file” command.  </p>
@@ -356,11 +355,11 @@
 <p>使用ndk-gdb –start 启动程序第一个activity，但是此时so文件并没有被加载。解决方法：首先打开程序并使用，在保证so文件已经被使用的情况下，调用ndk-gdb命令调试程序进程。<br>正确流程：1.创建一个模拟器或者使用真机运行想要调试的程序，确保so文件已经被加载。<br>一个比较简单的方法，在load so库的java文件中添加一个无关紧要的方法，比如：<br>Java代码  收藏代码<br>public static void test1(){  </p>
 <pre><code>Log.i(tag, &quot;test1&quot;);  
 </code></pre><p>}  </p>
-<p>然后在主activity起来的时候，调用一下这个方法就OK了。<br>参考这篇文章：<a href="http://qiang106.iteye.com/blog/1830416" target="_blank" rel="external">android NDK开发、编译、调试环境搭建与操作入门</a>  </p>
-<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p>网上的教程挺多的，我参考了下面这几篇：<br><a href="http://developer.android.com/tools/sdk/ndk/index.html" target="_blank" rel="external">Android官网</a>  </p>
-<p><a href="http://blog.csdn.net/wutianyin222/article/details/8222838" target="_blank" rel="external">超简单的NDK单步调试方法</a>  </p>
-<p><a href="http://blog.csdn.net/wjr2012/article/details/7993722" target="_blank" rel="external">eclipse下ndk调试</a>  </p>
-<p><a href="http://www.aiseminar.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=blog&amp;id=2735" target="_blank" rel="external">【暗黑世界】NDK调试的设置方法</a>  </p>
+<p>然后在主activity起来的时候，调用一下这个方法就OK了。<br>参考这篇文章：<a href="http://qiang106.iteye.com/blog/1830416" target="_blank" rel="noopener">android NDK开发、编译、调试环境搭建与操作入门</a>  </p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p>网上的教程挺多的，我参考了下面这几篇：<br><a href="http://developer.android.com/tools/sdk/ndk/index.html" target="_blank" rel="noopener">Android官网</a>  </p>
+<p><a href="http://blog.csdn.net/wutianyin222/article/details/8222838" target="_blank" rel="noopener">超简单的NDK单步调试方法</a>  </p>
+<p><a href="http://blog.csdn.net/wjr2012/article/details/7993722" target="_blank" rel="noopener">eclipse下ndk调试</a>  </p>
+<p><a href="http://www.aiseminar.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=blog&amp;id=2735" target="_blank" rel="noopener">【暗黑世界】NDK调试的设置方法</a>  </p>
 
       
     </div>

@@ -84,47 +84,19 @@
 
 
 
-<meta name="description" content="遇到的问题下载GarageBand内容，下载GarageBand音效库，很慢！很慢！很慢！  
-我这提示需要125个小时！  
-而且还总是下载失败！  
-
-解决方案1.打开GarageBand开始下载2.使用lsof命令查看GarageBand把文件下载到那里去了
-内容太多，所以先用ps命令找到GB的进程ID，我这里是291  
-
-然后再使用lsof，并把输出重定向到log.txt中去  
-
-
-1">
+<meta name="description" content="遇到的问题下载GarageBand内容，下载GarageBand音效库，很慢！很慢！很慢！   我这提示需要125个小时！   而且还总是下载失败！    解决方案1.打开GarageBand开始下载2.使用lsof命令查看GarageBand把文件下载到那里去了 内容太多，所以先用ps命令找到GB的进程ID，我这里是291    然后再使用lsof，并把输出重定向到log.txt中去     1">
+<meta name="keywords" content="mac,garageband">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GarageBand 音效库下载">
 <meta property="og:url" content="http://linyehui.me/2014/12/24/download-garageband-sound-effects/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="遇到的问题下载GarageBand内容，下载GarageBand音效库，很慢！很慢！很慢！  
-我这提示需要125个小时！  
-而且还总是下载失败！  
-
-解决方案1.打开GarageBand开始下载2.使用lsof命令查看GarageBand把文件下载到那里去了
-内容太多，所以先用ps命令找到GB的进程ID，我这里是291  
-
-然后再使用lsof，并把输出重定向到log.txt中去  
-
-
-1">
+<meta property="og:description" content="遇到的问题下载GarageBand内容，下载GarageBand音效库，很慢！很慢！很慢！   我这提示需要125个小时！   而且还总是下载失败！    解决方案1.打开GarageBand开始下载2.使用lsof命令查看GarageBand把文件下载到那里去了 内容太多，所以先用ps命令找到GB的进程ID，我这里是291    然后再使用lsof，并把输出重定向到log.txt中去     1">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://linyehui.me/media/files/2014/12/24/garageband_125_hours.png">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GarageBand 音效库下载">
-<meta name="twitter:description" content="遇到的问题下载GarageBand内容，下载GarageBand音效库，很慢！很慢！很慢！  
-我这提示需要125个小时！  
-而且还总是下载失败！  
-
-解决方案1.打开GarageBand开始下载2.使用lsof命令查看GarageBand把文件下载到那里去了
-内容太多，所以先用ps命令找到GB的进程ID，我这里是291  
-
-然后再使用lsof，并把输出重定向到log.txt中去  
-
-
-1">
+<meta name="twitter:description" content="遇到的问题下载GarageBand内容，下载GarageBand音效库，很慢！很慢！很慢！   我这提示需要125个小时！   而且还总是下载失败！    解决方案1.打开GarageBand开始下载2.使用lsof命令查看GarageBand把文件下载到那里去了 内容太多，所以先用ps命令找到GB的进程ID，我这里是291    然后再使用lsof，并把输出重定向到log.txt中去     1">
 <meta name="twitter:image" content="http://linyehui.me/media/files/2014/12/24/garageband_125_hours.png">
 
 
@@ -369,28 +341,28 @@
 <li><p>然后再使用lsof，并把输出重定向到log.txt中去  </p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ps aux | grep GarageBand  </div><div class="line"></div><div class="line">lsof -g 291 &gt; ~/log.txt</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep GarageBand  </span><br><span class="line"></span><br><span class="line">lsof -g 291 &gt; ~/log.txt</span><br></pre></td></tr></table></figure>
 <ul>
-<li>打开log.txt，搜索.pkg，你会找到类似下面的路径，对了，这个就是下载的临时文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/private/var/folders/37/1bzl8_j50wxcxgmj0dv805lm0000gn/C/com.apple.garageband10/com.apple.MusicApps/audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandPremiumContent.pkg</div></pre></td></tr></table></figure>
+<li>打开log.txt，搜索.pkg，你会找到类似下面的路径，对了，这个就是下载的临时文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/private/var/folders/37/1bzl8_j50wxcxgmj0dv805lm0000gn/C/com.apple.garageband10/com.apple.MusicApps/audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandPremiumContent.pkg</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="3-退出GarageBand，得到下载地址，使用第三方工具下载好pkg文件"><a href="#3-退出GarageBand，得到下载地址，使用第三方工具下载好pkg文件" class="headerlink" title="3.退出GarageBand，得到下载地址，使用第三方工具下载好pkg文件"></a>3.退出GarageBand，得到下载地址，使用第三方工具下载好pkg文件</h4><ul>
 <li>退出GarageBand，取消下载，GarageBand会在下载的临时文件旁边生成这么一个文件，文件中有实际的下载地址  </li>
 </ul>
 <p><strong> MAContent10_GarageBandCoreContent_v3.pkg.resumeData </strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandPremiumContent.pkg</div><div class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandCoreContent_v3.pkg</div><div class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GB_StereoDrumKitsSongWriter.pkg</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandPremiumContent.pkg</span><br><span class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandCoreContent_v3.pkg</span><br><span class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GB_StereoDrumKitsSongWriter.pkg</span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用第三方下载工具，下载这个ULR对应的文件  </li>
 </ul>
 <h4 id="4-下载后了之后，有两种方式进行安装"><a href="#4-下载后了之后，有两种方式进行安装" class="headerlink" title="4.下载后了之后，有两种方式进行安装"></a>4.下载后了之后，有两种方式进行安装</h4><h5 id="4-1-方案一：替换文件"><a href="#4-1-方案一：替换文件" class="headerlink" title="4.1 方案一：替换文件"></a>4.1 方案一：替换文件</h5><p>把下载到的文件替换到第2步得到的路径上，修改.resumeData中的文件大小，然后重启GarageBand。  </p>
 <h5 id="4-2-方案二：删除临时文件，双击pkg安装"><a href="#4-2-方案二：删除临时文件，双击pkg安装" class="headerlink" title="4.2 方案二：删除临时文件，双击pkg安装"></a>4.2 方案二：删除临时文件，双击pkg安装</h5><p>删除步骤2得到的目录下的文件，然后双击下载好的pkg，安装后，打开GarageBand。  </p>
 <h4 id="5-遗留问题"><a href="#5-遗留问题" class="headerlink" title="5.遗留问题"></a>5.遗留问题</h4><p>安装后还是会提示需要下载，而且看临时文件还是在下载MAContent10_GarageBandPremiumContent.pkg，太奇怪了</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://bbs.feng.com/read-htm-tid-7164986.html" target="_blank" rel="external">2013新版GarageBand下载基本音乐、声效库缓慢的解决办法</a>  </p>
-<p><a href="http://bbs.feng.com/read-htm-tid-8038836.html" target="_blank" rel="external">天朝重装GarageBand下载几十个小时基础包的盆友们进来看</a>  </p>
-<p><a href="http://www.audiobar.net/viewthread.php?tid=416782" target="_blank" rel="external">[原创]Logic Pro X全部扩展包下载地址 34.3GB</a>  </p>
-<p><a href="https://s3.amazonaws.com/bwhli001/files/logic-x-mainstage-3-content.txt" target="_blank" rel="external">logic-x-mainstage-3-content</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_8c6f1bae0102vbce.html" target="_blank" rel="external">GarageBand全部素材包下载地址</a>  </p>
-<p><a href="http://www.worldu.me/iLife/138.html" target="_blank" rel="external">GarageBand及随附增值包快速安装方法</a>  </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://bbs.feng.com/read-htm-tid-7164986.html" target="_blank" rel="noopener">2013新版GarageBand下载基本音乐、声效库缓慢的解决办法</a>  </p>
+<p><a href="http://bbs.feng.com/read-htm-tid-8038836.html" target="_blank" rel="noopener">天朝重装GarageBand下载几十个小时基础包的盆友们进来看</a>  </p>
+<p><a href="http://www.audiobar.net/viewthread.php?tid=416782" target="_blank" rel="noopener">[原创]Logic Pro X全部扩展包下载地址 34.3GB</a>  </p>
+<p><a href="https://s3.amazonaws.com/bwhli001/files/logic-x-mainstage-3-content.txt" target="_blank" rel="noopener">logic-x-mainstage-3-content</a>  </p>
+<p><a href="http://blog.sina.com.cn/s/blog_8c6f1bae0102vbce.html" target="_blank" rel="noopener">GarageBand全部素材包下载地址</a>  </p>
+<p><a href="http://www.worldu.me/iLife/138.html" target="_blank" rel="noopener">GarageBand及随附增值包快速安装方法</a>  </p>
 
       
     </div>

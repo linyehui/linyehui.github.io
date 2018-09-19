@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="疑问CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；
-那么同样的逻辑下iOS是什么效果呢？
-解答因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的
-如果按照比较常用的方式是什么样的呢？How can I create a UIColor from a hex string?
-12345678// Assu">
+<meta name="description" content="疑问CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC； 那么同样的逻辑下iOS是什么效果呢？ 解答因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的 如果按照比较常用的方式是什么样的呢？How can I create a UIColor from a hex string? 12345678// Assu">
+<meta name="keywords" content="tips,ios,css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HEX to RGB">
 <meta property="og:url" content="http://linyehui.me/2016/04/29/hex-to-rgb/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="疑问CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；
-那么同样的逻辑下iOS是什么效果呢？
-解答因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的
-如果按照比较常用的方式是什么样的呢？How can I create a UIColor from a hex string?
-12345678// Assu">
+<meta property="og:description" content="疑问CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC； 那么同样的逻辑下iOS是什么效果呢？ 解答因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的 如果按照比较常用的方式是什么样的呢？How can I create a UIColor from a hex string? 12345678// Assu">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-12-15T04:34:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HEX to RGB">
-<meta name="twitter:description" content="疑问CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；
-那么同样的逻辑下iOS是什么效果呢？
-解答因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的
-如果按照比较常用的方式是什么样的呢？How can I create a UIColor from a hex string?
-12345678// Assu">
+<meta name="twitter:description" content="疑问CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC； 那么同样的逻辑下iOS是什么效果呢？ 解答因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的 如果按照比较常用的方式是什么样的呢？How can I create a UIColor from a hex string? 12345678// Assu">
 
 
 
@@ -342,11 +332,11 @@
         <h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>CSS下有时候为了偷懒，会把#CCCCCC写成#CCC，这个其实就是自动补齐，CSS下会复制每个C变成CC；</p>
 <p>那么同样的逻辑下iOS是什么效果呢？</p>
 <h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>因为SDK并没有提供HEX参数的UIColor构造函数，所以实际上就是看代码怎么写的</p>
-<h3 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h3><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="external">How can I create a UIColor from a hex string?</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Assumes input like &quot;#00FF00&quot; (#RRGGBB).</div><div class="line">+ (UIColor *)colorFromHexString:(NSString *)hexString &#123;</div><div class="line">    unsigned rgbValue = 0;</div><div class="line">    NSScanner *scanner = [NSScanner scannerWithString:hexString];</div><div class="line">    [scanner setScanLocation:1]; // bypass &apos;#&apos; character</div><div class="line">    [scanner scanHexInt:&amp;rgbValue];</div><div class="line">    return [UIColor colorWithRed:((rgbValue &amp; 0xFF0000) &gt;&gt; 16)/255.0 green:((rgbValue &amp; 0xFF00) &gt;&gt; 8)/255.0 blue:(rgbValue &amp; 0xFF)/255.0 alpha:1.0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="如果按照比较常用的方式是什么样的呢？"><a href="#如果按照比较常用的方式是什么样的呢？" class="headerlink" title="如果按照比较常用的方式是什么样的呢？"></a>如果按照比较常用的方式是什么样的呢？</h3><p><a href="http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string" target="_blank" rel="noopener">How can I create a UIColor from a hex string?</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Assumes input like &quot;#00FF00&quot; (#RRGGBB).</span><br><span class="line">+ (UIColor *)colorFromHexString:(NSString *)hexString &#123;</span><br><span class="line">    unsigned rgbValue = 0;</span><br><span class="line">    NSScanner *scanner = [NSScanner scannerWithString:hexString];</span><br><span class="line">    [scanner setScanLocation:1]; // bypass &apos;#&apos; character</span><br><span class="line">    [scanner scanHexInt:&amp;rgbValue];</span><br><span class="line">    return [UIColor colorWithRed:((rgbValue &amp; 0xFF0000) &gt;&gt; 16)/255.0 green:((rgbValue &amp; 0xFF00) &gt;&gt; 8)/255.0 blue:(rgbValue &amp; 0xFF)/255.0 alpha:1.0];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>根据这个代码，实际的效果会是这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#CCC 会被解释成 #000CCC，而不是像CSS中所期望的#CCCCCC</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章:"></a>参考文章:</h2><p><a href="https://en.wikipedia.org/wiki/Web_colors#Converting_RGB_to_hexadecimal" target="_blank" rel="external">Web colors</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#CCC 会被解释成 #000CCC，而不是像CSS中所期望的#CCCCCC</span><br></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章:"></a>参考文章:</h2><p><a href="https://en.wikipedia.org/wiki/Web_colors#Converting_RGB_to_hexadecimal" target="_blank" rel="noopener">Web colors</a></p>
 
       
     </div>

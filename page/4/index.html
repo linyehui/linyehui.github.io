@@ -90,6 +90,7 @@
 <meta property="og:url" content="http://linyehui.me/page/4/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
 <meta property="og:description" content="HABIT IS POWSER">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HABIT IS POWSER">
 <meta name="twitter:description" content="HABIT IS POWSER">
@@ -341,10 +342,10 @@
 <li>删除本地的证书，服务器上配置的iOS Provisioning Profiles (Development)其实也是可以删除的，不删除也没问题，因为使用XCode重新申请证书的话，会自动把老的配置置为无效<br><img src="/media/files/2015/03/27/12_revoke_certificate_2_2x.png" alt="证书"></li>
 </ol>
 <p>做了上面的事情，你就可以安装各种教程，重新申请下证书了，这时你应该已经可以成功了。  </p>
-<p>参考：<a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW26" target="_blank" rel="external">Maintaining Your Signing Identities and Certificates</a><br><a href="http://www.cocoachina.com/bbs/read.php?tid=256724" target="_blank" rel="external">Valid signing identity not found（有关真机调试）</a>  </p>
+<p>参考：<a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW26" target="_blank" rel="noopener">Maintaining Your Signing Identities and Certificates</a><br><a href="http://www.cocoachina.com/bbs/read.php?tid=256724" target="_blank" rel="noopener">Valid signing identity not found（有关真机调试）</a>  </p>
 <p>这里有一点需要特别说的是：</p>
 <h3 id="No-signing-identity-found-不影响真机调试"><a href="#No-signing-identity-found-不影响真机调试" class="headerlink" title="No signing identity found 不影响真机调试"></a>No signing identity found 不影响真机调试</h3><p>如果你已经重新来过了，而且Build Setting-》Code Signing-》Provisioning Profiles已经有了正确的配置文件了，那么这个时候你看到  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No signing identity found</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No signing identity found</span><br></pre></td></tr></table></figure>
 <p>这个提示是可以忽略的，已经可以真机调试了。</p>
 <h2 id="Certificates-Identifiers-amp-Profiles"><a href="#Certificates-Identifiers-amp-Profiles" class="headerlink" title="Certificates, Identifiers &amp; Profiles"></a>Certificates, Identifiers &amp; Profiles</h2><p>Provisioning Profiles 到底是干什么的？  </p>
 <p>简单说，这个配置文件做的事情就是校验调试流程的三个主体的合法性：苹果开发者，XCode使用者，iPhone使用者。</p>
@@ -358,145 +359,6 @@
 </li>
 </ol>
 <h2 id="我为什么会遇到这个问题"><a href="#我为什么会遇到这个问题" class="headerlink" title="我为什么会遇到这个问题"></a>我为什么会遇到这个问题</h2><p>公司的开发者账号很容易满员，所以我加入了三个开发者账号……</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/18/debug-spidermonkey-with-cocos2d-js/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="linyehui">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="HABIT IS POWSER">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/18/debug-spidermonkey-with-cocos2d-js/" itemprop="url">
-                  cocos2d-js调试Spidermonkey代码
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T00:00:00+08:00">
-                2015-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/03/18/debug-spidermonkey-with-cocos2d-js/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/18/debug-spidermonkey-with-cocos2d-js/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>cocos2d-js-3.1中的spidermonkey是直接以头文件+.a文件的方式整合的，但是有些代码会crash在spidermonkey的代码中，所以我需要调试spidermonkey的C++代码。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="寻找cocos2d-js-3-1使用的spidermonkey版本"><a href="#寻找cocos2d-js-3-1使用的spidermonkey版本" class="headerlink" title="寻找cocos2d-js-3.1使用的spidermonkey版本"></a>寻找cocos2d-js-3.1使用的spidermonkey版本</h3><h4 id="尝试1，v23版本"><a href="#尝试1，v23版本" class="headerlink" title="尝试1，v23版本"></a>尝试1，v23版本</h4><p>版本 v23，看当前使用的版本，一开始的想法是查看本地cocos2d-x目录下的CHANGELOG，我看到的最新的是：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cocos2d-x-3.0alpha0 @Sep.19 2013</div><div class="line">Upgraded SpiderMonkey to Firefox v23</div></pre></td></tr></table></figure>
-<p>而spidermonker目录下的README告诉我们需要去这个github仓库取代码  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.\frameworks\js-bindings\external\spidermonkey\README.md</div><div class="line">https://github.com/ricardoquesada/Spidermonkey</div></pre></td></tr></table></figure>
-<p>找了下v23的log，发下没有release，所以只能从特定的commit下载zip包下来</p>
-<p><a href="https://github.com/ricardoquesada/Spidermonkey/tree/c8f78c30b633025f48fc0075e5f9a706639c7ac4" target="_blank" rel="external">https://github.com/ricardoquesada/Spidermonkey/tree/c8f78c30b633025f48fc0075e5f9a706639c7ac4</a></p>
-<h5 id="结论：编译后发现版本不对，头文件不对"><a href="#结论：编译后发现版本不对，头文件不对" class="headerlink" title="结论：编译后发现版本不对，头文件不对"></a>结论：编译后发现版本不对，头文件不对</h5><h4 id="尝试2，v28版本"><a href="#尝试2，v28版本" class="headerlink" title="尝试2，v28版本"></a>尝试2，v28版本</h4><p>本地的CHANGELOG不对，那么就看下在线版本的；  </p>
-<p>我们的cocos2d-js版本是3.1对应到在线的CHANGELOG，其中的Spidermonkey版本是v28  </p>
-<p><a href="https://github.com/cocos2d/cocos2d-js/blob/develop/CHANGELOG" target="_blank" rel="external">https://github.com/cocos2d/cocos2d-js/blob/develop/CHANGELOG</a></p>
-<p>同样的还是没有release版本，所以还是到对应的commit页面下载  </p>
-<p><a href="https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96" target="_blank" rel="external">https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Cocos2d-JS-v3.0 beta @ May.23, 2014</div><div class="line">[JSB]Upgraded SpiderMonkey to v28.</div><div class="line"></div><div class="line">Cocos2d-JS-v3.0 alpha2 @ April.14, 2014</div><div class="line">[JSB]Update precompiled SpiderMonkey to support iOS 64 bit devices.</div><div class="line"></div><div class="line"></div><div class="line">ricardoquesada authored on 25 Apr 2014</div><div class="line">Merge pull request #28 from pandamicro/v28 …</div><div class="line">[v28] Upgrade to Spidermonkey v28</div></pre></td></tr></table></figure>
-<h5 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h5><p>进入js/src/build-android，执行./build.sh -r<br>对比生成的apidermonkey-android中的include文件和cocos2d-js目录下的文件，一致，看来应该是这个版本了</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>cocos2d-js-3.1 使用的spidermonkey版本是v28，可以从这里下载到:<br><a href="https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96" target="_blank" rel="external">https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96</a></p>
-<p>进入js/src/build-android目录下执行./build.sh -r后将生成的三个目录覆盖到工程目录就可以调试了。</p>
 
           
         
@@ -623,7 +485,7 @@
             <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>双击SDK Manager.exe，闪退；  </p>
 <p>网上找了下资料，SDK Manager.exe启动其实调用的是android.bat这个批处理，而闪退的直接原因就是find_java.bat执行没有获取到正确的java.exe路径</p>
 <h3 id="问题根源"><a href="#问题根源" class="headerlink" title="问题根源"></a>问题根源</h3><p>问题的根源在于android.bat中的这一段脚本执行出错了，没有获取到正确的java.exe路径  </p>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">rem Check we have a valid Java.exe in the path.</span></div><div class="line"><span class="built_in">set</span> java_exe=</div><div class="line"><span class="keyword">call</span> lib\find_java.bat</div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> java_exe <span class="keyword">goto</span> :EOF</div></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">rem Check we have a valid Java.exe in the path.</span></span><br><span class="line"><span class="built_in">set</span> java_exe=</span><br><span class="line"><span class="keyword">call</span> lib\find_java.bat</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> java_exe <span class="keyword">goto</span> :EOF</span><br></pre></td></tr></table></figure>
 <p>其实问题最终的根源在于find_java.bat中调用的find_java.exe没有返回正确的路径</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="简单粗暴的解决方案"><a href="#简单粗暴的解决方案" class="headerlink" title="简单粗暴的解决方案"></a>简单粗暴的解决方案</h3><ul>
 <li><p>简单的改法就是修改Android.bat中的java_exe路径，直接写死；  </p>
@@ -631,13 +493,152 @@
 <li><p>当然这是个非常粗暴的解决方案，方案的风险在于：下次你复制这个目录到别的电脑上使用的时候，这里设置的路径需要重新设置。</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set java_exe=C:\Program Files\Java\jdk1.7.0_40\bin\java.exe</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set java_exe=C:\Program Files\Java\jdk1.7.0_40\bin\java.exe</span><br></pre></td></tr></table></figure>
 <h3 id="正确的解决方案"><a href="#正确的解决方案" class="headerlink" title="正确的解决方案"></a>正确的解决方案</h3><p>其实这个更简单，在系统环境变量中，添加一个JAVA_HOME的变量定义  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME</div><div class="line">C:\Program Files\Java\jdk1.7.0_40</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME</span><br><span class="line">C:\Program Files\Java\jdk1.7.0_40</span><br></pre></td></tr></table></figure>
 <h4 id="验证的方法"><a href="#验证的方法" class="headerlink" title="验证的方法"></a>验证的方法</h4><p>直接调用下find_java.exe看看能否返回正确的路径。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/puma004/article/details/11392271" target="_blank" rel="external">64位win7下Android SDK Manager闪退的解决方法</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_6e1ad0cf01013v9u.html" target="_blank" rel="external">解决64位Win7下的android sdk manager一闪而过的问题</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_8a2d5e270101ad3q.html" target="_blank" rel="external">安装Android SDK时，点击SDK Manager.exe闪退</a>  </p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/puma004/article/details/11392271" target="_blank" rel="noopener">64位win7下Android SDK Manager闪退的解决方法</a>  </p>
+<p><a href="http://blog.sina.com.cn/s/blog_6e1ad0cf01013v9u.html" target="_blank" rel="noopener">解决64位Win7下的android sdk manager一闪而过的问题</a>  </p>
+<p><a href="http://blog.sina.com.cn/s/blog_8a2d5e270101ad3q.html" target="_blank" rel="noopener">安装Android SDK时，点击SDK Manager.exe闪退</a>  </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/03/18/debug-spidermonkey-with-cocos2d-js/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="linyehui">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="HABIT IS POWSER">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="HABIT IS POWSER" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/03/18/debug-spidermonkey-with-cocos2d-js/" itemprop="url">
+                  cocos2d-js调试Spidermonkey代码
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-18T00:00:00+08:00">
+                2015-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/03/18/debug-spidermonkey-with-cocos2d-js/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/18/debug-spidermonkey-with-cocos2d-js/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>cocos2d-js-3.1中的spidermonkey是直接以头文件+.a文件的方式整合的，但是有些代码会crash在spidermonkey的代码中，所以我需要调试spidermonkey的C++代码。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="寻找cocos2d-js-3-1使用的spidermonkey版本"><a href="#寻找cocos2d-js-3-1使用的spidermonkey版本" class="headerlink" title="寻找cocos2d-js-3.1使用的spidermonkey版本"></a>寻找cocos2d-js-3.1使用的spidermonkey版本</h3><h4 id="尝试1，v23版本"><a href="#尝试1，v23版本" class="headerlink" title="尝试1，v23版本"></a>尝试1，v23版本</h4><p>版本 v23，看当前使用的版本，一开始的想法是查看本地cocos2d-x目录下的CHANGELOG，我看到的最新的是：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cocos2d-x-3.0alpha0 @Sep.19 2013</span><br><span class="line">Upgraded SpiderMonkey to Firefox v23</span><br></pre></td></tr></table></figure>
+<p>而spidermonker目录下的README告诉我们需要去这个github仓库取代码  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.\frameworks\js-bindings\external\spidermonkey\README.md</span><br><span class="line">https://github.com/ricardoquesada/Spidermonkey</span><br></pre></td></tr></table></figure>
+<p>找了下v23的log，发下没有release，所以只能从特定的commit下载zip包下来</p>
+<p><a href="https://github.com/ricardoquesada/Spidermonkey/tree/c8f78c30b633025f48fc0075e5f9a706639c7ac4" target="_blank" rel="noopener">https://github.com/ricardoquesada/Spidermonkey/tree/c8f78c30b633025f48fc0075e5f9a706639c7ac4</a></p>
+<h5 id="结论：编译后发现版本不对，头文件不对"><a href="#结论：编译后发现版本不对，头文件不对" class="headerlink" title="结论：编译后发现版本不对，头文件不对"></a>结论：编译后发现版本不对，头文件不对</h5><h4 id="尝试2，v28版本"><a href="#尝试2，v28版本" class="headerlink" title="尝试2，v28版本"></a>尝试2，v28版本</h4><p>本地的CHANGELOG不对，那么就看下在线版本的；  </p>
+<p>我们的cocos2d-js版本是3.1对应到在线的CHANGELOG，其中的Spidermonkey版本是v28  </p>
+<p><a href="https://github.com/cocos2d/cocos2d-js/blob/develop/CHANGELOG" target="_blank" rel="noopener">https://github.com/cocos2d/cocos2d-js/blob/develop/CHANGELOG</a></p>
+<p>同样的还是没有release版本，所以还是到对应的commit页面下载  </p>
+<p><a href="https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96" target="_blank" rel="noopener">https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Cocos2d-JS-v3.0 beta @ May.23, 2014</span><br><span class="line">[JSB]Upgraded SpiderMonkey to v28.</span><br><span class="line"></span><br><span class="line">Cocos2d-JS-v3.0 alpha2 @ April.14, 2014</span><br><span class="line">[JSB]Update precompiled SpiderMonkey to support iOS 64 bit devices.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ricardoquesada authored on 25 Apr 2014</span><br><span class="line">Merge pull request #28 from pandamicro/v28 …</span><br><span class="line">[v28] Upgrade to Spidermonkey v28</span><br></pre></td></tr></table></figure>
+<h5 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h5><p>进入js/src/build-android，执行./build.sh -r<br>对比生成的apidermonkey-android中的include文件和cocos2d-js目录下的文件，一致，看来应该是这个版本了</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>cocos2d-js-3.1 使用的spidermonkey版本是v28，可以从这里下载到:<br><a href="https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96" target="_blank" rel="noopener">https://github.com/ricardoquesada/Spidermonkey/tree/90747bc0ccb8e9fa1d56ef7e9c1b8b7b1bee4c96</a></p>
+<p>进入js/src/build-android目录下执行./build.sh -r后将生成的三个目录覆盖到工程目录就可以调试了。</p>
 
           
         
@@ -763,7 +764,7 @@
           
             <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>cocos2d-js-v3.1生成的工程，添加了C++的代码，想要调试C++部分的代码，所以需要在cocos console或者cocos code IDE生成的工程上配置NDK调试，以便我们可以Debug As-&gt;Android Native Application。</p>
 <h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>Windows跟Mac下都统一使用ADT，除了路径格式有点区别，其他的配置都是一样的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Android Developer Tools</div><div class="line">Build: v22.3.0-887826</div><div class="line"></div><div class="line">NDK </div><div class="line">D:\android-ndk-r9d</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Android Developer Tools</span><br><span class="line">Build: v22.3.0-887826</span><br><span class="line"></span><br><span class="line">NDK </span><br><span class="line">D:\android-ndk-r9d</span><br></pre></td></tr></table></figure>
 <p>为了说明这个问题，我用cocos code IDE创建了一个工程NativeDemo，下面中的.\NativeDemo就是这个工程的根目录</p>
 <h3 id="Add-Native-Support"><a href="#Add-Native-Support" class="headerlink" title="Add Native Support"></a>Add Native Support</h3><h4 id="默认生成的工程是找不到Add-Native-Support的"><a href="#默认生成的工程是找不到Add-Native-Support的" class="headerlink" title="默认生成的工程是找不到Add Native Support的"></a>默认生成的工程是找不到Add Native Support的</h4><p>用ADT打开工程后，没有办法使用Native来调试，这样就没办法调试NDK了，排查了下：  </p>
 <p>1.右键工程Android Tools中没有Add Native Support菜单  </p>
@@ -779,32 +780,32 @@
 <p>另外删除成功后工程属性下也看不到C/C++ Build的Tab页；    </p>
 <p>而工程属性的Builder下会看不到 Scanner Configuration Builder。    </p>
 <p>修改好了之后，右键工程，Android Tools，Add Native Support </p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.cocos2d-x.org/wiki/How_to_build_and_run_HelloWorld_on_Android_NDK_r5_and_above" target="_blank" rel="external">How to build and run HelloWorld on Android NDK r5 and above</a>  </p>
-<p><a href="http://www.cnblogs.com/sw926/p/3232311.html" target="_blank" rel="external">无需cygwin，使用NDK进行开发</a>  </p>
-<h3 id="配置NDK-build"><a href="#配置NDK-build" class="headerlink" title="配置NDK build"></a>配置NDK build</h3><h4 id="添加一个C-变量"><a href="#添加一个C-变量" class="headerlink" title="添加一个C++变量"></a>添加一个C++变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">COCOS2DX_HOME</div><div class="line">../../js-bindings/cocos2d-x</div></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.cocos2d-x.org/wiki/How_to_build_and_run_HelloWorld_on_Android_NDK_r5_and_above" target="_blank" rel="noopener">How to build and run HelloWorld on Android NDK r5 and above</a>  </p>
+<p><a href="http://www.cnblogs.com/sw926/p/3232311.html" target="_blank" rel="noopener">无需cygwin，使用NDK进行开发</a>  </p>
+<h3 id="配置NDK-build"><a href="#配置NDK-build" class="headerlink" title="配置NDK build"></a>配置NDK build</h3><h4 id="添加一个C-变量"><a href="#添加一个C-变量" class="headerlink" title="添加一个C++变量"></a>添加一个C++变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COCOS2DX_HOME</span><br><span class="line">../../js-bindings/cocos2d-x</span><br></pre></td></tr></table></figure>
 <p><img src="/media/files/2015/03/17/build_var.png" alt="build var"></p>
-<h4 id="配置NDK-build的命令行"><a href="#配置NDK-build的命令行" class="headerlink" title="配置NDK build的命令行"></a>配置NDK build的命令行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#Windows</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..;$&#123;COCOS2DX_HOME&#125;;$&#123;COCOS2DX_HOME&#125;/external;$&#123;COCOS2DX_HOME&#125;/cocos;../Classes&quot;</div><div class="line"></div><div class="line">#Mac</div><div class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..:$&#123;COCOS2DX_HOME&#125;:$&#123;COCOS2DX_HOME&#125;/external:$&#123;COCOS2DX_HOME&#125;/cocos:../Classes&quot;</div></pre></td></tr></table></figure>
+<h4 id="配置NDK-build的命令行"><a href="#配置NDK-build的命令行" class="headerlink" title="配置NDK build的命令行"></a>配置NDK build的命令行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#Windows</span><br><span class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..;$&#123;COCOS2DX_HOME&#125;;$&#123;COCOS2DX_HOME&#125;/external;$&#123;COCOS2DX_HOME&#125;/cocos;../Classes&quot;</span><br><span class="line"></span><br><span class="line">#Mac</span><br><span class="line">ndk-build NDK_DEBUG=1 -C &quot;$&#123;ProjDirPath&#125;&quot; &quot;NDK_MODULE_PATH=$&#123;COCOS2DX_HOME&#125;/..:$&#123;COCOS2DX_HOME&#125;:$&#123;COCOS2DX_HOME&#125;/external:$&#123;COCOS2DX_HOME&#125;/cocos:../Classes&quot;</span><br></pre></td></tr></table></figure>
 <p><img src="/media/files/2015/03/17/ndk_build.png" alt="ndk build"></p>
 <ul>
 <li>NDK_DEBUG=1这个参数记得加上</li>
 </ul>
-<h3 id="R-ARM-THM-CALL"><a href="#R-ARM-THM-CALL" class="headerlink" title="R_ARM_THM_CALL"></a>R_ARM_THM_CALL</h3><p>C++编译过程中出现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed Android build: “error: relocation overflow in R_ARM_THM_CALL”</div></pre></td></tr></table></figure></p>
+<h3 id="R-ARM-THM-CALL"><a href="#R-ARM-THM-CALL" class="headerlink" title="R_ARM_THM_CALL"></a>R_ARM_THM_CALL</h3><p>C++编译过程中出现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed Android build: “error: relocation overflow in R_ARM_THM_CALL”</span><br></pre></td></tr></table></figure></p>
 <h4 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h4><p>/runtime-scr/proj.android/jni/Android.mk 中添加一行：</p>
 <blockquote>
 <p>LOCAL_ARM_MODE := arm</p>
 </blockquote>
-<p>参考：<a href="http://blog.csdn.net/mingzznet/article/details/41120551" target="_blank" rel="external">http://blog.csdn.net/mingzznet/article/details/41120551</a></p>
-<h3 id="SDK版本号导致的Unknown-Application-ABI"><a href="#SDK版本号导致的Unknown-Application-ABI" class="headerlink" title="SDK版本号导致的Unknown Application ABI"></a>SDK版本号导致的Unknown Application ABI</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unknown Application ABI: </div><div class="line">Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 9 in ./AndroidManifest.xml</div></pre></td></tr></table></figure>
+<p>参考：<a href="http://blog.csdn.net/mingzznet/article/details/41120551" target="_blank" rel="noopener">http://blog.csdn.net/mingzznet/article/details/41120551</a></p>
+<h3 id="SDK版本号导致的Unknown-Application-ABI"><a href="#SDK版本号导致的Unknown-Application-ABI" class="headerlink" title="SDK版本号导致的Unknown Application ABI"></a>SDK版本号导致的Unknown Application ABI</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Unknown Application ABI: </span><br><span class="line">Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 9 in ./AndroidManifest.xml</span><br></pre></td></tr></table></figure>
 <h4 id="解决方案：-2"><a href="#解决方案：-2" class="headerlink" title="解决方案："></a>解决方案：</h4><p>手机上的版本需要和安装了的SDK已经配置的SDK版本一致，以我的小米2S为例，我的系统版本是4.1，也就是对应SDK 的API Level 16；  </p>
 <p>下面这两个文件需要对应的都修改成16：  </p>
-<h5 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-sdk android:minSdkVersion=&quot;16&quot;/&gt;</div></pre></td></tr></table></figure>
-<h5 id="project-properties"><a href="#project-properties" class="headerlink" title="project.properties"></a>project.properties</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">target=android-16</div></pre></td></tr></table></figure>
+<h5 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-sdk android:minSdkVersion=&quot;16&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="project-properties"><a href="#project-properties" class="headerlink" title="project.properties"></a>project.properties</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">target=android-16</span><br></pre></td></tr></table></figure>
 <h3 id="NDK-MODULE-PATH"><a href="#NDK-MODULE-PATH" class="headerlink" title="NDK_MODULE_PATH"></a>NDK_MODULE_PATH</h3><p>切换到Mac下，使用SDK 16来编译，提示NDK Module找不到，想起来之前做过类似的事情，NDK build命令行设置的NDK_MODULE_PATH适用于编译，但是调试的时候还是会提示找不到路径，解决方案是在Android.mk中加上调试用的配置，不调试的时候关掉：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 调试NDK用的定义，平常不要打开 linyhui</div><div class="line">$(call import-add-path, ../../js-bindings)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/external)</div><div class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/cocos)</div><div class="line">$(call import-add-path, ../Classes)</div></pre></td></tr></table></figure>
-<p><a href="http://blog.sina.com.cn/s/blog_4057ab62010197z8.html" target="_blank" rel="external">import-module的注意事项与NDK_MODULE_PATH的配置</a>  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果NDK_MODULE_PATH 没有设置或者设置不正确。编译时都是报错 Are you sure your NDK_MODULE_PATH variable is properly defined。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 调试NDK用的定义，平常不要打开 linyhui</span><br><span class="line">$(call import-add-path, ../../js-bindings)</span><br><span class="line">$(call import-add-path, ../../js-bindings/cocos2d-x)</span><br><span class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/external)</span><br><span class="line">$(call import-add-path, ../../js-bindings/cocos2d-x/cocos)</span><br><span class="line">$(call import-add-path, ../Classes)</span><br></pre></td></tr></table></figure>
+<p><a href="http://blog.sina.com.cn/s/blog_4057ab62010197z8.html" target="_blank" rel="noopener">import-module的注意事项与NDK_MODULE_PATH的配置</a>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果NDK_MODULE_PATH 没有设置或者设置不正确。编译时都是报错 Are you sure your NDK_MODULE_PATH variable is properly defined。</span><br></pre></td></tr></table></figure>
 <h3 id="bindings目录下的Android-mk有语法错误"><a href="#bindings目录下的Android-mk有语法错误" class="headerlink" title="bindings目录下的Android.mk有语法错误"></a>bindings目录下的Android.mk有语法错误</h3><p>排查了半天发现是这个文件有语法错误，导致无法调试，但不知道为什么编译是没有问题的，这个算是cocos2d的一个Bug：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./NativeDemo/frameworks/js-bindings/bindings/Android.mk</div><div class="line"></div><div class="line">#### 注释掉这个文件末尾中的这一行：</div><div class="line"></div><div class="line">#$(call import-module,.)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./NativeDemo/frameworks/js-bindings/bindings/Android.mk</span><br><span class="line"></span><br><span class="line">#### 注释掉这个文件末尾中的这一行：</span><br><span class="line"></span><br><span class="line">#$(call import-module,.)</span><br></pre></td></tr></table></figure>
 <p>注释后，Build下C++，就可以Debug As-&gt;Android Native Application</p>
 <h3 id="搞定了"><a href="#搞定了" class="headerlink" title="搞定了"></a>搞定了</h3><p>可以Debug As-&gt;Android Native Application</p>
 
@@ -1078,7 +1079,7 @@
       
         
           
-            <h1 id="三句话"><a href="#三句话" class="headerlink" title="三句话"></a>三句话</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> GoDaddy.com 千万不要用，还有域名在上面的赶紧逃离吧。</div><div class="line"></div><div class="line"><span class="number">2.</span> 偷域名的要么孤独终老，要么生孩子没屁眼。</div><div class="line"></div><div class="line"><span class="number">3.</span> 这个博客主要是写给自己看的，什么域名其实不重要，换个新域名继续写，希望<span class="number">2015</span>可以继续坚持下来。</div></pre></td></tr></table></figure>
+            <h1 id="三句话"><a href="#三句话" class="headerlink" title="三句话"></a>三句话</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> GoDaddy.com 千万不要用，还有域名在上面的赶紧逃离吧。</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 偷域名的要么孤独终老，要么生孩子没屁眼。</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 这个博客主要是写给自己看的，什么域名其实不重要，换个新域名继续写，希望<span class="number">2015</span>可以继续坚持下来。</span><br></pre></td></tr></table></figure>
 <h1 id="Have-Fun-：）"><a href="#Have-Fun-：）" class="headerlink" title="Have Fun ：）"></a>Have Fun ：）</h1>
           
         
@@ -1207,15 +1208,15 @@
 <h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><h4 id="开源库"><a href="#开源库" class="headerlink" title="开源库"></a>开源库</h4><p>boost，QT等都提供了指引</p>
 <h4 id="第三方SDK"><a href="#第三方SDK" class="headerlink" title="第三方SDK"></a>第三方SDK</h4><p>国内像友盟提供的SDK已经分别对应两个标准库提供了.a文件用于适配</p>
 <h4 id="自己的库"><a href="#自己的库" class="headerlink" title="自己的库"></a>自己的库</h4><p>修改下编译选项，重编下</p>
-<h2 id="两者的区别"><a href="#两者的区别" class="headerlink" title="两者的区别"></a>两者的区别</h2><h3 id="简单描述"><a href="#简单描述" class="headerlink" title="简单描述"></a>简单描述</h3><p><a href="http://stackoverflow.com/questions/12542971/using-libstdc-compiled-libraries-with-clang-stdlib-libc" target="_blank" rel="external">Using libstdc++ compiled libraries with clang++ -stdlib=libc++</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Although they are API compatible, they are not ABI compatible. </div><div class="line">That means that if you construct a std::string with libstdc++, </div><div class="line">and then pass it to other code that is linked against libc++, </div><div class="line">the receiving code would think it has a libc++ std::string.</div></pre></td></tr></table></figure>
-<h3 id="详细描述"><a href="#详细描述" class="headerlink" title="详细描述"></a>详细描述</h3><p><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4028.pdf" target="_blank" rel="external">Defining a Portable C++ ABI - Open Standards</a></p>
+<h2 id="两者的区别"><a href="#两者的区别" class="headerlink" title="两者的区别"></a>两者的区别</h2><h3 id="简单描述"><a href="#简单描述" class="headerlink" title="简单描述"></a>简单描述</h3><p><a href="http://stackoverflow.com/questions/12542971/using-libstdc-compiled-libraries-with-clang-stdlib-libc" target="_blank" rel="noopener">Using libstdc++ compiled libraries with clang++ -stdlib=libc++</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Although they are API compatible, they are not ABI compatible. </span><br><span class="line">That means that if you construct a std::string with libstdc++, </span><br><span class="line">and then pass it to other code that is linked against libc++, </span><br><span class="line">the receiving code would think it has a libc++ std::string.</span><br></pre></td></tr></table></figure>
+<h3 id="详细描述"><a href="#详细描述" class="headerlink" title="详细描述"></a>详细描述</h3><p><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4028.pdf" target="_blank" rel="noopener">Defining a Portable C++ ABI - Open Standards</a></p>
 <h2 id="为什么要有两个库？"><a href="#为什么要有两个库？" class="headerlink" title="为什么要有两个库？"></a>为什么要有两个库？</h2><h3 id="GPLv3"><a href="#GPLv3" class="headerlink" title="GPLv3"></a>GPLv3</h3><p>GCC 4.2.1之后的版本License改成了GPLv3，这个许可协议和Apple在AppStore里使用的DRM技术不相容，也就是说Apple以及第三方开发者不能使用GCC4.2.1之后的版本生成AppStore应用，libstdc++其实一直是GCC工具集的一部分，所以只好停留在GCC 4.2.1自带的那个版本。</p>
 <h3 id="GCC对Objective-C新特性的支持很有限"><a href="#GCC对Objective-C新特性的支持很有限" class="headerlink" title="GCC对Objective-C新特性的支持很有限"></a>GCC对Objective-C新特性的支持很有限</h3><p>GCC4.2.1及对应的libstdc++太老旧，不支持新的C和C++标准，也不支持Apple加入到Objective-C里的新特性比如Block、ARC等。</p>
-<p><a href="http://www.zhihu.com/question/23507141" target="_blank" rel="external">知乎：Apple 为什么在 Mavericks 里把 C++ 标准库从 libstdc++ 改成 libc++？</a></p>
+<p><a href="http://www.zhihu.com/question/23507141" target="_blank" rel="noopener">知乎：Apple 为什么在 Mavericks 里把 C++ 标准库从 libstdc++ 改成 libc++？</a></p>
 <h2 id="一件小事"><a href="#一件小事" class="headerlink" title="一件小事"></a>一件小事</h2><p>由于我自己的疏忽，我的GoDaddy账号被盗了，上面的6个域名(包括linyehui.com)被小偷转移，目前还在申诉中。</p>
 <p>虽然事情还没结束，但处理的过程让我对GoDaddy非常失望，以后绝不会在他们家注册任何服务：GoDaddy对你的财产安全根本不在乎。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1.如果小偷拥有了你的密码，小偷做了任何事情GoDaddy都不认账;</div><div class="line"></div><div class="line">2.稍微有点安全意识的网站，改个密码都要短信或者邮件验证下，</div><div class="line">而GoDaddy转移货真价实的财产（域名）竟然连个验证邮件都没有；</div><div class="line"></div><div class="line">3.域名被转移后，GoDaddy只会事后发一封知会邮件，而且虽然邮件上面说15天之内可以undo，</div><div class="line">但是所谓的undo只是一句空话，还是要走非常无力的申诉流程。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.如果小偷拥有了你的密码，小偷做了任何事情GoDaddy都不认账;</span><br><span class="line"></span><br><span class="line">2.稍微有点安全意识的网站，改个密码都要短信或者邮件验证下，</span><br><span class="line">而GoDaddy转移货真价实的财产（域名）竟然连个验证邮件都没有；</span><br><span class="line"></span><br><span class="line">3.域名被转移后，GoDaddy只会事后发一封知会邮件，而且虽然邮件上面说15天之内可以undo，</span><br><span class="line">但是所谓的undo只是一句空话，还是要走非常无力的申诉流程。</span><br></pre></td></tr></table></figure>
 <h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>万一域名要不回来，这也不是什么大事情，关注博客的同学还可以继续从linyehui.github.com访问。</p>
 <p>要加强防范，做好密码分级，并且定期修改密码。</p>
 <p>这一切没有想象的那么糟，不是吗 :)</p>
@@ -1352,28 +1353,28 @@
 <li><p>然后再使用lsof，并把输出重定向到log.txt中去  </p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ps aux | grep GarageBand  </div><div class="line"></div><div class="line">lsof -g 291 &gt; ~/log.txt</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep GarageBand  </span><br><span class="line"></span><br><span class="line">lsof -g 291 &gt; ~/log.txt</span><br></pre></td></tr></table></figure>
 <ul>
-<li>打开log.txt，搜索.pkg，你会找到类似下面的路径，对了，这个就是下载的临时文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/private/var/folders/37/1bzl8_j50wxcxgmj0dv805lm0000gn/C/com.apple.garageband10/com.apple.MusicApps/audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandPremiumContent.pkg</div></pre></td></tr></table></figure>
+<li>打开log.txt，搜索.pkg，你会找到类似下面的路径，对了，这个就是下载的临时文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/private/var/folders/37/1bzl8_j50wxcxgmj0dv805lm0000gn/C/com.apple.garageband10/com.apple.MusicApps/audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandPremiumContent.pkg</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="3-退出GarageBand，得到下载地址，使用第三方工具下载好pkg文件"><a href="#3-退出GarageBand，得到下载地址，使用第三方工具下载好pkg文件" class="headerlink" title="3.退出GarageBand，得到下载地址，使用第三方工具下载好pkg文件"></a>3.退出GarageBand，得到下载地址，使用第三方工具下载好pkg文件</h4><ul>
 <li>退出GarageBand，取消下载，GarageBand会在下载的临时文件旁边生成这么一个文件，文件中有实际的下载地址  </li>
 </ul>
 <p><strong> MAContent10_GarageBandCoreContent_v3.pkg.resumeData </strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandPremiumContent.pkg</div><div class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandCoreContent_v3.pkg</div><div class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GB_StereoDrumKitsSongWriter.pkg</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandPremiumContent.pkg</span><br><span class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GarageBandCoreContent_v3.pkg</span><br><span class="line">http://audiocontentdownload.apple.com/lp10_ms3_content_2013/MAContent10_GB_StereoDrumKitsSongWriter.pkg</span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用第三方下载工具，下载这个ULR对应的文件  </li>
 </ul>
 <h4 id="4-下载后了之后，有两种方式进行安装"><a href="#4-下载后了之后，有两种方式进行安装" class="headerlink" title="4.下载后了之后，有两种方式进行安装"></a>4.下载后了之后，有两种方式进行安装</h4><h5 id="4-1-方案一：替换文件"><a href="#4-1-方案一：替换文件" class="headerlink" title="4.1 方案一：替换文件"></a>4.1 方案一：替换文件</h5><p>把下载到的文件替换到第2步得到的路径上，修改.resumeData中的文件大小，然后重启GarageBand。  </p>
 <h5 id="4-2-方案二：删除临时文件，双击pkg安装"><a href="#4-2-方案二：删除临时文件，双击pkg安装" class="headerlink" title="4.2 方案二：删除临时文件，双击pkg安装"></a>4.2 方案二：删除临时文件，双击pkg安装</h5><p>删除步骤2得到的目录下的文件，然后双击下载好的pkg，安装后，打开GarageBand。  </p>
 <h4 id="5-遗留问题"><a href="#5-遗留问题" class="headerlink" title="5.遗留问题"></a>5.遗留问题</h4><p>安装后还是会提示需要下载，而且看临时文件还是在下载MAContent10_GarageBandPremiumContent.pkg，太奇怪了</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://bbs.feng.com/read-htm-tid-7164986.html" target="_blank" rel="external">2013新版GarageBand下载基本音乐、声效库缓慢的解决办法</a>  </p>
-<p><a href="http://bbs.feng.com/read-htm-tid-8038836.html" target="_blank" rel="external">天朝重装GarageBand下载几十个小时基础包的盆友们进来看</a>  </p>
-<p><a href="http://www.audiobar.net/viewthread.php?tid=416782" target="_blank" rel="external">[原创]Logic Pro X全部扩展包下载地址 34.3GB</a>  </p>
-<p><a href="https://s3.amazonaws.com/bwhli001/files/logic-x-mainstage-3-content.txt" target="_blank" rel="external">logic-x-mainstage-3-content</a>  </p>
-<p><a href="http://blog.sina.com.cn/s/blog_8c6f1bae0102vbce.html" target="_blank" rel="external">GarageBand全部素材包下载地址</a>  </p>
-<p><a href="http://www.worldu.me/iLife/138.html" target="_blank" rel="external">GarageBand及随附增值包快速安装方法</a>  </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://bbs.feng.com/read-htm-tid-7164986.html" target="_blank" rel="noopener">2013新版GarageBand下载基本音乐、声效库缓慢的解决办法</a>  </p>
+<p><a href="http://bbs.feng.com/read-htm-tid-8038836.html" target="_blank" rel="noopener">天朝重装GarageBand下载几十个小时基础包的盆友们进来看</a>  </p>
+<p><a href="http://www.audiobar.net/viewthread.php?tid=416782" target="_blank" rel="noopener">[原创]Logic Pro X全部扩展包下载地址 34.3GB</a>  </p>
+<p><a href="https://s3.amazonaws.com/bwhli001/files/logic-x-mainstage-3-content.txt" target="_blank" rel="noopener">logic-x-mainstage-3-content</a>  </p>
+<p><a href="http://blog.sina.com.cn/s/blog_8c6f1bae0102vbce.html" target="_blank" rel="noopener">GarageBand全部素材包下载地址</a>  </p>
+<p><a href="http://www.worldu.me/iLife/138.html" target="_blank" rel="noopener">GarageBand及随附增值包快速安装方法</a>  </p>
 
           
         
@@ -1500,13 +1501,13 @@
             <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>系统升级到OS X 10.10.1 + CocoaPods 0.34后遇到了下面的问题，之前是一切正常的：  </p>
 <blockquote>
 <p>[!] The use of implicit sources has been deprecated. To continue using all of the sources currently on your machine, add the following to the top of your Podfile:</p>
-<p>   source ‘<a href="https://github.com/CocoaPods/Specs.git" target="_blank" rel="external">https://github.com/CocoaPods/Specs.git</a>‘</p>
+<p>   source ‘<a href="https://github.com/CocoaPods/Specs.git&#39;" target="_blank" rel="noopener">https://github.com/CocoaPods/Specs.git&#39;</a></p>
 <p>[!] CocoaPods was not able to update the <code>master</code> repo. If this is an unexpected issue and persists you can inspect it running <code>&gt;pod repo update --verbose</code></p>
 </blockquote>
-<h1 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h1><h2 id="尝试1：重装CocoaPods，问题依旧"><a href="#尝试1：重装CocoaPods，问题依旧" class="headerlink" title="尝试1：重装CocoaPods，问题依旧"></a>尝试1：重装CocoaPods，问题依旧</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">gem list --local | grep cocoapods</div><div class="line"></div><div class="line"># 好几个，全部uninstall</div><div class="line">gem uninstall cocoapods</div><div class="line"></div><div class="line">gem install cocoapods</div></pre></td></tr></table></figure>
-<h2 id="尝试2：清除CocoaPods缓存后重新pod-setup，解决问题"><a href="#尝试2：清除CocoaPods缓存后重新pod-setup，解决问题" class="headerlink" title="尝试2：清除CocoaPods缓存后重新pod setup，解决问题"></a>尝试2：清除CocoaPods缓存后重新pod setup，解决问题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo rm -fr ~/.cocoapods/repos/master</div><div class="line">pod setup</div></pre></td></tr></table></figure>
+<h1 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h1><h2 id="尝试1：重装CocoaPods，问题依旧"><a href="#尝试1：重装CocoaPods，问题依旧" class="headerlink" title="尝试1：重装CocoaPods，问题依旧"></a>尝试1：重装CocoaPods，问题依旧</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gem list --local | grep cocoapods</span><br><span class="line"></span><br><span class="line"># 好几个，全部uninstall</span><br><span class="line">gem uninstall cocoapods</span><br><span class="line"></span><br><span class="line">gem install cocoapods</span><br></pre></td></tr></table></figure>
+<h2 id="尝试2：清除CocoaPods缓存后重新pod-setup，解决问题"><a href="#尝试2：清除CocoaPods缓存后重新pod-setup，解决问题" class="headerlink" title="尝试2：清除CocoaPods缓存后重新pod setup，解决问题"></a>尝试2：清除CocoaPods缓存后重新pod setup，解决问题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -fr ~/.cocoapods/repos/master</span><br><span class="line">pod setup</span><br></pre></td></tr></table></figure>
 <h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>解决问题后再次搜索总是能得到正确答案:  </p>
-<p><a href="http://guides.cocoapods.org/using/troubleshooting.html#im-getting-permission-errors-while-running-pod-commands" target="_blank" rel="external">I’m getting permission errors while running pod commands</a></p>
+<p><a href="http://guides.cocoapods.org/using/troubleshooting.html#im-getting-permission-errors-while-running-pod-commands" target="_blank" rel="noopener">I’m getting permission errors while running pod commands</a></p>
 <p>简单来说就是0.32之后的CocoaPods repo目录访问现在不需要root权限了，之前版本生成的目录权限在新版本下会有权限问题，所以需要删除重新生成一次。</p>
 
           
@@ -1632,21 +1633,21 @@
         
           
             <blockquote>
-<p>Slack is awesome, but multiline code formatting in a Slack Post is sucks.<br>My solution is using <a href="https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon" target="_blank" rel="external">Markdown Preview Plus</a> with a Slack Snippet.</p>
+<p>Slack is awesome, but multiline code formatting in a Slack Post is sucks.<br>My solution is using <a href="https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon" target="_blank" rel="noopener">Markdown Preview Plus</a> with a Slack Snippet.</p>
 </blockquote>
 <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。  </p>
 <p>解决这个问题，直接想到的就是”create a post”，Slack的POST虽然是支持Markdown的，但是他的支持非常有限，最让我无法忍受的是多行代码的排版，会完全乱掉。  </p>
 <p>能不能再Slack中使用Markdown而且有更好的排版支持呢？这是我的需求。</p>
 <p>PS.  </p>
 <p>补充一个使用情况：在PC或Mac上，我都是优先选择使用Web版本，Slack我也是在我的Chrome中使用。</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="0-没有用的吐槽"><a href="#0-没有用的吐槽" class="headerlink" title="0.没有用的吐槽"></a>0.没有用的吐槽</h2><p>发了条<a href="https://twitter.com/linyehui/status/542993353340493824" target="_blank" rel="external">Twitter</a>:</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="0-没有用的吐槽"><a href="#0-没有用的吐槽" class="headerlink" title="0.没有用的吐槽"></a>0.没有用的吐槽</h2><p>发了条<a href="https://twitter.com/linyehui/status/542993353340493824" target="_blank" rel="noopener">Twitter</a>:</p>
 <blockquote>
 <p>@SlackHQ Slack’s Code Formatting with Markdown is sucks :( #markdown</p>
 </blockquote>
 <p>发现Twitter也有人反馈过这个问题，Slack的回复很官方，但是实际的效果就是排版惨不忍睹。</p>
 <h2 id="1-Markdown-Preview-Plus-Chrome-Extension-text-snippet"><a href="#1-Markdown-Preview-Plus-Chrome-Extension-text-snippet" class="headerlink" title="1.Markdown Preview Plus(Chrome Extension) + text snippet"></a>1.Markdown Preview Plus(Chrome Extension) + text snippet</h2><h2 id="解决方案描述"><a href="#解决方案描述" class="headerlink" title="解决方案描述"></a>解决方案描述</h2><ol>
 <li>使用Chrome进行以下操作</li>
-<li>安装<a href="https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon" target="_blank" rel="external">Markdown Preview Plus</a></li>
+<li>安装<a href="https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon" target="_blank" rel="noopener">Markdown Preview Plus</a></li>
 <li>在Slack中”create a text Snippet”</li>
 <li>使用Markdown进行编辑文档</li>
 <li>使用”View raw”来查看Markdown文件，而插件会自动帮你格式化排版</li>

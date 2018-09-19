@@ -84,25 +84,18 @@
 
 
 
-<meta name="description" content="Slack is awesome, but multiline code formatting in a Slack Post is sucks.My solution is using Markdown Preview Plus with a Slack Snippet.
-
-需求使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。  
-解决这个问题，直接">
+<meta name="description" content="Slack is awesome, but multiline code formatting in a Slack Post is sucks.My solution is using Markdown Preview Plus with a Slack Snippet.  需求使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。   解决这个问题，直接">
+<meta name="keywords" content="markdown,slack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Using Slack with Markdown">
 <meta property="og:url" content="http://linyehui.me/2014/12/12/using-slack-with-markdown/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="Slack is awesome, but multiline code formatting in a Slack Post is sucks.My solution is using Markdown Preview Plus with a Slack Snippet.
-
-需求使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。  
-解决这个问题，直接">
+<meta property="og:description" content="Slack is awesome, but multiline code formatting in a Slack Post is sucks.My solution is using Markdown Preview Plus with a Slack Snippet.  需求使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。   解决这个问题，直接">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Slack with Markdown">
-<meta name="twitter:description" content="Slack is awesome, but multiline code formatting in a Slack Post is sucks.My solution is using Markdown Preview Plus with a Slack Snippet.
-
-需求使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。  
-解决这个问题，直接">
+<meta name="twitter:description" content="Slack is awesome, but multiline code formatting in a Slack Post is sucks.My solution is using Markdown Preview Plus with a Slack Snippet.  需求使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。   解决这个问题，直接">
 
 
 
@@ -337,21 +330,21 @@
 
       
         <blockquote>
-<p>Slack is awesome, but multiline code formatting in a Slack Post is sucks.<br>My solution is using <a href="https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon" target="_blank" rel="external">Markdown Preview Plus</a> with a Slack Snippet.</p>
+<p>Slack is awesome, but multiline code formatting in a Slack Post is sucks.<br>My solution is using <a href="https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon" target="_blank" rel="noopener">Markdown Preview Plus</a> with a Slack Snippet.</p>
 </blockquote>
 <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>使用Slack做运维日志的记录，不可避免的会有一些代码或者脚本，也想直接记录在Slack中。  </p>
 <p>解决这个问题，直接想到的就是”create a post”，Slack的POST虽然是支持Markdown的，但是他的支持非常有限，最让我无法忍受的是多行代码的排版，会完全乱掉。  </p>
 <p>能不能再Slack中使用Markdown而且有更好的排版支持呢？这是我的需求。</p>
 <p>PS.  </p>
 <p>补充一个使用情况：在PC或Mac上，我都是优先选择使用Web版本，Slack我也是在我的Chrome中使用。</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="0-没有用的吐槽"><a href="#0-没有用的吐槽" class="headerlink" title="0.没有用的吐槽"></a>0.没有用的吐槽</h2><p>发了条<a href="https://twitter.com/linyehui/status/542993353340493824" target="_blank" rel="external">Twitter</a>:</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="0-没有用的吐槽"><a href="#0-没有用的吐槽" class="headerlink" title="0.没有用的吐槽"></a>0.没有用的吐槽</h2><p>发了条<a href="https://twitter.com/linyehui/status/542993353340493824" target="_blank" rel="noopener">Twitter</a>:</p>
 <blockquote>
 <p>@SlackHQ Slack’s Code Formatting with Markdown is sucks :( #markdown</p>
 </blockquote>
 <p>发现Twitter也有人反馈过这个问题，Slack的回复很官方，但是实际的效果就是排版惨不忍睹。</p>
 <h2 id="1-Markdown-Preview-Plus-Chrome-Extension-text-snippet"><a href="#1-Markdown-Preview-Plus-Chrome-Extension-text-snippet" class="headerlink" title="1.Markdown Preview Plus(Chrome Extension) + text snippet"></a>1.Markdown Preview Plus(Chrome Extension) + text snippet</h2><h2 id="解决方案描述"><a href="#解决方案描述" class="headerlink" title="解决方案描述"></a>解决方案描述</h2><ol>
 <li>使用Chrome进行以下操作</li>
-<li>安装<a href="https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon" target="_blank" rel="external">Markdown Preview Plus</a></li>
+<li>安装<a href="https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-ntp-icon" target="_blank" rel="noopener">Markdown Preview Plus</a></li>
 <li>在Slack中”create a text Snippet”</li>
 <li>使用Markdown进行编辑文档</li>
 <li>使用”View raw”来查看Markdown文件，而插件会自动帮你格式化排版</li>

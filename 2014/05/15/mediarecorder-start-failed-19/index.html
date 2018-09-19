@@ -84,22 +84,17 @@
 
 
 
-<meta name="description" content="问题描述Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S下代码运行正常，但是在Nexux S下会直接异常退出，log如下：
-
-05-15 16:22:21.631: E/MediaRecorder(9265): start failed: -1905-15 16:22:21.635: W/System.err(9265): java.lang.RuntimeExc">
+<meta name="description" content="问题描述Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S下代码运行正常，但是在Nexux S下会直接异常退出，log如下：  05-15 16:22:21.631: E/MediaRecorder(9265): start failed: -1905-15 16:22:21.635: W/System.err(9265): java.lang.RuntimeExc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MediaRecorder.start failed: -19">
 <meta property="og:url" content="http://linyehui.me/2014/05/15/mediarecorder-start-failed-19/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="问题描述Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S下代码运行正常，但是在Nexux S下会直接异常退出，log如下：
-
-05-15 16:22:21.631: E/MediaRecorder(9265): start failed: -1905-15 16:22:21.635: W/System.err(9265): java.lang.RuntimeExc">
+<meta property="og:description" content="问题描述Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S下代码运行正常，但是在Nexux S下会直接异常退出，log如下：  05-15 16:22:21.631: E/MediaRecorder(9265): start failed: -1905-15 16:22:21.635: W/System.err(9265): java.lang.RuntimeExc">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MediaRecorder.start failed: -19">
-<meta name="twitter:description" content="问题描述Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S下代码运行正常，但是在Nexux S下会直接异常退出，log如下：
-
-05-15 16:22:21.631: E/MediaRecorder(9265): start failed: -1905-15 16:22:21.635: W/System.err(9265): java.lang.RuntimeExc">
+<meta name="twitter:description" content="问题描述Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S下代码运行正常，但是在Nexux S下会直接异常退出，log如下：  05-15 16:22:21.631: E/MediaRecorder(9265): start failed: -1905-15 16:22:21.635: W/System.err(9265): java.lang.RuntimeExc">
 
 
 
@@ -340,7 +335,7 @@
 <h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><h3 id="去掉对VideoFrameRate的设置："><a href="#去掉对VideoFrameRate的设置：" class="headerlink" title="去掉对VideoFrameRate的设置："></a>去掉对VideoFrameRate的设置：</h3><blockquote>
 <p>mediaRecorder.setVideoFrameRate(24);<br>或者<br>profile.videoFrameRate = Math.min(24);</p>
 </blockquote>
-<p><strong>参考这个</strong>：<a href="http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19" target="_blank" rel="external">Mediarecorder start failed -19</a></p>
+<p><strong>参考这个</strong>：<a href="http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19" target="_blank" rel="noopener">Mediarecorder start failed -19</a></p>
 <h3 id="不过我这还遇到了比其他网友更奇怪的问题："><a href="#不过我这还遇到了比其他网友更奇怪的问题：" class="headerlink" title="不过我这还遇到了比其他网友更奇怪的问题："></a>不过我这还遇到了比其他网友更奇怪的问题：</h3><p>直接使用MediaRecorer的set方法会异常退出，但是get CamcorderProfile后进行相应的修改就能正常运行</p>
 <p>下面这两份代码的视频和音频格式参数都是一样的，但是上面这种写法会导致异常退出：</p>
 <blockquote>
@@ -379,10 +374,10 @@ mediaRecorder.setVideoSize(640, 480);
 <li><p>mediaRecorder.setVideoFrameRate设置的参数硬件不支持<br><strong>解决方案</strong>：<br>暂时没找到好的办法，我的方法是先不用<br>（应该有方法可以获取硬件支持的这个信息，然后根据硬件支持的参数来设置就可以了）</p>
 </li>
 </ol>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://stackoverflow.com/questions/9271349/error-when-using-camera-on-android-4-nexus-s" target="_blank" rel="external">Error when Using Camera on Android 4/Nexus s</a>  </p>
-<p><a href="http://stackoverflow.com/questions/10496969/android-mediarecorder-start-failed-19" target="_blank" rel="external">Android MediaRecorder - “start failed: -19”</a>  </p>
-<p><a href="http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19" target="_blank" rel="external">Mediarecorder start failed -19</a>  </p>
-<p><a href="http://blog.csdn.net/netwalk/article/details/17686993" target="_blank" rel="external">Error处理： android.media.MediaRecorder.start(Native Method) 报错：start failed: -19</a>  </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://stackoverflow.com/questions/9271349/error-when-using-camera-on-android-4-nexus-s" target="_blank" rel="noopener">Error when Using Camera on Android 4/Nexus s</a>  </p>
+<p><a href="http://stackoverflow.com/questions/10496969/android-mediarecorder-start-failed-19" target="_blank" rel="noopener">Android MediaRecorder - “start failed: -19”</a>  </p>
+<p><a href="http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19" target="_blank" rel="noopener">Mediarecorder start failed -19</a>  </p>
+<p><a href="http://blog.csdn.net/netwalk/article/details/17686993" target="_blank" rel="noopener">Error处理： android.media.MediaRecorder.start(Native Method) 报错：start failed: -19</a>  </p>
 <p>– End –</p>
 
       

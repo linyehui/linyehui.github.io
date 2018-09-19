@@ -84,37 +84,18 @@
 
 
 
-<meta name="description" content="需求之前没太留意node的安装版本，各种手动安装，今天突然发现node怎么又变成了0.10的版本，nvm，npm，node版本都怪怪的。
-在代码洁癖的驱动下，准备清理这个恶劣的开发环境，清理后的目标是:
-
-用brew来安装nvm，并管理nvm的升级
-用nvm来安装node.js，并管理node.js的升级
-
-卸载老版本的node和nvm卸载node
-如果是从brew安装的, 运行brew unin">
+<meta name="description" content="需求之前没太留意node的安装版本，各种手动安装，今天突然发现node怎么又变成了0.10的版本，nvm，npm，node版本都怪怪的。 在代码洁癖的驱动下，准备清理这个恶劣的开发环境，清理后的目标是:  用brew来安装nvm，并管理nvm的升级 用nvm来安装node.js，并管理node.js的升级  卸载老版本的node和nvm卸载node 如果是从brew安装的, 运行brew unin">
+<meta name="keywords" content="mac,nvm,nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac OSX下重装node.js">
 <meta property="og:url" content="http://linyehui.me/2016/03/03/reinstall-nodejs-on-osx/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="需求之前没太留意node的安装版本，各种手动安装，今天突然发现node怎么又变成了0.10的版本，nvm，npm，node版本都怪怪的。
-在代码洁癖的驱动下，准备清理这个恶劣的开发环境，清理后的目标是:
-
-用brew来安装nvm，并管理nvm的升级
-用nvm来安装node.js，并管理node.js的升级
-
-卸载老版本的node和nvm卸载node
-如果是从brew安装的, 运行brew unin">
+<meta property="og:description" content="需求之前没太留意node的安装版本，各种手动安装，今天突然发现node怎么又变成了0.10的版本，nvm，npm，node版本都怪怪的。 在代码洁癖的驱动下，准备清理这个恶劣的开发环境，清理后的目标是:  用brew来安装nvm，并管理nvm的升级 用nvm来安装node.js，并管理node.js的升级  卸载老版本的node和nvm卸载node 如果是从brew安装的, 运行brew unin">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-09-06T06:28:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac OSX下重装node.js">
-<meta name="twitter:description" content="需求之前没太留意node的安装版本，各种手动安装，今天突然发现node怎么又变成了0.10的版本，nvm，npm，node版本都怪怪的。
-在代码洁癖的驱动下，准备清理这个恶劣的开发环境，清理后的目标是:
-
-用brew来安装nvm，并管理nvm的升级
-用nvm来安装node.js，并管理node.js的升级
-
-卸载老版本的node和nvm卸载node
-如果是从brew安装的, 运行brew unin">
+<meta name="twitter:description" content="需求之前没太留意node的安装版本，各种手动安装，今天突然发现node怎么又变成了0.10的版本，nvm，npm，node版本都怪怪的。 在代码洁癖的驱动下，准备清理这个恶劣的开发环境，清理后的目标是:  用brew来安装nvm，并管理nvm的升级 用nvm来安装node.js，并管理node.js的升级  卸载老版本的node和nvm卸载node 如果是从brew安装的, 运行brew unin">
 
 
 
@@ -361,19 +342,19 @@
 <li>删除/usr/local/lib中的所有node和node_modules的文件夹</li>
 <li>在/usr/local/bin中, 删除所有node的可执行文件(node和npm)</li>
 </ul>
-<h4 id="手动删除文件，整理成脚本是这个样子"><a href="#手动删除文件，整理成脚本是这个样子" class="headerlink" title="手动删除文件，整理成脚本是这个样子:"></a>手动删除文件，整理成脚本是这个样子:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo rm -rf ~/.npm</div><div class="line">sudo rm -rf ~/node_modules</div><div class="line">sudo rm -rf ~/.node-gyp</div><div class="line">sudo rm /usr/local/bin/node</div><div class="line">sudo rm /usr/local/bin/npm</div><div class="line">sudo rm /usr/local/lib/dtrace/node.d</div></pre></td></tr></table></figure>
-<p>参考文章: <a href="https://www.zhihu.com/question/27389115/answer/36434788" target="_blank" rel="external">如何删除node.js？</a></p>
+<h4 id="手动删除文件，整理成脚本是这个样子"><a href="#手动删除文件，整理成脚本是这个样子" class="headerlink" title="手动删除文件，整理成脚本是这个样子:"></a>手动删除文件，整理成脚本是这个样子:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -rf ~/.npm</span><br><span class="line">sudo rm -rf ~/node_modules</span><br><span class="line">sudo rm -rf ~/.node-gyp</span><br><span class="line">sudo rm /usr/local/bin/node</span><br><span class="line">sudo rm /usr/local/bin/npm</span><br><span class="line">sudo rm /usr/local/lib/dtrace/node.d</span><br></pre></td></tr></table></figure>
+<p>参考文章: <a href="https://www.zhihu.com/question/27389115/answer/36434788" target="_blank" rel="noopener">如何删除node.js？</a></p>
 <h3 id="卸载-nvm"><a href="#卸载-nvm" class="headerlink" title="卸载.nvm"></a>卸载.nvm</h3><p>我之前是手动安装的nvm，nvm的目录结构比较简单，删除这三个就可以了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rm -rf ~/.nvm</div><div class="line">rm -rf ~/.npm</div><div class="line">rm -rf ~/.bower</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/.nvm</span><br><span class="line">rm -rf ~/.npm</span><br><span class="line">rm -rf ~/.bower</span><br></pre></td></tr></table></figure>
 <p>还需要删除下.bash_profile文件中的配置(用brew安装后还需要重新加上，但不太一样)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># vim .bash_profile</div><div class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</div></pre></td></tr></table></figure>
-<p>参考文章: <a href="https://github.com/creationix/nvm/issues/298" target="_blank" rel="external">How to uninstall nvm? #298</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># vim .bash_profile</span><br><span class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</span><br><span class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</span><br></pre></td></tr></table></figure>
+<p>参考文章: <a href="https://github.com/creationix/nvm/issues/298" target="_blank" rel="noopener">How to uninstall nvm? #298</a></p>
 <h3 id="清理干净后的确认"><a href="#清理干净后的确认" class="headerlink" title="清理干净后的确认"></a>清理干净后的确认</h3><p>重启终端后，挨个测试几个命令应该都是找不到，才算是正确的:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">nvm</div><div class="line">node</div><div class="line">npm</div></pre></td></tr></table></figure>
-<h2 id="重新安装"><a href="#重新安装" class="headerlink" title="重新安装"></a>重新安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 使用brew安装nvm</div><div class="line">brew install nvm</div><div class="line"></div><div class="line"># vim .bash_profile后增加下面这两行</div><div class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">source $(brew --prefix nvm)/nvm.sh</div><div class="line"></div><div class="line"># 使用nvm安装node.js</div><div class="line">nvm install node</div><div class="line"></div><div class="line"># 校验</div><div class="line">$ nvm --version</div><div class="line">0.31.0</div><div class="line">$ node -v</div><div class="line">v5.7.1</div><div class="line">$ npm -v</div><div class="line">3.6.0</div><div class="line">$ nvm list</div><div class="line">-&gt;       v5.7.1</div><div class="line">default -&gt; node (-&gt; v5.7.1)</div><div class="line">node -&gt; stable (-&gt; v5.7.1) (default)</div><div class="line">stable -&gt; 5.7 (-&gt; v5.7.1) (default)</div><div class="line">iojs -&gt; N/A (default)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvm</span><br><span class="line">node</span><br><span class="line">npm</span><br></pre></td></tr></table></figure>
+<h2 id="重新安装"><a href="#重新安装" class="headerlink" title="重新安装"></a>重新安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 使用brew安装nvm</span><br><span class="line">brew install nvm</span><br><span class="line"></span><br><span class="line"># vim .bash_profile后增加下面这两行</span><br><span class="line">export NVM_DIR=&quot;$HOME/.nvm&quot;</span><br><span class="line">source $(brew --prefix nvm)/nvm.sh</span><br><span class="line"></span><br><span class="line"># 使用nvm安装node.js</span><br><span class="line">nvm install node</span><br><span class="line"></span><br><span class="line"># 校验</span><br><span class="line">$ nvm --version</span><br><span class="line">0.31.0</span><br><span class="line">$ node -v</span><br><span class="line">v5.7.1</span><br><span class="line">$ npm -v</span><br><span class="line">3.6.0</span><br><span class="line">$ nvm list</span><br><span class="line">-&gt;       v5.7.1</span><br><span class="line">default -&gt; node (-&gt; v5.7.1)</span><br><span class="line">node -&gt; stable (-&gt; v5.7.1) (default)</span><br><span class="line">stable -&gt; 5.7 (-&gt; v5.7.1) (default)</span><br><span class="line">iojs -&gt; N/A (default)</span><br></pre></td></tr></table></figure>
 <p>好了，世界清净了 :)</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章:"></a>参考文章:</h2><p><a href="http://icarus4.logdown.com/posts/175092-nodejs-installation-guide" target="_blank" rel="external">Node.js 安裝與版本切換教學 (for MAC)</a></p>
-<p><a href="http://www.cnblogs.com/Don/p/4672287.html" target="_blank" rel="external">Mac上使用brew安装nvm来支持多版本的Nodejs</a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章:"></a>参考文章:</h2><p><a href="http://icarus4.logdown.com/posts/175092-nodejs-installation-guide" target="_blank" rel="noopener">Node.js 安裝與版本切換教學 (for MAC)</a></p>
+<p><a href="http://www.cnblogs.com/Don/p/4672287.html" target="_blank" rel="noopener">Mac上使用brew安装nvm来支持多版本的Nodejs</a></p>
 
       
     </div>

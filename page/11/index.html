@@ -90,6 +90,7 @@
 <meta property="og:url" content="http://linyehui.me/page/11/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
 <meta property="og:description" content="HABIT IS POWSER">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HABIT IS POWSER">
 <meta name="twitter:description" content="HABIT IS POWSER">
@@ -335,7 +336,7 @@
           
             <p>不是一般的坑爹，工程稍微大一点，性能就差得像一坨屎！  </p>
 <p>好在VS2011后关起来方便了很多，因为一开始就做Win8，而Win8的内部版本又经常变，每次重装之后我都要遭受下IntelliSense的折磨，我甚至不记得自己是否成绩写过类似的文案来记录如何去掉这个恶心的东西。</p>
-<h1 id="IntelliSense关闭方法："><a href="#IntelliSense关闭方法：" class="headerlink" title="IntelliSense关闭方法："></a>IntelliSense关闭方法：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Tools-&gt;OPtions-&gt;Text Editor-&gt;C/C++-&gt;Advanced-&gt;IntelliSense</div><div class="line">Disable IntelliSense 改成True</div></pre></td></tr></table></figure>
+<h1 id="IntelliSense关闭方法："><a href="#IntelliSense关闭方法：" class="headerlink" title="IntelliSense关闭方法："></a>IntelliSense关闭方法：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Tools-&gt;OPtions-&gt;Text Editor-&gt;C/C++-&gt;Advanced-&gt;IntelliSense</span><br><span class="line">Disable IntelliSense 改成True</span><br></pre></td></tr></table></figure>
 <p>其他语言的关闭方法类似</p>
 
           
@@ -461,7 +462,7 @@
         
           
             <blockquote>
-<p>本文首发于 <a href="http://www.cnblogs.com/linyehui/" target="_blank" rel="external">http://www.cnblogs.com/linyehui/</a>   这里是我的Blog备份。</p>
+<p>本文首发于 <a href="http://www.cnblogs.com/linyehui/" target="_blank" rel="noopener">http://www.cnblogs.com/linyehui/</a>   这里是我的Blog备份。</p>
 </blockquote>
 <p>WinRT, Windows Runtime 是微软的下一代API体系，在Build大会上为人们所熟知。<br>如果说Windows 8是微软的未来的话，那么WinRT则是Win32的未来，对于千千万万的Win32程序员们来说，如果还想继续在Windows平台下发展，那么了解、学习并熟悉WinRT就是你居家旅行的不二之选。 </p>
 <h1 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h1><ul>
@@ -479,20 +480,20 @@
 <li>WinRT具备了多语言的支持能力，不仅支持C/C++，还支持.NET的主力语言C#和VB，同时还支持HTML下最普及的JavaScript；</li>
 <li>WinRT和Win32、.NET是相互独立的API体系；</li>
 </ol>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>实际上WinRT还支持部分Win32和.NET的API，我们可以从这里找到<br><a href="http://msdn.microsoft.com/en-us/library/windows/apps/br205757.aspx" target="_blank" rel="external">Win32 and COM for Metro style apps</a>  </p>
-<p>[<a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230232(v=vs.110).aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/windows/apps/br230232(v=vs.110).aspx</a> .NET for Metro style apps]  </p>
-<ol>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>实际上WinRT还支持部分Win32和.NET的API，我们可以从这里找到<br><a href="http://msdn.microsoft.com/en-us/library/windows/apps/br205757.aspx" target="_blank" rel="noopener">Win32 and COM for Metro style apps</a>  </p>
+<p>[<a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230232(v=vs.110).aspx" target="_blank" rel="noopener">http://msdn.microsoft.com/en-us/library/windows/apps/br230232(v=vs.110).aspx</a> .NET for Metro style apps]  </p>
+<ol start="4">
 <li>WinRT是专门为触屏体验的Metro style Apps实现的一套全新的APIs，但是我们却能从他身上看到很明显的.NET、WPF、Sliverlight的影子，作为系统原生API的WinRT，让我们有理由相信他可以做的比.NET更加优秀；</li>
 <li>WinRT之上程序员可以使用HTML相关技术来开发应用，可以预见这里肯定会是HTML5+WinRT的一个整合，这也是一个值得我们期待的开发方向。 </li>
 </ol>
 <h1 id="二、开发环境"><a href="#二、开发环境" class="headerlink" title="二、开发环境"></a>二、开发环境</h1><p>2012年2月29号，微软在MWC 2012上发布了Windows 8 Consumer Preview，同时更新了对应的开发工具和开发文档，这些都可以从微软的网站上面找到并下载：  </p>
-<p><a href="http://msdn.microsoft.com/en-us/windows/apps" target="_blank" rel="external">Metro style app development</a></p>
+<p><a href="http://msdn.microsoft.com/en-us/windows/apps" target="_blank" rel="noopener">Metro style app development</a></p>
 <h2 id="使用WinRT进行开发，我们需要："><a href="#使用WinRT进行开发，我们需要：" class="headerlink" title="使用WinRT进行开发，我们需要："></a>使用WinRT进行开发，我们需要：</h2><ol>
 <li>Windows 8 Consumer Preview（截止目前2012/3/30，这是你能下载到的最新的Windows 8）</li>
 <li>Visual Studio 11 Beta(Ultimate或者Express都可以，但是只有Ultimate才能使用VAssistX)</li>
 <li>嗯，没了，要说还有的话就是你需要一个Live ID，在第一次使用VS新建工程时， 你会被要求输入Live ID以获得开发者证书，没有这个证书你将无法进行调试和运行你的代码。</li>
 </ol>
-<h3 id="想安装Visual-Studio-11又不想用微软的在线安装器？"><a href="#想安装Visual-Studio-11又不想用微软的在线安装器？" class="headerlink" title="想安装Visual Studio 11又不想用微软的在线安装器？"></a>想安装Visual Studio 11又不想用微软的在线安装器？</h3><p>这里提供下微软的Visual Studio 11 Beta Ultimate的离线ISO下载页面地址：<br><a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=28975" target="_blank" rel="external">Visual Studio 11 Ultimate Beta ISO 离线安装包</a></p>
+<h3 id="想安装Visual-Studio-11又不想用微软的在线安装器？"><a href="#想安装Visual-Studio-11又不想用微软的在线安装器？" class="headerlink" title="想安装Visual Studio 11又不想用微软的在线安装器？"></a>想安装Visual Studio 11又不想用微软的在线安装器？</h3><p>这里提供下微软的Visual Studio 11 Beta Ultimate的离线ISO下载页面地址：<br><a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=28975" target="_blank" rel="noopener">Visual Studio 11 Ultimate Beta ISO 离线安装包</a></p>
 <h3 id="安装后的截图如下："><a href="#安装后的截图如下：" class="headerlink" title="安装后的截图如下："></a>安装后的截图如下：</h3><p><img src="http://pic002.cnblogs.com/images/2012/347098/2012033015415481.png" alt="2012033015415481.png"></p>
 <h1 id="三、Hello-WinRT"><a href="#三、Hello-WinRT" class="headerlink" title="三、Hello WinRT"></a>三、Hello WinRT</h1><p>开始Say hello之前请确认下你是否已经安装好了Windows 8，并在上面安装好了Visual Studio 11，都装好了？哦，让我们开始体验WinRT开发吧  </p>
 <p>作为一个Win32程序员，我们最熟悉的自然是C++，所以这里新建了Metro style Apps类型下的C++工程，然后拖了一个TextBlock进来，好了，F5，Hello WinRT  </p>
@@ -626,11 +627,11 @@
 <p>相比之下SQLite的代码就没那么漂亮了，2011年的12月份我差不多有一周的时间是专门在做Win32到WinRT的移植，其中最痛苦的就是SQLite部分，在我看来这个代码实在是比较搓，但是为了赶进度，我还是硬着头皮把事情给搞定了。</p>
 <p>随着时间的推移，我们觉得我们有必要更新下我们的SQLite版本，于是下载了最新的稳定代码3.7.10，发现代码还是进行了不少重构，优雅了一点，但是还是一样无法通过WinRT的Application Certification，没办法，我就又准备把之前干过一次的代码移植重来一遍，基本都是写API切换，类似LockFileW改成LockFileEx，CreateFileW改成CreateFile2之类的，这项工作本身没有太大的技术含量，主要就是阅读代码的能力，还有就是要足够细心，剩下的就是体力活了。</p>
 <p>在这期间我突然发现自己放了一个错误，疏忽了一件事情：开源参与者的热情及开源代码的更新速度！我还是太容易陷入一个点，就无法自拔，看不到周围的其他方案。  </p>
-<p>在同事的提醒下，我们发现<a href="http://www.sqlite.org/cgi/src/timeline?r=winrt" target="_blank" rel="external">SQLite WinRT分支</a>其实已经进行了一段时间，我Review下分支上面的代码，基本和我之前的改动是一致的，只是目前还在分支上，没有合入trunk。</p>
+<p>在同事的提醒下，我们发现<a href="http://www.sqlite.org/cgi/src/timeline?r=winrt" target="_blank" rel="noopener">SQLite WinRT分支</a>其实已经进行了一段时间，我Review下分支上面的代码，基本和我之前的改动是一致的，只是目前还在分支上，没有合入trunk。</p>
 <p>这个事情其实去年我专门找过，但当时还没有这样的分支，但是过了3个月后的现在我竟然没有想到：  按照开源项目的效率，这些事情很可能已经在解决或者已经被解决了。</p>
 <p>感谢开源代码的贡献者们，期待SQLite 3.7.11</p>
 <hr>
-<h3 id="附注："><a href="#附注：" class="headerlink" title="附注："></a>附注：</h3><p>从代码提交记录看，SQLite官方2012-06-06之后的版本就已经支持WinRT了:<a href="http://www.sqlite.org/cgi/src/timeline?r=winrt" target="_blank" rel="external">代码合入信息</a></p>
+<h3 id="附注："><a href="#附注：" class="headerlink" title="附注："></a>附注：</h3><p>从代码提交记录看，SQLite官方2012-06-06之后的版本就已经支持WinRT了:<a href="http://www.sqlite.org/cgi/src/timeline?r=winrt" target="_blank" rel="noopener">代码合入信息</a></p>
 
           
         
@@ -890,7 +891,7 @@
 <p>后面，我发现是我自己错了，VisualGit对于Git这样一个分布式版本管理系统是不需要的，因为你的任何一个git clone就能得到一个“服务器”，也就是说git close就是一个“SVN 服务器”，而且非常方便。</p>
 <h1 id="2、独立的-git目录"><a href="#2、独立的-git目录" class="headerlink" title="2、独立的.git目录"></a>2、独立的.git目录</h1><p>git的本地数据库是全部放在一个独立目录下的，一般会把目录名命名为xxxx.  git，如果你需要备份你的代码，你只需要把这个目录照顾好就可以了。  </p>
 <p>（当然SVN在1.7之后也改成了这样的方式，但依然没有分布式的理念）</p>
-<h1 id="这里再推荐一个利器：Gitbox-git-dropbox"><a href="#这里再推荐一个利器：Gitbox-git-dropbox" class="headerlink" title="这里再推荐一个利器：Gitbox=git+dropbox"></a>这里再推荐一个利器：<a href="http://roynotes.com/blog/gitbox/" target="_blank" rel="external">Gitbox=git+dropbox</a></h1><p>用这个方法你可以非常方便的做到：免费的，安全的，带有版本信息的，支持移动办公的文档管理系统</p>
+<h1 id="这里再推荐一个利器：Gitbox-git-dropbox"><a href="#这里再推荐一个利器：Gitbox-git-dropbox" class="headerlink" title="这里再推荐一个利器：Gitbox=git+dropbox"></a>这里再推荐一个利器：<a href="http://roynotes.com/blog/gitbox/" target="_blank" rel="noopener">Gitbox=git+dropbox</a></h1><p>用这个方法你可以非常方便的做到：免费的，安全的，带有版本信息的，支持移动办公的文档管理系统</p>
 <h1 id="分布式的好处？"><a href="#分布式的好处？" class="headerlink" title="分布式的好处？"></a>分布式的好处？</h1><p>我在向别人推荐Git时多次被问及这个问题，但我总是解释不清楚，我想有一个好的比喻可能是：  </p>
 <p>在你习惯了使用dropbox之前，你很难想象这样一个简单的同步工具能为你的工作带来多大的便利，谁爽谁知道！</p>
 <p>分布式其实是个很简单的理念，和盈利模式类似，那些吹的天花乱坠的理念无疑都是坑爹的，简单才是王道。</p>
@@ -1017,17 +1018,17 @@
       
         
           
-            <h1 id="Win8下的多语言实现，可以参考这几个说明："><a href="#Win8下的多语言实现，可以参考这几个说明：" class="headerlink" title="Win8下的多语言实现，可以参考这几个说明："></a>Win8下的多语言实现，可以参考这几个说明：</h1><p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh454044(v=vs.110" target="_blank" rel="external">Localizing the package manifest</a>.aspx)<br><a href="http://msdn.microsoft.com/zh-cn/library/windows/apps/xaml/hh771181.aspx" target="_blank" rel="external">QuickStart: Make your Metro style app world ready</a></p>
+            <h1 id="Win8下的多语言实现，可以参考这几个说明："><a href="#Win8下的多语言实现，可以参考这几个说明：" class="headerlink" title="Win8下的多语言实现，可以参考这几个说明："></a>Win8下的多语言实现，可以参考这几个说明：</h1><p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh454044(v=vs.110" target="_blank" rel="noopener">Localizing the package manifest</a>.aspx)<br><a href="http://msdn.microsoft.com/zh-cn/library/windows/apps/xaml/hh771181.aspx" target="_blank" rel="noopener">QuickStart: Make your Metro style app world ready</a></p>
 <h1 id="修改工程的默认语言"><a href="#修改工程的默认语言" class="headerlink" title="修改工程的默认语言"></a>修改工程的默认语言</h1><p>其中有一个默认语言的说法，这个在哪里设置呢？  </p>
 <p>用记事本打开工程的vcxproj文件，搜索：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;DefaultLanguage&gt;zh-CN&lt;/DefaultLanguage&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;DefaultLanguage&gt;zh-CN&lt;/DefaultLanguage&gt;</span><br></pre></td></tr></table></figure>
 <p>对的，修改这个就可以修改你的应用的默认语言了</p>
 <h1 id="多语言时在-resw文件中使用-n等特殊字符"><a href="#多语言时在-resw文件中使用-n等特殊字符" class="headerlink" title="多语言时在.resw文件中使用\n等特殊字符"></a>多语言时在.resw文件中使用\n等特殊字符</h1><ol>
 <li>直接在VS2011中打开.resw文件的话使用VS的编辑器打开，在其中配置了字符串如”\n“后你会发现，展示在界面上时变成了”\n“！</li>
 <li>坑爹吧，于是你可能想到应该把”\n”用转义符：”&#13;”替换，嗯，不错的思路，不过还是错的，因为这个时候实际会变成：”&amp;#13;”！</li>
 <li>还是坑爹啊，告诉你答案吧：不要用VS的编辑器打开，用文本格式打开.resw文件，手动添加”&#13;”就可以了</li>
 </ol>
-<h1 id="帮助我解决这个问题的参考文章："><a href="#帮助我解决这个问题的参考文章：" class="headerlink" title="帮助我解决这个问题的参考文章："></a>帮助我解决这个问题的参考文章：</h1><p><a href="http://www.zhcnco.info/index.php?db=so&amp;id=115431" target="_blank" rel="external">WPF和字符串格式化</a></p>
+<h1 id="帮助我解决这个问题的参考文章："><a href="#帮助我解决这个问题的参考文章：" class="headerlink" title="帮助我解决这个问题的参考文章："></a>帮助我解决这个问题的参考文章：</h1><p><a href="http://www.zhcnco.info/index.php?db=so&amp;id=115431" target="_blank" rel="noopener">WPF和字符串格式化</a></p>
 <p>回头发现，其实你需要回车的话可以直接在VS的编辑器中按：Shift+Enter</p>
 
           
@@ -1152,8 +1153,8 @@
       
         
           
-            <h4 id="You-can-download-Microsoft-Visual-Studio-11-Ultimate-Beta-ISO-from-here"><a href="#You-can-download-Microsoft-Visual-Studio-11-Ultimate-Beta-ISO-from-here" class="headerlink" title="You can download Microsoft Visual Studio 11 Ultimate Beta ISO from here:"></a>You can download Microsoft Visual Studio 11 Ultimate Beta ISO from here:</h4><p><a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=28975" target="_blank" rel="external">Microsoft Visual Studio 11 Ultimate Beta</a></p>
-<h4 id="大家可以从这里下载到Microsoft-Visual-Studio-11-Ultimate-Beta-ISO-离线安装包"><a href="#大家可以从这里下载到Microsoft-Visual-Studio-11-Ultimate-Beta-ISO-离线安装包" class="headerlink" title="大家可以从这里下载到Microsoft Visual Studio 11 Ultimate Beta ISO 离线安装包"></a>大家可以从这里下载到Microsoft Visual Studio 11 Ultimate Beta ISO 离线安装包</h4><p><a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=28975" target="_blank" rel="external">Microsoft Visual Studio 11 Ultimate Beta</a></p>
+            <h4 id="You-can-download-Microsoft-Visual-Studio-11-Ultimate-Beta-ISO-from-here"><a href="#You-can-download-Microsoft-Visual-Studio-11-Ultimate-Beta-ISO-from-here" class="headerlink" title="You can download Microsoft Visual Studio 11 Ultimate Beta ISO from here:"></a>You can download Microsoft Visual Studio 11 Ultimate Beta ISO from here:</h4><p><a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=28975" target="_blank" rel="noopener">Microsoft Visual Studio 11 Ultimate Beta</a></p>
+<h4 id="大家可以从这里下载到Microsoft-Visual-Studio-11-Ultimate-Beta-ISO-离线安装包"><a href="#大家可以从这里下载到Microsoft-Visual-Studio-11-Ultimate-Beta-ISO-离线安装包" class="headerlink" title="大家可以从这里下载到Microsoft Visual Studio 11 Ultimate Beta ISO 离线安装包"></a>大家可以从这里下载到Microsoft Visual Studio 11 Ultimate Beta ISO 离线安装包</h4><p><a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=28975" target="_blank" rel="noopener">Microsoft Visual Studio 11 Ultimate Beta</a></p>
 
           
         
@@ -1421,14 +1422,14 @@
 <li>携号转网还没普及，换个号码不容易，大家辛苦了</li>
 </ol>
 <p>以上只是我这么一个门外汉在一阵搜索之后的一些收获和见解，不一定全部正确 :)</p>
-<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p><a href="http://zh.wikipedia.org/wiki/3G" target="_blank" rel="external">3G</a>  </p>
-<p><a href="http://zh.wikipedia.org/wiki/WCDMA" target="_blank" rel="external">WCDMA</a>  </p>
-<p><a href="http://zh.wikipedia.org/wiki/CDMA2000" target="_blank" rel="external">CDMA2000</a>  </p>
-<p><a href="http://www.zhihu.com/question/19936601" target="_blank" rel="external">电信 CDMA 与联通 WCDMA 哪个更好？</a>  </p>
-<p><a href="http://www.ifanr.com/75417" target="_blank" rel="external">MWC 2012：中国 3G 市场数据</a>  </p>
-<p><a href="http://tech.163.com/mobile/09/0512/07/593LH74J00112K8D.html" target="_blank" rel="external">到底选谁? 移动电信联通3G资费业务全对比</a>  </p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p><a href="http://zh.wikipedia.org/wiki/3G" target="_blank" rel="noopener">3G</a>  </p>
+<p><a href="http://zh.wikipedia.org/wiki/WCDMA" target="_blank" rel="noopener">WCDMA</a>  </p>
+<p><a href="http://zh.wikipedia.org/wiki/CDMA2000" target="_blank" rel="noopener">CDMA2000</a>  </p>
+<p><a href="http://www.zhihu.com/question/19936601" target="_blank" rel="noopener">电信 CDMA 与联通 WCDMA 哪个更好？</a>  </p>
+<p><a href="http://www.ifanr.com/75417" target="_blank" rel="noopener">MWC 2012：中国 3G 市场数据</a>  </p>
+<p><a href="http://tech.163.com/mobile/09/0512/07/593LH74J00112K8D.html" target="_blank" rel="noopener">到底选谁? 移动电信联通3G资费业务全对比</a>  </p>
 <p><strong>PS.</strong>  </p>
-<p>你可能还对LTE 4G网络感兴趣，可以看下这个：<a href="http://zh.wikipedia.org/wiki/3GPP%E9%95%B7%E6%9C%9F%E6%BC%94%E9%80%B2%E6%8A%80%E8%A1%93" target="_blank" rel="external">LTE 3GPP长期演进技术</a></p>
+<p>你可能还对LTE 4G网络感兴趣，可以看下这个：<a href="http://zh.wikipedia.org/wiki/3GPP%E9%95%B7%E6%9C%9F%E6%BC%94%E9%80%B2%E6%8A%80%E8%A1%93" target="_blank" rel="noopener">LTE 3GPP长期演进技术</a></p>
 
           
         
@@ -1553,11 +1554,11 @@
         
           
             <p><img src="http://t3.qpic.cn/mblogpic/9651916edc7521c1a9f8/2000" alt="2000"></p>
-<p>Win8QQ Twitter: <a href="https://twitter.com/Win8QQ" target="_blank" rel="external">Win8QQ Twitter</a>  </p>
-<p>Win8QQ 腾讯微博: <a href="http://t.qq.com/win8qq" target="_blank" rel="external">Win8QQ 腾讯微博</a>  </p>
+<p>Win8QQ Twitter: <a href="https://twitter.com/Win8QQ" target="_blank" rel="noopener">Win8QQ Twitter</a>  </p>
+<p>Win8QQ 腾讯微博: <a href="http://t.qq.com/win8qq" target="_blank" rel="noopener">Win8QQ 腾讯微博</a>  </p>
 <p>PS.  </p>
 <p>Win8QQ是针对Windows 8 Metro UI的全新体验版本，只能从Windows Store上下载；  </p>
-<p>Windows 8 Desktop下还是继续使用<a href="http://im.qq.com" target="_blank" rel="external">QQ2011</a>，还有即将面世的QQ2012  </p>
+<p>Windows 8 Desktop下还是继续使用<a href="http://im.qq.com" target="_blank" rel="noopener">QQ2011</a>，还有即将面世的QQ2012  </p>
 <p>本博客非官方博客，所有消息均为“小道消息” :)</p>
 
           

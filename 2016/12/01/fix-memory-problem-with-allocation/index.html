@@ -84,18 +84,14 @@
 
 
 
-<meta name="description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦；
-这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。
-解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。
-使">
+<meta name="description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦； 这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。 解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。 使">
+<meta name="keywords" content="ios,mac,memory-leak,instruments">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Instruments Allocations排查内存释放不及时的问题">
 <meta property="og:url" content="http://linyehui.me/2016/12/01/fix-memory-problem-with-allocation/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦；
-这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。
-解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。
-使">
+<meta property="og:description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦； 这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。 解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。 使">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://linyehui.me/media/files/2016/12/01/01.png">
 <meta property="og:image" content="http://linyehui.me/media/files/2016/12/01/02.png">
 <meta property="og:image" content="http://linyehui.me/media/files/2016/12/01/04.png">
@@ -104,10 +100,7 @@
 <meta property="og:updated_time" content="2016-12-01T07:38:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Instruments Allocations排查内存释放不及时的问题">
-<meta name="twitter:description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦；
-这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。
-解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。
-使">
+<meta name="twitter:description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦； 这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。 解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。 使">
 <meta name="twitter:image" content="http://linyehui.me/media/files/2016/12/01/01.png">
 
 

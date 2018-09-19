@@ -90,6 +90,7 @@
 <meta property="og:url" content="http://linyehui.me/page/13/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
 <meta property="og:description" content="HABIT IS POWSER">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HABIT IS POWSER">
 <meta name="twitter:description" content="HABIT IS POWSER">
@@ -335,10 +336,10 @@
           
             <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol>
 <li>新建一个Windows Metro style的Project(Application/Grid Application/WinRT Component DLL……)</li>
-<li>#include <wrl.h></wrl.h></li>
+<li>#include &lt;wrl.h&gt;</li>
 <li>编译，发现一堆错误，类似：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1&gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(110): error C2872: &apos;TrustLevel&apos; : ambiguous symbol</div><div class="line">1&gt;          could be &apos;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(76) : TrustLevel&apos;</div><div class="line">1&gt;          or       &apos;c:\program files (x86)\microsoft visual studio 11.0\vc\lib\platform.winmd : Platform::TrustLevel&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&gt;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(110): error C2872: &apos;TrustLevel&apos; : ambiguous symbol</span><br><span class="line">1&gt;          could be &apos;c:\program files (x86)\windows kits\8.0\include\winrt\inspectable.h(76) : TrustLevel&apos;</span><br><span class="line">1&gt;          or       &apos;c:\program files (x86)\microsoft visual studio 11.0\vc\lib\platform.winmd : Platform::TrustLevel&apos;</span><br></pre></td></tr></table></figure>
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
 <li>错误原因很明显，两个命名空间下的类型定义冲突了</li>
 <li>所以解决问题的方法其实就是二选一</li>
@@ -477,25 +478,25 @@
       
         
           
-            <h1 id="说在前面"><a href="#说在前面" class="headerlink" title="说在前面"></a>说在前面</h1><p><strong>最准确的信息在<a href="http://szzfgjj.com/" target="_blank" rel="external">深圳住房公积金中心网站</a>，如果本文的说明或解释和公积金网站上的有出入，请以公积金中心网站为准。</strong>  </p>
+            <h1 id="说在前面"><a href="#说在前面" class="headerlink" title="说在前面"></a>说在前面</h1><p><strong>最准确的信息在<a href="http://szzfgjj.com/" target="_blank" rel="noopener">深圳住房公积金中心网站</a>，如果本文的说明或解释和公积金网站上的有出入，请以公积金中心网站为准。</strong>  </p>
 <p>网站的使用就不单独介绍了，官方网站一如既往的烂，要是访问过程中遇到莫名其妙的问题，大家要有点耐性。  </p>
 <p>和提取相关的指南其实应该是大家最关心的，本文其实就是对指南的一个“取后感”。  </p>
-<p>指南在这里：<a href="http://szzfgjj.com/tiqu/index.htm" target="_blank" rel="external">深圳公积金-网上办事-提取指南</a></p>
-<h1 id="租房提取"><a href="#租房提取" class="headerlink" title="租房提取"></a>租房提取</h1><p>官方指南：<a href="http://szzfgjj.com/tiqu/1261.htm" target="_blank" rel="external">支付自住住房租金提取业务办理指南（试行）</a></p>
+<p>指南在这里：<a href="http://szzfgjj.com/tiqu/index.htm" target="_blank" rel="noopener">深圳公积金-网上办事-提取指南</a></p>
+<h1 id="租房提取"><a href="#租房提取" class="headerlink" title="租房提取"></a>租房提取</h1><p>官方指南：<a href="http://szzfgjj.com/tiqu/1261.htm" target="_blank" rel="noopener">支付自住住房租金提取业务办理指南（试行）</a></p>
 <p><strong>我的心得：</strong>  </p>
 <p>0、租房提取可以选择一个你自己最方便的银行进行，当然要是你的公积金银行卡的所属银行  </p>
 <p>1、租房提取一年可以提取两次，可以累积提取，暂时不缺钱的话可以以后一起提取  </p>
-<p>2、提取需要网上预约，先到<a href="https://nbp.szzfgjj.com/nbp/pri.jsp" target="_blank" rel="external">网上登录</a>，然后修改下网上的登录密码(这个相当于是激活网上账户，进行过一次就可以了)，然后进行预约  </p>
+<p>2、提取需要网上预约，先到<a href="https://nbp.szzfgjj.com/nbp/pri.jsp" target="_blank" rel="noopener">网上登录</a>，然后修改下网上的登录密码(这个相当于是激活网上账户，进行过一次就可以了)，然后进行预约  </p>
 <p>3、提取需要事先激活公积金银行卡，最好事先到银行激活，取公积金的窗口是独立的，和激活银行卡的窗口不是同一个  </p>
 <p>4、<strong>需要带的材料：</strong>身份证、公积金银行卡  </p>
 <p>5、到预约的银行进行提取，5分钟之内搞定  </p>
-<h1 id="异地购房提取"><a href="#异地购房提取" class="headerlink" title="异地购房提取"></a>异地购房提取</h1><p>官方指南：<a href="http://www.szzfgjj.com/tiqu/1259.htm" target="_blank" rel="external">异地购房提取业务办理指南（试行）</a></p>
+<h1 id="异地购房提取"><a href="#异地购房提取" class="headerlink" title="异地购房提取"></a>异地购房提取</h1><p>官方指南：<a href="http://www.szzfgjj.com/tiqu/1259.htm" target="_blank" rel="noopener">异地购房提取业务办理指南（试行）</a></p>
 <p><strong>我的心得：</strong>  </p>
-<p>0、异地购房提取必须到公积金中心办事大厅才能提取，在福田，具体地址：<a href="http://www.szzfgjj.com/tzgg/408.htm" target="_blank" rel="external">深圳市住房公积金管理中心交通路线</a>  </p>
+<p>0、异地购房提取必须到公积金中心办事大厅才能提取，在福田，具体地址：<a href="http://www.szzfgjj.com/tzgg/408.htm" target="_blank" rel="noopener">深圳市住房公积金管理中心交通路线</a>  </p>
 <p>1、异地购房提取只能提取一次，购房后两年内有效，以契税上的日期为准，如果你想取的最多就在契税上的日期推后两年的时间点<strong>之前</strong>去提取（会保留一个月的钱在卡里）  </p>
-<p>2、提取需要网上预约，先到<a href="https://nbp.szzfgjj.com/nbp/pri.jsp" target="_blank" rel="external">网上登录</a>，然后修改下网上的登录密码(这个相当于是激活网上账户，进行过一次就可以了)，然后进行预约  </p>
+<p>2、提取需要网上预约，先到<a href="https://nbp.szzfgjj.com/nbp/pri.jsp" target="_blank" rel="noopener">网上登录</a>，然后修改下网上的登录密码(这个相当于是激活网上账户，进行过一次就可以了)，然后进行预约  </p>
 <p>3、提取需要事先激活公积金银行卡，公积金办事大厅应该是不能激活银行卡的，所以要实现去银行激活  </p>
-<p>4、<strong>没有按照配偶和未成年子女份额提取的（我的理解就是只提取自己的）需要带的材料：</strong>身份证、公积金银行卡、房产证、契税发票（复印什么的看自己方不方便，办事大厅那里也会帮你复印），每个家庭的情况不一样，需要按XXX份额提取的话，最好看下<a href="http://www.szzfgjj.com/tiqu/1259.htm" target="_blank" rel="external">官方指南</a>  </p>
+<p>4、<strong>没有按照配偶和未成年子女份额提取的（我的理解就是只提取自己的）需要带的材料：</strong>身份证、公积金银行卡、房产证、契税发票（复印什么的看自己方不方便，办事大厅那里也会帮你复印），每个家庭的情况不一样，需要按XXX份额提取的话，最好看下<a href="http://www.szzfgjj.com/tiqu/1259.htm" target="_blank" rel="noopener">官方指南</a>  </p>
 <p>5、到福田的公积金办事大厅提取，20分钟之内搞定  </p>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>我本来也是很没信心能从ZF手中把自己的钱给取了，但是情况所逼，再烂的网站，再难懂的条例我也要看下去，看明白，然后把自己的钱给取了。  </p>
 <p>事实证明：虽然麻烦点，但还是可以做到的。</p>
@@ -755,7 +756,7 @@
           
             <p>我的sln下面有两个WinRT工程，一个是exe，一个是dll，exe动态链接dll，一切看上去都是那么的和谐，但运行起来却不是那么回事：  </p>
 <p>直接退出，返回错误码为0xC0000135</p>
-<p>从MSDN上找到一个类似的例子：<a href="http://social.msdn.microsoft.com/Forums/en-US/winappswithnativecode/thread/dd42e972-414a-4809-a976-9ba91ec668ac" target="_blank" rel="external">Metro style app links to static lib, 0xc0000135 on start up</a></p>
+<p>从MSDN上找到一个类似的例子：<a href="http://social.msdn.microsoft.com/Forums/en-US/winappswithnativecode/thread/dd42e972-414a-4809-a976-9ba91ec668ac" target="_blank" rel="noopener">Metro style app links to static lib, 0xc0000135 on start up</a></p>
 <p>看完之后，尝试把我的dll拷贝到System32目录下，再运行竟然可以了 :(</p>
 <p>不过这事还没结束，这可不是我想要的结果，但由于时间问题，我只能先暂时搁置下这个问题，后面再来继续解决，待续……</p>
 <p><strong>2011/11/24 补充：</strong>  </p>
@@ -1024,7 +1025,7 @@
 <p>1、使用LoadPackagedLibrary/GetProcAddress  </p>
 <p>2、将dll添加到Metro App工程里面，发布时一起打包（这一步也是必须的，dll放在相同目录是不行的，会出现错误：Specifed module not found）  </p>
 <p><strong>参考：</strong>  </p>
-<p><a href="http://social.msdn.microsoft.com/Forums/en-US/winappswithcsharp/thread/1bec1fd8-3f1c-4f84-a2b9-f3e9086dce39" target="_blank" rel="external">How to load win32 dll with C# on metro app</a></p>
+<p><a href="http://social.msdn.microsoft.com/Forums/en-US/winappswithcsharp/thread/1bec1fd8-3f1c-4f84-a2b9-f3e9086dce39" target="_blank" rel="noopener">How to load win32 dll with C# on metro app</a></p>
 
           
         
@@ -1421,7 +1422,7 @@
 </ol>
 <p>否则的话小米手机岂不是要成为第二个苹果，那真是笑话。  </p>
 <p>每个平台都会有自己的Human Interface Guidelines，但可供设计师发挥的空间还非常大，iPhone上各种各样的twitter客户端就是最好的佐证</p>
-<ol>
+<ol start="2">
 <li>Microsoft和Apple之于开发者<br>对于开发者Apple的生态系统毋庸置疑是最好的，但框架的开发能力Microsoft显然要高上一个等级，可惜技术并不是决定成败的唯一条件。</li>
 </ol>
 <p>Apple一直坚持的软硬件两手都要抓都要硬，而微软则是做着兼容的苦差事，因为微软的战略就是合作共赢。微软的合作共赢，造就了微软帝国，也造成了反应迟钝，没能第一个做出突破，“转身太慢”。</p>
@@ -1553,9 +1554,9 @@
             <h1 id="我遇到的问题"><a href="#我遇到的问题" class="headerlink" title="我遇到的问题"></a>我遇到的问题</h1><p>两个进程，用Mutex进行互斥，后起来的进程WaitForSingleObject这个Mutex来等待前一个进程退出，期望是第二个进程可以Wait时卡住，但事实是没有，不过OpenMutex却可以拿到这个Mutex。</p>
 <p>检查代码后发现和CreateMutex的第二个参数有关系，如果设置成TRUE就可以了。</p>
 <p>不是很明白其中的道理，于是仔细阅读了MSDN上关于这个参数的说明，得到了一些启示。</p>
-<h2 id="MSDN上的参数说明："><a href="#MSDN上的参数说明：" class="headerlink" title="MSDN上的参数说明："></a>MSDN上的参数说明：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bInitialOwner [in]</div><div class="line">If this value is TRUE and the caller created the mutex, the calling thread obtains initial ownership of </div><div class="line">the mutex object. Otherwise, the calling thread does not obtain ownership of the mutex. To determine </div><div class="line">if the caller created the mutex, see the Return Values section.</div></pre></td></tr></table></figure>
+<h2 id="MSDN上的参数说明："><a href="#MSDN上的参数说明：" class="headerlink" title="MSDN上的参数说明："></a>MSDN上的参数说明：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bInitialOwner [in]</span><br><span class="line">If this value is TRUE and the caller created the mutex, the calling thread obtains initial ownership of </span><br><span class="line">the mutex object. Otherwise, the calling thread does not obtain ownership of the mutex. To determine </span><br><span class="line">if the caller created the mutex, see the Return Values section.</span><br></pre></td></tr></table></figure>
 <p>看完之后还不是很明白这个参数的具体意义，于是接着往下看，这段就说的比较清楚了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">The state of a mutex object is signaled when it is not owned by any thread. The creating thread can use </div><div class="line">the bInitialOwner flag to request immediate ownership of the mutex. Otherwise, a thread must use one of </div><div class="line">the wait functions to request ownership. When the mutex&apos;s state is signaled, one waiting thread is granted ownership, the mutex&apos;s state changes to nonsignaled, and the wait function returns. Only one thread can own a mutex at any given time. The owning thread uses the ReleaseMutex function to release its ownership.</div><div class="line"></div><div class="line">The thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking </div><div class="line">its execution. Typically, you would not wait repeatedly for the same mutex, but this mechanism prevents a thread from deadlocking itself while waiting for a mutex that it already owns. However, to release its ownership, the thread must call ReleaseMutex once for each time that the mutex satisfied a wait.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">The state of a mutex object is signaled when it is not owned by any thread. The creating thread can use </span><br><span class="line">the bInitialOwner flag to request immediate ownership of the mutex. Otherwise, a thread must use one of </span><br><span class="line">the wait functions to request ownership. When the mutex&apos;s state is signaled, one waiting thread is granted ownership, the mutex&apos;s state changes to nonsignaled, and the wait function returns. Only one thread can own a mutex at any given time. The owning thread uses the ReleaseMutex function to release its ownership.</span><br><span class="line"></span><br><span class="line">The thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking </span><br><span class="line">its execution. Typically, you would not wait repeatedly for the same mutex, but this mechanism prevents a thread from deadlocking itself while waiting for a mutex that it already owns. However, to release its ownership, the thread must call ReleaseMutex once for each time that the mutex satisfied a wait.</span><br></pre></td></tr></table></figure>
 <h3 id="英文不好，第一次看是没太留意，后面发现了一个bug后才知道自己用错了。"><a href="#英文不好，第一次看是没太留意，后面发现了一个bug后才知道自己用错了。" class="headerlink" title="英文不好，第一次看是没太留意，后面发现了一个bug后才知道自己用错了。"></a>英文不好，第一次看是没太留意，后面发现了一个bug后才知道自己用错了。</h3><ol>
 <li>如果bInitialOwner参数是FALSE的话那么默认是signaled，也就是谁都可以Wait到（比如有第二个进程WaitForSingleObject了这个Mutex，那么会直接过去）</li>
 <li>如果不想第二个进程Wait时直接过去，有两个方法：<br>2.1 bInitialOwner设置为TRUE<br>2.2 bInitialOwner设置为FALSE，第一个进程在CreateMutex后主动WaitForSingleObject一次，我是这么干的，有用</li>
@@ -1563,11 +1564,11 @@
 <blockquote>
 <p>WaitForSingleObject(hMutex, 0);</p>
 </blockquote>
-<h3 id="两个的区别是什么："><a href="#两个的区别是什么：" class="headerlink" title="两个的区别是什么："></a>两个的区别是什么：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Two or more processes can call CreateMutex to create the same named mutex. The first process actually </div><div class="line">creates the mutex, and subsequent processes with sufficient access rights simply open a handle to the </div><div class="line">existing mutex. This enables multiple processes to get handles of the same mutex, while relieving the user of the responsibility of ensuring that the creating process is started first. When using this technique, you should set the bInitialOwner flag to FALSE; otherwise, it can be difficult to be certain which process has initial ownership.</div></pre></td></tr></table></figure>
+<h3 id="两个的区别是什么："><a href="#两个的区别是什么：" class="headerlink" title="两个的区别是什么："></a>两个的区别是什么：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Two or more processes can call CreateMutex to create the same named mutex. The first process actually </span><br><span class="line">creates the mutex, and subsequent processes with sufficient access rights simply open a handle to the </span><br><span class="line">existing mutex. This enables multiple processes to get handles of the same mutex, while relieving the user of the responsibility of ensuring that the creating process is started first. When using this technique, you should set the bInitialOwner flag to FALSE; otherwise, it can be difficult to be certain which process has initial ownership.</span><br></pre></td></tr></table></figure>
 <h2 id="我最终使用的解决方法是2-2的方法："><a href="#我最终使用的解决方法是2-2的方法：" class="headerlink" title="我最终使用的解决方法是2.2的方法："></a>我最终使用的解决方法是2.2的方法：</h2><blockquote>
 <p>bInitialOwner设置为FALSE，第一个进程在CreateMutex后主动WaitForSingleObject一次，我是这么干的，有用</p>
 </blockquote>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms682411.aspx" target="_blank" rel="external">MSDN上的CreateMutex function</a></p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms682411.aspx" target="_blank" rel="noopener">MSDN上的CreateMutex function</a></p>
 
           
         

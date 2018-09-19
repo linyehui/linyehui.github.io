@@ -84,22 +84,18 @@
 
 
 
-<meta name="description" content="我遇到的问题两个进程，用Mutex进行互斥，后起来的进程WaitForSingleObject这个Mutex来等待前一个进程退出，期望是第二个进程可以Wait时卡住，但事实是没有，不过OpenMutex却可以拿到这个Mutex。
-检查代码后发现和CreateMutex的第二个参数有关系，如果设置成TRUE就可以了。
-不是很明白其中的道理，于是仔细阅读了MSDN上关于这个参数的说明，得到了一些启示。">
+<meta name="description" content="我遇到的问题两个进程，用Mutex进行互斥，后起来的进程WaitForSingleObject这个Mutex来等待前一个进程退出，期望是第二个进程可以Wait时卡住，但事实是没有，不过OpenMutex却可以拿到这个Mutex。 检查代码后发现和CreateMutex的第二个参数有关系，如果设置成TRUE就可以了。 不是很明白其中的道理，于是仔细阅读了MSDN上关于这个参数的说明，得到了一些启示。">
+<meta name="keywords" content="createmutex,windowsapi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于CreateMutex的bInitialOwner参数">
 <meta property="og:url" content="http://linyehui.me/2011/10/13/createmutex-binitialowner/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="我遇到的问题两个进程，用Mutex进行互斥，后起来的进程WaitForSingleObject这个Mutex来等待前一个进程退出，期望是第二个进程可以Wait时卡住，但事实是没有，不过OpenMutex却可以拿到这个Mutex。
-检查代码后发现和CreateMutex的第二个参数有关系，如果设置成TRUE就可以了。
-不是很明白其中的道理，于是仔细阅读了MSDN上关于这个参数的说明，得到了一些启示。">
+<meta property="og:description" content="我遇到的问题两个进程，用Mutex进行互斥，后起来的进程WaitForSingleObject这个Mutex来等待前一个进程退出，期望是第二个进程可以Wait时卡住，但事实是没有，不过OpenMutex却可以拿到这个Mutex。 检查代码后发现和CreateMutex的第二个参数有关系，如果设置成TRUE就可以了。 不是很明白其中的道理，于是仔细阅读了MSDN上关于这个参数的说明，得到了一些启示。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:33:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于CreateMutex的bInitialOwner参数">
-<meta name="twitter:description" content="我遇到的问题两个进程，用Mutex进行互斥，后起来的进程WaitForSingleObject这个Mutex来等待前一个进程退出，期望是第二个进程可以Wait时卡住，但事实是没有，不过OpenMutex却可以拿到这个Mutex。
-检查代码后发现和CreateMutex的第二个参数有关系，如果设置成TRUE就可以了。
-不是很明白其中的道理，于是仔细阅读了MSDN上关于这个参数的说明，得到了一些启示。">
+<meta name="twitter:description" content="我遇到的问题两个进程，用Mutex进行互斥，后起来的进程WaitForSingleObject这个Mutex来等待前一个进程退出，期望是第二个进程可以Wait时卡住，但事实是没有，不过OpenMutex却可以拿到这个Mutex。 检查代码后发现和CreateMutex的第二个参数有关系，如果设置成TRUE就可以了。 不是很明白其中的道理，于是仔细阅读了MSDN上关于这个参数的说明，得到了一些启示。">
 
 
 
@@ -336,9 +332,9 @@
         <h1 id="我遇到的问题"><a href="#我遇到的问题" class="headerlink" title="我遇到的问题"></a>我遇到的问题</h1><p>两个进程，用Mutex进行互斥，后起来的进程WaitForSingleObject这个Mutex来等待前一个进程退出，期望是第二个进程可以Wait时卡住，但事实是没有，不过OpenMutex却可以拿到这个Mutex。</p>
 <p>检查代码后发现和CreateMutex的第二个参数有关系，如果设置成TRUE就可以了。</p>
 <p>不是很明白其中的道理，于是仔细阅读了MSDN上关于这个参数的说明，得到了一些启示。</p>
-<h2 id="MSDN上的参数说明："><a href="#MSDN上的参数说明：" class="headerlink" title="MSDN上的参数说明："></a>MSDN上的参数说明：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bInitialOwner [in]</div><div class="line">If this value is TRUE and the caller created the mutex, the calling thread obtains initial ownership of </div><div class="line">the mutex object. Otherwise, the calling thread does not obtain ownership of the mutex. To determine </div><div class="line">if the caller created the mutex, see the Return Values section.</div></pre></td></tr></table></figure>
+<h2 id="MSDN上的参数说明："><a href="#MSDN上的参数说明：" class="headerlink" title="MSDN上的参数说明："></a>MSDN上的参数说明：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bInitialOwner [in]</span><br><span class="line">If this value is TRUE and the caller created the mutex, the calling thread obtains initial ownership of </span><br><span class="line">the mutex object. Otherwise, the calling thread does not obtain ownership of the mutex. To determine </span><br><span class="line">if the caller created the mutex, see the Return Values section.</span><br></pre></td></tr></table></figure>
 <p>看完之后还不是很明白这个参数的具体意义，于是接着往下看，这段就说的比较清楚了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">The state of a mutex object is signaled when it is not owned by any thread. The creating thread can use </div><div class="line">the bInitialOwner flag to request immediate ownership of the mutex. Otherwise, a thread must use one of </div><div class="line">the wait functions to request ownership. When the mutex&apos;s state is signaled, one waiting thread is granted ownership, the mutex&apos;s state changes to nonsignaled, and the wait function returns. Only one thread can own a mutex at any given time. The owning thread uses the ReleaseMutex function to release its ownership.</div><div class="line"></div><div class="line">The thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking </div><div class="line">its execution. Typically, you would not wait repeatedly for the same mutex, but this mechanism prevents a thread from deadlocking itself while waiting for a mutex that it already owns. However, to release its ownership, the thread must call ReleaseMutex once for each time that the mutex satisfied a wait.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">The state of a mutex object is signaled when it is not owned by any thread. The creating thread can use </span><br><span class="line">the bInitialOwner flag to request immediate ownership of the mutex. Otherwise, a thread must use one of </span><br><span class="line">the wait functions to request ownership. When the mutex&apos;s state is signaled, one waiting thread is granted ownership, the mutex&apos;s state changes to nonsignaled, and the wait function returns. Only one thread can own a mutex at any given time. The owning thread uses the ReleaseMutex function to release its ownership.</span><br><span class="line"></span><br><span class="line">The thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking </span><br><span class="line">its execution. Typically, you would not wait repeatedly for the same mutex, but this mechanism prevents a thread from deadlocking itself while waiting for a mutex that it already owns. However, to release its ownership, the thread must call ReleaseMutex once for each time that the mutex satisfied a wait.</span><br></pre></td></tr></table></figure>
 <h3 id="英文不好，第一次看是没太留意，后面发现了一个bug后才知道自己用错了。"><a href="#英文不好，第一次看是没太留意，后面发现了一个bug后才知道自己用错了。" class="headerlink" title="英文不好，第一次看是没太留意，后面发现了一个bug后才知道自己用错了。"></a>英文不好，第一次看是没太留意，后面发现了一个bug后才知道自己用错了。</h3><ol>
 <li>如果bInitialOwner参数是FALSE的话那么默认是signaled，也就是谁都可以Wait到（比如有第二个进程WaitForSingleObject了这个Mutex，那么会直接过去）</li>
 <li>如果不想第二个进程Wait时直接过去，有两个方法：<br>2.1 bInitialOwner设置为TRUE<br>2.2 bInitialOwner设置为FALSE，第一个进程在CreateMutex后主动WaitForSingleObject一次，我是这么干的，有用</li>
@@ -346,11 +342,11 @@
 <blockquote>
 <p>WaitForSingleObject(hMutex, 0);</p>
 </blockquote>
-<h3 id="两个的区别是什么："><a href="#两个的区别是什么：" class="headerlink" title="两个的区别是什么："></a>两个的区别是什么：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Two or more processes can call CreateMutex to create the same named mutex. The first process actually </div><div class="line">creates the mutex, and subsequent processes with sufficient access rights simply open a handle to the </div><div class="line">existing mutex. This enables multiple processes to get handles of the same mutex, while relieving the user of the responsibility of ensuring that the creating process is started first. When using this technique, you should set the bInitialOwner flag to FALSE; otherwise, it can be difficult to be certain which process has initial ownership.</div></pre></td></tr></table></figure>
+<h3 id="两个的区别是什么："><a href="#两个的区别是什么：" class="headerlink" title="两个的区别是什么："></a>两个的区别是什么：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Two or more processes can call CreateMutex to create the same named mutex. The first process actually </span><br><span class="line">creates the mutex, and subsequent processes with sufficient access rights simply open a handle to the </span><br><span class="line">existing mutex. This enables multiple processes to get handles of the same mutex, while relieving the user of the responsibility of ensuring that the creating process is started first. When using this technique, you should set the bInitialOwner flag to FALSE; otherwise, it can be difficult to be certain which process has initial ownership.</span><br></pre></td></tr></table></figure>
 <h2 id="我最终使用的解决方法是2-2的方法："><a href="#我最终使用的解决方法是2-2的方法：" class="headerlink" title="我最终使用的解决方法是2.2的方法："></a>我最终使用的解决方法是2.2的方法：</h2><blockquote>
 <p>bInitialOwner设置为FALSE，第一个进程在CreateMutex后主动WaitForSingleObject一次，我是这么干的，有用</p>
 </blockquote>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms682411.aspx" target="_blank" rel="external">MSDN上的CreateMutex function</a></p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms682411.aspx" target="_blank" rel="noopener">MSDN上的CreateMutex function</a></p>
 
       
     </div>

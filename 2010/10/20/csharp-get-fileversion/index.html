@@ -84,19 +84,17 @@
 
 
 
-<meta name="description" content=".NET CF 3.5下可用的取文件版本号方法
-1234567string path = @&quot;C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll&quot;;  Assembly assembly = Assembly.LoadFile(path);  // 获取当前程序集的版本就用这个// Assembly assembly = Assembly.G">
+<meta name="description" content=".NET CF 3.5下可用的取文件版本号方法 1234567string path = @&quot;C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll&quot;;  Assembly assembly = Assembly.LoadFile(path);  // 获取当前程序集的版本就用这个// Assembly assembly = Assembly.G">
 <meta property="og:type" content="article">
 <meta property="og:title" content=".NET CF下获取文件版本号">
 <meta property="og:url" content="http://linyehui.me/2010/10/20/csharp-get-fileversion/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content=".NET CF 3.5下可用的取文件版本号方法
-1234567string path = @&quot;C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll&quot;;  Assembly assembly = Assembly.LoadFile(path);  // 获取当前程序集的版本就用这个// Assembly assembly = Assembly.G">
+<meta property="og:description" content=".NET CF 3.5下可用的取文件版本号方法 1234567string path = @&quot;C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll&quot;;  Assembly assembly = Assembly.LoadFile(path);  // 获取当前程序集的版本就用这个// Assembly assembly = Assembly.G">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:38:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=".NET CF下获取文件版本号">
-<meta name="twitter:description" content=".NET CF 3.5下可用的取文件版本号方法
-1234567string path = @&quot;C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll&quot;;  Assembly assembly = Assembly.LoadFile(path);  // 获取当前程序集的版本就用这个// Assembly assembly = Assembly.G">
+<meta name="twitter:description" content=".NET CF 3.5下可用的取文件版本号方法 1234567string path = @&quot;C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll&quot;;  Assembly assembly = Assembly.LoadFile(path);  // 获取当前程序集的版本就用这个// Assembly assembly = Assembly.G">
 
 
 
@@ -331,7 +329,7 @@
 
       
         <p>.NET CF 3.5下可用的取文件版本号方法</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> path = <span class="string">@"C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"</span>;  </div><div class="line">Assembly assembly = Assembly.LoadFile(path);  </div><div class="line"><span class="comment">// 获取当前程序集的版本就用这个</span></div><div class="line"><span class="comment">// Assembly assembly = Assembly.GetExecutingAssembly();   </span></div><div class="line"></div><div class="line">AssemblyName assemblyName = assembly.GetName();  </div><div class="line">Version version = assemblyName.Version;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> path = <span class="string">@"C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"</span>;  </span><br><span class="line">Assembly assembly = Assembly.LoadFile(path);  </span><br><span class="line"><span class="comment">// 获取当前程序集的版本就用这个</span></span><br><span class="line"><span class="comment">// Assembly assembly = Assembly.GetExecutingAssembly();   </span></span><br><span class="line"></span><br><span class="line">AssemblyName assemblyName = assembly.GetName();  </span><br><span class="line">Version version = assemblyName.Version;</span><br></pre></td></tr></table></figure>
       
     </div>
 

@@ -84,19 +84,17 @@
 
 
 
-<meta name="description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。
-我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
+<meta name="description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。 我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebBrowser内嵌页面的跨域调用问题">
 <meta property="og:url" content="http://linyehui.me/2013/11/15/webbrowser-cross-domain-access/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。
-我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
+<meta property="og:description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。 我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:27:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebBrowser内嵌页面的跨域调用问题">
-<meta name="twitter:description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。
-我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
+<meta name="twitter:description" content="很早之前我写过一篇Blog：网页通过External接口与WebBrowser交互，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。 我遇到的问题：内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面">
 
 
 
@@ -330,7 +328,7 @@
       
 
       
-        <p>很早之前我写过一篇Blog：<a href="http://blog.csdn.net/debehe/article/details/5053759" target="_blank" rel="external">网页通过External接口与WebBrowser交互</a>，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。</p>
+        <p>很早之前我写过一篇Blog：<a href="http://blog.csdn.net/debehe/article/details/5053759" target="_blank" rel="noopener">网页通过External接口与WebBrowser交互</a>，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。</p>
 <h2 id="我遇到的问题："><a href="#我遇到的问题：" class="headerlink" title="我遇到的问题："></a>我遇到的问题：</h2><p>内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面iframe.html，iframe.html上有个JS方法，我用C++调用不到，而host.html上的JS方法可以正常调用到。</p>
 <h2 id="问题分析："><a href="#问题分析：" class="headerlink" title="问题分析："></a>问题分析：</h2><p>从JS来说，这是个跨域问题，host.html和iframe.html不在一个域内；<br>JS解决跨域问题的方案其实也是有的，但这个不是我们本文的重点，本文的重点是怎么通过WebBrowser控件直接来解决这个“跨域调用”的问题。</p>
 <h3 id="问题的根本原因在于："><a href="#问题的根本原因在于：" class="headerlink" title="问题的根本原因在于："></a>问题的根本原因在于：</h3><p>调用网页的JS需要拿到IHTMLDocument2接口，而每个iframe都有自己对应的IHTMLDocument2，所以我们只要能拿到iframe对应的IHTMLDocument2就能解决问题了。</p>
@@ -540,11 +538,11 @@ bool calljs_helper::CallFunction(
 // -------------------------------------------------------------------------
 // $Log: $
 </code></pre><p>完整的例子代码在附件中。</p>
-<h3 id="另外再附上帮助我解决问题的参考资料"><a href="#另外再附上帮助我解决问题的参考资料" class="headerlink" title="另外再附上帮助我解决问题的参考资料:"></a>另外再附上帮助我解决问题的参考资料:</h3><p><a href="http://blog.csdn.net/skyremember/article/details/3422841" target="_blank" rel="external">IHTMLWindow2的get_document方法有时候会返回E_ACCESSDENIED</a>  </p>
-<p><a href="http://blog.csdn.net/nvidiacuda/article/details/9300869" target="_blank" rel="external">VC++实现浏览器自动填表</a>  </p>
-<p><a href="http://www.itdelphi.com/delphibbs/doc/2007/3845499.htm" target="_blank" rel="external">webbrowser控件的IHTMLDocument3 or2接口的iframe问题（非安全设置）</a>  </p>
-<p><a href="http://www.cnblogs.com/rainman/archive/2011/02/21/1960044.html" target="_blank" rel="external">window.name实现的跨域数据传输</a>  </p>
-<p><a href="http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html" target="_blank" rel="external">JavaScript跨域总结与解决办法</a>  </p>
+<h3 id="另外再附上帮助我解决问题的参考资料"><a href="#另外再附上帮助我解决问题的参考资料" class="headerlink" title="另外再附上帮助我解决问题的参考资料:"></a>另外再附上帮助我解决问题的参考资料:</h3><p><a href="http://blog.csdn.net/skyremember/article/details/3422841" target="_blank" rel="noopener">IHTMLWindow2的get_document方法有时候会返回E_ACCESSDENIED</a>  </p>
+<p><a href="http://blog.csdn.net/nvidiacuda/article/details/9300869" target="_blank" rel="noopener">VC++实现浏览器自动填表</a>  </p>
+<p><a href="http://www.itdelphi.com/delphibbs/doc/2007/3845499.htm" target="_blank" rel="noopener">webbrowser控件的IHTMLDocument3 or2接口的iframe问题（非安全设置）</a>  </p>
+<p><a href="http://www.cnblogs.com/rainman/archive/2011/02/21/1960044.html" target="_blank" rel="noopener">window.name实现的跨域数据传输</a>  </p>
+<p><a href="http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html" target="_blank" rel="noopener">JavaScript跨域总结与解决办法</a>  </p>
 <p>The End.</p>
 
       

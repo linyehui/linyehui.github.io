@@ -84,19 +84,18 @@
 
 
 
-<meta name="description" content="在WinRT下使用软键盘可能会出现“黑屏”的Bug，这个时候你需要特别留意下是不是使用错了InputPaneVisibilityEventArgs下面这个属性：
-12EnsuredFocusedElementInViewRead/write	Identifies whether the application has taken steps to ensure that the input pan">
+<meta name="description" content="在WinRT下使用软键盘可能会出现“黑屏”的Bug，这个时候你需要特别留意下是不是使用错了InputPaneVisibilityEventArgs下面这个属性： 12EnsuredFocusedElementInViewRead/write	Identifies whether the application has taken steps to ensure that the input pan">
+<meta name="keywords" content="winrt,inputpane,softkeyboard">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WinRT下软键盘导致的“黑屏”">
 <meta property="og:url" content="http://linyehui.me/2012/01/08/soft-keyboard-make-a-black-screen/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="在WinRT下使用软键盘可能会出现“黑屏”的Bug，这个时候你需要特别留意下是不是使用错了InputPaneVisibilityEventArgs下面这个属性：
-12EnsuredFocusedElementInViewRead/write	Identifies whether the application has taken steps to ensure that the input pan">
+<meta property="og:description" content="在WinRT下使用软键盘可能会出现“黑屏”的Bug，这个时候你需要特别留意下是不是使用错了InputPaneVisibilityEventArgs下面这个属性： 12EnsuredFocusedElementInViewRead/write	Identifies whether the application has taken steps to ensure that the input pan">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WinRT下软键盘导致的“黑屏”">
-<meta name="twitter:description" content="在WinRT下使用软键盘可能会出现“黑屏”的Bug，这个时候你需要特别留意下是不是使用错了InputPaneVisibilityEventArgs下面这个属性：
-12EnsuredFocusedElementInViewRead/write	Identifies whether the application has taken steps to ensure that the input pan">
+<meta name="twitter:description" content="在WinRT下使用软键盘可能会出现“黑屏”的Bug，这个时候你需要特别留意下是不是使用错了InputPaneVisibilityEventArgs下面这个属性： 12EnsuredFocusedElementInViewRead/write	Identifies whether the application has taken steps to ensure that the input pan">
 
 
 
@@ -331,12 +330,12 @@
 
       
         <p>在WinRT下使用软键盘可能会出现“黑屏”的Bug，这个时候你需要特别留意下是不是使用错了InputPaneVisibilityEventArgs下面这个属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">EnsuredFocusedElementInView</div><div class="line">Read/write	Identifies whether the application has taken steps to ensure that the input pane doesn&apos;t cover the UI element that has focus.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EnsuredFocusedElementInView</span><br><span class="line">Read/write	Identifies whether the application has taken steps to ensure that the input pane doesn&apos;t cover the UI element that has focus.</span><br></pre></td></tr></table></figure>
 <p>出现黑屏的问题，试试在InputPane的Showing事件处理时将EnsuredFocusedElementInView赋值为false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The InputPane class has the following events. </div><div class="line">Hiding    Occurs when the input pane is about to be hidden by sliding out of view.</div><div class="line">Showing   Occurs when the input pane is about to be displayed by sliding into view.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The InputPane class has the following events. </span><br><span class="line">Hiding    Occurs when the input pane is about to be hidden by sliding out of view.</span><br><span class="line">Showing   Occurs when the input pane is about to be displayed by sliding into view.</span><br></pre></td></tr></table></figure>
 <p>两个相关的MSDN链接：  </p>
-<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.inputpane.aspx" target="_blank" rel="external">InputPane class</a>  </p>
-<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.inputpanevisibilityeventargs" target="_blank" rel="external">InputPaneVisibilityEventArgs class</a></p>
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.inputpane.aspx" target="_blank" rel="noopener">InputPane class</a>  </p>
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.inputpanevisibilityeventargs" target="_blank" rel="noopener">InputPaneVisibilityEventArgs class</a></p>
 
       
     </div>

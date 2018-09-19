@@ -84,28 +84,18 @@
 
 
 
-<meta name="description" content="How to Build FFmpeg for Android On Mac
-官方文档在这：CompilationGuide/Android  
-关于Android上的FFmpeg入门，这个Blog不错：roman10 ffmpeg on Android  
-关于FFmpeg耻辱名单使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。
-特别是暴风影音和QQ影">
+<meta name="description" content="How to Build FFmpeg for Android On Mac 官方文档在这：CompilationGuide/Android   关于Android上的FFmpeg入门，这个Blog不错：roman10 ffmpeg on Android   关于FFmpeg耻辱名单使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。 特别是暴风影音和QQ影">
+<meta name="keywords" content="android,ffmpeg">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Mac上编译FFmpeg的Android版本">
 <meta property="og:url" content="http://linyehui.me/2014/05/09/how-to-build-ffmpeg-for-android-on-mac/index.html">
 <meta property="og:site_name" content="HABIT IS POWSER">
-<meta property="og:description" content="How to Build FFmpeg for Android On Mac
-官方文档在这：CompilationGuide/Android  
-关于Android上的FFmpeg入门，这个Blog不错：roman10 ffmpeg on Android  
-关于FFmpeg耻辱名单使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。
-特别是暴风影音和QQ影">
+<meta property="og:description" content="How to Build FFmpeg for Android On Mac 官方文档在这：CompilationGuide/Android   关于Android上的FFmpeg入门，这个Blog不错：roman10 ffmpeg on Android   关于FFmpeg耻辱名单使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。 特别是暴风影音和QQ影">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-02-29T08:22:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Mac上编译FFmpeg的Android版本">
-<meta name="twitter:description" content="How to Build FFmpeg for Android On Mac
-官方文档在这：CompilationGuide/Android  
-关于Android上的FFmpeg入门，这个Blog不错：roman10 ffmpeg on Android  
-关于FFmpeg耻辱名单使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。
-特别是暴风影音和QQ影">
+<meta name="twitter:description" content="How to Build FFmpeg for Android On Mac 官方文档在这：CompilationGuide/Android   关于Android上的FFmpeg入门，这个Blog不错：roman10 ffmpeg on Android   关于FFmpeg耻辱名单使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。 特别是暴风影音和QQ影">
 
 
 
@@ -340,23 +330,23 @@
 
       
         <p>How to Build FFmpeg for Android On Mac</p>
-<p>官方文档在这：<a href="https://trac.ffmpeg.org/wiki/CompilationGuide/Android" target="_blank" rel="external">CompilationGuide/Android</a>  </p>
-<p>关于Android上的FFmpeg入门，这个Blog不错：<a href="http://www.roman10.net/category/android-tutorial/ffmpeg-on-android/" target="_blank" rel="external">roman10 ffmpeg on Android</a>  </p>
+<p>官方文档在这：<a href="https://trac.ffmpeg.org/wiki/CompilationGuide/Android" target="_blank" rel="noopener">CompilationGuide/Android</a>  </p>
+<p>关于Android上的FFmpeg入门，这个Blog不错：<a href="http://www.roman10.net/category/android-tutorial/ffmpeg-on-android/" target="_blank" rel="noopener">roman10 ffmpeg on Android</a>  </p>
 <h1 id="关于FFmpeg耻辱名单"><a href="#关于FFmpeg耻辱名单" class="headerlink" title="关于FFmpeg耻辱名单"></a>关于FFmpeg耻辱名单</h1><p>使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。</p>
-<p>特别是暴风影音和QQ影音让大家知道了FFmpeg的耻辱名单：<a href="http://ffmpeg.org/shame.html" target="_blank" rel="external">Hall of Shame</a>，我们更得先研究下FFmpeg的开源协议了。</p>
-<p>被加入这个名单的直接原因是这些产品违反了FFmpeg的开源协议，但具体是违反了那个开源协议呢？这就得从<a href="https://ffmpeg.org/legal.html" target="_blank" rel="external">FFmpeg的开源协议</a>说起了:</p>
+<p>特别是暴风影音和QQ影音让大家知道了FFmpeg的耻辱名单：<a href="http://ffmpeg.org/shame.html" target="_blank" rel="noopener">Hall of Shame</a>，我们更得先研究下FFmpeg的开源协议了。</p>
+<p>被加入这个名单的直接原因是这些产品违反了FFmpeg的开源协议，但具体是违反了那个开源协议呢？这就得从<a href="https://ffmpeg.org/legal.html" target="_blank" rel="noopener">FFmpeg的开源协议</a>说起了:</p>
 <blockquote>
 <p>FFmpeg is licensed under the GNU Lesser General Public License (LGPL) version 2.1 or later. However, FFmpeg incorporates several optional parts and optimizations that are covered by the GNU General Public License (GPL) version 2 or later. If those parts get used the GPL applies to all of FFmpeg.</p>
 </blockquote>
 <h3 id="怎么的就违反开源协议了呢？"><a href="#怎么的就违反开源协议了呢？" class="headerlink" title="怎么的就违反开源协议了呢？"></a>怎么的就违反开源协议了呢？</h3><ol>
 <li>虽然FFmpeg使用的开源协议是LGPL，但是他用到的部分组件是GPL开源协议;</li>
-<li>LGPL和GPL有着很大的区别，这个可以参考：<a href="http://www.oschina.net/question/12_2663" target="_blank" rel="external">关于开源授权协议 GPL 和 LGPL</a>；<br>简单来说，如果商用产品只是把LGPL的开源代码作为第三方库来使用，商用产品本身是不需要开源的，但GPL就不一样，只要你用了开源代码，整个商用产品就必须开源，这就是常说的“传染性”；</li>
+<li>LGPL和GPL有着很大的区别，这个可以参考：<a href="http://www.oschina.net/question/12_2663" target="_blank" rel="noopener">关于开源授权协议 GPL 和 LGPL</a>；<br>简单来说，如果商用产品只是把LGPL的开源代码作为第三方库来使用，商用产品本身是不需要开源的，但GPL就不一样，只要你用了开源代码，整个商用产品就必须开源，这就是常说的“传染性”；</li>
 <li>如果使用FFmpeg没有使用到GPL开源协议的部分组件，那么产品只要遵循LGPL就可以了，哪怕你修改了第三方库，也只需要开源修改后的第三方库代码就不算违反LGPL；</li>
 <li>如果使用到了GPL开源协议的部分组件，如x264，那么商用产品就必须遵循GPL，开源商用产品的所有代码；</li>
 <li>综合上面4点，可以知道如果使用了FFmpeg中使用GPL的部分组件，那么你的商用产品就必须开源，否则就是违反了GPL开源协议，要被加入FFmpeg的Hall of Shame。</li>
 </ol>
-<p>一不小心就上了耻辱名单，有没有什么防范措施呢？可以参考FFmpeg官方的<a href="https://ffmpeg.org/legal.html" target="_blank" rel="external">License Compliance Checklist</a>  </p>
-<h1 id="在Mac下编译FFmpeg-2-1-4"><a href="#在Mac下编译FFmpeg-2-1-4" class="headerlink" title="在Mac下编译FFmpeg-2.1.4"></a>在Mac下编译FFmpeg-2.1.4</h1><h3 id="概要说明"><a href="#概要说明" class="headerlink" title="概要说明"></a>概要说明</h3><p>Mac开发环境，按照这篇文章来的指引编译通过：<a href="http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/" target="_blank" rel="external">How to Build ffmpeg with NDK r9</a>  </p>
+<p>一不小心就上了耻辱名单，有没有什么防范措施呢？可以参考FFmpeg官方的<a href="https://ffmpeg.org/legal.html" target="_blank" rel="noopener">License Compliance Checklist</a>  </p>
+<h1 id="在Mac下编译FFmpeg-2-1-4"><a href="#在Mac下编译FFmpeg-2-1-4" class="headerlink" title="在Mac下编译FFmpeg-2.1.4"></a>在Mac下编译FFmpeg-2.1.4</h1><h3 id="概要说明"><a href="#概要说明" class="headerlink" title="概要说明"></a>概要说明</h3><p>Mac开发环境，按照这篇文章来的指引编译通过：<a href="http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/" target="_blank" rel="noopener">How to Build ffmpeg with NDK r9</a>  </p>
 <p>直接按照文章的指引编译通过，只有一个步骤需要特别注意，build_android.sh中：</p>
 <blockquote>
 <p>TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64</p>
@@ -364,16 +354,16 @@
 <p>TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64</p>
 </blockquote>
 <p>./build_android.sh中的路径要从linux-x86_64改成darwin-x86_64，这个我是在编译错误的时候根据提示发现下面这个路径文件找不到，才知道需要改下，修改之后就可以继续调用./build_android.sh编译了</p>
-<h2 id="详细编译步骤"><a href="#详细编译步骤" class="headerlink" title="详细编译步骤"></a>详细编译步骤</h2><p>虽然都是按照<a href="http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/" target="_blank" rel="external">How to Build ffmpeg with NDK r9</a>中的指引来操作的，我还是把操作流程简单记录如下：</p>
+<h2 id="详细编译步骤"><a href="#详细编译步骤" class="headerlink" title="详细编译步骤"></a>详细编译步骤</h2><p>虽然都是按照<a href="http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/" target="_blank" rel="noopener">How to Build ffmpeg with NDK r9</a>中的指引来操作的，我还是把操作流程简单记录如下：</p>
 <ol>
 <li><p>我的开发环境</p>
 <blockquote>
 <p>Mac OSX 10.9.2<br>XCode 5.0.2(带的gcc)<br>NDK r9d</p>
 </blockquote>
 </li>
-<li><p>下载并配置好<a href="http://developer.android.com/tools/sdk/ndk/index.html" target="_blank" rel="external">NDK</a>，我之前已经配好了，不清楚的同学自己看Android的官网帮助文档 </p>
+<li><p>下载并配置好<a href="http://developer.android.com/tools/sdk/ndk/index.html" target="_blank" rel="noopener">NDK</a>，我之前已经配好了，不清楚的同学自己看Android的官网帮助文档 </p>
 </li>
-<li>下载<a href="http://www.ffmpeg.org/download.html" target="_blank" rel="external">ffmpeg源码</a>，我下载时的最新稳定版本是2.1.4，解压到NDK目录下的sources目录下</li>
+<li>下载<a href="http://www.ffmpeg.org/download.html" target="_blank" rel="noopener">ffmpeg源码</a>，我下载时的最新稳定版本是2.1.4，解压到NDK目录下的sources目录下</li>
 <li><p>修改ffmpeg-2.1.4目录下的configure文件<br>Open ffmpeg-2.0.1/configure file with a text editor, and locate the following lines.</p>
 <blockquote>
 <p>SLIBNAME_WITH_MAJOR=’$(SLIBNAME).$(LIBMAJOR)’<br>LIB_INSTALL_EXTRA_CMD=’$$(RANLIB) “$(LIBDIR)/$(LIBNAME)”‘<br>SLIB_INSTALL_NAME=’$(SLIBNAME_WITH_VERSION)’<br>SLIB_INSTALL_LINKS=’$(SLIBNAME_WITH_MAJOR) $(SLIBNAME)’</p>
@@ -413,7 +403,7 @@ $ADDITIONAL_CONFIGURE_FLAG
 <p>改成</p>
 <p>TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64</p>
 </blockquote>
-<ol>
+<ol start="6">
 <li><p>保存build_android.sh，并调用执行编译<br>我直接把build_android.sh保存在了ffmpeg-2.1.4根目录下，然后执行：</p>
 <blockquote>
 <p>sudo chmod +x build_android.sh<br>./build_android.sh</p>

@@ -201,9 +201,9 @@
     
       <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
     
-      <category term="nsarray" scheme="http://linyehui.me/tags/nsarray/"/>
-    
       <category term="memory-leak" scheme="http://linyehui.me/tags/memory-leak/"/>
+    
+      <category term="nsarray" scheme="http://linyehui.me/tags/nsarray/"/>
     
   </entry>
   

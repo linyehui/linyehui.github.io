@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>HABIT IS POWSER</title>
+  <title>HABIT IS POWER</title>
   
   <subtitle>习惯就是力量</subtitle>
   <link href="/atom.xml" rel="self"/>
@@ -201,9 +201,9 @@
     
       <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
     
-      <category term="memory-leak" scheme="http://linyehui.me/tags/memory-leak/"/>
-    
       <category term="nsarray" scheme="http://linyehui.me/tags/nsarray/"/>
+    
+      <category term="memory-leak" scheme="http://linyehui.me/tags/memory-leak/"/>
     
   </entry>
   

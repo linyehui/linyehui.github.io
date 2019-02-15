@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linyehui.me/"/>
-  <updated>2018-09-19T02:10:58.416Z</updated>
+  <updated>2019-02-15T02:29:04.608Z</updated>
   <id>http://linyehui.me/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mac OS X Mojave (10.14) 下更新python开发环境</title>
+    <link href="http://linyehui.me/2019/02/14/update-python-on-on-macos-x-mojave/"/>
+    <id>http://linyehui.me/2019/02/14/update-python-on-on-macos-x-mojave/</id>
+    <published>2019-02-13T16:00:00.000Z</published>
+    <updated>2019-02-15T02:29:04.608Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>系统自带的python版本是2.7，之前用homebrew直接安装了一个python 3.6.5，不方便切换版本，想要清理下环境，使用pyenv来统一管理系统内的python版本</p><h2 id="清理老版本"><a href="#清理老版本" class="headerlink" title="清理老版本"></a>清理老版本</h2><h3 id="清理老的pip安装"><a href="#清理老的pip安装" class="headerlink" title="清理老的pip安装"></a>清理老的pip安装</h3><p>之前用sudu pip安装了不少package，太挫了，先把这部分清理一下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确认下当前使用的文件</span></span><br><span class="line"><span class="built_in">which</span> pip</span><br><span class="line"><span class="built_in">which</span> python</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除pip</span></span><br><span class="line">sudu pip uninstall pip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载之前brew安装的python</span></span><br><span class="line">brew uninstall python –ignore-dependencies</span><br><span class="line"></span><br><span class="line">brew uninstall pyenv</span><br></pre></td></tr></table></figure><h3 id="检查是否清理干净"><a href="#检查是否清理干净" class="headerlink" title="检查是否清理干净"></a>检查是否清理干净</h3><p>下面这几个命令应该都找不到了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pyenv</span><br><span class="line">python</span><br><span class="line">pip</span><br></pre></td></tr></table></figure></p><h2 id="安装新版本"><a href="#安装新版本" class="headerlink" title="安装新版本"></a>安装新版本</h2><h3 id="最先需要安装的是pyenv"><a href="#最先需要安装的是pyenv" class="headerlink" title="最先需要安装的是pyenv"></a>最先需要安装的是pyenv</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">brew install pyenv</span><br><span class="line"></span><br><span class="line"># 打开.bash_profile</span><br><span class="line">vim ~/.bash_profile</span><br><span class="line"></span><br><span class="line"># 添加下面三行</span><br><span class="line"></span><br><span class="line"># pyenv</span><br><span class="line">export PYENV_ROOT=/usr/local/var/pyenv</span><br><span class="line">eval &quot;$(pyenv init -)&quot;</span><br><span class="line"></span><br><span class="line"># 重新加载下配置，查看当前的python版本，应该只有一个system版本</span><br><span class="line">source ~/.bash_profile</span><br><span class="line">pyenv versions</span><br></pre></td></tr></table></figure><h3 id="安装指定的python版本"><a href="#安装指定的python版本" class="headerlink" title="安装指定的python版本"></a>安装指定的python版本</h3><p>本来应该是一条命令搞定的事情，比如:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 3.6.8</span><br></pre></td></tr></table></figure><p>结果遇到了问题：<a href="https://github.com/pyenv/pyenv/issues/530" target="_blank" rel="noopener">Install fails, “zlib not available” #530</a></p><p>简单来说，我确认了以下几个操作后最终可以了，我也不太确定是那个生效了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查xcode编译工具</span></span><br><span class="line">xcode-select --install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查几个安装，其实我之前都安装过了，提示是否需要reinstall，我没有重新安装</span></span><br><span class="line">brew install readline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修正zlib的inclue路径</span></span><br><span class="line"><span class="built_in">export</span> CFLAGS=<span class="string">"-I<span class="variable">$(xcrun --show-sdk-path)</span>/usr/include"</span></span><br><span class="line"><span class="built_in">export</span> CPPFLAGS=<span class="string">"-I/usr/local/opt/zlib/include"</span></span><br><span class="line">pyenv install 3.6.8</span><br></pre></td></tr></table></figure><p>安装成功后，把默认版本修改下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pyenv versions</span><br><span class="line">pyenv global 3.6.8</span><br></pre></td></tr></table></figure></p><p>检查下版本是否正常，正常的话就算完成了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python --version</span><br><span class="line">pip --version</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;系统自带的python版本是2.7，之前用homebrew直接安装了一个python 3.6.5，不方便切换版本，想要清理下环境，使用pye
+      
+    
+    </summary>
+    
+    
+      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="python" scheme="http://linyehui.me/tags/python/"/>
+    
+      <category term="pyenv" scheme="http://linyehui.me/tags/pyenv/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows下使用nvm管理node版本</title>
@@ -226,9 +253,9 @@
     </summary>
     
     
-      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
-    
       <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
+    
+      <category term="ios" scheme="http://linyehui.me/tags/ios/"/>
     
       <category term="memory-leak" scheme="http://linyehui.me/tags/memory-leak/"/>
     
@@ -503,11 +530,11 @@
     </summary>
     
     
+      <category term="github" scheme="http://linyehui.me/tags/github/"/>
+    
       <category term="markdown" scheme="http://linyehui.me/tags/markdown/"/>
     
       <category term="jekyll" scheme="http://linyehui.me/tags/jekyll/"/>
-    
-      <category term="github" scheme="http://linyehui.me/tags/github/"/>
     
   </entry>
   
@@ -534,33 +561,6 @@
       <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
     
       <category term="rime" scheme="http://linyehui.me/tags/rime/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello MongoDB</title>
-    <link href="http://linyehui.me/2016/01/13/hello-mongodb/"/>
-    <id>http://linyehui.me/2016/01/13/hello-mongodb/</id>
-    <published>2016-01-12T16:00:00.000Z</published>
-    <updated>2016-02-24T07:26:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>最近在看Tornado的<a href="http://demo.pythoner.com/itt2zh/ch4.html" target="_blank" rel="noopener">教程</a>，其中使用了MongoDB，之前没用过，所以需要配置下相关的环境，并在Python中使用</p><h2 id="安装MongoDB"><a href="#安装MongoDB" class="headerlink" title="安装MongoDB"></a>安装MongoDB</h2><h3 id="完整的命令行"><a href="#完整的命令行" class="headerlink" title="完整的命令行"></a>完整的命令行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">brew update</span><br><span class="line">brew install mongodb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为数据库创建默认的文件目录，并设置权限</span></span><br><span class="line">sudo mkdir -p /data/db</span><br><span class="line">sudo chown -R linyehui /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务器</span></span><br><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 另外启动一个终端，连接服务器</span></span><br><span class="line">mongo</span><br></pre></td></tr></table></figure><h3 id="过程分解"><a href="#过程分解" class="headerlink" title="过程分解"></a>过程分解</h3><p>我的系统是Mac OS X 10.11.2，根据<a href="https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/" target="_blank" rel="noopener">MongoDB官网的指引</a>，我直接用HomeBrew安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure><p>安装成功后，尝试启动数据库服务：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 出现错误，提示</span></span><br><span class="line">2016-01-13T15:19:24.484+0800 I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: 29 Data directory /data/db not found., terminating</span><br></pre></td></tr></table></figure><p>原来是默认的数据库目录不存在，但是于是创建下:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /data/db</span><br><span class="line"></span><br><span class="line"><span class="comment"># 记得要设置下目录权限，把owner设置成当前用户</span></span><br><span class="line">sudo chown -R linyehui /data</span><br></pre></td></tr></table></figure><p>如果目前权限没有设置正常，会出现权限问题：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2016-01-13T15:22:47.055+0800 I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: 98 Unable to create/open lock file: /data/db/mongod.lock errno:13 Permission denied Is a mongod instance already running?, terminating</span><br></pre></td></tr></table></figure><p>好了，可以起启动了</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">2016-01-13T19:58:30.287+0800 I CONTROL  [initandlisten] MongoDB starting : pid=16845 port=27017 dbpath=/data/db 64-bit host=linyehui-mbp.local</span><br><span class="line">2016-01-13T19:58:30.288+0800 I CONTROL  [initandlisten] db version v3.2.0</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>服务器启动好了，就可以新建一个终端，来连接数据库测试了</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">MongoDB shell version: 3.2.0</span><br><span class="line">connecting to: <span class="built_in">test</span></span><br></pre></td></tr></table></figure><h2 id="Python中使用MongoDB"><a href="#Python中使用MongoDB" class="headerlink" title="Python中使用MongoDB"></a>Python中使用MongoDB</h2><p>我们这里使用的Python库是PyMongo，我直接用pip安装:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pymongo</span><br><span class="line">pip show pymongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">Name: pymongo</span><br><span class="line">Version: 3.2</span><br></pre></td></tr></table></figure><p>安装成功后，就可以在Python下，import pymongo了</p><p>参考<a href="http://api.mongodb.org/python/current/api/pymongo/mongo_client.html#pymongo.mongo_client.MongoClient" target="_blank" rel="noopener">PyMongo的官方文档</a>，pymongo的连接测试代码如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = MongoClient()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.test_database</span><br><span class="line">Database(MongoClient(host=[<span class="string">'localhost:27017'</span>], document_class=dict, tz_aware=<span class="keyword">False</span>, connect=<span class="keyword">True</span>), <span class="string">u'test_database'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="string">'test-database'</span>]</span><br><span class="line">Database(MongoClient(host=[<span class="string">'localhost:27017'</span>], document_class=dict, tz_aware=<span class="keyword">False</span>, connect=<span class="keyword">True</span>), <span class="string">u'test-database'</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure><p>好了，可以用了 ：）</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;最近在看Tornado的&lt;a href=&quot;http://demo.pythoner.com/itt2zh/ch4.html&quot; target=
-      
-    
-    </summary>
-    
-    
-      <category term="mac" scheme="http://linyehui.me/tags/mac/"/>
-    
-      <category term="mongodb" scheme="http://linyehui.me/tags/mongodb/"/>
-    
-      <category term="python" scheme="http://linyehui.me/tags/python/"/>
     
   </entry>
   

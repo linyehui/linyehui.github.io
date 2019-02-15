@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ios,mac,memory-leak,instruments," />
+  <meta name="keywords" content="mac,ios,memory-leak,instruments," />
 
 
 
@@ -85,7 +85,7 @@
 
 
 <meta name="description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦； 这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。 解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。 使">
-<meta name="keywords" content="ios,mac,memory-leak,instruments">
+<meta name="keywords" content="mac,ios,memory-leak,instruments">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Instruments Allocations排查内存释放不及时的问题">
 <meta property="og:url" content="http://linyehui.me/2016/12/01/fix-memory-problem-with-allocation/index.html">
@@ -372,9 +372,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ios/" rel="tag"># ios</a>
-          
             <a href="/tags/mac/" rel="tag"># mac</a>
+          
+            <a href="/tags/ios/" rel="tag"># ios</a>
           
             <a href="/tags/memory-leak/" rel="tag"># memory-leak</a>
           
@@ -471,7 +471,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">143</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -481,7 +481,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-count">178</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="需求把AVAudioPCMBuffer转换层CMSampleBufferRef，同理也可以从AudioBufferList加上AudioStreamBasicDescription转换成CMSampleBufferRef 实现代码实现代码如下： 1234567891011121314151617181920212223242526272829303132333435- (CMSampleBuffe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AVAudioPCMBuffer to CMSampleBufferRef">
+<meta property="og:url" content="http://linyehui.me/2022/05/17/2016/2016-09-22-avaudiopcmbuffer-to-cmsamplebufferref/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="需求把AVAudioPCMBuffer转换层CMSampleBufferRef，同理也可以从AudioBufferList加上AudioStreamBasicDescription转换成CMSampleBufferRef 实现代码实现代码如下： 1234567891011121314151617181920212223242526272829303132333435- (CMSampleBuffe">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-05-17T07:49:14.430Z">
+<meta property="article:modified_time" content="2022-05-17T07:49:14.430Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="ios">
+<meta property="article:tag" content="audio">
+<meta property="article:tag" content="pcm">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://linyehui.me/2022/05/17/2016/2016-09-22-avaudiopcmbuffer-to-cmsamplebufferref/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>AVAudioPCMBuffer to CMSampleBufferRef | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2016/2016-09-22-avaudiopcmbuffer-to-cmsamplebufferref/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AVAudioPCMBuffer to CMSampleBufferRef
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>把AVAudioPCMBuffer转换层CMSampleBufferRef，同理也可以从AudioBufferList加上AudioStreamBasicDescription转换成CMSampleBufferRef</p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><p>实现代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (CMSampleBufferRef)createAudioSampleBufferFrom:(AVAudioPCMBuffer *) pcmBuffer &#123;</span><br><span class="line">	AudioBufferList *audioBufferList = [pcmBuffer mutableAudioBufferList];</span><br><span class="line">	AudioStreamBasicDescription asbd = *pcmBuffer.format.streamDescription;</span><br><span class="line"></span><br><span class="line">	CMSampleBufferRef sampleBuffer = NULL;</span><br><span class="line">	CMFormatDescriptionRef format = NULL;</span><br><span class="line"></span><br><span class="line">	OSStatus error = CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &amp;asbd, 0, NULL, 0, NULL, NULL, &amp;format);</span><br><span class="line">	if (error != noErr) &#123;</span><br><span class="line">		return nil;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	CMSampleTimingInfo timing = &#123; CMTimeMake(1, asbd.mSampleRate), kCMTimeZero, kCMTimeInvalid &#125;;</span><br><span class="line">	error = CMSampleBufferCreate(kCFAllocatorDefault,</span><br><span class="line">								 NULL, false, NULL, NULL, format,</span><br><span class="line">								 pcmBuffer.frameLength,</span><br><span class="line">								 1, &amp;timing, 0, NULL, &amp;sampleBuffer);</span><br><span class="line">	if (error != noErr) &#123;</span><br><span class="line">		CFRelease(format);</span><br><span class="line">		NSLog(@&quot;CMSampleBufferCreate returned error: %d&quot;, (int)error);</span><br><span class="line">		return nil;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	error = CMSampleBufferSetDataBufferFromAudioBufferList(sampleBuffer, kCFAllocatorDefault, kCFAllocatorDefault, 0, audioBufferList);</span><br><span class="line">	if (error != noErr) &#123;</span><br><span class="line">		CFRelease(format);</span><br><span class="line">		NSLog(@&quot;CMSampleBufferSetDataBufferFromAudioBufferList returned error: %d&quot;, (int)error);</span><br><span class="line">		return nil;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	CFRelease(format);</span><br><span class="line">	return sampleBuffer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="内存释放"><a href="#内存释放" class="headerlink" title="内存释放"></a>内存释放</h2><p>生成的CMSampleBufferRef引用计数为1，记得释放，类似：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CMSampleBufferRef sampleBuffer = [self createAudioSampleBufferFrom:pcmBuffer];</span><br><span class="line"></span><br><span class="line">// do somthing with sampleBuffer</span><br><span class="line"></span><br><span class="line">CFRelease(sampleBuffer);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="AudioBufferList"><a href="#AudioBufferList" class="headerlink" title="AudioBufferList"></a>AudioBufferList</h2><p>关于AudioBufferList，需要说的是PCM中的双通道，对应到AudioBufferList就是mNumberBuffers</p>
+<p>假定存在</p>
+<blockquote>
+<p>AudioBufferList *ioData &#x3D; …<br>AudioStreamBasicDescription asbd &#x3D; …</p>
+</blockquote>
+<p>如果ioData-&gt;mNumberBuffers为2，那么有以下几个推导：</p>
+<ul>
+<li>1、ioData-&gt;mBuffers[0]有数据外，ioData-&gt;mBuffers[1]也有数据；</li>
+<li>2、跟AudioBufferList对应的asbd-&gt;mChannelsPerFrame &#x3D;&#x3D; 2</li>
+<li>3、还要补充一点的是，asbd.mChannelsPerFrame &#x3D;&#x3D; 2的时候，asbd.mBytesPerFrame并不会包含2个channel的数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">asbd.mBytesPerFrame = asbd.mBitsPerChannel/8; // 正确</span><br><span class="line">asbd.mBytesPerFrame = asbd.mBitsPerChannel/8 * mChannelsPerFrame; // 错误</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/reference/coremedia/1669345-cmsamplebuffer?language=objc">CMSampleBuffer</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/wnnvv/article/details/50865201">iOS 音频采集 AudioBufferList转CMSampleBufferRef</a><br><a target="_blank" rel="noopener" href="https://forums.developer.apple.com/thread/11418">CMSampleBufferSetDataBufferFromAudioBufferList returning -12731</a><br><a target="_blank" rel="noopener" href="https://www.osstatus.com/search/results?platform=all&framework=all&search=-12737">osstatus</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios/" rel="tag"># ios</a>
+              <a href="/tags/audio/" rel="tag"># audio</a>
+              <a href="/tags/pcm/" rel="tag"># pcm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2016/2016-05-04-hello-react/" rel="prev" title="Hello React">
+      <i class="fa fa-chevron-left"></i> Hello React
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2016/2016-08-12-build-srs-librtmp-for-ios/" rel="next" title="Build SRS librtmp for iOS">
+      Build SRS librtmp for iOS <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">实现代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E9%87%8A%E6%94%BE"><span class="nav-number">3.</span> <span class="nav-text">内存释放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AudioBufferList"><span class="nav-number">4.</span> <span class="nav-text">AudioBufferList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

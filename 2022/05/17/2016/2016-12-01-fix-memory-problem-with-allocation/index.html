@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦； 这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。 解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。 使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Instruments Allocations排查内存释放不及时的问题">
+<meta property="og:url" content="http://linyehui.me/2022/05/17/2016/2016-12-01-fix-memory-problem-with-allocation/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="问题描述使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦； 这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。 解决方案使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。 使">
+<meta property="og:locale">
+<meta property="og:image" content="http://linyehui.me/media/files/2016/12/01/01.png">
+<meta property="og:image" content="http://linyehui.me/media/files/2016/12/01/02.png">
+<meta property="og:image" content="http://linyehui.me/media/files/2016/12/01/04.png">
+<meta property="og:image" content="http://linyehui.me/media/files/2016/12/01/05.png">
+<meta property="og:image" content="http://linyehui.me/media/files/2016/12/01/06.png">
+<meta property="article:published_time" content="2022-05-17T07:49:14.431Z">
+<meta property="article:modified_time" content="2022-05-17T07:49:14.431Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="ios">
+<meta property="article:tag" content="mac">
+<meta property="article:tag" content="memory-leak">
+<meta property="article:tag" content="instruments">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://linyehui.me/media/files/2016/12/01/01.png">
+
+<link rel="canonical" href="http://linyehui.me/2022/05/17/2016/2016-12-01-fix-memory-problem-with-allocation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>使用Instruments Allocations排查内存释放不及时的问题 | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2016/2016-12-01-fix-memory-problem-with-allocation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Instruments Allocations排查内存释放不及时的问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>使用ARC的过程中，由于循环引用或者其他使用不当，会造成对象的内存没有及时释放，而这些内存在页面关闭的时候又会随着页面的生命周期一起释放，这就给我们排查“内存泄漏”带来了麻烦；</p>
+<p>这种内存问题用Leaks是找不出问题的，因为这些内存其实只是释放不及时，而不是没有释放。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用Instruments Allocations的Mark Generation功能能帮助我们排查出这种问题。</p>
+<h3 id="使用之前先说几个Instruments的调试技巧"><a href="#使用之前先说几个Instruments的调试技巧" class="headerlink" title="使用之前先说几个Instruments的调试技巧"></a>使用之前先说几个Instruments的调试技巧</h3><p>1、调试内存可以用Debug模式来调试，但是记得在工程设置中把Debug模式的Debug Information Format设置成：DWARF with dSYM File，否则无法在Instruments中看到出问题的符号对应的代码</p>
+<p>2、性能调试真机调试的时候有时候连接不上，试试重启手机，实在还是不行，可以换成Debug模式，相对没那么容易连接不上手机(修改方法：Edit Scheme-&gt;Profile-&gt;Build Configuration 修改成Debug)</p>
+<h3 id="一个典型案例，问题描述"><a href="#一个典型案例，问题描述" class="headerlink" title="一个典型案例，问题描述"></a>一个典型案例，问题描述</h3><p>假定我们有一个页面MainViewController，打开这个页面后会开始进行视频直播，在直播的过程中会出现内存没有及时释放，比如10分钟后应用的内存占用已经达到了200MB，但是页面一关闭内存有都正确释放了。</p>
+<p>针对这样的一个问题我们应该怎么来排查呢？</p>
+<h3 id="排查步骤"><a href="#排查步骤" class="headerlink" title="排查步骤"></a>排查步骤</h3><p>1、Xcode中启动Profile工具<br><img src="/media/files/2016/12/01/01.png" alt="image"></p>
+<p>2、选择Allocations工具，点击红色按钮开始“录制”，这时Instruments会启动我们的应用<br><img src="/media/files/2016/12/01/02.png" alt="image"></p>
+<p>3、打开有内存释放问题的页面，稍微等一下，等页面的常规初始化完成，比如等个10秒钟</p>
+<p>4、从Instruments右下角的区域切换到“Display Settings” Tab页，并点击“Mark Generation”生成第一个Generation：Generation A；<br>这个相当于是我们判断内存没有及时释放的起始点<br><img src="/media/files/2016/12/01/04.png" alt="image"></p>
+<p>5、为了让没有及时释放的内存泄漏问题，累积的更多一点，第二次Mark的时间可以稍微多等久一点（等多久这个取决于你的内存问题出现所需要的时间，比如2分钟），然后再次点击“Mark Generation”，这个时候你就会发现两次Generation之间的内存增长，而这里面的增长其实就是我们所寻找的没有及时释放的内存：</p>
+<p><img src="/media/files/2016/12/01/05.png" alt="image"></p>
+<p>6、点击小箭头查看更详细的信息，根据内存占用的比例，找到占用比例最高的，并且不断展开，直到找到我们自己的代码，这就是出问题的地方了。<br><img src="/media/files/2016/12/01/06.png" alt="image"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios/" rel="tag"># ios</a>
+              <a href="/tags/mac/" rel="tag"># mac</a>
+              <a href="/tags/memory-leak/" rel="tag"># memory-leak</a>
+              <a href="/tags/instruments/" rel="tag"># instruments</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2016/2016-12-06-memory-leak-from-nsarray-sortedarrayusingfunction/" rel="prev" title="NSArray sortedArrayUsingFunction引发的内存泄漏">
+      <i class="fa fa-chevron-left"></i> NSArray sortedArrayUsingFunction引发的内存泄漏
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2017/2017-02-23-traffic-raiders-for-kansai-tourist/" rel="next" title="关西旅行交通攻略">
+      关西旅行交通攻略 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B9%8B%E5%89%8D%E5%85%88%E8%AF%B4%E5%87%A0%E4%B8%AAInstruments%E7%9A%84%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="nav-number">2.1.</span> <span class="nav-text">使用之前先说几个Instruments的调试技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E5%85%B8%E5%9E%8B%E6%A1%88%E4%BE%8B%EF%BC%8C%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.2.</span> <span class="nav-text">一个典型案例，问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.3.</span> <span class="nav-text">排查步骤</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

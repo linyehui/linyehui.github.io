@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="首先你应该知道这个类大概是做什么的：Windows::ApplicationModel::Store::CurrentApp   MSDN上的说明：Windows.ApplicationModel.Store classes 上面的MSDN页面给我们提供的API主要是用于Metro Style  App的Store购买相关的信息和功能，其实微软给我们提供了两个类：   12345CurrentAp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 8下如何使用Windows.ApplicationModel.Store的CurrentApp类">
+<meta property="og:url" content="http://linyehui.me/2022/05/17/2012/2012-08-25-tips-for-using-currentapp-in-an-metro-style-app/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="首先你应该知道这个类大概是做什么的：Windows::ApplicationModel::Store::CurrentApp   MSDN上的说明：Windows.ApplicationModel.Store classes 上面的MSDN页面给我们提供的API主要是用于Metro Style  App的Store购买相关的信息和功能，其实微软给我们提供了两个类：   12345CurrentAp">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-05-17T07:49:14.423Z">
+<meta property="article:modified_time" content="2022-05-17T07:49:14.423Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="win8">
+<meta property="article:tag" content="winrt">
+<meta property="article:tag" content="windows8">
+<meta property="article:tag" content="store">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://linyehui.me/2022/05/17/2012/2012-08-25-tips-for-using-currentapp-in-an-metro-style-app/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Windows 8下如何使用Windows.ApplicationModel.Store的CurrentApp类 | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2012/2012-08-25-tips-for-using-currentapp-in-an-metro-style-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows 8下如何使用Windows.ApplicationModel.Store的CurrentApp类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="首先你应该知道这个类大概是做什么的："><a href="#首先你应该知道这个类大概是做什么的：" class="headerlink" title="首先你应该知道这个类大概是做什么的："></a>首先你应该知道这个类大概是做什么的：</h1><p>Windows::ApplicationModel::Store::CurrentApp  </p>
+<p><a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/apps/br229885.aspx">MSDN上的说明：Windows.ApplicationModel.Store classes</a></p>
+<p>上面的MSDN页面给我们提供的API主要是用于Metro Style  App的Store购买相关的信息和功能，其实微软给我们提供了两个类：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CurrentApp class</span><br><span class="line">Defines methods and properties you can use to get license and listing info about the current app and perform in-app purchases.</span><br><span class="line"></span><br><span class="line">CurrentAppSimulator class</span><br><span class="line">Defines methods and properties used to instantiate an object that you can use to get simulated license info during testing.</span><br></pre></td></tr></table></figure>
+
+<p>这两个类中，微软推荐我们用CurrentAppSimulator进行测试，可惜我有个坏毛病，代码一定要自己跑过一次才相信，微软所说的先用CurrentAppSimulator调试，上架的时候直接换成CurrentApp就万事大吉了，这样的“理所当然”我可不信，所以我想方设法想亲自验证下CurrentApp这个类的功能，下面是一些我自己的验证。</p>
+<h1 id="测试环境："><a href="#测试环境：" class="headerlink" title="测试环境："></a>测试环境：</h1><p>外网大家正在用的Windows 8 RTM版本，VS2012（这俩微软官没有正式版，所以本文的结论一段时间后可能会被微软自己推翻）</p>
+<h1 id="我遇到的问题："><a href="#我遇到的问题：" class="headerlink" title="我遇到的问题："></a>我遇到的问题：</h1><p>微软的MSDN说要调试CurrentApp必须使用开发者帐号，且应用已经上架，那我就想我本地想调试应该怎么弄呢？我不想用CurrentAppSimulator敷衍我自己  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2012/9/8 补充</span><br><span class="line">这里其实有猫腻，所谓的已经上架还不够，还需要你在调试的机器上购买并下载了这个应用才算数</span><br><span class="line">所以调试之前一定要到应用商店的“你的应用”中检查下要调试的应用的状态</span><br></pre></td></tr></table></figure>
+<h2 id="最后成功的方案和需要注意的细节："><a href="#最后成功的方案和需要注意的细节：" class="headerlink" title="最后成功的方案和需要注意的细节："></a>最后成功的方案和需要注意的细节：</h2><ul>
+<li>1、应用已经上架，这个是必须的，如果没有的话就确实只能用CurrentAppSimulator</li>
+<li>2、Package.appxmanifest里Packageing Tab页的Publisher属性必须是你已经上架了的应用的开发者帐号对应的证书，这个证书在你创建用于上传到Store的Package时会自动帮你填充（<strong>这个证书是关键</strong>）</li>
+<li>3、只要你调试的时候符合上面两个条件，无论你是本机直接F5调试还是编译本地安装包然后测试，都能获取到CurrentApp的Store信息。你会发现异步获取到的ListingInformation就是你在Store后台配置的应用信息。(ListingInformation-&gt;Name就是Store上的应用名)</li>
+</ul>
+<h2 id="修改安装后的应用文件是否会影响CurrentApp-gt-LicenseInformation的IsActive和IsTrial呢？"><a href="#修改安装后的应用文件是否会影响CurrentApp-gt-LicenseInformation的IsActive和IsTrial呢？" class="headerlink" title="修改安装后的应用文件是否会影响CurrentApp-&gt;LicenseInformation的IsActive和IsTrial呢？"></a>修改安装后的应用文件是否会影响CurrentApp-&gt;LicenseInformation的IsActive和IsTrial呢？</h2><p>我的实验结果是不会，而且我发现这影响Store返回的两个属性值的关键在于我上面提到的Package.appxmanifest里Packageing Tab页的Publisher这个证书。  </p>
+<p>也就是说你从Store安装了某个应用，然后修改这个应用安装目录下的文件，CurrentApp-&gt;LicenseInformation的IsActive和IsTrial属性并不会受到影响，其他的属性我就没有进一步确认，大家有兴趣可以自己验证。</p>
+<h2 id="2012-x2F-9-x2F-8-21-18-今晚调试后再补充点信息吧，希望对读者有用："><a href="#2012-x2F-9-x2F-8-21-18-今晚调试后再补充点信息吧，希望对读者有用：" class="headerlink" title="2012&#x2F;9&#x2F;8 21:18 今晚调试后再补充点信息吧，希望对读者有用："></a>2012&#x2F;9&#x2F;8 21:18 今晚调试后再补充点信息吧，希望对读者有用：</h2><ul>
+<li>1、没有网络的时候获取License Information是会失败的</li>
+<li>2、没有购买的时候获取License Information也是会失败的</li>
+<li>3、License获取的线程也是有讲究的，你用线程定时器起来的异步操作中执行的话，需要先做下线程切换</li>
+</ul>
+<p>所以我们需要对代码进行异常捕获，要这么写才可以： </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AppEngine::InitializeLicenseCore</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">try</span></span><br><span class="line">	&#123;</span><br><span class="line">		m_licenseInformation = CurrentApp::LicenseInformation;</span><br><span class="line">		<span class="function">task&lt;ListingInformation^&gt; <span class="title">listingTask</span><span class="params">(CurrentApp::LoadListingInformationAsync())</span></span>;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_licenseInformation-&gt;LicenseChanged += ref <span class="keyword">new</span> <span class="built_in">LicenseChangedEventHandler</span>(<span class="keyword">this</span>, &amp;AppEngine::OnLicenseChanged);</span><br><span class="line">		<span class="keyword">this</span>-&gt;<span class="built_in">OnLicenseChanged</span>();</span><br><span class="line"></span><br><span class="line">		listingTask.<span class="built_in">then</span>([=](ListingInformation^ listing)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>-&gt;m_listingInformation = listing;</span><br><span class="line">			Platform::String^ name = <span class="keyword">this</span>-&gt;m_listingInformation-&gt;Name;</span><br><span class="line">			<span class="comment">// ...</span></span><br><span class="line">		&#125;)</span><br><span class="line">		.<span class="built_in">then</span>([=](Concurrency::task&lt;<span class="type">void</span>&gt; t)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">try</span></span><br><span class="line">			&#123;</span><br><span class="line">				t.<span class="built_in">get</span>();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">catch</span> (Platform::Exception ^ e)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">log_error</span>(<span class="string">&quot;license listing task exception&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">catch</span> (Platform::Exception^ e)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">log_error</span>(<span class="string">&quot;InitializeLicenseCore exception&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Windows 8还没正式发布，我所说的都是错的 :)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/win8/" rel="tag"># win8</a>
+              <a href="/tags/winrt/" rel="tag"># winrt</a>
+              <a href="/tags/windows8/" rel="tag"># windows8</a>
+              <a href="/tags/store/" rel="tag"># store</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2012/2012-09-20-remote-debug-using-vs2012/" rel="prev" title="用VS2012远程调试Metro style apps">
+      <i class="fa fa-chevron-left"></i> 用VS2012远程调试Metro style apps
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2012/2012-07-19-tips-of-winrt-component-in-cpp-and-calling-it-from-js/" rel="next" title="WinRT下JavaScript调用C++ WinRT组件的注意事项">
+      WinRT下JavaScript调用C++ WinRT组件的注意事项 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E8%BF%99%E4%B8%AA%E7%B1%BB%E5%A4%A7%E6%A6%82%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">首先你应该知道这个类大概是做什么的：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">测试环境：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">我遇到的问题：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E6%88%90%E5%8A%9F%E7%9A%84%E6%96%B9%E6%A1%88%E5%92%8C%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%BB%86%E8%8A%82%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">最后成功的方案和需要注意的细节：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AE%89%E8%A3%85%E5%90%8E%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BD%B1%E5%93%8DCurrentApp-gt-LicenseInformation%E7%9A%84IsActive%E5%92%8CIsTrial%E5%91%A2%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">修改安装后的应用文件是否会影响CurrentApp-&gt;LicenseInformation的IsActive和IsTrial呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2012-x2F-9-x2F-8-21-18-%E4%BB%8A%E6%99%9A%E8%B0%83%E8%AF%95%E5%90%8E%E5%86%8D%E8%A1%A5%E5%85%85%E7%82%B9%E4%BF%A1%E6%81%AF%E5%90%A7%EF%BC%8C%E5%B8%8C%E6%9C%9B%E5%AF%B9%E8%AF%BB%E8%80%85%E6%9C%89%E7%94%A8%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">2012&#x2F;9&#x2F;8 21:18 今晚调试后再补充点信息吧，希望对读者有用：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

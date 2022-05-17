@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="降噪是什么？其实我们一直在享受这个技术给我们带来的方便，只是我们不知道，本文的主题是简单的介绍双MIC降噪，并索引你进行更深入的了解。 双MIC降噪科技改变生活，iPhone等目前主流手机都在使用这项技术：双MIC降噪 具体是个什么东西呢？来看下通俗解释：  所谓“双mic抗噪技术”是指通过技术处理，将外界的噪音消除而在这之中的“技术处理”，就是内置的2个麦克风，一个稳定保持清晰通话，另一个麦克风">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是声音降噪">
+<meta property="og:url" content="http://linyehui.me/2022/05/17/2014/2014-02-14-what-is-noise-reduction/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="降噪是什么？其实我们一直在享受这个技术给我们带来的方便，只是我们不知道，本文的主题是简单的介绍双MIC降噪，并索引你进行更深入的了解。 双MIC降噪科技改变生活，iPhone等目前主流手机都在使用这项技术：双MIC降噪 具体是个什么东西呢？来看下通俗解释：  所谓“双mic抗噪技术”是指通过技术处理，将外界的噪音消除而在这之中的“技术处理”，就是内置的2个麦克风，一个稳定保持清晰通话，另一个麦克风">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-05-17T07:49:14.425Z">
+<meta property="article:modified_time" content="2022-05-17T07:49:14.425Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="mic">
+<meta property="article:tag" content="noise-redution">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://linyehui.me/2022/05/17/2014/2014-02-14-what-is-noise-reduction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>什么是声音降噪 | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-02-14-what-is-noise-reduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          什么是声音降噪
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>降噪是什么？其实我们一直在享受这个技术给我们带来的方便，只是我们不知道，本文的主题是简单的介绍双MIC降噪，并索引你进行更深入的了解。</p>
+<h4 id="双MIC降噪"><a href="#双MIC降噪" class="headerlink" title="双MIC降噪"></a>双MIC降噪</h4><p>科技改变生活，iPhone等目前主流手机都在使用这项技术：双MIC降噪</p>
+<p><strong>具体是个什么东西呢？来看下通俗解释：</strong></p>
+<blockquote>
+<p>所谓“双mic抗噪技术”是指通过技术处理，将外界的噪音消除而在这之中的“技术处理”，就是内置的2个麦克风，一个稳定保持清晰通话，另一个麦克风物理主动消除噪音。  </p>
+</blockquote>
+<p>引申阅读：<a target="_blank" rel="noopener" href="http://tieba.baidu.com/p/2126118342">★双MIC降噪原理及优缺点分析（技术贴）</a></p>
+<p>对于这个技术的解释，这篇文章介绍的很接地气：<a target="_blank" rel="noopener" href="http://www.igao7.com/reduce-noice.html">手机麦克风是如何消除环境噪音的？</a></p>
+<p><strong>这是一篇关于iPhone5的介绍，从中我们也可以发现苹果对这个技术的使用和加强：</strong></p>
+<blockquote>
+<p>相较iPhone 4以及4S的双麦克，iPhone 5拥有更好的降噪能力。除了仍旧在底部的主麦克风外，还拥有听筒位置以及背部摄像头附近的两个降噪麦。传统双麦降噪手机，通过主麦克以及降噪麦克过滤相同环境噪音，已达到强化用户声音的目的。这样一来，无论身处何处，周围的噪音都会有一定程度的削减。</p>
+<p>然而iPhone 5的三麦设计，主要是解决在嘈杂环境下听不清听筒声音的问题。这也就是为什么第二个降噪麦，从机身顶部挪到了听筒的位置。通过背部摄像头附近的麦收集环境噪音，以及听筒附近降噪麦计算用户耳朵贴合手机的角度和距离，测算后从听筒发出干扰声波，以达到降低噪音的功效。</p>
+<p>实测iPhone 5在安静环境下，通话质量与iPhone 4&#x2F;4S并无大异，然而在周围噪音繁杂的环境下，听筒音量并无显著提高，但是噪音过滤比较明显，可以清晰收听对方的声音。    </p>
+</blockquote>
+<p>引申阅读：<a target="_blank" rel="noopener" href="http://tech.sina.com.cn/mobile/n/2012-09-21/11497643200.shtml">体验全面提升 苹果iPhone 5评测</a></p>
+<h4 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释"></a>术语解释</h4><p><a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Noise_reduction">Noise reduction</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.multimediasignalprocessing.com/PDF/tutorial6.pdf">Microphone Arrays : A Tutorial</a></p>
+<p>中文的降噪我没找到专业的术语解释</p>
+<h4 id="其他的引申阅读："><a href="#其他的引申阅读：" class="headerlink" title="其他的引申阅读："></a>其他的引申阅读：</h4><p><a target="_blank" rel="noopener" href="http://tieba.baidu.com/p/2126118342">★双MIC降噪原理及优缺点分析（技术贴）</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://bbs.21ic.com/icview-244981-1-1.html">求双MIC的DSP降噪算法？</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://scholar.google.com/scholar?q=%E5%8F%8CMIC%E6%B6%88%E5%99%AA%E6%8A%80%E6%9C%AF&hl=zh-CN&as_sdt=0&as_vis=1&oi=scholart&sa=X&ei=H8X9UvOUJKaWiQea0oDADQ&ved=0CCcQgQMwAA">Google学术搜索：双MIC消噪技术</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.docin.com/p-260511024.html">双MIC消噪技术 资料整理</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://bbs.gfan.com/android-4421314-1-1.html">MOTO丽音技术深度解析，帮助大家了解丽音</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.miui.com/thread-1011253-1-1.html">为什么小米2在安静环境下通话效果差？双MIC降噪原理解析</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.slideshare.net/lpzhang/demo-victor-cqf">声学降噪技术</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://qing.blog.sina.com.cn/tj/564012ca330025hg.html">《看不出的创新，听得见的改变——谈 iPhone 5的通话性能提升》</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://bbs.52rd.com/Thread-202698-1-1.html">双MIC消噪技术</a>  </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mic/" rel="tag"># mic</a>
+              <a href="/tags/noise-redution/" rel="tag"># noise-redution</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2013/2013-12-30-offline-install-dot-net-3-5-with-win8-1-iso/" rel="prev" title="Win8.1下使用系统ISO离线安装.NET 3.5">
+      <i class="fa fa-chevron-left"></i> Win8.1下使用系统ISO离线安装.NET 3.5
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2014/2014-02-13-reading-learning/" rel="next" title="侧方位停车引发的读书思考">
+      侧方位停车引发的读书思考 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8CMIC%E9%99%8D%E5%99%AA"><span class="nav-number">1.</span> <span class="nav-text">双MIC降噪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A"><span class="nav-number">2.</span> <span class="nav-text">术语解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E5%BC%95%E7%94%B3%E9%98%85%E8%AF%BB%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">其他的引申阅读：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这是我的Git入门笔记，讲述我在Windows 7上的Git初体验。   整个过程主要参考：http:&#x2F;&#x2F;lab.mzr.jp&#x2F;progit&#x2F;progit.zh.html.gz   1、Windows上安装Git有个叫做 msysGit 的项目提供了git的Windows安装包，可以从 Google Code 的页面上下载安装文件（.exe）：http:&#x2F;&#x2F;code.google.com&#x2F;p&#x2F;ms">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello Git">
+<meta property="og:url" content="http://linyehui.me/2022/05/17/2010/2010-12-21-hello-git/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="这是我的Git入门笔记，讲述我在Windows 7上的Git初体验。   整个过程主要参考：http:&#x2F;&#x2F;lab.mzr.jp&#x2F;progit&#x2F;progit.zh.html.gz   1、Windows上安装Git有个叫做 msysGit 的项目提供了git的Windows安装包，可以从 Google Code 的页面上下载安装文件（.exe）：http:&#x2F;&#x2F;code.google.com&#x2F;p&#x2F;ms">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-05-17T07:49:14.419Z">
+<meta property="article:modified_time" content="2022-05-17T07:49:14.419Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="hello">
+<meta property="article:tag" content="windows7">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://linyehui.me/2022/05/17/2010/2010-12-21-hello-git/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Hello Git | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2010/2010-12-21-hello-git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hello Git
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这是我的Git入门笔记，讲述我在Windows 7上的Git初体验。  </p>
+<p>整个过程主要参考：<a target="_blank" rel="noopener" href="http://lab.mzr.jp/progit/progit.zh.html.gz">http://lab.mzr.jp/progit/progit.zh.html.gz</a>  </p>
+<h1 id="1、Windows上安装Git"><a href="#1、Windows上安装Git" class="headerlink" title="1、Windows上安装Git"></a>1、Windows上安装Git</h1><p>有个叫做 msysGit 的项目提供了git的Windows安装包，可以从 Google Code 的页面上下载安装文件（.exe）：<br><a target="_blank" rel="noopener" href="http://code.google.com/p/msysgit">http://code.google.com/p/msysgit</a>    </p>
+<p>我下载的是这个：“Full installer for official Git 1.7.3.1”</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</h2><ul>
+<li>a、安装时推荐只使用Git Bash，因为我试过了在Win7下在命令行下直接使用Git会有各种各样奇怪的问题</li>
+<li>b、Win7上打开Git Bash切记要“以管理员权限打开”<br>这个非常重要，不这么做会出现类似的提示：<blockquote>
+<p>error: Failed connect to github.com:443; No error while accessing</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="2、路径使用注意"><a href="#2、路径使用注意" class="headerlink" title="2、路径使用注意"></a>2、路径使用注意</h1><p>使用Git Bash时的目录切换采用类似的命令行：cd &#x2F;e&#x2F;github&#x2F;zaina，而不是Windows那样的cd E:然后cd:github&#x2F;zaina</p>
+<h1 id="3、你可能需要设置代理，那么设置两个环境变量"><a href="#3、你可能需要设置代理，那么设置两个环境变量" class="headerlink" title="3、你可能需要设置代理，那么设置两个环境变量"></a>3、你可能需要设置代理，那么设置两个环境变量</h1><p><a target="_blank" rel="noopener" href="https://github.com/blog/642-smart-http-support">参考文献</a>  </p>
+<blockquote>
+<p>http_proxy &#x3D; “<a href="http://proxy1.somecompany.com:8080&quot;">http://proxy1.somecompany.com:8080&quot;</a><br>https_proxy &#x3D; “<a href="http://proxy1.somecompany.com:8080&quot;">http://proxy1.somecompany.com:8080&quot;</a></p>
+</blockquote>
+<h1 id="4、遇到“fatal-write-error-Broken-pipe”怎么办？"><a href="#4、遇到“fatal-write-error-Broken-pipe”怎么办？" class="headerlink" title="4、遇到“fatal: write error: Broken pipe”怎么办？"></a>4、遇到“fatal: write error: Broken pipe”怎么办？</h1><p><a target="_blank" rel="noopener" href="http://flightschool.acylt.com/devnotes/git-fatal-write-error-broken-pipe/">参考文献</a>  </p>
+<p>用这个命令行解决：git config http.postBuffer 104857600</p>
+<h1 id="5、不小心把obj文件入库了怎么删除"><a href="#5、不小心把obj文件入库了怎么删除" class="headerlink" title="5、不小心把obj文件入库了怎么删除"></a>5、不小心把obj文件入库了怎么删除</h1><p>删除文件及索引用命令:git rm -f xxx.obj  </p>
+<p>删除目录及对应的索引用命令：git rm -r -f obj</p>
+<h1 id="6、github的README文件想要显示中文的话要记得保存成UTF编码"><a href="#6、github的README文件想要显示中文的话要记得保存成UTF编码" class="headerlink" title="6、github的README文件想要显示中文的话要记得保存成UTF编码"></a>6、github的README文件想要显示中文的话要记得保存成UTF编码</h1><h1 id="7、-gitconfig的路径问题"><a href="#7、-gitconfig的路径问题" class="headerlink" title="7、.gitconfig的路径问题"></a>7、.gitconfig的路径问题</h1><p>.gitconfig的配置不支持”D:\Program Files&quot;这样的带空格的路径，如果你非要放在这样的目录下，建议你加个环境变量</p>
+<h1 id="8、CopSSH激活系统用户作为ssh用户时卡很久"><a href="#8、CopSSH激活系统用户作为ssh用户时卡很久" class="headerlink" title="8、CopSSH激活系统用户作为ssh用户时卡很久"></a>8、CopSSH激活系统用户作为ssh用户时卡很久</h1><p>用CopSSH在Windows上搭建git服务器时，安装后需要激活系统的用户作为ssh的用户，执行这一步时如果你所在的域有很多用户（比如公司环境），那么这个地方会卡住很久，有个小技巧：断开网络后再执行这个操作</p>
+<h1 id="9、TortoiseGit"><a href="#9、TortoiseGit" class="headerlink" title="9、TortoiseGit"></a>9、TortoiseGit</h1><p>TortoiseGit非常好用，习惯TortoiseSVN 的话能很快上手  </p>
+<p><a target="_blank" rel="noopener" href="http://code.google.com/p/tortoisegit/">TortoiseGit下载地址</a>，  </p>
+<p>还有<a target="_blank" rel="noopener" href="http://www.zonozone.com/tiki/tiki-index.php?title=TortoiseGit%25E4%25BD%25BF%25E7%2594%25A8%25E5%2585%25A5%25E9%2597%25A8">使用教程</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/hello/" rel="tag"># hello</a>
+              <a href="/tags/windows7/" rel="tag"># windows7</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2011/2011-01-08-hello-oracle/" rel="prev" title="Oracle初体验">
+      <i class="fa fa-chevron-left"></i> Oracle初体验
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2010/2010-12-28-visualsvn-pre-commit/" rel="next" title="VisualSVN设置提交时必须输入log信息">
+      VisualSVN设置提交时必须输入log信息 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81Windows%E4%B8%8A%E5%AE%89%E8%A3%85Git"><span class="nav-number">1.</span> <span class="nav-text">1、Windows上安装Git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips"><span class="nav-number">1.1.</span> <span class="nav-text">Tips:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E8%B7%AF%E5%BE%84%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F"><span class="nav-number">2.</span> <span class="nav-text">2、路径使用注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E4%BD%A0%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%EF%BC%8C%E9%82%A3%E4%B9%88%E8%AE%BE%E7%BD%AE%E4%B8%A4%E4%B8%AA%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">3、你可能需要设置代理，那么设置两个环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E9%81%87%E5%88%B0%E2%80%9Cfatal-write-error-Broken-pipe%E2%80%9D%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">4、遇到“fatal: write error: Broken pipe”怎么办？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81%E4%B8%8D%E5%B0%8F%E5%BF%83%E6%8A%8Aobj%E6%96%87%E4%BB%B6%E5%85%A5%E5%BA%93%E4%BA%86%E6%80%8E%E4%B9%88%E5%88%A0%E9%99%A4"><span class="nav-number">5.</span> <span class="nav-text">5、不小心把obj文件入库了怎么删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6%E3%80%81github%E7%9A%84README%E6%96%87%E4%BB%B6%E6%83%B3%E8%A6%81%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E7%9A%84%E8%AF%9D%E8%A6%81%E8%AE%B0%E5%BE%97%E4%BF%9D%E5%AD%98%E6%88%90UTF%E7%BC%96%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">6、github的README文件想要显示中文的话要记得保存成UTF编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7%E3%80%81-gitconfig%E7%9A%84%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">7、.gitconfig的路径问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8%E3%80%81CopSSH%E6%BF%80%E6%B4%BB%E7%B3%BB%E7%BB%9F%E7%94%A8%E6%88%B7%E4%BD%9C%E4%B8%BAssh%E7%94%A8%E6%88%B7%E6%97%B6%E5%8D%A1%E5%BE%88%E4%B9%85"><span class="nav-number">8.</span> <span class="nav-text">8、CopSSH激活系统用户作为ssh用户时卡很久</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9%E3%80%81TortoiseGit"><span class="nav-number">9.</span> <span class="nav-text">9、TortoiseGit</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

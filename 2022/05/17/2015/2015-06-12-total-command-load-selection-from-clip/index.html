@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="需求对SVN入库的文件进行PNG优化，我使用PNGoo进行PNG优化，我已经从SVN记录中得到了所有需要更新的PNG文件全路径，但是怎么把这些分散在不同目录下的文件加入PNGoo中是我想要解决的问题 方案一：Windows的文件选择框PNGoo使用的Windows的文件选择框是支持文件多选的，支持的文件格式类似：   1&quot;F:\test\Activity\100.png&quot; &amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Total Command导入文件选择列表">
+<meta property="og:url" content="http://linyehui.me/2022/05/17/2015/2015-06-12-total-command-load-selection-from-clip/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="需求对SVN入库的文件进行PNG优化，我使用PNGoo进行PNG优化，我已经从SVN记录中得到了所有需要更新的PNG文件全路径，但是怎么把这些分散在不同目录下的文件加入PNGoo中是我想要解决的问题 方案一：Windows的文件选择框PNGoo使用的Windows的文件选择框是支持文件多选的，支持的文件格式类似：   1&quot;F:\test\Activity\100.png&quot; &amp;q">
+<meta property="og:locale">
+<meta property="og:image" content="http://linyehui.me/media/files/2015/06/12/load-selection-from-clip.png">
+<meta property="article:published_time" content="2022-05-17T07:49:14.429Z">
+<meta property="article:modified_time" content="2022-05-17T07:49:14.429Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="windows">
+<meta property="article:tag" content="total-command">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://linyehui.me/media/files/2015/06/12/load-selection-from-clip.png">
+
+<link rel="canonical" href="http://linyehui.me/2022/05/17/2015/2015-06-12-total-command-load-selection-from-clip/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Total Command导入文件选择列表 | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-06-12-total-command-load-selection-from-clip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Total Command导入文件选择列表
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>对SVN入库的文件进行PNG优化，我使用PNGoo进行PNG优化，我已经从SVN记录中得到了所有需要更新的PNG文件全路径，但是怎么把这些分散在不同目录下的文件加入PNGoo中是我想要解决的问题</p>
+<h2 id="方案一：Windows的文件选择框"><a href="#方案一：Windows的文件选择框" class="headerlink" title="方案一：Windows的文件选择框"></a>方案一：Windows的文件选择框</h2><p>PNGoo使用的Windows的文件选择框是支持文件多选的，支持的文件格式类似：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;F:\test\Activity\100.png&quot; &quot;F:\test\ActivityItem\ActivityItem0.png&quot;</span><br></pre></td></tr></table></figure>
+
+<p>文件路径中间以空格隔开即可。</p>
+<p>但是这个方法再文件多了之后有问题：一次加入10个文件的话会只有前几个被加入进去，后面的你还得再一点点往里面加。  </p>
+<p>显然，像我这么懒的人是不会喜欢这个方案的。  </p>
+<h2 id="方案二：Total-Command导入文件选择列表"><a href="#方案二：Total-Command导入文件选择列表" class="headerlink" title="方案二：Total Command导入文件选择列表"></a>方案二：Total Command导入文件选择列表</h2><h3 id="纯手动的解决方案"><a href="#纯手动的解决方案" class="headerlink" title="纯手动的解决方案"></a>纯手动的解决方案</h3><ol>
+<li>Total Command，到资源目录下Ctrl+B，把文件展开</li>
+<li>根据文件名，快速定位文件，然后空格选择这个文件</li>
+<li>按ESC返回文件过滤，重复步骤2，知道所有文件都已经被选中</li>
+<li>拖动Total Command选中的文件列表到PNGoo中去</li>
+<li>完成</li>
+</ol>
+<p>显然，像我这么懒的人还是不会喜欢这个方案的，但是这个方案却有改进的空间。</p>
+<h3 id="半自动的解决方案"><a href="#半自动的解决方案" class="headerlink" title="半自动的解决方案"></a>半自动的解决方案</h3><ol>
+<li>Total Command，到资源目录下Ctrl+B，把文件展开</li>
+<li>把准备好的文件选中列表复制到剪切板（等会我会单独介绍怎么准备这个文件列表）</li>
+<li>选择菜单上的“选择”-》“备份&#x2F;回复选择列表”-》“从剪切板导入”<br><img src="/media/files/2015/06/12/load-selection-from-clip.png" alt="从剪切板导入"></li>
+<li>拖动Total Command选中的文件列表到PNGoo中去</li>
+<li>完成</li>
+</ol>
+<h4 id="准备文件列表"><a href="#准备文件列表" class="headerlink" title="准备文件列表"></a>准备文件列表</h4><ol>
+<li>以这个文件为例：</li>
+</ol>
+<blockquote>
+<p>F:\test\Activity\100.png  </p>
+</blockquote>
+<blockquote>
+<p>F:\test\ActivityItem\ActivityItem0.png</p>
+</blockquote>
+<p>2.Total Command，到F:\test\目录下，Ctrl+B把文件展开<br>3.将步骤1中的全路径，去掉步骤2中的目录前缀“F:\test\”，这时你将得到我们最终需要的文件列表，Ctrl+C复制到剪切板，文件选择列表搞定  </p>
+<blockquote>
+<p>Activity\100.png  </p>
+</blockquote>
+<blockquote>
+<p>ActivityItem\ActivityItem0.png</p>
+</blockquote>
+<h5 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h5><ol>
+<li><p>SVN上的路径使用的是“&#x2F;”，但是Windows下的文件路径是”&quot;，这个需要实现转换下  </p>
+</li>
+<li><p>批量修改和删除字符串的操作，使用Sublime的话非常简单，我就不单独说了</p>
+</li>
+</ol>
+<p>这个方案勉强还可以接受，因为我习惯使用快捷键，上面的操作步骤我可以在30S内完成，而这样的事情我并不需要经常做，否则我想我应该写个脚本自动来做这个事情，看来还是不够懒。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/windows/" rel="tag"># windows</a>
+              <a href="/tags/total-command/" rel="tag"># total-command</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2015/2015-11-05-unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/" rel="prev" title="Xcode 7.1无法使用Instruments真机调试，设备灰色不可选">
+      <i class="fa fa-chevron-left"></i> Xcode 7.1无法使用Instruments真机调试，设备灰色不可选
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/17/2015/2015-07-07-submit-voice-game-to-app-store/" rel="next" title="一款语音杀人游戏的App Store提交记录">
+      一款语音杀人游戏的App Store提交记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9AWindows%E7%9A%84%E6%96%87%E4%BB%B6%E9%80%89%E6%8B%A9%E6%A1%86"><span class="nav-number">2.</span> <span class="nav-text">方案一：Windows的文件选择框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9ATotal-Command%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6%E9%80%89%E6%8B%A9%E5%88%97%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">方案二：Total Command导入文件选择列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E6%89%8B%E5%8A%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.</span> <span class="nav-text">纯手动的解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E8%87%AA%E5%8A%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.</span> <span class="nav-text">半自动的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8"><span class="nav-number">3.2.1.</span> <span class="nav-text">准备文件列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%8F%E6%8F%90%E7%A4%BA"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">小提示</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

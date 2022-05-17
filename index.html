@@ -148,7 +148,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2018/2018-09-19-nvm-windows/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2019/02/14/2019/2019-02-14-update-python-on-on-macos-x-mojave/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -162,7 +162,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2018/2018-09-19-nvm-windows/" class="post-title-link" itemprop="url">Windows下使用nvm管理node版本</a>
+            <a href="/2019/02/14/2019/2019-02-14-update-python-on-on-macos-x-mojave/" class="post-title-link" itemprop="url">Mac OS X Mojave (10.14) 下更新python开发环境</a>
         </h2>
 
         <div class="post-meta">
@@ -172,78 +172,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm</p>
-<ul>
-<li><p>原来的解决方案用的挺好的：<br><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a></p>
-</li>
-<li><p>今天更新node版本遇到了问题：<br>之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来</p>
-</li>
-</ul>
-<p>nvm root看了下安装路径是在AppData下，虚拟链接是在%Program Files%目录下，nvm use的时候会弹出UAC提示，照理应该也不会出错，不过nvm的对应版本目录下并没有下载到npm文件。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>github上看了下，最近（2018-08-02）更新了一个版本1.1.7：<br><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a></p>
-<p>我把老的版本卸载干净，然后重新安装了下新版本，然后重新安装，重新安装的时候我把安装目录和软连接目录都放到的我的非系统盘D盘的根目录下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\nodejs\</span><br><span class="line">D:\nvm\</span><br></pre></td></tr></table></figure>
-<p>重新使用nvm安装下最新版本的node：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nvm list available</span><br><span class="line">nvm install 10.10.0</span><br><span class="line">nvm use 10.10.0</span><br><span class="line"></span><br><span class="line">node --version</span><br><span class="line">npm --version</span><br></pre></td></tr></table></figure>
-<p>验证了下版本，没问题：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;npm --version</span><br><span class="line">6.4.1</span><br><span class="line"></span><br><span class="line">D:\&gt;node --version</span><br><span class="line">v10.10.0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2019/2019-02-14-update-python-on-on-macos-x-mojave/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2019/2019-02-14-update-python-on-on-macos-x-mojave/" class="post-title-link" itemprop="url">Mac OS X Mojave (10.14) 下更新python开发环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2019-02-14 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-14T00:00:00+08:00">2019-02-14</time>
             </span>
 
           
@@ -296,7 +225,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2017/2017-01-06-setstatusbarorientation-not-working/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2018/09/19/2018/2018-09-19-nvm-windows/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -310,7 +239,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2017/2017-01-06-setstatusbarorientation-not-working/" class="post-title-link" itemprop="url">setStatusBarOrientation:animated: not working</a>
+            <a href="/2018/09/19/2018/2018-09-19-nvm-windows/" class="post-title-link" itemprop="url">Windows下使用nvm管理node版本</a>
         </h2>
 
         <div class="post-meta">
@@ -320,7 +249,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2018-09-19 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-19T00:00:00+08:00">2018-09-19</time>
             </span>
 
           
@@ -334,186 +263,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>有个视频播放页面需要手动控制页面的横竖屏状态，使用setStatusBarOrientation可以达到这个效果；<br>但是很奇怪的事情发生了，我们发现代码在某台机器的某种情况下会出现setStatusBarOrientation调用无效。</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>直接的原因是我们使用了BugTags，并且在白名单用户登录后打开了BugTags的悬浮小球，悬浮小球出现的时候setStatusBarOrientation调用就会无效；</p>
-<p>分析后发现真正的原因是，页面已经不是the top-most full-screen view controller了：</p>
-<blockquote>
-<p>The setStatusBarOrientation:animated: method is not deprecated outright. It now works only if the supportedInterfaceOrientations method of the top-most full-screen view controller returns 0</p>
-</blockquote>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>知道原因就简单了，需要全屏的时候隐藏BugTags的悬浮球即可</p>
-<blockquote>
-<p>BTGInvocationEventNone</p>
-</blockquote>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/12563954/setstatusbarorientationanimated-not-working-in-ios-6">setStatusBarOrientation:animated: not working in iOS 6</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/ginhoor/article/details/20454229">setStatusBarOrientation 未生效的解决办法</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2017/2017-02-08-ignore-sigpipe-crash/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2017/2017-02-08-ignore-sigpipe-crash/" class="post-title-link" itemprop="url">ignore SIGPIPE crash</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：</p>
-<blockquote>
-<p>Signal 13 was raised. SIGPIPE</p>
-</blockquote>
-<p>查找资料后，发现最简单的解决方案就是忽略这个错误：</p>
-<blockquote>
-<p>signal(SIGPIPE, SIG_IGN);</p>
-</blockquote>
-<p>但实际的结果是我们设置了还是会继续出现闪退</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>排查了很久后才发现，问题的原因是BugTags也会控制这个开头，默认是不忽略，而且这个默认显然代码是主动调用了，而不是我们期望的不调用就不设置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 是否忽略 PIPE Signal (SIGPIPE) 闪退，默认 NO</span><br><span class="line"> */</span><br><span class="line">@property(nonatomic, assign) BOOL ignorePIPESignalCrash;</span><br></pre></td></tr></table></figure>
-
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>设置BugTags的对应开关即可：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Bugtags</span><br><span class="line">BugtagsOptions *options = [[BugtagsOptions alloc] init];</span><br><span class="line">options.ignorePIPESignalCrash = YES;</span><br><span class="line">[Bugtags startWithAppKey:BugTagsAPPKEY invocationEvent:BTGInvocationEventNone options:options];</span><br></pre></td></tr></table></figure>
-
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这个问题我们排查了很久，一直在找我们自己的原因，但其实这种bug因为跟网络环境有关系不容易重现；<br>其实反思后发现，排查这个问题我们应该先做一个事情，就是手动出发SIGNAL 13，看闪退是否被正确忽略；<br>而我们恰恰没做这个事情，思路上的疏漏导致了之前的大量工作变成了无用功。</p>
-<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1957d2b18d2c">如何在 iOS 上避免 SIGPIPE 信号导致的 crash (Avoiding SIGPIPE signal crash in iOS)</a><br><a target="_blank" rel="noopener" href="https://developer.apple.com/reference/foundation/nsstream/1410399-close?language=objc">NSStream close</a><br><a target="_blank" rel="noopener" href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Streams/Articles/WritingOutputStreams.html">Writing OutputStreams</a><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/kesalin/archive/2013/04/29/ios_network_nsstream.html">[深入浅出Cocoa]iOS网络编程之NSStream</a><br><a target="_blank" rel="noopener" href="http://iphonedevsdk.com/forum/iphone-sdk-development/21065-how-to-make-a-nsstream-instance-reusable.html">How to make a NSStream instance reusable?</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2017/2017-02-17-proxychain4-pod-update-failed/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2017/2017-02-17-proxychain4-pod-update-failed/" class="post-title-link" itemprop="url">升级到Sierra后proxychains4 pod update失败</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：</p>
-<blockquote>
-<p>[proxychains] preloading .&#x2F;libproxychains4.dylib<br>dyld: warning: could not load inserted library ‘.&#x2F;libproxychains4.dylib’ into library validated process because no suitable image found. Did find:<br>.&#x2F;libproxychains4.dylib: code signing blocked mmap() of ‘.&#x2F;libproxychains4.dylib’</p>
-</blockquote>
-<h3 id="我的环境如下："><a href="#我的环境如下：" class="headerlink" title="我的环境如下："></a>我的环境如下：</h3><ul>
-<li>macOS Sierra 10.12.3</li>
-<li>proxychains-ng 4.12_1</li>
-<li>SIP之前配置过用的是：csrutil enable –without debug，查询的状态如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ csrutil status</span><br><span class="line">System Integrity Protection status: enabled (Custom Configuration).</span><br><span class="line"></span><br><span class="line">Configuration:</span><br><span class="line">	Apple Internal: disabled</span><br><span class="line">	Kext Signing: enabled</span><br><span class="line">	Filesystem Protections: enabled</span><br><span class="line">	Debugging Restrictions: disabled</span><br><span class="line">	DTrace Restrictions: enabled</span><br><span class="line">	NVRAM Protections: enabled</span><br><span class="line">	BaseSystem Verification: enabled</span><br><span class="line"></span><br><span class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="寻找原因"><a href="#寻找原因" class="headerlink" title="寻找原因"></a>寻找原因</h2><p>一开始是找到了这篇issues:<a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/109">Proxychains4 with brew for MacOs error #109</a>，以为是我的proxychains4版本问题或者是我的SIP问题，所以做了以下尝试：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 进入系统的recovery mode，禁用SIP</span><br><span class="line">csrutil disable</span><br><span class="line">reboot</span><br><span class="line"></span><br><span class="line"># 重启后卸载老的proxychains</span><br><span class="line">brew tap beeftornado/rmtree</span><br><span class="line">brew rmtree proxychains-ng</span><br><span class="line"></span><br><span class="line"># 重新安装</span><br><span class="line">proxychains-ng --universal</span><br><span class="line"></span><br><span class="line"># 确认下proxychains-ng的配置是否正确，如果不正确就再配置下proxychains.conf</span><br><span class="line"># 确认下telnet是否正常</span><br><span class="line">proxychains4 telnet google.com 80</span><br><span class="line"></span><br><span class="line"># 再尝试下pod update</span><br><span class="line">proxychains4 pod update</span><br><span class="line"></span><br><span class="line"># 问题依旧：code signing blocked mmap()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>在另外一个issue78:<a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/78">Not working on OS X 10.11 due to SIP #78</a>中看到了被点赞了4次的这个回答，让我最后解决了问题：</p>
-<blockquote>
-<p>It only happens if you execute a system binary using proxychains, e.g. proxychains4 ssh user@server. For now, a workaround is to copy the executable to another location (e.g. cp &#x2F;usr&#x2F;bin&#x2F;ssh ~&#x2F;XXX), and use it (e.g. proxychains4 ~&#x2F;XXX&#x2F;ssh user@server). You can modify the path variable so that ~&#x2F;XXX&#x2F;ssh is executed instead of &#x2F;usr&#x2F;bin&#x2F;ssh, when you just type “ssh”.</p>
-</blockquote>
-<h3 id="一句话描述问题："><a href="#一句话描述问题：" class="headerlink" title="一句话描述问题："></a>一句话描述问题：</h3><blockquote>
-<p>proxychain尝试注入系统bin目录下的二进制文件会出现这种情况，解决方案就是换个非系统目录的文件来执行和注入就可以了。</p>
-</blockquote>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>根据上面的问题描述，再考虑pod update的实际操作，其实就是调用git去更新，而我的git用的是系统自带的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/bin/git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这样一来问题就变成了让pod update使用我自己安装的git就可以了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br><span class="line"></span><br><span class="line"># 修改.bash_profile，增加下面的export配置，优先搜索/usr/local/bin目录</span><br><span class="line"># 这样修改后，terminal下使用git就会优先使用我们刚刚安装的git版本了</span><br><span class="line">export PATH=/usr/local/bin:/usr/local/sbin:$&#123;PATH&#125;</span><br></pre></td></tr></table></figure>
-
-<p>好了，配置好了，再试一下，成功了:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 pod update</span><br></pre></td></tr></table></figure>
-
-<h3 id="关于SIP"><a href="#关于SIP" class="headerlink" title="关于SIP"></a>关于SIP</h3><p>最后我验证了下，SIP其实不需要disable，csrutil enable –without debug下proxychains也是能正常工作的</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>说下我这里能够正常运行的环境和因素：</p>
+          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在Windows下像Mac和Linux那样使用NVM来管理node版本，使用npm</p>
 <ul>
-<li>macOS Sierra 10.12.3</li>
-<li>proxychains-ng 4.12_1</li>
-<li>进入系统的recovery mode，打开terminal，csrutil enable –without debug<br>可以使用这个命令查询的状态，我的状态如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ csrutil status</span><br><span class="line">System Integrity Protection status: enabled (Custom Configuration).</span><br><span class="line"></span><br><span class="line">Configuration:</span><br><span class="line">	Apple Internal: disabled</span><br><span class="line">	Kext Signing: enabled</span><br><span class="line">	Filesystem Protections: enabled</span><br><span class="line">	Debugging Restrictions: disabled</span><br><span class="line">	DTrace Restrictions: enabled</span><br><span class="line">	NVRAM Protections: enabled</span><br><span class="line">	BaseSystem Verification: enabled</span><br><span class="line"></span><br><span class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</span><br></pre></td></tr></table></figure></li>
-<li>我的git使用的是brew install git的版本:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/local/bin/git</span><br></pre></td></tr></table></figure>
-<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/78">Not working on OS X 10.11 due to SIP #78</a><br><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/109">Proxychains4 with brew for MacOs error #109</a><br><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/159">code signing blocked mmap() #159</a></li>
+<li><p>原来的解决方案用的挺好的：<br><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a></p>
+</li>
+<li><p>今天更新node版本遇到了问题：<br>之前安装的8.x的版本能正常使用，nvm install 10.10.0后发现node有但是npm文件没有下载下来</p>
+</li>
 </ul>
-
+<p>nvm root看了下安装路径是在AppData下，虚拟链接是在%Program Files%目录下，nvm use的时候会弹出UAC提示，照理应该也不会出错，不过nvm的对应版本目录下并没有下载到npm文件。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>github上看了下，最近（2018-08-02）更新了一个版本1.1.7：<br><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a></p>
+<p>我把老的版本卸载干净，然后重新安装了下新版本，然后重新安装，重新安装的时候我把安装目录和软连接目录都放到的我的非系统盘D盘的根目录下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\nodejs\</span><br><span class="line">D:\nvm\</span><br></pre></td></tr></table></figure>
+<p>重新使用nvm安装下最新版本的node：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nvm list available</span><br><span class="line">nvm install 10.10.0</span><br><span class="line">nvm use 10.10.0</span><br><span class="line"></span><br><span class="line">node --version</span><br><span class="line">npm --version</span><br></pre></td></tr></table></figure>
+<p>验证了下版本，没问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;npm --version</span><br><span class="line">6.4.1</span><br><span class="line"></span><br><span class="line">D:\&gt;node --version</span><br><span class="line">v10.10.0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -532,7 +296,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2017/2017-02-23-traffic-raiders-for-kansai-tourist/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2017/02/23/2017/2017-02-23-traffic-raiders-for-kansai-tourist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -546,7 +310,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2017/2017-02-23-traffic-raiders-for-kansai-tourist/" class="post-title-link" itemprop="url">关西旅行交通攻略</a>
+            <a href="/2017/02/23/2017/2017-02-23-traffic-raiders-for-kansai-tourist/" class="post-title-link" itemprop="url">关西旅行交通攻略</a>
         </h2>
 
         <div class="post-meta">
@@ -556,7 +320,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2017-02-23 00:00:00" itemprop="dateCreated datePublished" datetime="2017-02-23T00:00:00+08:00">2017-02-23</time>
             </span>
 
           
@@ -637,7 +401,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2016/2016-12-01-fix-memory-problem-with-allocation/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2017/02/17/2017/2017-02-17-proxychain4-pod-update-failed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -651,7 +415,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2016/2016-12-01-fix-memory-problem-with-allocation/" class="post-title-link" itemprop="url">使用Instruments Allocations排查内存释放不及时的问题</a>
+            <a href="/2017/02/17/2017/2017-02-17-proxychain4-pod-update-failed/" class="post-title-link" itemprop="url">升级到Sierra后proxychains4 pod update失败</a>
         </h2>
 
         <div class="post-meta">
@@ -661,7 +425,421 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2017-02-17 00:00:00" itemprop="dateCreated datePublished" datetime="2017-02-17T00:00:00+08:00">2017-02-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：</p>
+<blockquote>
+<p>[proxychains] preloading .&#x2F;libproxychains4.dylib<br>dyld: warning: could not load inserted library ‘.&#x2F;libproxychains4.dylib’ into library validated process because no suitable image found. Did find:<br>.&#x2F;libproxychains4.dylib: code signing blocked mmap() of ‘.&#x2F;libproxychains4.dylib’</p>
+</blockquote>
+<h3 id="我的环境如下："><a href="#我的环境如下：" class="headerlink" title="我的环境如下："></a>我的环境如下：</h3><ul>
+<li>macOS Sierra 10.12.3</li>
+<li>proxychains-ng 4.12_1</li>
+<li>SIP之前配置过用的是：csrutil enable –without debug，查询的状态如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ csrutil status</span><br><span class="line">System Integrity Protection status: enabled (Custom Configuration).</span><br><span class="line"></span><br><span class="line">Configuration:</span><br><span class="line">	Apple Internal: disabled</span><br><span class="line">	Kext Signing: enabled</span><br><span class="line">	Filesystem Protections: enabled</span><br><span class="line">	Debugging Restrictions: disabled</span><br><span class="line">	DTrace Restrictions: enabled</span><br><span class="line">	NVRAM Protections: enabled</span><br><span class="line">	BaseSystem Verification: enabled</span><br><span class="line"></span><br><span class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="寻找原因"><a href="#寻找原因" class="headerlink" title="寻找原因"></a>寻找原因</h2><p>一开始是找到了这篇issues:<a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/109">Proxychains4 with brew for MacOs error #109</a>，以为是我的proxychains4版本问题或者是我的SIP问题，所以做了以下尝试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 进入系统的recovery mode，禁用SIP</span><br><span class="line">csrutil disable</span><br><span class="line">reboot</span><br><span class="line"></span><br><span class="line"># 重启后卸载老的proxychains</span><br><span class="line">brew tap beeftornado/rmtree</span><br><span class="line">brew rmtree proxychains-ng</span><br><span class="line"></span><br><span class="line"># 重新安装</span><br><span class="line">proxychains-ng --universal</span><br><span class="line"></span><br><span class="line"># 确认下proxychains-ng的配置是否正确，如果不正确就再配置下proxychains.conf</span><br><span class="line"># 确认下telnet是否正常</span><br><span class="line">proxychains4 telnet google.com 80</span><br><span class="line"></span><br><span class="line"># 再尝试下pod update</span><br><span class="line">proxychains4 pod update</span><br><span class="line"></span><br><span class="line"># 问题依旧：code signing blocked mmap()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>在另外一个issue78:<a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/78">Not working on OS X 10.11 due to SIP #78</a>中看到了被点赞了4次的这个回答，让我最后解决了问题：</p>
+<blockquote>
+<p>It only happens if you execute a system binary using proxychains, e.g. proxychains4 ssh user@server. For now, a workaround is to copy the executable to another location (e.g. cp &#x2F;usr&#x2F;bin&#x2F;ssh ~&#x2F;XXX), and use it (e.g. proxychains4 ~&#x2F;XXX&#x2F;ssh user@server). You can modify the path variable so that ~&#x2F;XXX&#x2F;ssh is executed instead of &#x2F;usr&#x2F;bin&#x2F;ssh, when you just type “ssh”.</p>
+</blockquote>
+<h3 id="一句话描述问题："><a href="#一句话描述问题：" class="headerlink" title="一句话描述问题："></a>一句话描述问题：</h3><blockquote>
+<p>proxychain尝试注入系统bin目录下的二进制文件会出现这种情况，解决方案就是换个非系统目录的文件来执行和注入就可以了。</p>
+</blockquote>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>根据上面的问题描述，再考虑pod update的实际操作，其实就是调用git去更新，而我的git用的是系统自带的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/bin/git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样一来问题就变成了让pod update使用我自己安装的git就可以了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br><span class="line"></span><br><span class="line"># 修改.bash_profile，增加下面的export配置，优先搜索/usr/local/bin目录</span><br><span class="line"># 这样修改后，terminal下使用git就会优先使用我们刚刚安装的git版本了</span><br><span class="line">export PATH=/usr/local/bin:/usr/local/sbin:$&#123;PATH&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好了，配置好了，再试一下，成功了:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 pod update</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于SIP"><a href="#关于SIP" class="headerlink" title="关于SIP"></a>关于SIP</h3><p>最后我验证了下，SIP其实不需要disable，csrutil enable –without debug下proxychains也是能正常工作的</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>说下我这里能够正常运行的环境和因素：</p>
+<ul>
+<li>macOS Sierra 10.12.3</li>
+<li>proxychains-ng 4.12_1</li>
+<li>进入系统的recovery mode，打开terminal，csrutil enable –without debug<br>可以使用这个命令查询的状态，我的状态如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ csrutil status</span><br><span class="line">System Integrity Protection status: enabled (Custom Configuration).</span><br><span class="line"></span><br><span class="line">Configuration:</span><br><span class="line">	Apple Internal: disabled</span><br><span class="line">	Kext Signing: enabled</span><br><span class="line">	Filesystem Protections: enabled</span><br><span class="line">	Debugging Restrictions: disabled</span><br><span class="line">	DTrace Restrictions: enabled</span><br><span class="line">	NVRAM Protections: enabled</span><br><span class="line">	BaseSystem Verification: enabled</span><br><span class="line"></span><br><span class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</span><br></pre></td></tr></table></figure></li>
+<li>我的git使用的是brew install git的版本:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/local/bin/git</span><br></pre></td></tr></table></figure>
+<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/78">Not working on OS X 10.11 due to SIP #78</a><br><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/109">Proxychains4 with brew for MacOs error #109</a><br><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/159">code signing blocked mmap() #159</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2017/02/08/2017/2017-02-08-ignore-sigpipe-crash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/02/08/2017/2017-02-08-ignore-sigpipe-crash/" class="post-title-link" itemprop="url">ignore SIGPIPE crash</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-02-08 00:00:00" itemprop="dateCreated datePublished" datetime="2017-02-08T00:00:00+08:00">2017-02-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于使用了Multipeer Connectivity和NSOutputStream，在某些网络环境切换的情况下，总是会遇到这样的crash：</p>
+<blockquote>
+<p>Signal 13 was raised. SIGPIPE</p>
+</blockquote>
+<p>查找资料后，发现最简单的解决方案就是忽略这个错误：</p>
+<blockquote>
+<p>signal(SIGPIPE, SIG_IGN);</p>
+</blockquote>
+<p>但实际的结果是我们设置了还是会继续出现闪退</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>排查了很久后才发现，问题的原因是BugTags也会控制这个开头，默认是不忽略，而且这个默认显然代码是主动调用了，而不是我们期望的不调用就不设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 是否忽略 PIPE Signal (SIGPIPE) 闪退，默认 NO</span><br><span class="line"> */</span><br><span class="line">@property(nonatomic, assign) BOOL ignorePIPESignalCrash;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>设置BugTags的对应开关即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Bugtags</span><br><span class="line">BugtagsOptions *options = [[BugtagsOptions alloc] init];</span><br><span class="line">options.ignorePIPESignalCrash = YES;</span><br><span class="line">[Bugtags startWithAppKey:BugTagsAPPKEY invocationEvent:BTGInvocationEventNone options:options];</span><br></pre></td></tr></table></figure>
+
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这个问题我们排查了很久，一直在找我们自己的原因，但其实这种bug因为跟网络环境有关系不容易重现；<br>其实反思后发现，排查这个问题我们应该先做一个事情，就是手动出发SIGNAL 13，看闪退是否被正确忽略；<br>而我们恰恰没做这个事情，思路上的疏漏导致了之前的大量工作变成了无用功。</p>
+<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1957d2b18d2c">如何在 iOS 上避免 SIGPIPE 信号导致的 crash (Avoiding SIGPIPE signal crash in iOS)</a><br><a target="_blank" rel="noopener" href="https://developer.apple.com/reference/foundation/nsstream/1410399-close?language=objc">NSStream close</a><br><a target="_blank" rel="noopener" href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Streams/Articles/WritingOutputStreams.html">Writing OutputStreams</a><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/kesalin/archive/2013/04/29/ios_network_nsstream.html">[深入浅出Cocoa]iOS网络编程之NSStream</a><br><a target="_blank" rel="noopener" href="http://iphonedevsdk.com/forum/iphone-sdk-development/21065-how-to-make-a-nsstream-instance-reusable.html">How to make a NSStream instance reusable?</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2017/01/06/2017/2017-01-06-setstatusbarorientation-not-working/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/01/06/2017/2017-01-06-setstatusbarorientation-not-working/" class="post-title-link" itemprop="url">setStatusBarOrientation:animated: not working</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-06 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-06T00:00:00+08:00">2017-01-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>有个视频播放页面需要手动控制页面的横竖屏状态，使用setStatusBarOrientation可以达到这个效果；<br>但是很奇怪的事情发生了，我们发现代码在某台机器的某种情况下会出现setStatusBarOrientation调用无效。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>直接的原因是我们使用了BugTags，并且在白名单用户登录后打开了BugTags的悬浮小球，悬浮小球出现的时候setStatusBarOrientation调用就会无效；</p>
+<p>分析后发现真正的原因是，页面已经不是the top-most full-screen view controller了：</p>
+<blockquote>
+<p>The setStatusBarOrientation:animated: method is not deprecated outright. It now works only if the supportedInterfaceOrientations method of the top-most full-screen view controller returns 0</p>
+</blockquote>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>知道原因就简单了，需要全屏的时候隐藏BugTags的悬浮球即可</p>
+<blockquote>
+<p>BTGInvocationEventNone</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/12563954/setstatusbarorientationanimated-not-working-in-ios-6">setStatusBarOrientation:animated: not working in iOS 6</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/ginhoor/article/details/20454229">setStatusBarOrientation 未生效的解决办法</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/12/08/2016/2016-12-08-migrate-jekyll-to-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/12/08/2016/2016-12-08-migrate-jekyll-to-hexo/" class="post-title-link" itemprop="url">把GitHub Pages上的博客从Jekyll迁移到Hexo</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-08 17:21:02" itemprop="dateCreated datePublished" datetime="2016-12-08T17:21:02+08:00">2016-12-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前用的Jekyll，最大的痛点是对Markdown的代码格式支持的不是很好，尝试过一些方法，不过都不太理想；<br>最近偶然看到Hexo的介绍，决定尝试一下；<br>迁移过程中有些小Tips觉得有必要小结下，对于迁移的人来说还是很有用的。</p>
+<ul>
+<li>迁移结果：<br>最终效果：<a href="http://linyehui.me/">http://linyehui.me</a><br>Hexo生成的代码：<a target="_blank" rel="noopener" href="https://github.com/linyehui/linyehui.github.io">https://github.com/linyehui/linyehui.github.io</a><br>Blog源代码：<a target="_blank" rel="noopener" href="https://github.com/linyehui/linyehui-hexo-blog">https://github.com/linyehui/linyehui-hexo-blog</a></li>
+</ul>
+<h2 id="迁移步骤"><a href="#迁移步骤" class="headerlink" title="迁移步骤"></a>迁移步骤</h2><ul>
+<li><p>我的系统是Mac OS 10.12.1</p>
+</li>
+<li><p>我原来的Jekylly代码在这个仓库下：<a target="_blank" rel="noopener" href="https://github.com/linyehui/linyehui.github.io">https://github.com/linyehui/linyehui.github.io</a></p>
+</li>
+<li><p>代码备份</p>
+<ul>
+<li>从master建立分支用于代码备份（多留个心眼，后面发现很有用），备份用的分支：<a target="_blank" rel="noopener" href="https://github.com/linyehui/linyehui.github.io/tree/release-jekyll">release-jekyll</a></li>
+<li>保险起见，我把本地的github 仓库也备份了下</li>
+</ul>
+</li>
+<li><p>创建一个新的github仓库用于存储我的hexo blog代码：<a target="_blank" rel="noopener" href="https://github.com/linyehui/linyehui-hexo-blog">linyehui-hexo-blog</a>，git clone到本地，得到hexo的本地根目录：linyehui-hexo-blog</p>
+</li>
+<li><p>初始化hexo本地环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/linyehui/linyehui-hexo-blog</span><br><span class="line">cd linyehui-hexo-blog</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line">hexo init</span><br><span class="line"></span><br><span class="line">npm install hexo --save</span><br><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-deployer-heroku --save</span><br><span class="line">npm install hexo-deployer-rsync --save</span><br><span class="line">npm install hexo-deployer-openshift --save</span><br><span class="line">npm install hexo-renderer-marked@0.2 --save</span><br><span class="line">npm install hexo-renderer-stylus@0.2 --save</span><br><span class="line">npm install hexo-generator-feed@1 --save</span><br><span class="line">npm install hexo-generator-sitemap@1 --save</span><br></pre></td></tr></table></figure>
+<p>  这一步完成的时候，你就可以在根目录下执行hexo server，并且可以在浏览器上看到Hello World页面了</p>
+</li>
+<li><p>配置下_config.yml，这里就是各种名字的配置，配置完了之后，浏览器预览没问题就行了</p>
+</li>
+<li><p>配置theme，我用的是iissnan&#x2F;hexo-theme-next</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># git clone到另外一个目录，然后复制到./linyehui-hexo-blog/themes/next目录下</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next</span><br><span class="line"></span><br><span class="line"># 复制hexo-theme-next目录到./linyehui-hexo-blog/themes/next</span><br><span class="line"></span><br><span class="line"># 修改_config.yml中的这行文件，主题名字和目录名一致</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<p>  根据自己的需要修改下主题的配置：.&#x2F;linyehui-hexo-blog&#x2F;themes&#x2F;next&#x2F;_cofig.yml</p>
+</li>
+<li><p>迁移之前博客的文章</p>
+<ul>
+<li>把Jekyll版本的_posts目录下的文件复制到.&#x2F;linyehui-hexo-blog&#x2F;source&#x2F;_posts&#x2F;</li>
+<li>把之前根目录下的媒体文件目录：media（图片）复制到.&#x2F;linyehui-hexo-blog&#x2F;source&#x2F;media</li>
+</ul>
+<p>  浏览器中预览下，首页应该能看到你的文章了，数据迁移非常简单，就这一步</p>
+</li>
+<li><p>创建tags文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cd linyehui-hexo-blog</span><br><span class="line">$ hexo new page tags</span><br><span class="line"></span><br><span class="line"># 文件内容如下：</span><br><span class="line">title: 标签</span><br><span class="line">date: 2016-12-08 12:36:06</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面都没问题，就可以发布了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## 发布前记得generate，保险起见带上--generate参数</span><br><span class="line">hexo deploy --generate</span><br></pre></td></tr></table></figure>
+<p>  每次发布，你都会发现你的github仓库的master分支只有两次commit，也就是说hexo deploy把老的master分支给删除了……</p>
+</li>
+<li><p>发布没问题，我就把新的代码仓库下的文件给入库了，记得配置下.gitignore</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">.deploy_git</span><br><span class="line">db.json</span><br><span class="line">node_modules</span><br><span class="line">public</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>到这一步blog的主体功能已经迁移完成，剩下的就是些美化、图标、头像，这里就不细说了</p>
+</li>
+</ul>
+<h2 id="迁移Tips"><a href="#迁移Tips" class="headerlink" title="迁移Tips"></a>迁移Tips</h2><ul>
+<li>hexo deploy 每次会将master分支删除后重新创建，迁移之前的代码切记要建立分支进行备份</li>
+<li>hexo deploy 所做的事情：删除现有的master分支，并建立新的master分支，把hexo目录下的.deploy_git目录push到master分支上</li>
+<li>source&#x2F;_posts目录支持按年份划分目录，_config.yml中这么配置就行了：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">new_post_name:</span> <span class="string">:year/:year-:month-:day-:title.md</span> <span class="comment"># File name of new posts</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="http://www.ezlippi.com/blog/2016/02/jekyll-to-hexo.html">Jekyll迁移到Hexo搭建个人博客</a><br><a target="_blank" rel="noopener" href="http://www.wukai.me/2016/01/13/blog-jekyll-to-hexo/">将博客从Jekyll迁移至Hexo</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/12/06/2016/2016-12-06-memory-leak-from-nsarray-sortedarrayusingfunction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/12/06/2016/2016-12-06-memory-leak-from-nsarray-sortedarrayusingfunction/" class="post-title-link" itemprop="url">NSArray sortedArrayUsingFunction引发的内存泄漏</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-06 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-06T00:00:00+08:00">2016-12-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>对一个NSMutableArray进行排序，却造成了内存泄漏……</p>
+<h3 id="代码说明："><a href="#代码说明：" class="headerlink" title="代码说明："></a>代码说明：</h3><p>在多线程的流程中，存在一个NSMutableArray *sortList；</p>
+<p>对sortList进行排序，一开始用的方法是这样的，有内存泄漏：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare context:NULL];</span><br><span class="line">[self.sortList removeAllObjects];</span><br><span class="line">[self.sortList addObjectsFromArray:sortedSendQuery];</span><br></pre></td></tr></table></figure>
+
+<p>修正后的代码只有一行，没有内存泄漏：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.sortList sortUsingFunction:frameDataCompare context:nil];</span><br></pre></td></tr></table></figure>
+
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>NSArray的排序方法是：sortedArrayUsingFunction<br>NSMutableArray的排序方法是：sortUsingFunction<br>self.sortList是一个NSMutableArray，直接使用NSMutableArray的排序方法sortUsingFunction不需要进行内存复制，可以提高性能；</p>
+<p>除了性能问题，由于在多线程中使用，而且如果NSMutableArray中的object内存分配来自于其他线程的，那么不必要的内存复制会导致内存泄漏，出现的内存泄漏问题类似于：<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5200857/memory-leaks-from-multidimensional-array-nsmutablearray-nsarray-addobject-and">Memory leaks from Multidimensional array: NSMutableArray, NSArray, addObject and insertObjectAtIndex</a></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>对于NSMutable的使用，要留意调用正确的方法，能不做类型转换就不做</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/12/01/2016/2016-12-01-fix-memory-problem-with-allocation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/12/01/2016/2016-12-01-fix-memory-problem-with-allocation/" class="post-title-link" itemprop="url">使用Instruments Allocations排查内存释放不及时的问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-01T00:00:00+08:00">2016-12-01</time>
             </span>
 
           
@@ -708,7 +886,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2016/2016-12-06-memory-leak-from-nsarray-sortedarrayusingfunction/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/11/15/2016/2016-11-15-installtaponbus-buffersize-not-taking-effect/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -722,7 +900,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2016/2016-12-06-memory-leak-from-nsarray-sortedarrayusingfunction/" class="post-title-link" itemprop="url">NSArray sortedArrayUsingFunction引发的内存泄漏</a>
+            <a href="/2016/11/15/2016/2016-11-15-installtaponbus-buffersize-not-taking-effect/" class="post-title-link" itemprop="url">使用AudioEngine时installTapOnBus的bufferSize设置无效</a>
         </h2>
 
         <div class="post-meta">
@@ -732,7 +910,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2016-11-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-15T00:00:00+08:00">2016-11-15</time>
             </span>
 
           
@@ -746,197 +924,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>对一个NSMutableArray进行排序，却造成了内存泄漏……</p>
-<h3 id="代码说明："><a href="#代码说明：" class="headerlink" title="代码说明："></a>代码说明：</h3><p>在多线程的流程中，存在一个NSMutableArray *sortList；</p>
-<p>对sortList进行排序，一开始用的方法是这样的，有内存泄漏：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSArray *sortedSendQuery = [self.sortList sortedArrayUsingFunction:frameDataCompare context:NULL];</span><br><span class="line">[self.sortList removeAllObjects];</span><br><span class="line">[self.sortList addObjectsFromArray:sortedSendQuery];</span><br></pre></td></tr></table></figure>
+          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>1、使用AudioEngine进行音频采集，并加入部分EQ等效果器</p>
+<p>2、将混音后的音频输出为PCM的Buffer</p>
+<p>3、将PCM Buffer编码为AAC</p>
+<h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><p>AudioEngine的这个方法有Bug: <a target="_blank" rel="noopener" href="https://developer.apple.com/reference/avfoundation/avaudionode/1387122-installtaponbus">installTapOnBus</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)installTapOnBus:(AVAudioNodeBus)bus bufferSize:(AVAudioFrameCount)bufferSize format:(AVAudioFormat * __nullable)format block:(AVAudioNodeTapBlock)tapBlock;</span><br></pre></td></tr></table></figure>
 
-<p>修正后的代码只有一行，没有内存泄漏：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.sortList sortUsingFunction:frameDataCompare context:nil];</span><br></pre></td></tr></table></figure>
-
-<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>NSArray的排序方法是：sortedArrayUsingFunction<br>NSMutableArray的排序方法是：sortUsingFunction<br>self.sortList是一个NSMutableArray，直接使用NSMutableArray的排序方法sortUsingFunction不需要进行内存复制，可以提高性能；</p>
-<p>除了性能问题，由于在多线程中使用，而且如果NSMutableArray中的object内存分配来自于其他线程的，那么不必要的内存复制会导致内存泄漏，出现的内存泄漏问题类似于：<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5200857/memory-leaks-from-multidimensional-array-nsmutablearray-nsarray-addobject-and">Memory leaks from Multidimensional array: NSMutableArray, NSArray, addObject and insertObjectAtIndex</a></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>对于NSMutable的使用，要留意调用正确的方法，能不做类型转换就不做</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2016/2016-01-13-hello-mongodb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2016/2016-01-13-hello-mongodb/" class="post-title-link" itemprop="url">Hello MongoDB</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>最近在看Tornado的<a target="_blank" rel="noopener" href="http://demo.pythoner.com/itt2zh/ch4.html">教程</a>，其中使用了MongoDB，之前没用过，所以需要配置下相关的环境，并在Python中使用</p>
-<h2 id="安装MongoDB"><a href="#安装MongoDB" class="headerlink" title="安装MongoDB"></a>安装MongoDB</h2><h3 id="完整的命令行"><a href="#完整的命令行" class="headerlink" title="完整的命令行"></a>完整的命令行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">brew update</span><br><span class="line">brew install mongodb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为数据库创建默认的文件目录，并设置权限</span></span><br><span class="line">sudo <span class="built_in">mkdir</span> -p /data/db</span><br><span class="line">sudo <span class="built_in">chown</span> -R linyehui /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务器</span></span><br><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 另外启动一个终端，连接服务器</span></span><br><span class="line">mongo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="过程分解"><a href="#过程分解" class="headerlink" title="过程分解"></a>过程分解</h3><p>我的系统是Mac OS X 10.11.2，根据<a target="_blank" rel="noopener" href="https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/">MongoDB官网的指引</a>，我直接用HomeBrew安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure>
-
-<p>安装成功后，尝试启动数据库服务：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 出现错误，提示</span></span><br><span class="line">2016-01-13T15:19:24.484+0800 I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: 29 Data directory /data/db not found., terminating</span><br></pre></td></tr></table></figure>
-
-<p>原来是默认的数据库目录不存在，但是于是创建下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /data/db</span><br><span class="line"></span><br><span class="line"><span class="comment"># 记得要设置下目录权限，把owner设置成当前用户</span></span><br><span class="line">sudo <span class="built_in">chown</span> -R linyehui /data</span><br></pre></td></tr></table></figure>
-
-<p>如果目前权限没有设置正常，会出现权限问题：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2016-01-13T15:22:47.055+0800 I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: 98 Unable to create/open lock file: /data/db/mongod.lock errno:13 Permission denied Is a mongod instance already running?, terminating</span><br></pre></td></tr></table></figure>
-
-<p>好了，可以起启动了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">2016-01-13T19:58:30.287+0800 I CONTROL  [initandlisten] MongoDB starting : pid=16845 port=27017 dbpath=/data/db 64-bit host=linyehui-mbp.local</span><br><span class="line">2016-01-13T19:58:30.288+0800 I CONTROL  [initandlisten] db version v3.2.0</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>服务器启动好了，就可以新建一个终端，来连接数据库测试了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">MongoDB shell version: 3.2.0</span><br><span class="line">connecting to: <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Python中使用MongoDB"><a href="#Python中使用MongoDB" class="headerlink" title="Python中使用MongoDB"></a>Python中使用MongoDB</h2><p>我们这里使用的Python库是PyMongo，我直接用pip安装:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pymongo</span><br><span class="line">pip show pymongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">Name: pymongo</span><br><span class="line">Version: 3.2</span><br></pre></td></tr></table></figure>
-<p>安装成功后，就可以在Python下，import pymongo了</p>
-<p>参考<a target="_blank" rel="noopener" href="http://api.mongodb.org/python/current/api/pymongo/mongo_client.html#pymongo.mongo_client.MongoClient">PyMongo的官方文档</a>，pymongo的连接测试代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = MongoClient()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.test_database</span><br><span class="line">Database(MongoClient(host=[<span class="string">&#x27;localhost:27017&#x27;</span>], document_class=<span class="built_in">dict</span>, tz_aware=<span class="literal">False</span>, connect=<span class="literal">True</span>), <span class="string">u&#x27;test_database&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="string">&#x27;test-database&#x27;</span>]</span><br><span class="line">Database(MongoClient(host=[<span class="string">&#x27;localhost:27017&#x27;</span>], document_class=<span class="built_in">dict</span>, tz_aware=<span class="literal">False</span>, connect=<span class="literal">True</span>), <span class="string">u&#x27;test-database&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br></pre></td></tr></table></figure>
-
-<p>好了，可以用了 ：）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2016/2016-01-29-hello-rime/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2016/2016-01-29-hello-rime/" class="post-title-link" itemprop="url">Rime 鼠须管输入法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/rime/home/wiki/CustomizationGuide">Rime 定製指南</a>  </p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/rime/home/wiki/RimeWithSchemata">RimeWithSchemata</a>  </p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://medium.com/@scomper/%E9%BC%A0%E9%A0%88%E7%AE%A1-%E7%9A%84%E8%B0%83%E6%95%99%E7%AC%94%E8%AE%B0-3fdeb0e78814#.oq28ijk3h">「鼠須管」的调教笔记</a>  </p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/cffc0ea094a7">Rime输入法—鼠须管(Squirrel)词库添加及配置</a></p>
-</li>
-</ul>
-<h2 id="配置入门"><a href="#配置入门" class="headerlink" title="配置入门"></a>配置入门</h2><h3 id="说在前面的几点提示"><a href="#说在前面的几点提示" class="headerlink" title="说在前面的几点提示"></a>说在前面的几点提示</h3><ul>
-<li><p>1、不推荐使用图形化配置工具，直接修改配置文件是最靠谱的  </p>
-</li>
-<li><p>2、配置文件在~&#x2F;Library&#x2F;Rime这个目录下  </p>
-</li>
-<li><p>3、不要直接修改配置文件，使用.custom.yaml的扩展配置来自定义自己的配置</p>
-</li>
-</ul>
-<h3 id="配置文件说明"><a href="#配置文件说明" class="headerlink" title="配置文件说明"></a>配置文件说明</h3><p>注意下面的文件，都是对默认文件的自定义，所有文件名中都有”.custom”  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">squirrel.custom.yaml ，自定义皮肤；  </span><br><span class="line"></span><br><span class="line">default.custom.yaml ，设定备选词数量，定义输入方案；  </span><br><span class="line"></span><br><span class="line">luna_pinyin_simp.custom.yaml ，定义扩充词库、加载符号库、模糊拼音。明月拼音·简化字输入方案配置文件，明月拼音对应的文件是 luna_pinyin.custom.yaml；  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="还原默认配置文件"><a href="#还原默认配置文件" class="headerlink" title="还原默认配置文件"></a>还原默认配置文件</h3><p>万一你不听劝，还是修改来默认的配置文件，而且改坏来，那么有个简单的方法可以还原：  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把~/Library/Rime目录删除，然后点击下“重新部署”，会自动生成默认配置。</span><br></pre></td></tr></table></figure>
-
-<h3 id="切换到简体输入"><a href="#切换到简体输入" class="headerlink" title="切换到简体输入"></a>切换到简体输入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+~</span><br><span class="line">选择“朙月拼音.简化字”</span><br></pre></td></tr></table></figure>
-
-<h3 id="切换全角和半角"><a href="#切换全角和半角" class="headerlink" title="切换全角和半角"></a>切换全角和半角</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shift+空格</span><br><span class="line"></span><br><span class="line">也可以使用Ctrl+~进行切换，不过就要多进行一次选择操作</span><br></pre></td></tr></table></figure>
+<p>iOS 10一下的版本，installTapOnBus的第二个参数bufferSize设置是无效的，<br>比如我设置bufferSize为1024，如果我的format中的bytePerFrame是4，那么最后出来的bufferSize应该是1024*4&#x3D;4096才对，但是在iOS 10一下的版本，出来的bufferSize每次都是66148</p>
+<p>如果我们要进行AAC编码，那么AAC编码的bufferSize必须是能够被1024整除的，而66148是无法被1024整除</p>
+<p>如果AAC编码的时候没有对齐bufferSize和1024，就会出现音频数据丢失的情况</p>
+<h3 id="解决这个问题的两个角度"><a href="#解决这个问题的两个角度" class="headerlink" title="解决这个问题的两个角度"></a>解决这个问题的两个角度</h3><p>1、让installTapOnBus出来的数据能够被1024整除</p>
+<p>2、自己用做对齐的事情，那么部分音频数据的采集时间戳就需要自己构造</p>
+<p>我个人比较偏向第一种，这样就不存在构造时间戳的问题。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="第一步：installTapOnBus的Block中设置frameLength"><a href="#第一步：installTapOnBus的Block中设置frameLength" class="headerlink" title="第一步：installTapOnBus的Block中设置frameLength"></a>第一步：installTapOnBus的Block中设置frameLength</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const uint32_t frameLength = 1024;</span><br><span class="line">[_inputNode installTapOnBus:0 bufferSize:frameLength format:[_inputNode outputFormatForBus:0] block:</span><br><span class="line">	^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) &#123;</span><br><span class="line">		// iOS 10以下需要这么设置才可以缩短Block回调的Buffer大小和同时也能缩短Block回调的时间间隔</span><br><span class="line">		// linyehui 2016-11-11</span><br><span class="line">		buffer.frameLength = frameLength;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="squirrel-custom-yaml"><a href="#squirrel-custom-yaml" class="headerlink" title="squirrel.custom.yaml"></a>squirrel.custom.yaml</h3><p>指定程序的名称（比如 Safari 浏览器的程序名称 com.apple.Safari ），通过在「应用程序」里选中 app 图标，鼠标右键选择「显示包内容」，然后找到包内文件夹里的「Info.plist」文件，找到其中 Bundle identifier 属性，对应的就是指定程序名称了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">patch:</span><br><span class="line">  style:</span><br><span class="line">    horizontal: true</span><br><span class="line">    font_point: 32</span><br><span class="line">    color_scheme: starcraft</span><br><span class="line">    horizontal : true # 候选词横排</span><br><span class="line">    font_face&quot; : &quot;苹方-简 细体&quot; # 字体名称</span><br><span class="line">  app_options:</span><br><span class="line">    com.alfredapp.Alfred:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">    com.runningwithcrayons.Alfred-2:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">    com.blacktree.Quicksilver:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">    com.apple.Terminal:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">      no_inline: true</span><br><span class="line">    com.googlecode.iterm2:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">    org.vim.MacVim:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">      no_inline: true</span><br><span class="line">    com.apple.dt.Xcode:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">    com.apple.spotlight:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">    com.apple.finder:</span><br><span class="line">      ascii_mode: true</span><br><span class="line">    com.sublimetext.3:</span><br><span class="line">      ascii_mode: true</span><br></pre></td></tr></table></figure>
-
-<h3 id="luna-pinyin-custom-yaml"><a href="#luna-pinyin-custom-yaml" class="headerlink" title="luna_pinyin.custom.yaml"></a>luna_pinyin.custom.yaml</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># luna_pinyin.custom.yaml</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 【朙月拼音】模糊音定製模板</span></span><br><span class="line"><span class="comment">#   佛振配製 :-)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 位置：</span></span><br><span class="line"><span class="comment"># ~/.config/ibus/rime  (Linux)</span></span><br><span class="line"><span class="comment"># ~/Library/Rime  (Mac OS)</span></span><br><span class="line"><span class="comment"># %APPDATA%\Rime  (Windows)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 於重新部署後生效</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">patch:</span><br><span class="line">  <span class="string">&#x27;speller/algebra&#x27;</span>:</span><br><span class="line">    - erase/^xx$/                      <span class="comment"># 第一行保留</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 模糊音定義</span></span><br><span class="line">    <span class="comment"># 需要哪組就刪去行首的 # 號，單雙向任選</span></span><br><span class="line">    - derive/^([zcs])h/$<span class="number">1</span>/             <span class="comment"># zh, ch, sh =&gt; z, c, s</span></span><br><span class="line">    - derive/^([zcs])([^h])/$1h$<span class="number">2</span>/     <span class="comment"># z, c, s =&gt; zh, ch, sh</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#- derive/^n/l/                     # n =&gt; l</span></span><br><span class="line">    <span class="comment">#- derive/^l/n/                     # l =&gt; n</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 這兩組一般是單向的</span></span><br><span class="line">    - derive/^r/l/                     <span class="comment"># r =&gt; l</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#- derive/^ren/yin/                 # ren =&gt; yin, reng =&gt; ying</span></span><br><span class="line">    <span class="comment">#- derive/^r/y/                     # r =&gt; y</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 下面 hu &lt;=&gt; f 這組寫法複雜一些，分情況討論</span></span><br><span class="line">    <span class="comment">#- derive/^hu$/fu/                  # hu =&gt; fu</span></span><br><span class="line">    <span class="comment">#- derive/^hong$/feng/              # hong =&gt; feng</span></span><br><span class="line">    <span class="comment">#- derive/^hu([in])$/fe$1/          # hui =&gt; fei, hun =&gt; fen</span></span><br><span class="line">    <span class="comment">#- derive/^hu([ao])/f$1/            # hua =&gt; fa, ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#- derive/^fu$/hu/                  # fu =&gt; hu</span></span><br><span class="line">    <span class="comment">#- derive/^feng$/hong/              # feng =&gt; hong</span></span><br><span class="line">    <span class="comment">#- derive/^fe([in])$/hu$1/          # fei =&gt; hui, fen =&gt; hun</span></span><br><span class="line">    <span class="comment">#- derive/^f([ao])/hu$1/            # fa =&gt; hua, ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 韻母部份</span></span><br><span class="line">    <span class="comment">#- derive/^([bpmf])eng$/$1ong/      # meng = mong, ...</span></span><br><span class="line">    - derive/([eia])n$/$1ng/            <span class="comment"># en =&gt; eng, in =&gt; ing, an =&gt; ang</span></span><br><span class="line">    - derive/([eia])ng$/$1n/            <span class="comment"># eng =&gt; en, ing =&gt; in, ang =&gt; an</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 樣例足夠了，其他請自己總結……</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 反模糊音？</span></span><br><span class="line">    <span class="comment"># 誰說方言沒有普通話精確、有模糊音，就能有反模糊音。</span></span><br><span class="line">    <span class="comment"># 示例爲分尖團的中原官話：</span></span><br><span class="line">    <span class="comment">#- derive/^ji$/zii/   # 在設計者安排下鳩佔鵲巢，尖音i只好雙寫了</span></span><br><span class="line">    <span class="comment">#- derive/^qi$/cii/</span></span><br><span class="line">    <span class="comment">#- derive/^xi$/sii/</span></span><br><span class="line">    <span class="comment">#- derive/^ji/zi/</span></span><br><span class="line">    <span class="comment">#- derive/^qi/ci/</span></span><br><span class="line">    <span class="comment">#- derive/^xi/si/</span></span><br><span class="line">    <span class="comment">#- derive/^ju/zv/</span></span><br><span class="line">    <span class="comment">#- derive/^qu/cv/</span></span><br><span class="line">    <span class="comment">#- derive/^xu/sv/</span></span><br><span class="line">    <span class="comment"># 韻母部份，只能從大面上覆蓋</span></span><br><span class="line">    <span class="comment">#- derive/^([bpm])o$/$1eh/          # bo =&gt; beh, ...</span></span><br><span class="line">    <span class="comment">#- derive/(^|[dtnlgkhzcs]h?)e$/$1eh/  # ge =&gt; geh, se =&gt; sheh, ...</span></span><br><span class="line">    <span class="comment">#- derive/^([gkh])uo$/$1ue/         # guo =&gt; gue, ...</span></span><br><span class="line">    <span class="comment">#- derive/^([gkh])e$/$1uo/          # he =&gt; huo, ...</span></span><br><span class="line">    <span class="comment">#- derive/([uv])e$/$1o/             # jue =&gt; juo, lve =&gt; lvo, ...</span></span><br><span class="line">    <span class="comment">#- derive/^fei$/fi/                 # fei =&gt; fi</span></span><br><span class="line">    <span class="comment">#- derive/^wei$/vi/                 # wei =&gt; vi</span></span><br><span class="line">    <span class="comment">#- derive/^([nl])ei$/$1ui/          # nei =&gt; nui, lei =&gt; lui</span></span><br><span class="line">    <span class="comment">#- derive/^([nlzcs])un$/$1vn/       # lun =&gt; lvn, zun =&gt; zvn, ... </span></span><br><span class="line">    <span class="comment">#- derive/^([nlzcs])ong$/$1iong/    # long =&gt; liong, song =&gt; siong, ...</span></span><br><span class="line">    <span class="comment"># 這個辦法雖從拼寫上做出了區分，然而受詞典制約，候選字仍是混的。</span></span><br><span class="line">    <span class="comment"># 只有真正的方音輸入方案纔能做到！但「反模糊音」這個玩法快速而有效！</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 模糊音定義先於簡拼定義，方可令簡拼支持以上模糊音</span></span><br><span class="line">    - abbrev/^([a-z]).+$/$<span class="number">1</span>/           <span class="comment"># 簡拼（首字母）</span></span><br><span class="line">    - abbrev/^([zcs]h).+$/$<span class="number">1</span>/          <span class="comment"># 簡拼（zh, ch, sh）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 以下是一組容錯拼寫，《漢語拼音》方案以前者爲正</span></span><br><span class="line">    - derive/^([nl])ve$/$1ue/          <span class="comment"># nve = nue, lve = lue</span></span><br><span class="line">    - derive/^([jqxy])u/$1v/           <span class="comment"># ju = jv,</span></span><br><span class="line">    - derive/un$/uen/                  <span class="comment"># gun = guen,</span></span><br><span class="line">    - derive/ui$/uei/                  <span class="comment"># gui = guei,</span></span><br><span class="line">    - derive/iu$/iou/                  <span class="comment"># jiu = jiou,</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 自動糾正一些常見的按鍵錯誤</span></span><br><span class="line">    - derive/([aeiou])ng$/$1gn/        <span class="comment"># dagn =&gt; dang </span></span><br><span class="line">    - derive/([dtngkhrzcs])o(u|ng)$/$1o/  <span class="comment"># zho =&gt; zhong|zhou</span></span><br><span class="line">    - derive/ong$/on/                  <span class="comment"># zhonguo =&gt; zhong guo</span></span><br><span class="line">    - derive/ao$/oa/                   <span class="comment"># hoa =&gt; hao</span></span><br><span class="line">    - derive/([iu])a(o|ng?)$/a$<span class="number">1</span>$<span class="number">2</span>/    <span class="comment"># tain =&gt; tian</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 分尖團後 v =&gt; ü 的改寫條件也要相應地擴充：</span></span><br><span class="line">  <span class="comment">#&#x27;translator/preedit_format&#x27;:</span></span><br><span class="line">  <span class="comment">#  - &quot;xform/([nljqxyzcs])v/$1ü/&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="全部使用英文符号"><a href="#全部使用英文符号" class="headerlink" title="全部使用英文符号"></a>全部使用英文符号</h3><p>默认输入中括号，出来的是花式的括号，有点不太习惯，从官方下载这个文档<a target="_blank" rel="noopener" href="https://gist.github.com/lotem/2334409">alternative.yaml</a>放到配置目录，然后修改下luna_pinyin.custom.yaml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># luna_pinyin.custom.yaml</span><br><span class="line"></span><br><span class="line">patch:</span><br><span class="line">  &#x27;punctuator/import_preset&#x27;: alternative</span><br></pre></td></tr></table></figure>
-
-<p>这样就能直接用”[]”输出”[]”了</p>
+<h4 id="参考：I-want-to-call-20-times-per-second-the-installTapOnBus-bufferSize-format-block"><a href="#参考：I-want-to-call-20-times-per-second-the-installTapOnBus-bufferSize-format-block" class="headerlink" title="参考：I want to call 20 times per second the installTapOnBus:bufferSize:format:block:"></a>参考：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/26115626/i-want-to-call-20-times-per-second-the-installtaponbusbuffersizeformatblock">I want to call 20 times per second the installTapOnBus:bufferSize:format:block:</a></h4><h3 id="第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList"><a href="#第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList" class="headerlink" title="第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList"></a>第二步：不要使用AVAudioPCMBuffer的mutableAudioBufferList</h3><p>如果你使用了步骤一的代码，那么installTapOnBus回调出来的AVAudioPCMBuffer，不要使用mutableAudioBufferList，必须使用audioBufferList。</p>
+<p>因为mutableAudioBufferList的mDataByteSize是frameCapacity，而audioBufferList的mDataByteSize是真实的frameLength</p>
 
       
     </div>

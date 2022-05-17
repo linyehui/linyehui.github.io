@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="需求：用手机拍下二维码，调用起应用，如果应用没有安装就提示下载应用 解决方案：手机淘宝就是个现成的例子 1、手机淘宝的原始二维码链接：http:&#x2F;&#x2F;ma.taobao.com&#x2F;311fY   2、跳转后：http:&#x2F;&#x2F;h5.m.taobao.com&#x2F;1212&#x2F;express-pcqr.html?_qr&#x3D;http%3A%2F%2Fma.taobao.com%2F311fY   3、查看这个页面的代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用二维码启动应用或下载应用">
+<meta property="og:url" content="http://linyehui.me/2014/01/20/2014/2014-01-20-qrcode-launch-app-or-download-app/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="需求：用手机拍下二维码，调用起应用，如果应用没有安装就提示下载应用 解决方案：手机淘宝就是个现成的例子 1、手机淘宝的原始二维码链接：http:&#x2F;&#x2F;ma.taobao.com&#x2F;311fY   2、跳转后：http:&#x2F;&#x2F;h5.m.taobao.com&#x2F;1212&#x2F;express-pcqr.html?_qr&#x3D;http%3A%2F%2Fma.taobao.com%2F311fY   3、查看这个页面的代码">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-01-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2014-01-19T16:00:00.000Z">
+<meta property="article:author" content="linyehui">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://linyehui.me/2014/01/20/2014/2014-01-20-qrcode-launch-app-or-download-app/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>使用二维码启动应用或下载应用 | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/01/20/2014/2014-01-20-qrcode-launch-app-or-download-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用二维码启动应用或下载应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2014-01-20T00:00:00+08:00">2014-01-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h4><p>用手机拍下二维码，调用起应用，如果应用没有安装就提示下载应用</p>
+<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p>手机淘宝就是个现成的例子</p>
+<p>1、手机淘宝的原始二维码链接：<a target="_blank" rel="noopener" href="http://ma.taobao.com/311fY">http://ma.taobao.com/311fY</a>  </p>
+<p>2、跳转后：<a target="_blank" rel="noopener" href="http://h5.m.taobao.com/1212/express-pcqr.html?_qr=http://ma.taobao.com/311fY">http://h5.m.taobao.com/1212/express-pcqr.html?_qr=http%3A%2F%2Fma.taobao.com%2F311fY</a>  </p>
+<p>3、查看这个页面的代码你能直接发现实现的原理</p>
+<pre><code>&lt;!DOCTYPE HTML&gt; &lt;html&gt; &lt;head&gt; &lt;meta charset=&quot;utf-8&quot;/&gt; &lt;meta content=&quot;yes&quot; name=&quot;apple-mobile-web-app-capable&quot;/&gt; &lt;meta content=&quot;yes&quot; name=&quot;apple-touch-fullscreen&quot;/&gt; &lt;meta content=&quot;telephone=no,email=no&quot; name=&quot;format-detection&quot;/&gt; &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;favicon.png&quot;/&gt; &lt;link rel=&quot;Shortcut Icon&quot; href=&quot;favicon.png&quot; type=&quot;image/x-icon&quot;/&gt; &lt;title&gt;手机淘宝购物送刮免单&lt;/title&gt; &lt;/head&gt; &lt;body&gt;&lt;script type=&quot;text/javascript&quot;&gt;
+with(document)with(body)with(insertBefore(createElement(&quot;script&quot;),firstChild))setAttribute(&quot;exparams&quot;,&quot;req_url=http%3a%2f%2fh5%2em%2etaobao%2ecom%2f1212%2fexpress%2dpcqr%2ehtml&amp;amp;category=&amp;amp;userid=&amp;amp;b2c_orid=&amp;amp;b2c_auction=&amp;amp;at_isb=&amp;amp;atp_isdpp=&amp;amp;at_ssid=&amp;amp;bbid=&amp;amp;aplus&amp;amp;at_cart=&amp;amp;at_udid=&quot;,id=&quot;tb-beacon-aplus&quot;,src=(location&gt;&quot;https&quot;?&quot;//s&quot;:&quot;//a&quot;)+&quot;.tbcdn.cn/s/aplus_wap.js&quot;)
+&lt;/script&gt;
+ &lt;script src=&quot;http://g.tbcdn.cn/mtb/lib-smartbanner/0.3.1/function.js&quot;&gt;&lt;/script&gt; &lt;script src=&quot;http://g.tbcdn.cn/mtb/lib-httpurl/1.0.0/httpurl.js&quot;&gt;&lt;/script&gt; &lt;script&gt;var smartbanner=lib.smartbanner;var HttpUrl=lib.httpurl();var redirect=&quot;http://m.taobao.com/go/act/scrapoutfree.html&quot;;var param=new HttpUrl(location.href);var ttid=param.search&amp;&amp;param.search.ttid;if(smartbanner.ttidInTaobaoApp()||smartbanner.uaInTaobaoApp())&#123;if(ttid)&#123;redirect+=&quot;?ttid=&quot;;redirect+=ttid&#125;location.href=redirect&#125;else&#123;redirect=&quot;taobaowebview://m.taobao.com/?weburl=&quot;+encodeURIComponent(redirect);var sbInstance=smartbanner.getInstance(&#123;href:redirect,url:&quot;http://m.taobao.com/go/act/other/1212pcwuliuerweima.html&quot;,crossplat:true&#125;);sbInstance&amp;&amp;sbInstance.install()&#125;;&lt;/script&gt; &lt;/body&gt; &lt;/html&gt;
+</code></pre>
+<p>**核心的JS文件是：<a target="_blank" rel="noopener" href="http://g.tbcdn.cn/mtb/lib-smartbanner/0.3.1/function.js">http://g.tbcdn.cn/mtb/lib-smartbanner/0.3.1/function.js</a>  **</p>
+<pre><code>!function(a,b)&#123;function c()&#123;var a=&#123;&#125;,b=location.search.slice(1).split(&quot;&amp;&quot;);if(b[0].length)for(var c=0;c&lt;b.length;c++)&#123;var d=b[c].split(&quot;=&quot;);a[d[0]]=d[1]&#125;return a&#125;function d(a)&#123;a&amp;&amp;a.apuri&amp;&amp;(a.ap_uri=a.apuri,delete a.apuri);var b=a||&#123;&#125;,c=g.getElementById(&quot;buried&quot;);ttid=c&amp;&amp;c.value,href=location.href.toString(),ttid&amp;&amp;-1==href.indexOf(&quot;ttid&quot;)&amp;&amp;(href.indexOf(&quot;?&quot;)&gt;-1?href=href.replace(&quot;?&quot;,&quot;?ttid=&quot;+ttid):href.indexOf(&quot;#&quot;)&gt;-1?href=href.replace(&quot;#&quot;,&quot;?ttid=&quot;+ttid+&quot;#&quot;):href+=&quot;?ttid=&quot;+ttid),b.ap_ref=encodeURIComponent(href),h&amp;&amp;h.length&gt;1&amp;&amp;(b.ap_cna=h[1]);var d=[];for(var e in b)d.push(e+&quot;=&quot;+encodeURIComponent(b[e]));var f=g.createElement(&quot;script&quot;);f.src=&quot;http://log.m.taobao.com/js.do?&quot;+d.join(&quot;&amp;&quot;).replace(/%20/g,&quot;+&quot;),g.body.appendChild(f)&#125;function e()&#123;var a=c(),b=a.ttid,d=/.+@taobao_(iphone|android|apad|ipad)_.+/i;return b=b?decodeURIComponent(b):&quot;&quot;,d.test(b)&#125;function f()&#123;var a=navigator.userAgent;return null!=a.match(/WindVane/i)?!0:!1&#125;var g=a.document,h=g.cookie.match(/(?:^|\s)cna=([^;]+)(?:;|$)/),i=g.createElement(&quot;frame&quot;),j=function(a)&#123;var b=this,c=navigator.standalone,d=navigator.userAgent;return null!=d.match(/iPhone|iPod|iPad/i)?(this.platform=&quot;ios&quot;,this.isIpad=null!=d.match(/iPad/i)):null!=d.match(/Android/i)?null!=d.match(/Mobile/i)&amp;&amp;(this.platform=&quot;android&quot;,this.isChrome=null!=d.match(/Chrome/i)&amp;&amp;null==d.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i)):null!=d.match(/Linux/i)&amp;&amp;(this.platform=&quot;android&quot;),!this.platform||c?(this.invaliable=!0,null):(this.init(a)&amp;&amp;(this.create(),window.onblur=function()&#123;clearTimeout(b.timeload),b.timeload=null&#125;),this)&#125;;j.prototype=&#123;constructor:j,init:function(a)&#123;var b=this.options=a,d=b.isInstance||function()&#123;return f()||e()&#125;;if(d())return this.invaliable=!0,null;a.version||(a.version=&quot;v1&quot;),this.cover=b.cover||!1,this.isDownload=b.download||!1,this.timeout=b.timeout||600;var h=b.from||&quot;h5&quot;,i=b.crossplat||!1;if(this.bannerUrl=&quot;ios&quot;!=this.platform||i?b.url||&quot;http://m.taobao.com/channel/act/sale/tbdl1.html&quot;:b.appstoreUrl||(this.isIpad?&quot;https://itunes.apple.com/app/id438865278&quot;:&quot;http://itunes.apple.com/cn/app/id387682726?mt=8&quot;),b.href)&#123;var j=b.href,k=c(),l=g.getElementById(&quot;buried&quot;),m=k.ttid||l&amp;&amp;l.value,n=k.sprefer,o=k.ali_trackid,p=location.href;p=-1!=p.indexOf(&quot;?&quot;)?p.split(&quot;?&quot;)[0]:p,p=-1!=p.indexOf(&quot;#&quot;)?p.split(&quot;#&quot;)[0]:p;var q=&#123;from:h,url:encodeURIComponent(p)&#125;,r=b.point;if(r)for(var s in r)q[s]=r[s];m&amp;&amp;(q.ttid=m),n&amp;&amp;(q.sprefer=n),o&amp;&amp;(q.ali_trackid=o),q.ap_uri=&quot;&quot;,q=encodeURIComponent(JSON.stringify(q));var t,u=j.indexOf(&quot;#&quot;);if(-1!=u&amp;&amp;(t=j.slice(u),j=j.replace(t,&quot;&quot;)),-1==j.indexOf(&quot;?&quot;)?j+=&quot;?&quot;:j.indexOf(&quot;?&quot;)!=j.length-1&amp;&amp;(j+=&quot;&amp;&quot;),j+=&quot;point=&quot;+q+(t?t:&quot;&quot;),j=-1!=j.indexOf(&quot;://&quot;)?j:&quot;taobao://&quot;+j,this.isChrome)&#123;var v=j.split(&quot;://&quot;),w=v[0],x=v[1],y=b.package||&quot;com.taobao.taobao&quot;;j=&quot;intent://&quot;+x+&quot;#Intent;scheme=&quot;+w+&quot;;package=&quot;+y+&quot;;end&quot;&#125;this.paramUrl=j&#125;return!0&#125;,reset:function(a)&#123;this.iClose||(this.init(a),this.resetHtml&amp;&amp;this.resetHtml(a))&#125;,create:function()&#123;this.iClose||(i.parentNode||(i.setAttribute(&quot;id&quot;,&quot;J_smartFrame&quot;),i.style.cssText=&quot;display:none&quot;,g.body.appendChild(i)),this.frame=i)&#125;,download:function(b)&#123;var c=Date.now();(!b||c-b&lt;this.timeout+200)&amp;&amp;(this.cover?a.location.replace(this.bannerUrl):a.location.href=this.bannerUrl)&#125;,redirect:function(b)&#123;var c=this.options&amp;&amp;this.options.version,e=this.frame,f=b?&quot;click_sb_&quot;+c+&quot;_manual&quot;:&quot;click_sb_&quot;+c+&quot;_auto&quot;;this.paramUrl&amp;&amp;(d(&#123;ap_uri:f&#125;),this.paramUrl=this.paramUrl.replace(&quot;%22ap_uri%22%3A%22%22&quot;,encodeURIComponent(&#39;&quot;ap_uri&quot;:&quot;&#39;+f+&#39;&quot;&#39;)),this.isChrome?a.location.href=this.paramUrl:e&amp;&amp;e.setAttribute(&quot;src&quot;,this.paramUrl))&#125;,install:function(a)&#123;var b=this,c=Date.now();b.isDownload||(b.timeload=setTimeout(function()&#123;b.download(c)&#125;,b.timeout)),b.redirect(a)&#125;&#125;,b.smartbanner=function(a)&#123;var c=a.type,d=b.smartbanner.BannerUI,e=b.smartbanner.PopUI;if(&quot;banner&quot;!==c&amp;&amp;c)&#123;if(&quot;pop&quot;===c)&#123;if(e)return new e(a)&#125;else if(&quot;func&quot;===c)return b.smartbanner.getInstance(a)&#125;else if(d)return new d(a)&#125;,b.smartbanner.getInstance=function(a,b)&#123;b||(b=Object.create(&#123;&#125;));for(var c in j.prototype)b[c]=j.prototype[c];return j.call(b,a)&#125;,b.smartbanner.aplus=d,b.smartbanner.getParam=c,b.smartbanner.ttidInTaobaoApp=e,b.smartbanner.uaInTaobaoApp=f&#125;(window,window.lib||(window.lib=&#123;&#125;));
+</code></pre>
+<p>看了下，github上有这个库：<br><a target="_blank" rel="noopener" href="https://github.com/jasny/jquery.smartbanner">jquery.smartbanner</a></p>
+<p>有现成的方案可以参考真好 :)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/01/15/2014/2014-01-15-learning-ios-from-xcode-5/" rel="prev" title="从Xcode 5开始入门学习iOS开发">
+      <i class="fa fa-chevron-left"></i> 从Xcode 5开始入门学习iOS开发
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/02/13/2014/2014-02-13-reading-learning/" rel="next" title="侧方位停车引发的读书思考">
+      侧方位停车引发的读书思考 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">需求：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">解决方案：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

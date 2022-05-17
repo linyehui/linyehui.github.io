@@ -148,7 +148,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-08-21-cocoapods-cause-undefined-symbols-for-architecture-i386/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/09/2014/2014-07-09-convert-gbk-to-utf8-on-mac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -162,7 +162,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2014/2014-08-21-cocoapods-cause-undefined-symbols-for-architecture-i386/" class="post-title-link" itemprop="url">使用CocoaPods引入第三方库导致的Undefined symbols for architecture i386</a>
+            <a href="/2014/07/09/2014/2014-07-09-convert-gbk-to-utf8-on-mac/" class="post-title-link" itemprop="url">Xcode下的中文乱码问题</a>
         </h2>
 
         <div class="post-meta">
@@ -172,7 +172,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2014-07-09 00:00:00" itemprop="dateCreated datePublished" datetime="2014-07-09T00:00:00+08:00">2014-07-09</time>
             </span>
 
           
@@ -186,463 +186,48 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><hr>
-<ul>
-<li><p>使用cocos2dx的iOS工程，通过cocospods引入了FMDB用于使用SQLite：</p>
-<blockquote>
-<p>pod ‘FMDB’, ‘~&gt; 2.3’</p>
-</blockquote>
-</li>
-<li><p>Xcode 5.1.1</p>
-</li>
-<li><p>结果选择64的模拟器编译时提示</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Undefined symbols for architecture i386:</span><br><span class="line">  &quot;_OBJC_CLASS_$_FMDatabase&quot;, referenced from:</span><br><span class="line">      objc-class-ref in DBWrapper.o</span><br><span class="line">ld: symbol(s) not found for architecture i386</span><br></pre></td></tr></table></figure>
-<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><hr>
-<h2 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h2><ul>
-<li>一开始搜索到的结果，出现这种情况都是因为没有把FMDB下的.m文件加入到工程里面；</li>
-<li>但是我们其实是通过CocoaPods进行第三方库依赖的，这种情况还要自己把.m加到工程就太可笑了</li>
-<li>还有一个疑问是为什么非64的模拟器就可以编译通过？</li>
-<li>为了验证上面这个问题，我在github上找了个同样使用pod ‘FMDB’的例子，发现例子可以再64位下正常编译，也就是说和FMDB库是无关的，是我们自己使用的不对</li>
-<li>盯着64位这个字眼，突然想起了我们的工程因为为了支持cocos2dx，是修改了编译选项中的</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config.build_settings[&#x27;ARCHS&#x27;] = &#x27;armv7 armv7s&#x27;</span><br><span class="line">config.build_settings[&#x27;ONLY_ACTIVE_ARCH&#x27;] = &#x27;NO&#x27;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在Xcode下点击Pods工程，把新加入的FMDB-Pods target选项修改了下，果然就编译通过了</li>
-</ul>
-<h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><ul>
-<li>使用到的两个第三方库的ONLY_ACTIVE_ARCH选项不同导致了这个问题</li>
-<li>cocos2dx为了兼容64位需要把这个选项设置位NO，而默认这个选项为YES</li>
-</ul>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><hr>
-<h3 id="解决的思路"><a href="#解决的思路" class="headerlink" title="解决的思路"></a>解决的思路</h3><ul>
-<li><p>cocos2dx（2.2.4）因为本身不支持64位，所以ONLY_ACTIVE_ARCH需要设置为NO，那么有没有方法把github上第三方的Spec也使用我们的这个属性配置？</p>
-</li>
-<li><p>问题清楚后，搜索新的关键字马上就得到了答案：</p>
-</li>
-</ul>
-<p>用CocosPods 的Podfile配置可以满足我的需求:<a target="_blank" rel="noopener" href="http://guides.cocoapods.org/syntax/podfile.html#post_install">post install</a></p>
-<ul>
-<li>然后我又去github上用post install位关键字找到好多类似的例子</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/needbee/nbasyncrestconnection/blob/ecadaf7206ffddfd9cc829b880ba015d33be9eb0/demo/Podfile">Podfile 参考1</a>  </p>
-<p><a target="_blank" rel="noopener" href="https://github.com/cybertk/libchromium/blob/fa7fecdce6dbe31d8da82b80c999268bbea2ddf3/Example/Podfile">Podfile 参考2</a>  </p>
-<p><a target="_blank" rel="noopener" href="https://github.com/mikefullerton/FishLampLib/blob/3d9f0308015edab41335641dc0cdd7f3e47d63ea/Podfile">Podfile 参考3</a>  </p>
-<h3 id="最终的方案"><a href="#最终的方案" class="headerlink" title="最终的方案"></a>最终的方案</h3><p> 有了上面的信息，我的解决方案也就水到渠成了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pod &#x27;FMDB&#x27;, &#x27;~&gt; 2.3&#x27;</span><br><span class="line"></span><br><span class="line">post_install do |installer_representation|</span><br><span class="line">  installer_representation.project.targets.each do |target|</span><br><span class="line">    target.build_configurations.each do |config|</span><br><span class="line">      config.build_settings[&#x27;ARCHS&#x27;] = &#x27;armv7 armv7s&#x27;</span><br><span class="line">      config.build_settings[&#x27;ONLY_ACTIVE_ARCH&#x27;] = &#x27;NO&#x27;</span><br><span class="line">    end</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-09-27-fts-world-tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2014/2014-09-27-fts-world-tips/" class="post-title-link" itemprop="url">FTS World入门指南</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="First-Touch-足球系列"><a href="#First-Touch-足球系列" class="headerlink" title="First Touch 足球系列"></a>First Touch 足球系列</h1><p>iOS下的足球游戏，如果要从操作性的角度选出一系列最好的，不是FIFA系列也不是Real Football系列，而是First Touch系列。</p>
-<p>第一次接触到First Touch的足球系列游戏，是《Dream League Soccer》，这款游戏虽然画面比较粗糙，但是操作感十足，特别是各种各样的进球方式让人赏心悦目，比赛的节奏很流畅，和起华而不实的FIFA和Real系列比起来，有种早期实况 VS FIFA的感觉。</p>
-<p>这款游戏我已经不记得自己多少次“通关”，自己组建的切尔西也已经把我想买的所有球员都给买下了，而且所有球员的数值我都已经训练到了90以上，其中几个能力值是100。</p>
-<p>不过《Dream League Soccer》的玩法还是简陋，比如连助攻数都不统计，联赛形式也比较单一，在这个时候我发现了同系列的另一款新游戏：《First Touch Soccer World Edition》。</p>
-<h1 id="First-Touch-Soccer-World-Edition-与前作的差别"><a href="#First-Touch-Soccer-World-Edition-与前作的差别" class="headerlink" title="First Touch Soccer World Edition 与前作的差别"></a>First Touch Soccer World Edition 与前作的差别</h1><ul>
-<li>游戏引擎和上一款没有大的变化，所以操作上完全一致</li>
-<li>游戏部分玩法和设置必须要VIP才可以玩，而VIP需要4000金币</li>
-<li>游戏的联赛使用了真实名字，而上一代都是类似“北伦敦”一样的替代名字</li>
-<li>游戏的“Manager Mode”，让你自己当Manager，你不仅要操作游戏比赛，还要考虑球员买卖，更有教练自己的转会，这个是新版本的精华所在</li>
-<li>新增了世界杯模式，世界球队随便选，夺取世界杯</li>
-<li>新增了俱乐部的营收体系，使用独立的货币，球队买卖球员，升级体育场都要使用货币进行，但货币不足时可以使用金币兑换，美其名曰：投资俱乐部</li>
-<li>FTS新增了Star Player Mode（VIP功能），比赛的时候你只控制一个球员，可以呼叫你的队友传球给你</li>
-<li>新增了TOURNAMENT MODE（VIP功能），其实就是各大联赛和杯赛，想体验每个联赛的话不用在Manager Mode下进行，解锁VIP后就可以随便选队了</li>
-</ul>
-<h1 id="First-Touch-Soccer-World-Edition-入门指引"><a href="#First-Touch-Soccer-World-Edition-入门指引" class="headerlink" title="First Touch Soccer World Edition 入门指引"></a>First Touch Soccer World Edition 入门指引</h1><ul>
-<li>刚开始玩，推荐从世界杯模式入手，熟悉下操作，同时也赚点金币</li>
-<li>对于不想花钱的用户，世界杯通关后的下一个游戏目标是赚够4000金币，买下VIP</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">有了VIP你的每局游戏经验和金币都会翻倍，  </span><br><span class="line"></span><br><span class="line">可以随便挑选球队进行比赛，联赛或杯赛，  </span><br><span class="line"></span><br><span class="line">还可以设置比赛时长（想不到这个都是VIP功能……）  </span><br><span class="line"></span><br><span class="line">比赛开始前可以选择使用Star Player Mode  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Manager-Mode技巧和窍门"><a href="#Manager-Mode技巧和窍门" class="headerlink" title="Manager Mode技巧和窍门"></a>Manager Mode技巧和窍门</h2><h3 id="比赛操作"><a href="#比赛操作" class="headerlink" title="比赛操作"></a>比赛操作</h3><ul>
-<li>玩Manager Mode，一开始可以把游戏难度调成“Low”，因为一开始你能选到的球队真的很搓</li>
-<li>初始的时候要选一个球队，尽量选个星级高一点的，球队收益好点</li>
-<li>头球大法好用</li>
-<li>挑球需要球员数值比较高，没有大牌球星还是不要尝试了</li>
-</ul>
-<h3 id="维持俱乐部的收支平衡"><a href="#维持俱乐部的收支平衡" class="headerlink" title="维持俱乐部的收支平衡"></a>维持俱乐部的收支平衡</h3><ul>
-<li>小球会不要买大球星，其实70-79能力值的球员已经可以打遍五大联赛了</li>
-<li>实在缺钱的时候，可以玩一轮世界杯模式，刷一刷金币</li>
-<li>球队连续5周财政赤字会自动解雇球员（被解雇的球员不给选的，不小心好球员被裁掉会很吃亏）</li>
-<li>但是有一种情况就算财政赤字也不会自动解雇球员：球队有且只有16个球员，因为游戏规定一直球队至少必须有16个球员</li>
-<li>省钱大法</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">守门员只保留一个</span><br><span class="line">球员保持游戏最低人数：16个（教练转会的时候要注意这一点，下文有说明）</span><br><span class="line">比赛要赢球，冠军联赛这种钱比较多</span><br></pre></td></tr></table></figure>
-
-<h3 id="球员转会"><a href="#球员转会" class="headerlink" title="球员转会"></a>球员转会</h3><ul>
-<li>联赛开始后马上开始转会运作，把不好的球员全部加入转会名单，然后买入一些物美价廉的球员</li>
-<li>物美价廉的好球员：OVERALL能力值在70-79之间，身体素质的三个属性均超过80</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">球员最重要的是身体素质的三个属性：SPEED，ACCELERATION，STAMINA</span><br><span class="line">而这三个中STAMINA（耐力）又是最重要的，因为你也不想踢了半场就得换人吧</span><br><span class="line">球员比赛过程中状态差的情况下最好换人，不然会被电脑抛在后面几米</span><br><span class="line">STAMINA 80以上的球员可以保证这个球员整个赛季可以比较完整的完成，而不是踢一场休息两场</span><br><span class="line">同样身体素质的球员中，球员的价格：守门员 &lt; 后卫 &lt; 前锋 &lt; 中场</span><br></pre></td></tr></table></figure>
-<ul>
-<li>球队还是要有一两个数值比较高，性价比高的核心球员，有两个球员值得推荐：特雷泽盖和里克尔梅</li>
-<li>缺钱的话，先买个好前锋或前腰，剩下的都买后卫（身体素质好的边后卫打前锋也不错的）</li>
-<li>多说一句，在有核心球员的前提下，其他球员只要有体力在场上跑就够了，所以转会的时候一定要买STAMINA值高于80的球员</li>
-</ul>
-<h3 id="教练转会"><a href="#教练转会" class="headerlink" title="教练转会"></a>教练转会</h3><ul>
-<li>在你的带队成绩出来后，邀请你转会的球队会越来越好，球队的好坏主要看他的收益，以及是否可以参加欧洲联赛（上面说过的：钱多）</li>
-<li>转会后的球队收益比较好会让你有更多的资金购买球员</li>
-<li>我一般在赛季结束后会看看有没有合适的转会邀请，看情况选择换家俱乐部</li>
-<li>赛季中间走的话我这个联赛的GameCenter成就就没法达成多可惜</li>
-<li>如果准备教练转会，就没必要花金币投资俱乐部了，什么请教练，升级球场统统不要</li>
-<li>每个月的目标只挑好完成的实现，不用在意有没有完成</li>
-<li>带着自己的弟子转会</li>
-</ul>
-<p>由于我都是保存一只球队16个球员的最高性价比配置，所以如果我的教练想要转会，而我又想把我心爱的弟子给一起带走，那么这件事情你必须要做：</p>
-<blockquote>
-<p>教练转会之前，买几个球员充数，不要让这个球队只有16个球员，否则你回头想买你的弟子，多少钱老东家都不卖（卖不了啊）</p>
-</blockquote>
-<h2 id="Star-Player-Mode"><a href="#Star-Player-Mode" class="headerlink" title="Star Player Mode"></a>Star Player Mode</h2><ul>
-<li>比较坑爹，特别是视角只能是球员视角，球队里有大牌球星的情况下可以玩玩</li>
-<li>有单独的Start Player Mode</li>
-<li>在其他模式下，开始比赛前也可以选择使用“Star Player Mode”进行游戏（双方阵容界面，中下部分的VIP功能按钮）</li>
-</ul>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>不经意间竟然写了这么长，不过确实是款好游戏，游戏好玩，还没有各种坑爹的收费道具，而我自己玩了这么久竟然没花过钱，做下广告还下人情也是应该的：  <a target="_blank" rel="noopener" href="https://itunes.apple.com/cn/app/first-touch-soccer-world-edition/id472344174">First Touch Soccer World Edition</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-10-09-sonic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2014/2014-10-09-sonic/" class="post-title-link" itemprop="url">开源跨平台声波传输库：Sonic</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a target="_blank" rel="noopener" href="https://github.com/linyehui/sonic">Sonic</a> 是一个跨平台的声波传输库（iOS &amp; Android)，技术上类似于<a target="_blank" rel="noopener" href="http://chirp.io/">chirp</a>和<a target="_blank" rel="noopener" href="http://www.xququ.com/index_cn.html">蛐蛐儿</a>，但声波识别率上和他们还有很大的差距。</p>
-<p>声波生成和识别的代码源自<a target="_blank" rel="noopener" href="https://github.com/CloudSide/WaveTrans">WaveTrans</a>，linyehui 对源代码进行了精简，将声波编解码部分的代码进行了独立封装，并做了跨平台移植，从而得到了这个更简练的声波传输库：<a target="_blank" rel="noopener" href="https://github.com/linyehui/sonic">Sonic</a>。</p>
-<h2 id="关于声波识别率和存在的问题"><a href="#关于声波识别率和存在的问题" class="headerlink" title="关于声波识别率和存在的问题"></a>关于声波识别率和存在的问题</h2><p>目前的代码，降噪主要依赖于手机本身的物理降噪（类似双MIC降噪等），嘈杂环境下的声波识别率比较差；  </p>
-<p>如果你需要产品化这项技术，那么这份代码只能带你入门。</p>
-<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OS X 10.9.5</span><br><span class="line">Xcode 6.0.1 (准备开源的时候才做了Xcode6兼容，模拟器下iPhone 6还有问题)</span><br><span class="line">adt-bundle-mac-x86_64-20131030</span><br><span class="line">android-ndk-r9d</span><br></pre></td></tr></table></figure>
-
-<h2 id="目录说明"><a href="#目录说明" class="headerlink" title="目录说明"></a>目录说明</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|---sonic</span><br><span class="line">|   |--android           <span class="comment"># Android Demo</span></span><br><span class="line">|   |--ios               <span class="comment"># iOS Demo</span></span><br><span class="line">|   |--sdk               <span class="comment"># 跨平台的C++代码</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h2><p>iOS 和 Android Demo非常简陋，可以在两部设备上相互发送声波并识别，但交互上还有很多已知和未知的Bug :(</p>
-<h3 id="希望这份代码能给你带来些许帮助。"><a href="#希望这份代码能给你带来些许帮助。" class="headerlink" title="希望这份代码能给你带来些许帮助。"></a>希望这份代码能给你带来些许帮助。</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-05-07-set-orientation-of-a-video-recording-with-mediarecorder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2014/2014-05-07-set-orientation-of-a-video-recording-with-mediarecorder/" class="post-title-link" itemprop="url">MediaRecorder视频录制旋转90度的问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在Android下录制视频，录制的视频在手机（iOS和Android）上预览、播放正常;<br>在手机浏览器中播放正常;<br>在PC上的浏览器和播放器播放正常。</p>
-<hr>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="预览的时候视频需要旋转90°"><a href="#预览的时候视频需要旋转90°" class="headerlink" title="预览的时候视频需要旋转90°"></a>预览的时候视频需要旋转90°</h3><p>这个可以解决，设置下摄像头显示的方向就可以了：</p>
-<pre><code>// private Camera camera = null;
-// 修改摄像头参数就能解决预览视频的旋转90°问题
-// 具体是90还是270我这里就不具体说了，网上很多代码
-camera.setDisplayOrientation(90);
-</code></pre>
-<p>参考文章：<a target="_blank" rel="noopener" href="http://blog.csdn.net/fengye810130/article/details/11614427">android中Camera setDisplayOrientation使用</a></p>
-<h3 id="视频文件保存的时候需要旋转90°"><a href="#视频文件保存的时候需要旋转90°" class="headerlink" title="视频文件保存的时候需要旋转90°"></a>视频文件保存的时候需要旋转90°</h3><p>导致这个问题的原因是使用MediaRecorder录视频保存的文件都是“横版”的，也就是说：如果你是竖着录制视频，录制保存下来的视频本来就是“旋转了90度的”，这个问题怎么解决呢？</p>
-<h4 id="一种有缺陷的解决方案"><a href="#一种有缺陷的解决方案" class="headerlink" title="一种有缺陷的解决方案"></a>一种有缺陷的解决方案</h4><p>Android 2.3(API Level 9)之后提供了setOrientationHint方法，但这并不是完美的方案，不是所有的播放起都支持这个设置，看下官方文档:<a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/media/MediaRecorder.html#setOrientationHint">setOrientationHint</a></p>
-<blockquote>
-<p>Sets the orientation hint for output video playback. This method should be called before prepare(). This method will not trigger the source video frame to rotate during video recording, but to add a composition matrix containing the rotation angle in the output video if the output format is OutputFormat.THREE_GPP or OutputFormat.MPEG_4 so that a video player can choose the proper orientation for playback. Note that some video players may choose to ignore the compostion matrix in a video during playback.</p>
-</blockquote>
-<p>关键是这句：</p>
-<blockquote>
-<p>Note that some video players may choose to ignore the compostion matrix in a video during playback.</p>
-</blockquote>
-<p>这就是我为什么说这是一种有缺陷的解决方案，但这个方案足够简单，只用Android SDK就够了，一句代码搞定：</p>
-<pre><code>// private MediaRecorder mediaRecorder = null;
-// 用VideoView,Safari,QuickTime Player播放视频，视频角度是正确的
-// 用Chrome,QQPlayer,MPlayerX播放视频，视频需要旋转90°才正确
-mediaRecorder.setOrientationHint(90);
-</code></pre>
-<p><strong>补充说明：</strong></p>
+          <p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<h1 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h1><p>绝大部分的中文乱码是因为文件编码不对导致的：</p>
 <ol>
-<li>使用这个方案并不能完美解决问题，在Chrome,QQPlayer,MPlayerX等播放器中，视频都无法按照“预设的角度”被播放，因为这些播放器并不支持setOrientationHint的这种格式设置；</li>
-<li>如果非要使用这个方案，可以在HTML5中使用CSS对video标签进行旋转，但这样会把整个标签，包括控制条都旋转掉，有个猥琐的解决方案是不显示自带的控制条，而是自己实现简单的控制（播放，暂停）</li>
+<li>使用了GBK的文件编码方式在Xcode下是无法识别的</li>
+<li>老版本的Xcode对带BOOM头的UTF8文件编码也是无法识别的（我的Xcode 5.0.2已经支持带BOM头的UTF8文件了）</li>
 </ol>
-<p>参考文章：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/12486870/chrome-html5-video-flipping-portrait-sideways">Chrome HTML5 Video Flipping Portrait Sideways</a></p>
-<h4 id="可能的完美方案-未验证"><a href="#可能的完美方案-未验证" class="headerlink" title="可能的完美方案(未验证)"></a>可能的完美方案(未验证)</h4><p>使用FFMpeg或者OpenCV对录制的视频进行旋转</p>
+<p>出现上述情况一般都是因为跨平台共用文件导致的，Windows，Mac共同使用的代码文件会出现乱码的问题。</p>
+<h1 id="最好的解决方案"><a href="#最好的解决方案" class="headerlink" title="最好的解决方案"></a>最好的解决方案</h1><p>Windows和Mac下统一使用UTF8带BOM头的文件编码格式。</p>
+<h3 id="特别解释下"><a href="#特别解释下" class="headerlink" title="特别解释下"></a>特别解释下</h3><h4 id="以前是这样的："><a href="#以前是这样的：" class="headerlink" title="以前是这样的："></a>以前是这样的：</h4><p>UTF8不带BOM头的文件，在xcode和eclipse下显示正常，但Windows下会中文乱码；  </p>
+<p>UTF8带BOM头的文件，Windows下显示正常，但Xcode和eclipse下会中文乱码；</p>
+<h4 id="现在是这样的："><a href="#现在是这样的：" class="headerlink" title="现在是这样的："></a>现在是这样的：</h4><p>Xcode 5.0.2和ADT 22.3.0都已经支持显示带BOM头的UTF8格式。</p>
+<h1 id="Mac下遇到这种乱码怎么解决"><a href="#Mac下遇到这种乱码怎么解决" class="headerlink" title="Mac下遇到这种乱码怎么解决"></a>Mac下遇到这种乱码怎么解决</h1><h2 id="方法一：使用Sublime的解决办法"><a href="#方法一：使用Sublime的解决办法" class="headerlink" title="方法一：使用Sublime的解决办法"></a>方法一：使用Sublime的解决办法</h2><p>Sublime Text 2下，使用Package Control 安装 ConvertToUTF8 这个插件：</p>
 <ol>
-<li>对录制后的文件进行直接的FFMpeg旋转</li>
-<li>对录制过程中的每一帧进行旋转，最后生成的文件自然也是正确旋转了的</li>
+<li>使用Sublime打开乱码文件，正常是可以自动识别出来是GBK还是GB2312等编码的</li>
+<li>如果识别不出来，那么就手动选择下菜单File-》Reload With Encoding，选择GBK，应该也能正确显示中文了</li>
+<li>正确显示中文后，就可以把文件保存成UTF8格式了，但是直接Save是不行的，保存之前必须先做一件事情：<blockquote>
+<p>File -&gt; Set File Encoding to -&gt; UTF8</p>
+</blockquote>
+</li>
+<li>保存文件</li>
 </ol>
-<p>有个有点沾边的参考文章：[<a target="_blank" rel="noopener" href="https://groups.google.com/forum/#!msg/javacv/J0O6jV8kK9k/cu0iY6fyNWAJ">https://groups.google.com/forum/#!msg/javacv/J0O6jV8kK9k/cu0iY6fyNWAJ</a> Can I set the orientation of a video when recording with FfmpegFrameRecorder?]</p>
-<p>未完待续……</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-05-09-how-to-build-ffmpeg-for-android-on-mac/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2014/2014-05-09-how-to-build-ffmpeg-for-android-on-mac/" class="post-title-link" itemprop="url">在Mac上编译FFmpeg的Android版本</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>How to Build FFmpeg for Android On Mac</p>
-<p>官方文档在这：<a target="_blank" rel="noopener" href="https://trac.ffmpeg.org/wiki/CompilationGuide/Android">CompilationGuide&#x2F;Android</a>  </p>
-<p>关于Android上的FFmpeg入门，这个Blog不错：<a target="_blank" rel="noopener" href="http://www.roman10.net/category/android-tutorial/ffmpeg-on-android/">roman10 ffmpeg on Android</a>  </p>
-<h1 id="关于FFmpeg耻辱名单"><a href="#关于FFmpeg耻辱名单" class="headerlink" title="关于FFmpeg耻辱名单"></a>关于FFmpeg耻辱名单</h1><p>使用开源代码，第一步一定是确认开源协议所带来的风险，确认后我们才能决定是否使用这一开源代码。</p>
-<p>特别是暴风影音和QQ影音让大家知道了FFmpeg的耻辱名单：<a target="_blank" rel="noopener" href="http://ffmpeg.org/shame.html">Hall of Shame</a>，我们更得先研究下FFmpeg的开源协议了。</p>
-<p>被加入这个名单的直接原因是这些产品违反了FFmpeg的开源协议，但具体是违反了那个开源协议呢？这就得从<a target="_blank" rel="noopener" href="https://ffmpeg.org/legal.html">FFmpeg的开源协议</a>说起了:</p>
-<blockquote>
-<p>FFmpeg is licensed under the GNU Lesser General Public License (LGPL) version 2.1 or later. However, FFmpeg incorporates several optional parts and optimizations that are covered by the GNU General Public License (GPL) version 2 or later. If those parts get used the GPL applies to all of FFmpeg.</p>
-</blockquote>
-<h3 id="怎么的就违反开源协议了呢？"><a href="#怎么的就违反开源协议了呢？" class="headerlink" title="怎么的就违反开源协议了呢？"></a>怎么的就违反开源协议了呢？</h3><ol>
-<li>虽然FFmpeg使用的开源协议是LGPL，但是他用到的部分组件是GPL开源协议;</li>
-<li>LGPL和GPL有着很大的区别，这个可以参考：<a target="_blank" rel="noopener" href="http://www.oschina.net/question/12_2663">关于开源授权协议 GPL 和 LGPL</a>；<br>简单来说，如果商用产品只是把LGPL的开源代码作为第三方库来使用，商用产品本身是不需要开源的，但GPL就不一样，只要你用了开源代码，整个商用产品就必须开源，这就是常说的“传染性”；</li>
-<li>如果使用FFmpeg没有使用到GPL开源协议的部分组件，那么产品只要遵循LGPL就可以了，哪怕你修改了第三方库，也只需要开源修改后的第三方库代码就不算违反LGPL；</li>
-<li>如果使用到了GPL开源协议的部分组件，如x264，那么商用产品就必须遵循GPL，开源商用产品的所有代码；</li>
-<li>综合上面4点，可以知道如果使用了FFmpeg中使用GPL的部分组件，那么你的商用产品就必须开源，否则就是违反了GPL开源协议，要被加入FFmpeg的Hall of Shame。</li>
-</ol>
-<p>一不小心就上了耻辱名单，有没有什么防范措施呢？可以参考FFmpeg官方的<a target="_blank" rel="noopener" href="https://ffmpeg.org/legal.html">License Compliance Checklist</a>  </p>
-<h1 id="在Mac下编译FFmpeg-2-1-4"><a href="#在Mac下编译FFmpeg-2-1-4" class="headerlink" title="在Mac下编译FFmpeg-2.1.4"></a>在Mac下编译FFmpeg-2.1.4</h1><h3 id="概要说明"><a href="#概要说明" class="headerlink" title="概要说明"></a>概要说明</h3><p>Mac开发环境，按照这篇文章来的指引编译通过：<a target="_blank" rel="noopener" href="http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/">How to Build ffmpeg with NDK r9</a>  </p>
-<p>直接按照文章的指引编译通过，只有一个步骤需要特别注意，build_android.sh中：</p>
-<blockquote>
-<p>TOOLCHAIN&#x3D;$NDK&#x2F;toolchains&#x2F;arm-linux-androideabi-4.8&#x2F;prebuilt&#x2F;linux-x86_64</p>
-<p>改成</p>
-<p>TOOLCHAIN&#x3D;$NDK&#x2F;toolchains&#x2F;arm-linux-androideabi-4.8&#x2F;prebuilt&#x2F;darwin-x86_64</p>
-</blockquote>
-<p>.&#x2F;build_android.sh中的路径要从linux-x86_64改成darwin-x86_64，这个我是在编译错误的时候根据提示发现下面这个路径文件找不到，才知道需要改下，修改之后就可以继续调用.&#x2F;build_android.sh编译了</p>
-<h2 id="详细编译步骤"><a href="#详细编译步骤" class="headerlink" title="详细编译步骤"></a>详细编译步骤</h2><p>虽然都是按照<a target="_blank" rel="noopener" href="http://www.roman10.net/how-to-build-ffmpeg-with-ndk-r9/">How to Build ffmpeg with NDK r9</a>中的指引来操作的，我还是把操作流程简单记录如下：</p>
-<ol>
-<li><p>我的开发环境</p>
-<blockquote>
-<p>Mac OSX 10.9.2<br>XCode 5.0.2(带的gcc)<br>NDK r9d</p>
-</blockquote>
+<h2 id="方法二：Xcode的File-inspector属性窗口"><a href="#方法二：Xcode的File-inspector属性窗口" class="headerlink" title="方法二：Xcode的File inspector属性窗口"></a>方法二：Xcode的File inspector属性窗口</h2><ol>
+<li><p>在工程中打开乱码的文件，选择File inspector属性窗口</p>
 </li>
-<li><p>下载并配置好<a target="_blank" rel="noopener" href="http://developer.android.com/tools/sdk/ndk/index.html">NDK</a>，我之前已经配好了，不清楚的同学自己看Android的官网帮助文档 </p>
+<li><p>选择Text Encoding，比如我选择“GB 2313”（不对的话可以换着试试看）</p>
 </li>
-<li><p>下载<a target="_blank" rel="noopener" href="http://www.ffmpeg.org/download.html">ffmpeg源码</a>，我下载时的最新稳定版本是2.1.4，解压到NDK目录下的sources目录下</p>
-</li>
-<li><p>修改ffmpeg-2.1.4目录下的configure文件<br>Open ffmpeg-2.0.1&#x2F;configure file with a text editor, and locate the following lines.</p>
+<li><p>弹出提示，选择“Reinterpret”，如果中文显示正确，就下一步，否则就再换个编码试试</p>
 <blockquote>
-<p>SLIBNAME_WITH_MAJOR&#x3D;’$(SLIBNAME).$(LIBMAJOR)’<br>LIB_INSTALL_EXTRA_CMD&#x3D;’$$(RANLIB) “$(LIBDIR)&#x2F;$(LIBNAME)”‘<br>SLIB_INSTALL_NAME&#x3D;’$(SLIBNAME_WITH_VERSION)’<br>SLIB_INSTALL_LINKS&#x3D;’$(SLIBNAME_WITH_MAJOR) $(SLIBNAME)’</p>
+<p>Do you want to convert the text to ‘Simplified Chinese (GB 2312)’?</p>
 </blockquote>
-<p> This cause ffmpeg shared libraries to be compiled to libavcodec.so.<version> (e.g. libavcodec.so.55), which is not compatible with Android build system. Therefore we’ll need to replace the above lines with the following lines.</p>
+<p> Choose ‘Convert’ if you want to change the contents of the file to be encoded as ‘Simplified Chinese (GB 2312)’.</p>
+<blockquote>
+</blockquote>
+<p> Choose ‘Reinterpret’ if you believe the file has been opened with an incorrect encoding and you want to reopen it as ‘Simplified Chinese (GB 2312)’.</p>
+</li>
+<li><p>把成功显示中文后的文件保存成UTF8格式：</p>
 </li>
 </ol>
-<blockquote>
-<p>SLIBNAME_WITH_MAJOR&#x3D;’$(SLIBPREF)$(FULLNAME)-$(LIBMAJOR)$(SLIBSUF)’<br>LIB_INSTALL_EXTRA_CMD&#x3D;’$$(RANLIB) “$(LIBDIR)&#x2F;$(LIBNAME)”‘<br>SLIB_INSTALL_NAME&#x3D;’$(SLIBNAME_WITH_MAJOR)’<br>SLIB_INSTALL_LINKS&#x3D;’$(SLIBNAME)’</p>
-</blockquote>
+<p>再选择下Text Encoing-&gt;UTF8，这次出现的提示选择Convert</p>
 <ol start="5">
-<li><p>新建build_android.sh，下面是使用的配置，主要是开头的三个变量要根据自己机器上的情况修改成对应的路径:</p>
-<p> #!&#x2F;bin&#x2F;bash<br> NDK&#x3D;&#x2F;Applications&#x2F;android-ndk-r9d<br> SYSROOT&#x3D;$NDK&#x2F;platforms&#x2F;android-9&#x2F;arch-arm&#x2F;<br> TOOLCHAIN&#x3D;$NDK&#x2F;toolchains&#x2F;arm-linux-androideabi-4.8&#x2F;prebuilt&#x2F;darwin-x86_64<br> function build_one<br> {<br> .&#x2F;configure <br> –prefix&#x3D;$PREFIX <br> –enable-shared <br> –disable-static <br> –disable-doc <br> –disable-ffmpeg <br> –disable-ffplay <br> –disable-ffprobe <br> –disable-ffserver <br> –disable-avdevice <br> –disable-doc <br> –disable-symver <br> –cross-prefix&#x3D;$TOOLCHAIN&#x2F;bin&#x2F;arm-linux-androideabi- <br> –target-os&#x3D;linux <br> –arch&#x3D;arm <br> –enable-cross-compile <br> –sysroot&#x3D;$SYSROOT <br> –extra-cflags&#x3D;”-Os -fpic $ADDI_CFLAGS” <br> –extra-ldflags&#x3D;”$ADDI_LDFLAGS” <br> $ADDITIONAL_CONFIGURE_FLAG<br> make clean<br> make<br> make install<br> }<br> CPU&#x3D;arm<br> PREFIX&#x3D;$(pwd)&#x2F;android&#x2F;$CPU<br> ADDI_CFLAGS&#x3D;”-marm”<br> build_one</p>
-<p> 我一开始没留意TOOLCHAIN的路径，后面发现编译错误，才修改了build_android.sh中TOOLCHAIN的路径定义：</p>
-</li>
+<li>搞定</li>
 </ol>
-<blockquote>
-<p>TOOLCHAIN&#x3D;$NDK&#x2F;toolchains&#x2F;arm-linux-androideabi-4.8&#x2F;prebuilt&#x2F;linux-x86_64</p>
-<p>改成</p>
-<p>TOOLCHAIN&#x3D;$NDK&#x2F;toolchains&#x2F;arm-linux-androideabi-4.8&#x2F;prebuilt&#x2F;darwin-x86_64</p>
-</blockquote>
-<ol start="6">
-<li><p>保存build_android.sh，并调用执行编译<br>我直接把build_android.sh保存在了ffmpeg-2.1.4根目录下，然后执行：</p>
-<blockquote>
-<p>sudo chmod +x build_android.sh<br>.&#x2F;build_android.sh</p>
-</blockquote>
-</li>
-<li><p>编译通过，在ffmpeg-2.1.4&#x2F;Android目录下生成了若干.so文件</p>
-</li>
-</ol>
-<h2 id="解压到别的目录下去编译"><a href="#解压到别的目录下去编译" class="headerlink" title="解压到别的目录下去编译"></a>解压到别的目录下去编译</h2><p>文章中把ffmpeg的源代码解压到了NDK的sources目录下，并说明了原因：</p>
-<blockquote>
-<p>The reason we built our ffmpeg source code under $NDK&#x2F;sources folder is that NDK build system will search for directories under this path for external modules automatically. </p>
-</blockquote>
-<p>其实解压到哪里编译都可以，只是放在NDK目录下其他工程使用ffmpeg时的引用路径配置方便一点。</p>
-<p>– The End –</p>
 
       
     </div>
@@ -662,7 +247,7 @@ mediaRecorder.setOrientationHint(90);
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-05-09-keystone-habits/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/09/2014/2014-07-09-jsoncpp-semantic-issue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -676,7 +261,7 @@ mediaRecorder.setOrientationHint(90);
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2014/2014-05-09-keystone-habits/" class="post-title-link" itemprop="url">核心习惯 Keystone Habits</a>
+            <a href="/2014/07/09/2014/2014-07-09-jsoncpp-semantic-issue/" class="post-title-link" itemprop="url">jsoncpp在Xcode下编译出现semantic issue</a>
         </h2>
 
         <div class="post-meta">
@@ -686,7 +271,7 @@ mediaRecorder.setOrientationHint(90);
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2014-07-09 00:00:00" itemprop="dateCreated datePublished" datetime="2014-07-09T00:00:00+08:00">2014-07-09</time>
             </span>
 
           
@@ -700,13 +285,11 @@ mediaRecorder.setOrientationHint(90);
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="最近在看这本书：《习惯的力量》"><a href="#最近在看这本书：《习惯的力量》" class="headerlink" title="最近在看这本书：《习惯的力量》"></a>最近在看这本书：《<a target="_blank" rel="noopener" href="http://book.douban.com/subject/20507212/">习惯的力量</a>》</h2><p><img src="http://img3.douban.com/mpic/s26262254.jpg" alt="s26262254.jpg"></p>
-<h2 id="突然想到核心习惯这个问题，我就发了一条推特："><a href="#突然想到核心习惯这个问题，我就发了一条推特：" class="headerlink" title="突然想到核心习惯这个问题，我就发了一条推特："></a>突然想到核心习惯这个问题，我就发了<a target="_blank" rel="noopener" href="https://twitter.com/linyehui/status/464674799520710656">一条推特</a>：</h2><blockquote>
-<p>最近看《习惯的力量》，开始思考自己的核心习惯是什么？或者说应该培养怎样的核心习惯对自己的帮助最大，目前想到的是 #GTD；<br>虽然BIO中声称自己是GTD，但是GTD并不是自己目前的核心习惯；<br>这个问题还得再琢磨琢磨，但千万不能被现在的核心习惯 #三分钟热度 给抛弃了，发推备忘下</p>
+          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>Xcode 5.0.2下编译Cocos2d-x工程，工程中使用了jsoncpp-0.5.0，编译的时候出现这个问题，找了半天不知道怎么解决：</p>
+<blockquote>
+<p>semantic issue<br>Variable has incomplete type ‘Json::StyledWriter’</p>
 </blockquote>
-<h2 id="提醒自己核心习惯自我反省下"><a href="#提醒自己核心习惯自我反省下" class="headerlink" title="提醒自己核心习惯自我反省下"></a>提醒自己核心习惯自我反省下</h2><p>现在：三分钟热度<br>期望：GTD，高效，坚持</p>
-<h2 id="对我影响最大的三本书："><a href="#对我影响最大的三本书：" class="headerlink" title="对我影响最大的三本书："></a>对我影响最大的三本书：</h2><p>《把时间当作朋友》<br>《习惯的力量》<br>《把信带给加西亚》</p>
-<h2 id="2014-05-26-补充"><a href="#2014-05-26-补充" class="headerlink" title="2014-05-26 补充"></a>2014-05-26 补充</h2><p>场景化是习惯养成的一个重要条件，当生活的重心全部集中于一点的时候，所有的其他习惯貌似都被打乱了？在新的场景下如何养成新的习惯替代老的习惯呢？<br>习惯养成应该是有方法论的，这个问题我还要持续思考，希望未来有天我可以在这个点上向世界输出点有用的东西。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>升级jsoncpp-0.6.0后解决，我用的是这个版本:<a target="_blank" rel="noopener" href="https://github.com/rboulton/jsoncpp">github jsoncpp</a></p>
 
       
     </div>
@@ -726,7 +309,7 @@ mediaRecorder.setOrientationHint(90);
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-05-15-mediarecorder-start-failed-19/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/06/2014/2014-07-06-migrating-from-wikidot-to-jekyll/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -740,7 +323,7 @@ mediaRecorder.setOrientationHint(90);
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2014/2014-05-15-mediarecorder-start-failed-19/" class="post-title-link" itemprop="url">MediaRecorder.start failed: -19</a>
+            <a href="/2014/07/06/2014/2014-07-06-migrating-from-wikidot-to-jekyll/" class="post-title-link" itemprop="url">把Blog数据从Wikidot迁移到Jekyll</a>
         </h2>
 
         <div class="post-meta">
@@ -750,7 +333,7 @@ mediaRecorder.setOrientationHint(90);
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2014-07-06 00:00:00" itemprop="dateCreated datePublished" datetime="2014-07-06T00:00:00+08:00">2014-07-06</time>
             </span>
 
           
@@ -764,166 +347,73 @@ mediaRecorder.setOrientationHint(90);
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>Android下，使用MediaRecorder进行视频录制，同一段代码在小米2S下代码运行正常，但是在Nexux S下会直接异常退出，log如下：</p>
-<blockquote>
-<p>05-15 16:22:21.631: E&#x2F;MediaRecorder(9265): start failed: -19<br>05-15 16:22:21.635: W&#x2F;System.err(9265): java.lang.RuntimeException: start failed.<br>05-15 16:22:21.639: W&#x2F;System.err(9265): 	at android.media.MediaRecorder.start(Native Method)</p>
+          <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><blockquote>
+<p>把Wikidot的Blog数据迁移到Jekyll</p>
 </blockquote>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><h3 id="去掉对VideoFrameRate的设置："><a href="#去掉对VideoFrameRate的设置：" class="headerlink" title="去掉对VideoFrameRate的设置："></a>去掉对VideoFrameRate的设置：</h3><blockquote>
-<p>mediaRecorder.setVideoFrameRate(24);<br>或者<br>profile.videoFrameRate &#x3D; Math.min(24);</p>
-</blockquote>
-<p><strong>参考这个</strong>：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19">Mediarecorder start failed -19</a></p>
-<h3 id="不过我这还遇到了比其他网友更奇怪的问题："><a href="#不过我这还遇到了比其他网友更奇怪的问题：" class="headerlink" title="不过我这还遇到了比其他网友更奇怪的问题："></a>不过我这还遇到了比其他网友更奇怪的问题：</h3><p>直接使用MediaRecorer的set方法会异常退出，但是get CamcorderProfile后进行相应的修改就能正常运行</p>
-<p>下面这两份代码的视频和音频格式参数都是一样的，但是上面这种写法会导致异常退出：</p>
-<blockquote>
-<p>05-15 16:22:21.631: E&#x2F;MediaRecorder(9265): start failed: -19<br>05-15 16:22:21.635: W&#x2F;System.err(9265): java.lang.RuntimeException: start failed.<br>05-15 16:22:21.639: W&#x2F;System.err(9265): 	at android.media.MediaRecorder.start(Native Method)</p>
-</blockquote>
-<h4 id="失败"><a href="#失败" class="headerlink" title="失败"></a>失败</h4><pre><code>// 失败 -19 异常退出
-CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
-mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
-mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-//mediaRecorder.setVideoFrameRate(24);
-mediaRecorder.setVideoEncodingBitRate(1000 * 1024);
-mediaRecorder.setAudioEncodingBitRate(42 * 1024);
-mediaRecorder.setAudioSamplingRate(44100);
-mediaRecorder.setAudioChannels(2);
-mediaRecorder.setVideoSize(640, 480);
-</code></pre>
-<h4 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h4><pre><code>// 成功
-CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);    		
-profile.fileFormat = MediaRecorder.OutputFormat.MPEG_4;
-profile.videoCodec = MediaRecorder.VideoEncoder.H264;
-profile.audioCodec = MediaRecorder.AudioEncoder.AAC;
-            
-// 设置videoFrameRate会导致Nexus S下异常退出-19 @linyehui
-//profile.videoFrameRate = 24;
-profile.videoBitRate = 1000 * 1024;
-profile.audioBitRate = 42 * 1024;
-profile.audioSampleRate = 44100;
-profile.audioChannels = 2;        
-
-mediaRecorder.setProfile(profile);
-mediaRecorder.setVideoSize(640, 480);
-</code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>会导致MediaRecorder start时-19异常退出，主要有两个原因：</p>
-<ol>
-<li><p>mediaRecorder.setVideoSize设置的大小硬件不支持<br><strong>解决方案</strong>：<br>先用getSupportedPreviewSizes获取硬件支持的分辨率再使用</p>
-</li>
-<li><p>mediaRecorder.setVideoFrameRate设置的参数硬件不支持<br><strong>解决方案</strong>：<br>暂时没找到好的办法，我的方法是先不用<br>（应该有方法可以获取硬件支持的这个信息，然后根据硬件支持的参数来设置就可以了）</p>
-</li>
-</ol>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/9271349/error-when-using-camera-on-android-4-nexus-s">Error when Using Camera on Android 4&#x2F;Nexus s</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/10496969/android-mediarecorder-start-failed-19">Android MediaRecorder - “start failed: -19”</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/11249642/mediarecorder-start-failed-19">Mediarecorder start failed -19</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/netwalk/article/details/17686993">Error处理： android.media.MediaRecorder.start(Native Method) 报错：start failed: -19</a>  </p>
-<p>– End –</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-05-21-nexus-s-front-camera-mediarecorder-start-failed-19/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2014/2014-05-21-nexus-s-front-camera-mediarecorder-start-failed-19/" class="post-title-link" itemprop="url">Nexus S 前置摄像头MediaRecorder start failed -19</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>前几天解决了Android下的这个问题：<a target="_blank" rel="noopener" href="http://www.linyehui.com/mediarecorder-start-failed-19">MediaRecorder.start failed: -19</a>，后面发现没有彻底解决：<br><strong>在Nexus S这部“神机”下，如果使用前置摄像头进行录像，还是会出现start failed -19</strong></p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>判断是Nexus S，而且使用的是前置摄像头，调用setVideoFrameRate设置为15，解决。<br>参考文章是这篇：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/14681703/android-cant-record-video-with-front-facing-camera-mediarecorder-start-failed">Android cant record video with Front Facing Camera, MediaRecorder start failed: -19</a></p>
-<p><strong>原文是这样的：</strong></p>
-<blockquote>
-<p>So, if I use the QUALITY_LOW profile AND set the frame-rate to 15 or lower, it magically works.</p>
-<p>mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));<br>mediaRecorder.setVideoFrameRate(15);<br>Infact any value, 1 - 15 works. Which seems weird.</p>
-</blockquote>
-<p><strong>不过我用CamcorderProfile.QUALITY_HIGH也是没问题的，关键是mediaRecorder.setVideoFrameRate(15);</strong></p>
-<h2 id="贴下我的代码："><a href="#贴下我的代码：" class="headerlink" title="贴下我的代码："></a>贴下我的代码：</h2><pre><code>// ... 此处省略代码若干
-
-            CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
-            
-            profile.fileFormat = MediaRecorder.OutputFormat.MPEG_4;
-            profile.videoCodec = MediaRecorder.VideoEncoder.H264;
-            profile.audioCodec = MediaRecorder.AudioEncoder.AAC;
-
-            // 设置videoFrameRate会导致Nexus S后置摄像头异常退出-19
-            // 但不设置，或者设置的不是15以下的值，Nexus S前置摄像头会异常退出-19
-            // @linyehui
-            if (isModelNexusS())
-            &#123;
-                if (!cameraManager.isUseBackCamera())
-                &#123;
-                    profile.videoFrameRate = 15;
-                &#125;
-            &#125;
-            else
-            &#123;
-                profile.videoFrameRate = Math.min(HJW_VIDEO_FRAME_RATE, profile.videoFrameRate);
-            &#125;
-
-            // ... 此处省略代码若干
-
-    private boolean isModelNexusS() &#123;
-         final String MODLE_NEXUS_S = &quot;Nexus S&quot;;
-         Log.i(LOG_TAG, &quot;MODEL: &quot; + android.os.Build.MODEL);
-         
-         if (android.os.Build.MODEL.equalsIgnoreCase(MODLE_NEXUS_S))
-             return true;
-         else
-             return false;
-    &#125;
-</code></pre>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>我目前的做法就是对Nexus S这种神机进行适配：</p>
-<ul>
-<li>如果是Nexus S，前置摄像头，设置videoFrameRate 为 15</li>
-<li>如果是Nexus S，后置摄像头，就不要设置videoFrameRate </li>
-<li>如果不是Nexus S，正常设置videoFrameRate 即可</li>
+<h3 id="目标分解："><a href="#目标分解：" class="headerlink" title="目标分解："></a>目标分解：</h3><ul>
+<li>Blog原文从之前的Wiki格式转换成Markdown</li>
+<li>保持原有的文章发布时间，标题，文章的Url，tag信息</li>
 </ul>
-<p>– End –</p>
+<p><strong>PS.</strong>  </p>
+<p>为什么把博客从Wikidot迁移出来？<br>为什么选择Github Pages + Jekyll 而不是Farbox或者其他？<br>这个先沉淀下，同时也用段时间验证下，过段时间再和大家分享。</p>
+<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><h2 id="基本情况介绍"><a href="#基本情况介绍" class="headerlink" title="基本情况介绍"></a>基本情况介绍</h2><ul>
+<li>Wikidot支持Backup，但是备份出来的数据压缩包解压出来就是些纯文本，文件名是url名字，文件内容就是Wiki格式的文章内容，没有文章发布的时间，没有tag信息；</li>
+<li>想拿到全的RSS，但试了半天RSS还是只导出了22篇文章，不知道怎么拿到老的数据RSS。</li>
+</ul>
+<h2 id="尝试-1：能不能直接使用-Jekyll-import"><a href="#尝试-1：能不能直接使用-Jekyll-import" class="headerlink" title="尝试 1：能不能直接使用 Jekyll-import"></a>尝试 1：能不能直接使用 Jekyll-import</h2><ul>
+<li>我也想用，但是没找到直接对Wikidot的支持，对Wiki格式的支持也没有；</li>
+<li>如果想从RSS导入的话，Wikidot导出的RSS又不全</li>
+<li>无奈放弃</li>
+</ul>
+<h2 id="尝试-2：能不能曲线救国，先转成Wordpress再转"><a href="#尝试-2：能不能曲线救国，先转成Wordpress再转" class="headerlink" title="尝试 2：能不能曲线救国，先转成Wordpress再转"></a>尝试 2：能不能曲线救国，先转成Wordpress再转</h2><p>看了下，有位哥们脚本实现了：<a target="_blank" rel="noopener" href="https://github.com/vLj2/wikidot-to-markdown">wikidot-to-markdown</a>，但是他只是对格式的转换，这个代码我可以复用，但是……</p>
+<h4 id="但是来了："><a href="#但是来了：" class="headerlink" title="但是来了："></a>但是来了：</h4><ul>
+<li><p>前提是我得先有数据给他转换，从上面介绍Wikidot直接提供给我们的数据是不够的</p>
+</li>
+<li><p>我的目的是放到Jekyll上，也就是说我的文件头需要加上Jakyll的配置，这个我还得另外写个脚本来做</p>
+</li>
+<li><p>需求描述变成了：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 从Wikidot拿到所有文章的索引信息（Title，Url，tags，Date），和backup中的文件关联起来；</span><br><span class="line">2. 再处理下backup中的文件，加上文件头，把正文从Wiki转成Mardown</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>到此，问题分析的七七八八了，结论是我要写个脚本来做这个事情。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="拿到WIkidot所有文章的索引"><a href="#拿到WIkidot所有文章的索引" class="headerlink" title="拿到WIkidot所有文章的索引"></a>拿到WIkidot所有文章的索引</h2><p>没能拿到全的RSS，但是全的索引还是可以拿到的，但是需要再wikidot下页面单独来做这个事情，比如我的：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.linyehui.com/misc:rss">http://www.linyehui.com/misc:rss</a></p>
+</blockquote>
+<p>这个Wikidot页面的源码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[module ListPages category=&quot;_default&quot; perPage=&quot;500&quot; date=&quot;@URL&quot; separate=&quot;false&quot; prependLine=&quot;||~ Page||~ Date created||~ Tags ||&quot;]]</span><br><span class="line">|| %%linked_title%% || %%date%% || %%tags%% ||</span><br><span class="line">[[/module]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="从Wikidot后台Backup并下载Zip包"><a href="#从Wikidot后台Backup并下载Zip包" class="headerlink" title="从Wikidot后台Backup并下载Zip包"></a>从Wikidot后台Backup并下载Zip包</h2><p>解压后的文件路径类似：</p>
+<blockquote>
+<p>~&#x2F;backup_linyehui_20140705_1759UTC&#x2F;source&#x2F;system_recent-changes.txt</p>
+</blockquote>
+<h2 id="写脚本"><a href="#写脚本" class="headerlink" title="写脚本"></a>写脚本</h2><p>有了上面两步，我就能拿到全索引，并用索引把backup目录下的文件关联起来了<br>对脚本感兴趣的可以直接看代码：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/linyehui/migrating-from-wikidot-to-jekyll">https://github.com/linyehui/migrating-from-wikidot-to-jekyll</a></p>
+</blockquote>
+<h3 id="这里说下脚本的使用方式："><a href="#这里说下脚本的使用方式：" class="headerlink" title="这里说下脚本的使用方式："></a>这里说下脚本的使用方式：</h3><ol>
+<li><p>git clone 得到两个脚本文件 </p>
+<blockquote>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/linyehui/migrating-from-wikidot-to-jekyll">https://github.com/linyehui/migrating-from-wikidot-to-jekyll</a></p>
+</blockquote>
+</li>
+<li><p>从Wikidot 管理后台备份Blog，并下载下来，解压后得到source目录，放到脚本下的wikidot根目录（是的，我的脚本不对文件进行处理）</p>
+</li>
+<li><p>新建一个Wikidot页面，用于生成所有文章的RSS（我这文章数上限设置的是500，你可以自己调整），生成的RSS保存成rss.html，把文件复制到脚本下的wikidot根目录</p>
+<p> 我新建了这个页面：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.linyehui.com/misc:rss">http://www.linyehui.com/misc:rss</a></p>
+</blockquote>
+<p> 页面代码如下（点击Edit就能编辑）：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[module ListPages category=&quot;_default&quot; perPage=&quot;500&quot; date=&quot;@URL&quot; separate=&quot;false&quot; prependLine=&quot;||~ Page||~ Date created||~ Tags ||&quot;]]</span><br><span class="line">|| %%linked_title%% || %%date%% || %%tags%% ||</span><br><span class="line">[[/module]]</span><br></pre></td></tr></table></figure></li>
+<li><p>现在的脚本目录结构如下：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">|----wikidot</span><br><span class="line">|    |-convert.py</span><br><span class="line">|    |-wikidot.py</span><br><span class="line">|    |-rss.html</span><br><span class="line">|    |-source</span><br><span class="line">|        |- xxxx-xxx1.txt</span><br><span class="line">|        |- xxxx-xxx2.txt</span><br></pre></td></tr></table></figure></li>
+<li><p>执行convert.py，不带参数会使用默认的目录结构进行执行，执行后你就能再脚本旁边的.&#x2F;jekyll目录下得到你所需要的转换后的.markdown文件们</p>
+</li>
+<li><p>把.markdown文件全选，复制到github pages对应git目录下的_post目录，git commit，git push</p>
+</li>
+<li><p>迁移工作搞定。</p>
+</li>
+</ol>
 
       
     </div>
@@ -943,7 +433,7 @@ mediaRecorder.setVideoSize(640, 480);
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-06-10-like-and-love/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/05/2014/2014-07-05-make-cocos2dx-samples-as-static-libraries/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -957,7 +447,7 @@ mediaRecorder.setVideoSize(640, 480);
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2014/2014-06-10-like-and-love/" class="post-title-link" itemprop="url">喜欢和爱</a>
+            <a href="/2014/07/05/2014/2014-07-05-make-cocos2dx-samples-as-static-libraries/" class="post-title-link" itemprop="url">把cocos2dx的Sample工程改成Static Library</a>
         </h2>
 
         <div class="post-meta">
@@ -967,7 +457,7 @@ mediaRecorder.setVideoSize(640, 480);
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2014-07-05 00:00:00" itemprop="dateCreated datePublished" datetime="2014-07-05T00:00:00+08:00">2014-07-05</time>
             </span>
 
           
@@ -981,17 +471,99 @@ mediaRecorder.setVideoSize(640, 480);
     <div class="post-body" itemprop="articleBody">
 
       
-          <pre><code>关于养宠物，一直想表达点什么，但总是话在嘴边却说不出个所以然。
-
-
-做了三个月爸爸之后，我开始有点明白：
-喜欢小猫小狗，和养一只小猫小狗……
-喜欢小孩，和养育一个小孩……
-
-
-两者有个相同点：
-养育，只有喜欢是不够的，需要你满满的爱，满满的。
-</code></pre>
+          <h1 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h1><ol>
+<li>我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发；</li>
+<li>我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心</li>
+<li>Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用</li>
+<li>现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调用。</li>
+</ol>
+<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>Mac下已经配置好了cocos2dx的开发环境，Sample中的HelloCpp工程可以在Xcode下成功编译并运行</p>
+<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h3 id="1-把HelloCpp工程从Cocos2dx目录下复制出来"><a href="#1-把HelloCpp工程从Cocos2dx目录下复制出来" class="headerlink" title="1. 把HelloCpp工程从Cocos2dx目录下复制出来"></a>1. 把HelloCpp工程从Cocos2dx目录下复制出来</h3><h4 id="问题：复制出来后会提示cocos2d-h文件找不到"><a href="#问题：复制出来后会提示cocos2d-h文件找不到" class="headerlink" title="问题：复制出来后会提示cocos2d.h文件找不到"></a>问题：复制出来后会提示cocos2d.h文件找不到</h4><h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><p>原因是Sample工程设置的include路径是按照工程再cocos自己的目录下来设置的，把工程复制出来后路径就变了</p>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><ol>
+<li><p>先添加一个SourceTrees变量</p>
+<blockquote>
+<p>Perferences-&gt;Locatons-&gt;Source Trees<br>添加一个COCOS2DX_HOME变量，并把path设置成本机的cocos2dx根目录</p>
+</blockquote>
+</li>
+<li><p>修改工程Targets中的Header Search Paths</p>
+<blockquote>
+<p>点击工程-&gt;Targets-&gt;HelloCpp-&gt;Build Settings-&gt;Search Paths-&gt;Header Search Paths<br>把值修改成这个：</p>
+</blockquote>
+<p> “$(SDKROOT)&#x2F;usr&#x2F;include&#x2F;libxml2&#x2F;“ “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;include” “$(COCOS2DX_HOME)&#x2F;cocos2dx” “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;platform&#x2F;ios” “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;kazmath&#x2F;include” “$(COCOS2DX_HOME)&#x2F;external&#x2F;chipmunk&#x2F;include&#x2F;chipmunk”</p>
+</li>
+<li><p>Clean工程，然后再次Build，成功</p>
+</li>
+</ol>
+<h3 id="2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"><a href="#2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来" class="headerlink" title="2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"></a>2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来</h3><h4 id="先把HelloCpp工程调整成这样"><a href="#先把HelloCpp工程调整成这样" class="headerlink" title="先把HelloCpp工程调整成这样"></a>先把HelloCpp工程调整成这样</h4><p>发现这个文章做了我想做的事情的一部分：<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/crayondeng/article/details/16828555">Cocos2d-x UIView和Coco2d-x场景之间的相互跳转切换</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.raywenderlich.com/zh-hans/24764/%E5%A6%82%E4%BD%95%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8cocos2d%E5%92%8Cuikit-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86">如何结合使用Cocos2d和UIKit 第一部分</a></p>
+<h3 id="3-新增HelloCpp-Target：Static-Library"><a href="#3-新增HelloCpp-Target：Static-Library" class="headerlink" title="3. 新增HelloCpp Target：Static Library"></a>3. 新增HelloCpp Target：Static Library</h3><p>在Library的Target中有几个点需要参考默认Target的配置：</p>
+<ol>
+<li><p>不使用ARC</p>
+<blockquote>
+<p>Object-C Automatic Reference Counting —–&gt; NO</p>
+</blockquote>
+</li>
+<li><p>Search Path，直接复制默认Target的配置即可</p>
+<p> “$(SDKROOT)&#x2F;usr&#x2F;include&#x2F;libxml2&#x2F;“ “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;include” “$(COCOS2DX_HOME)&#x2F;cocos2dx” “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;platform&#x2F;ios” “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;kazmath&#x2F;include” “$(COCOS2DX_HOME)&#x2F;external&#x2F;chipmunk&#x2F;include&#x2F;chipmunk”</p>
+</li>
+<li><p>修改预编译宏定义 Preprocessor Macros，也是直接复制默认的Target配置就可以了</p>
+<blockquote>
+<p>USE_FILE32API CC_TARGET_OS_IPHONE COCOS2D_DEBUG&#x3D;1<br>USE_FILE32API CC_TARGET_OS_IPHONE</p>
+</blockquote>
+</li>
+<li><p>添加对libcocos2dx.a的依赖</p>
+<blockquote>
+<p>Build Phases-&gt;Link Binary With Libraries</p>
+</blockquote>
+</li>
+<li><p>新的Target配置成功后会编译出.a文件</p>
+</li>
+</ol>
+<h3 id="4-新增工程GamesHall用于调用library"><a href="#4-新增工程GamesHall用于调用library" class="headerlink" title="4. 新增工程GamesHall用于调用library"></a>4. 新增工程GamesHall用于调用library</h3><ul>
+<li>把HelloCpp工程添加到GamesHall下</li>
+<li>在Target中添加对libhellocpp.a的依赖</li>
+<li>不添加任何代码，编译工程，可以运行</li>
+<li>如果不能运行要按照错误提示进行修改，很有可能是libhellocpp.a没有编译出来，那就要检查下上面的步骤，看新增的Static Library的Target是不是配置的有问题</li>
+<li>配置正确的话，GamesHall编译后可以再调试目录(Debug-iphonesimulator)下看到libhellocpp.a和libcocos2dx.a还有include目录都正确复制过来了</li>
+</ul>
+<blockquote>
+<p>&#x2F;Users&#x2F;linyehui&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData&#x2F;GamesHall-ezsoyplchjjurfeznsedhgwywbkr&#x2F;Build&#x2F;Products&#x2F;Debug-iphonesimulator</p>
+</blockquote>
+<h3 id="5-添加代码调用"><a href="#5-添加代码调用" class="headerlink" title="5. 添加代码调用"></a>5. 添加代码调用</h3><ul>
+<li>添加后发现link失败，找了好多原因，最后有效的是这个：<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/18959691/ios7-only-stdlibc-linking-issue">IOS7 (only) stdlibc++ linking issue</a></li>
+<li>改完stdlib后又提示zlib相关的几个函数找不到<br>工程依赖加上libz.dylib</li>
+</ul>
+<h3 id="6-调用成功，独立成Static-Library没问题"><a href="#6-调用成功，独立成Static-Library没问题" class="headerlink" title="6. 调用成功，独立成Static Library没问题"></a>6. 调用成功，独立成Static Library没问题</h3><h3 id="7-尝试多个游戏一起加入进来"><a href="#7-尝试多个游戏一起加入进来" class="headerlink" title="7. 尝试多个游戏一起加入进来"></a>7. 尝试多个游戏一起加入进来</h3><ul>
+<li><p>单个HelloCpp是OK的</p>
+</li>
+<li><p>两个一起加会编译失败但没有具体失败的项，只有Warning，很奇怪</p>
+</li>
+<li><p>两个分别成功加进去，并正确运行后，再把两个加到一起，可以运行，但是第二个游戏错乱了，还要再找下原因</p>
+</li>
+<li><p>第二个游戏不是乱了，而是显示了第一个游戏的场景；原因是：</p>
+<p>  注册cocos2d::CCApplication用的是一个全局静态变量，而不是注册上去的，我们有两个游戏，其实有两个这个全局变量的实现，用来处理cocos的启动跟暂停；<br>  而且我们的runWithScene是在这个里面调用的，所以导致了，两个游戏启动的时候都调用到了同样的场景。</p>
+</li>
+<li><p>尝试自己runWithScene，看看能不能把两个游戏分开<br>CCApplication的之类全局自定义一个，然后runWitSenne拿到cocosView中来分别处理，可以做到，但是这个方案并不好，下面单独解释。</p>
+</li>
+</ul>
+<h1 id="两个工程合在一起的问题"><a href="#两个工程合在一起的问题" class="headerlink" title="两个工程合在一起的问题"></a>两个工程合在一起的问题</h1><h3 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h3><blockquote>
+<p>不要把两个独立的游戏座位Library整合在一个应用内。<br>技术上可以实现，但是Cocos架构不支持，勉强自己改来用的话出现莫名其妙问题的风险很大。</p>
+</blockquote>
+<h3 id="非要实现的细节和缺陷"><a href="#非要实现的细节和缺陷" class="headerlink" title="非要实现的细节和缺陷"></a>非要实现的细节和缺陷</h3><ol>
+<li><p>Cocos本身的设计没有考虑这种一个进程多个游戏的架构，我们使用会有架构风险<br>比如cocos2d::CCApplication的事件注册并不是Add上去，而是定义一个全局变量来实现，这个设计本身就没考虑多个实例同时存在</p>
+<p> &#x2F;&#x2F; cocos2d application instance<br> &#x2F;&#x2F; 两个游戏加到一个工程的时候只能保留一个，否则会从Cocos内部直接异常退出<br> &#x2F;&#x2F; 变量名不同也没用，因为实际起作用的是父类CCApplication的成员变量<br> &#x2F;&#x2F; static CCApplication * sm_pSharedApplication;<br><br><br> &#x2F;&#x2F;static CocosAppDelegate s_sharedApplication;<br> 解决的办法，是多个游戏只保留一个CCApplication之类的全局变量的定义。</p>
+</li>
+<li><p>本来应该每个游戏自己响应CCApplication事件并做出处理，现在这个点不能做了，架构上本身就有问题，和把游戏整个在一个Cocos实例下没有本质的区别，未知的问题还更多</p>
+</li>
+<li><p>Xcode对于这种多个Library依赖同一个Library的编译支持有时候会出错<br>会出现上面提到的：提示编译失败，但是没有列出具体失败的地方，如果这个时候把其中一个游戏工程删掉，错误的地方就能正确被提示</p>
+</li>
+</ol>
+<h1 id="关于静态库对安装包大小的影响"><a href="#关于静态库对安装包大小的影响" class="headerlink" title="关于静态库对安装包大小的影响"></a>关于静态库对安装包大小的影响</h1><p>以下三个包，资源都是一样的，只是库文件上有差异</p>
+<h3 id="只有大厅，不包含游戏库，-app大小235KB"><a href="#只有大厅，不包含游戏库，-app大小235KB" class="headerlink" title="只有大厅，不包含游戏库，.app大小235KB"></a>只有大厅，不包含游戏库，.app大小235KB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/just_hall.png" alt="just_hall.png"></p>
+<h3 id="大厅-一个cocos2dx游戏Library，-app大小3-5MB"><a href="#大厅-一个cocos2dx游戏Library，-app大小3-5MB" class="headerlink" title="大厅+一个cocos2dx游戏Library，.app大小3.5MB"></a>大厅+一个cocos2dx游戏Library，.app大小3.5MB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/one_game.png" alt="one_game.png"></p>
+<h3 id="大厅-两个cocos2dx游戏Library，-app大小3-2MB"><a href="#大厅-两个cocos2dx游戏Library，-app大小3-2MB" class="headerlink" title="大厅+两个cocos2dx游戏Library，.app大小3.2MB"></a>大厅+两个cocos2dx游戏Library，.app大小3.2MB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/two_games.png" alt="two_games.png"></p>
+<p>科学吗？差不多是这个意思</p>
+<h1 id="其他参考文章"><a href="#其他参考文章" class="headerlink" title="其他参考文章"></a>其他参考文章</h1><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/beginor/archive/2012/04/20/2459244.html">iOS 静态类库项目的建立与使用</a></p>
 
       
     </div>
@@ -1011,7 +583,7 @@ mediaRecorder.setVideoSize(640, 480);
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2014/2014-06-12-monitoring-curl-traffic-in-android-using-fiddler2/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/02/2014/2014-07-02-empty-application-add-interface-builder-on-xcode-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1025,7 +597,7 @@ mediaRecorder.setVideoSize(640, 480);
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2014/2014-06-12-monitoring-curl-traffic-in-android-using-fiddler2/" class="post-title-link" itemprop="url">Android下使用Fiddler2对cURL进行抓包分析</a>
+            <a href="/2014/07/02/2014/2014-07-02-empty-application-add-interface-builder-on-xcode-5/" class="post-title-link" itemprop="url">给Xcode5下Empty Application模板创建的工程添加Interface Builder</a>
         </h2>
 
         <div class="post-meta">
@@ -1035,7 +607,391 @@ mediaRecorder.setVideoSize(640, 480);
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2014-07-02 00:00:00" itemprop="dateCreated datePublished" datetime="2014-07-02T00:00:00+08:00">2014-07-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1-新建一个Empty-Application的工程"><a href="#1-新建一个Empty-Application的工程" class="headerlink" title="1. 新建一个Empty Application的工程"></a>1. 新建一个Empty Application的工程</h3><p>Xcode-&gt;New Project-&gt;Empty Application</p>
+<h3 id="2-填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”"><a href="#2-填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”" class="headerlink" title="2. 填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”"></a>2. 填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”</h3><h3 id="3-选择工程保存的路径，然后点击“Create”"><a href="#3-选择工程保存的路径，然后点击“Create”" class="headerlink" title="3. 选择工程保存的路径，然后点击“Create”"></a>3. 选择工程保存的路径，然后点击“Create”</h3><h3 id="4-File-gt-New-File-gt-左边的导航选择Cocoa-Touch-gt-右边选择Objective-C-Class-gt-点击“Next”"><a href="#4-File-gt-New-File-gt-左边的导航选择Cocoa-Touch-gt-右边选择Objective-C-Class-gt-点击“Next”" class="headerlink" title="4. File-&gt;New File-&gt;左边的导航选择Cocoa Touch-&gt;右边选择Objective-C Class-&gt;点击“Next”"></a>4. File-&gt;New File-&gt;左边的导航选择Cocoa Touch-&gt;右边选择Objective-C Class-&gt;点击“Next”</h3><h3 id="5-配置下类的信息如下："><a href="#5-配置下类的信息如下：" class="headerlink" title="5. 配置下类的信息如下："></a>5. 配置下类的信息如下：</h3><p>Subclass of：UIViewController （这个先填，Xcode会帮你生成Class的值）<br>Class：HelloWorldUIViewController<br>Targeted for iPad:不勾选<br>With XIB for user interface:勾选<br>然后点击“Next”</p>
+<h3 id="6-选择路径后，点击“Create”"><a href="#6-选择路径后，点击“Create”" class="headerlink" title="6. 选择路径后，点击“Create”"></a>6. 选择路径后，点击“Create”</h3><p>你会发现工程下新增了三个文件：<br>HelloWorldUIViewController.h<br>HelloWorldUIViewController.m<br>HelloWorldUIViewController.xib</p>
+<h3 id="7-把新建的UIViewController显示到界面上"><a href="#7-把新建的UIViewController显示到界面上" class="headerlink" title="7. 把新建的UIViewController显示到界面上"></a>7. 把新建的UIViewController显示到界面上</h3><p>7.1 打开AppDelegate.m文件，并在</p>
+<blockquote>
+<p>#import “AppDelegate.h”<br>之后加上一句<br>#import “HelloWorldUIViewController.h”</p>
+</blockquote>
+<p>7.2 在这句注释之后添加两行我们的代码</p>
+<blockquote>
+<p>&#x2F;&#x2F; Override point for customization after application launch.<br>修改后的代码如下：</p>
+</blockquote>
+<pre><code>// Override point for customization after application launch.
+    HelloWorldViewController *hvc = [[HelloWorldViewController alloc] init];
+    [[self window] setRootViewController:hvc];
+</code></pre>
+<h3 id="8-编译，运行"><a href="#8-编译，运行" class="headerlink" title="8. 编译，运行"></a>8. 编译，运行</h3><p>&#x3D;&#x3D;&#x3D;The End&#x3D;&#x3D;&#x3D;</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/01/2014/2014-07-01-what-did-add-native-support-do/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/07/01/2014/2014-07-01-what-did-add-native-support-do/" class="post-title-link" itemprop="url">Add Native Support 都做了些什么</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-07-01 00:00:00" itemprop="dateCreated datePublished" datetime="2014-07-01T00:00:00+08:00">2014-07-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><blockquote>
+<p>Android工程不小心点击了Android Tools-&gt;Add Native Support，怎么还原</p>
+</blockquote>
+<h3 id="还原步骤"><a href="#还原步骤" class="headerlink" title="还原步骤"></a>还原步骤</h3><h4 id="1-删除工程根目录的-cproject文件"><a href="#1-删除工程根目录的-cproject文件" class="headerlink" title="1. 删除工程根目录的 .cproject文件"></a>1. 删除工程根目录的 .cproject文件</h4><h4 id="2-删除-project中的cdt部分"><a href="#2-删除-project中的cdt部分" class="headerlink" title="2. 删除.project中的cdt部分"></a>2. 删除.project中的cdt部分</h4><ul>
+<li>Add Native Support后的工程会在<buildSpec>下多出一个<buildCommand></buildCommand>XML段，找到包含cdt的buildCommand XML段删除</li>
+<li>Add Native Support后的工程会在<natures>下多出几个包含cdt的XML段，删除</li>
+</ul>
+<h4 id="3-回到Eclipse，刷新，右键工程-gt-Android-Tools-gt-Add-Native-Support又回来了"><a href="#3-回到Eclipse，刷新，右键工程-gt-Android-Tools-gt-Add-Native-Support又回来了" class="headerlink" title="3. 回到Eclipse，刷新，右键工程-&gt;Android Tools-&gt;Add Native Support又回来了"></a>3. 回到Eclipse，刷新，右键工程-&gt;Android Tools-&gt;Add Native Support又回来了</h4><p>#不折腾不舒服斯基</p>
+<p>—–The End—–</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/06/20/2014/2014-06-20-fix-video-capture-exception-on-android/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/20/2014/2014-06-20-fix-video-capture-exception-on-android/" class="post-title-link" itemprop="url">Android拍摄视频异常处理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-20 00:00:00" itemprop="dateCreated datePublished" datetime="2014-06-20T00:00:00+08:00">2014-06-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>遇到了好多异常，逐一介绍解决方案如下。</p>
+<h1 id="java-lang-RuntimeException-autoFocus-failed-at-android-hardware-Camera-native-autoFocus"><a href="#java-lang-RuntimeException-autoFocus-failed-at-android-hardware-Camera-native-autoFocus" class="headerlink" title="java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus"></a>java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus</h1><h3 id="autoFocus-时机不对导致的Crash，异常信息"><a href="#autoFocus-时机不对导致的Crash，异常信息" class="headerlink" title="autoFocus 时机不对导致的Crash，异常信息:"></a>autoFocus 时机不对导致的Crash，异常信息:</h3><pre><code>java.lang.RuntimeException: autoFocus failed at android.hardware.Camera.native_autoFocus
+</code></pre>
+<h3 id="得到的用户反馈描述："><a href="#得到的用户反馈描述：" class="headerlink" title="得到的用户反馈描述："></a>得到的用户反馈描述：</h3><p>Sony s39h 一点拍摄视频就crash，从他们上传上来的log看是autoFocus的时候crash了，找了下资料，这个比较接近：<a target="_blank" rel="noopener" href="http://www.hitziger.net/blog/android-camera-autofocus-failed/">Android Camera.autoFocus() failed</a></p>
+<h3 id="参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus-，去掉，搞定。"><a href="#参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus-，去掉，搞定。" class="headerlink" title="参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus()，去掉，搞定。"></a>参考上面的文章在我们的代码中发现了一个调用时机不对的autoFocus()，去掉，搞定。</h3><h1 id="java-lang-RuntimeException-startPreview-failed"><a href="#java-lang-RuntimeException-startPreview-failed" class="headerlink" title="java.lang.RuntimeException: startPreview failed"></a>java.lang.RuntimeException: startPreview failed</h1><h3 id="老的系统版本需要调用SurfaceView的-setType，异常信息："><a href="#老的系统版本需要调用SurfaceView的-setType，异常信息：" class="headerlink" title="老的系统版本需要调用SurfaceView的 setType，异常信息："></a>老的系统版本需要调用SurfaceView的 setType，异常信息：</h3><pre><code>06-19 21:25:28.730: E/AndroidRuntime(1082): FATAL EXCEPTION: main
+    06-19 21:25:28.730: E/AndroidRuntime(1082): java.lang.RuntimeException: startPreview failed
+    06-19 21:25:28.730: E/AndroidRuntime(1082): 	at android.hardware.Camera.startPreview(Native Method)
+    06-19 21:25:28.730: E/AndroidRuntime(1082): 	at com.duowan.huanjuwan.app.truthordare.MediaActivity$1.surfaceChanged(MediaActivity.java:413)
+</code></pre>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><strong>只需要加上setType这个修改就可以了</strong>，但是代码加的位置有讲究，要在getHolder().addCallback之后加才可以</p>
+<pre><code>getHolder().addCallback(this);
+getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+</code></pre>
+<h2 id="心路历程"><a href="#心路历程" class="headerlink" title="心路历程"></a>心路历程</h2><p>解决问题的过程比结果更优价值 :)</p>
+<h3 id="搜索到描述最接近的一文章："><a href="#搜索到描述最接近的一文章：" class="headerlink" title="搜索到描述最接近的一文章："></a>搜索到描述最接近的一文章：</h3><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/7942378/android-camera-will-not-work-startpreview-fails">Android Camera will not work. startPreview fails</a><br>试了下里面的代码，没有解决</p>
+<h3 id="其他的参考文章："><a href="#其他的参考文章：" class="headerlink" title="其他的参考文章："></a>其他的参考文章：</h3><p><a target="_blank" rel="noopener" href="http://code.google.com/p/android/issues/detail?id=7909">Issue 7909:Camera preview does not work on HTC Desire</a><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/dyingbleed/archive/2012/12/04/2801621.html">java.lang.RuntimeException: startPreview failed</a></p>
+<h3 id="再试下这个："><a href="#再试下这个：" class="headerlink" title="再试下这个："></a>再试下这个：</h3><pre><code>#34 paul.won...@gmail.com
+Hi everyone,
+
+
+I&#39;m new to Android but encountered the same problem.  Could it be the case that the width and height parameters are not called properly?  I added the following two lines before parameters.setPreviewSize and it now seems to work fine.
+
+
+w = parameters.getPreviewSize().width;
+h = parameters.getPreviewSize().height;
+        
+
+For the record, I am using a HTC Desire too.
+
+
+Cheers,
+
+
+Paul
+</code></pre>
+<p>还是不行</p>
+<h3 id="尝试下用Demo来调试"><a href="#尝试下用Demo来调试" class="headerlink" title="尝试下用Demo来调试"></a>尝试下用Demo来调试</h3><p>Demo加了两个地方，成功跑起来了，要看下能不能具体到只加一个就可以</p>
+<pre><code>@SuppressWarnings(&quot;deprecation&quot;)
+        public void initCameraManager(Context paramContext) &#123;
+            cameraManager = ((MainActivity) paramContext).getCameraManager();
+            getHolder().addCallback(this);
+            getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        &#125;
+
+
+
+int preview_width = parameters.getPreviewSize().width;
+                int preview_height = parameters.getPreviewSize().height;
+                parameters.setPreviewSize(preview_width, preview_height);
+                Log.e(&quot;video&quot;, &quot;Width: &quot; + preview_width + &quot;, height: &quot; + preview_height);
+                //parameters.setPreviewSize(640, 480);
+                camera.setParameters(parameters);
+</code></pre>
+<p><strong>确认了：只需要加上setType这个修改就可以了</strong>，比较奇怪的是我昨天在我们的产品工程加了，但还是crash了，可能是加的位置不对</p>
+<blockquote>
+<p>getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);</p>
+</blockquote>
+<h3 id="回我们的产品工程再验证下"><a href="#回我们的产品工程再验证下" class="headerlink" title="回我们的产品工程再验证下"></a>回我们的产品工程再验证下</h3><p>果然是加的位置不对，要在getHolder().addCallback之后加才可以</p>
+<pre><code>getHolder().addCallback(this);
+getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+</code></pre>
+<h1 id="java-lang-NoSuchFieldError-android-os-AsyncTask-THREAD-POOL-EXECUTOR"><a href="#java-lang-NoSuchFieldError-android-os-AsyncTask-THREAD-POOL-EXECUTOR" class="headerlink" title="java.lang.NoSuchFieldError: android.os.AsyncTask.THREAD_POOL_EXECUTOR"></a>java.lang.NoSuchFieldError: android.os.AsyncTask.THREAD_POOL_EXECUTOR</h1><h3 id="THREAD-POOL-EXECUTOR在Level-11后才有，需要做系统版本判断再调用，异常信息"><a href="#THREAD-POOL-EXECUTOR在Level-11后才有，需要做系统版本判断再调用，异常信息" class="headerlink" title="THREAD_POOL_EXECUTOR在Level 11后才有，需要做系统版本判断再调用，异常信息:"></a>THREAD_POOL_EXECUTOR在Level 11后才有，需要做系统版本判断再调用，异常信息:</h3><pre><code>06-20 12:36:06.410: E/AndroidRuntime(1613): FATAL EXCEPTION: main
+    06-20 12:36:06.410: E/AndroidRuntime(1613): java.lang.NoSuchFieldError: android.os.AsyncTask.THREAD_POOL_EXECUTOR
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at com.duowan.huanjuwan.app.camera.AutoFocusManager.onAutoFocus(AutoFocusManager.java:67)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at android.hardware.Camera$EventHandler.handleMessage(Camera.java:559)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at android.os.Looper.loop(Looper.java:130)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at android.app.ActivityThread.main(ActivityThread.java:3703)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at java.lang.reflect.Method.invokeNative(Native Method)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at java.lang.reflect.Method.invoke(Method.java:507)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:841)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:599)
+    06-20 12:36:06.410: E/AndroidRuntime(1613): 	at dalvik.system.NativeStart.main(Native Method)
+</code></pre>
+<h3 id="参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError"><a href="#参考这个文章解决了：Android-2-3-3-AsyncTask-call-throws-NoSuchFieldError" class="headerlink" title="参考这个文章解决了：Android 2.3.3 AsyncTask call throws NoSuchFieldError"></a>参考这个文章解决了：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/12227682/android-2-3-3-asynctask-call-throws-nosuchfielderror">Android 2.3.3 AsyncTask call throws NoSuchFieldError</a></h3><pre><code>@TargetApi(11)
+  static public &lt;T&gt; void executeAsyncTask(AsyncTask&lt;T, ?, ?&gt; task,
+                                          T... params) &#123;
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.HONEYCOMB) &#123;
+      task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+    &#125;
+    else &#123;
+      task.execute(params);
+    &#125;
+  &#125;
+</code></pre>
+<h1 id="可以启动并预览，但是一开始录制视频，画面就卡住，没Crash"><a href="#可以启动并预览，但是一开始录制视频，画面就卡住，没Crash" class="headerlink" title="可以启动并预览，但是一开始录制视频，画面就卡住，没Crash"></a>可以启动并预览，但是一开始录制视频，画面就卡住，没Crash</h1><h3 id="异常信息："><a href="#异常信息：" class="headerlink" title="异常信息："></a>异常信息：</h3><pre><code>06-20 12:53:07.766: E/AndroidRuntime(1682): FATAL EXCEPTION: main
+    06-20 12:53:07.766: E/AndroidRuntime(1682): java.lang.OutOfMemoryError: bitmap size exceeds VM budget
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at android.graphics.BitmapFactory.nativeDecodeByteArray(Native Method)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at android.graphics.BitmapFactory.decodeByteArray(BitmapFactory.java:419)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at android.graphics.BitmapFactory.decodeByteArray(BitmapFactory.java:432)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at com.duowan.huanjuwan.app.truthordare.MediaActivity$9.onPictureTaken(MediaActivity.java:446)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at android.hardware.Camera$EventHandler.handleMessage(Camera.java:529)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at android.os.Looper.loop(Looper.java:130)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at android.app.ActivityThread.main(ActivityThread.java:3703)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at java.lang.reflect.Method.invokeNative(Native Method)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at java.lang.reflect.Method.invoke(Method.java:507)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:841)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:599)
+    06-20 12:53:07.766: E/AndroidRuntime(1682): 	at dalvik.system.NativeStart.main(Native Method)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): Unexpected exception while focusing
+    06-20 12:53:08.207: W/AutoFocusManager(1682): java.lang.RuntimeException: autoFocus failed
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at android.hardware.Camera.native_autoFocus(Native Method)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at android.hardware.Camera.autoFocus(Camera.java:650)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at com.duowan.huanjuwan.app.camera.AutoFocusManager.start(AutoFocusManager.java:82)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at com.duowan.huanjuwan.app.camera.AutoFocusManager$AutoFocusTask.doInBackground(AutoFocusManager.java:118)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at android.os.AsyncTask$2.call(AsyncTask.java:185)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:306)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1088)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:581)
+    06-20 12:53:08.207: W/AutoFocusManager(1682): 	at java.lang.Thread.run(Thread.java:1019)
+    06-20 12:53:10.198: I/Process(1682): Sending signal. PID: 1682 SIG: 9
+    06-20 12:53:10.539: I/dalvikvm(1884): Could not find method android.view.Display.getSize, referenced from method com.duowan.huanjuwan.app.common.Utils.getDisplaySize
+    06-20 12:53:10.549: W/dalvikvm(1884): VFY: unable to resolve virtual method 7806: Landroid/view/Display;.getSize (Landroid/graphics/Point;)V
+    06-20 12:53:10.549: D/dalvikvm(1884): VFY: replacing opcode 0x6e at 0x0017
+</code></pre>
+<h3 id="结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。"><a href="#结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。" class="headerlink" title="结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。"></a>结论是老的机器内存不足，使用之前清理下内存就好了，这个就不是单纯一两行代码的问题，整个应用的内存使用都要Review下。</h3><p>———-The End———–</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/06/18/2014/2014-06-18-online-markdown-editor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/18/2014/2014-06-18-online-markdown-editor/" class="post-title-link" itemprop="url">Markdown在线编辑器对比</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-18 00:00:00" itemprop="dateCreated datePublished" datetime="2014-06-18T00:00:00+08:00">2014-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <table>
+<thead>
+<tr>
+<th align="left">产品名称</th>
+<th align="left">同步到Evernote</th>
+<th align="left">同步到Dropbox</th>
+<th align="left">整体描述</th>
+<th align="left">链接</th>
+</tr>
+</thead>
+</table>
+<p>| 马克飞象|支持|不支持|目前体验最好的一个，但是服务器不是很稳定，作者说是Evernote的问题，需要再观察下，这也是为什么我会写这篇文章的原因：马克飞象出问题的时候，我需要一个临时的替代品|<a target="_blank" rel="noopener" href="http://maxiang.info/">链接</a> |  </p>
+<p>| stackedit.io|不支持|支持|除了不支持Evernote，其他的功能和马克飞象比起来是最类似的（编辑体验，快捷键等）；支持Dropbox，Google Drive自动同步，但需要自己指定下保存的文件路径；还有个缺点是没有Evernote分享那么强大的功能，只能是先保存成HTML然后再分享HTML文件的链接；整体看stackedit的功能和配置更多，但不支持Evernote确实减分不少，可以作为一个备选方案|<a target="_blank" rel="noopener" href="https://stackedit.io/">链接</a> |<br>| Farbox|不支持|支持|Dropbox+Markdown的可加密Blog系统，还是很好用的，但是不能实时预览，文件名等会自动保存，算数没有实时预览的在线编辑器中最好的一个，可以作为一个备选方案|<a target="_blank" rel="noopener" href="http://farbox.com/">链接</a> |<br>| Markable|支持|支持|编辑的时候，输入法的体验不好，保存的时候需要自己输入文件名，这个体验很不好|<a target="_blank" rel="noopener" href="http://markable.in/">链接</a> |<br>| 小书匠|支持|不支持|编辑的体验还可以，但是保存和同步到Evernote的体验比较差，每次同步都需要自己选择文件名|<a target="_blank" rel="noopener" href="http://markdown.xiaoshujiang.com/">链接</a> |<br>| Sublime + 插件Evernote + 插件Markdown Preview| 支持 | 支持 | 可以做到双向同步，但是体验上没有实时预览，保存的时候到时可以不用自己写文件名，但是快捷键调用命令行来保存还是稍微麻烦了一点，另外保存下来的文本CSS不好看，需要自己再调整；整体来说这个组合是非常强大的，但是就是需要自己做太多的事情|本地方案 |<br>| Markdown Here | 可以再Evernote页面中使用 | 不支持 | 比较灵活的一个方案，缺点是不能实时预览（HTML和Markdown可以切换，但需要全选文字，右键-》Markdown Toggle）| Chrome插件 |<br>| 简书Markdown编辑器 | 不支持 | 不支持 | 这编辑器确实漂亮，要是能同步到Evernote就好了 | <a target="_blank" rel="noopener" href="http://jianshu.io/writer">链接</a> |</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/06/12/2014/2014-06-12-monitoring-curl-traffic-in-android-using-fiddler2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/12/2014/2014-06-12-monitoring-curl-traffic-in-android-using-fiddler2/" class="post-title-link" itemprop="url">Android下使用Fiddler2对cURL进行抓包分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-12 00:00:00" itemprop="dateCreated datePublished" datetime="2014-06-12T00:00:00+08:00">2014-06-12</time>
             </span>
 
           
@@ -1088,6 +1044,74 @@ CURLOPT_DNS_CACHE_TIMEOUT 设置在内存中保存DNS信息的时间，默认为
 </code></pre>
 <h3 id="关于cURL的超时处理，这几篇文章值得参考"><a href="#关于cURL的超时处理，这几篇文章值得参考" class="headerlink" title="关于cURL的超时处理，这几篇文章值得参考:"></a>关于cURL的超时处理，这几篇文章值得参考:</h3><p><a target="_blank" rel="noopener" href="http://hi.baidu.com/taibaishu/item/3962d901241b3c27a1312df8">curl超时问题追查</a><br><a target="_blank" rel="noopener" href="http://hi.baidu.com/farmerluo/item/7e1e56ffa394efee1b111f81">初窥curl(上)</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/delphiwcdj/article/details/18284429">Libcurl多线程crash问题</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/linuxphilosopy/article/details/8864590">小谈libcurl</a></p>
 <p>—–End—–</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/06/10/2014/2014-06-10-like-and-love/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/06/10/2014/2014-06-10-like-and-love/" class="post-title-link" itemprop="url">喜欢和爱</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-06-10 00:00:00" itemprop="dateCreated datePublished" datetime="2014-06-10T00:00:00+08:00">2014-06-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <pre><code>关于养宠物，一直想表达点什么，但总是话在嘴边却说不出个所以然。
+
+
+做了三个月爸爸之后，我开始有点明白：
+喜欢小猫小狗，和养一只小猫小狗……
+喜欢小孩，和养育一个小孩……
+
+
+两者有个相同点：
+养育，只有喜欢是不够的，需要你满满的爱，满满的。
+</code></pre>
 
       
     </div>

@@ -148,7 +148,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-03-27-ios-provisioning-profiles/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2016/01/13/2016/2016-01-13-hello-mongodb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -162,7 +162,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2015/2015-03-27-ios-provisioning-profiles/" class="post-title-link" itemprop="url">iOS Provisioning Profiles</a>
+            <a href="/2016/01/13/2016/2016-01-13-hello-mongodb/" class="post-title-link" itemprop="url">Hello MongoDB</a>
         </h2>
 
         <div class="post-meta">
@@ -172,7 +172,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2016-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-13T00:00:00+08:00">2016-01-13</time>
             </span>
 
           
@@ -186,32 +186,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如果你遇到过XCode下的开发者证书怎么都无法正确获取，无法真机调试，各种抓狂，那么你应该也非常需要下面的吐槽和解决方案。</p>
-<h2 id="解决方案-一切重头再来"><a href="#解决方案-一切重头再来" class="headerlink" title="解决方案:一切重头再来"></a>解决方案:一切重头再来</h2><p>重头再来不是说，安装教程从头到尾再操作一次，因为你会抓狂，基本上你应该已经按照教程操作的多次，所以这里说的重头再来，我想告诉大家的是：</p>
-<h3 id="如何清除本地的证书信息"><a href="#如何清除本地的证书信息" class="headerlink" title="如何清除本地的证书信息"></a>如何清除本地的证书信息</h3><ol>
-<li>打开”钥匙串”，切换到证书，删除所有Apple Developer相关的证书</li>
-<li>打开XCode，Performance,Account,删除之前的登录信息，重新登录开发者账号</li>
-<li>删除本地的证书，服务器上配置的iOS Provisioning Profiles (Development)其实也是可以删除的，不删除也没问题，因为使用XCode重新申请证书的话，会自动把老的配置置为无效<br><img src="/media/files/2015/03/27/12_revoke_certificate_2_2x.png" alt="证书"></li>
-</ol>
-<p>做了上面的事情，你就可以安装各种教程，重新申请下证书了，这时你应该已经可以成功了。  </p>
-<p>参考：<a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW26">Maintaining Your Signing Identities and Certificates</a><br><a target="_blank" rel="noopener" href="http://www.cocoachina.com/bbs/read.php?tid=256724">Valid signing identity not found（有关真机调试）</a>  </p>
-<p>这里有一点需要特别说的是：</p>
-<h3 id="No-signing-identity-found-不影响真机调试"><a href="#No-signing-identity-found-不影响真机调试" class="headerlink" title="No signing identity found 不影响真机调试"></a>No signing identity found 不影响真机调试</h3><p>如果你已经重新来过了，而且Build Setting-》Code Signing-》Provisioning Profiles已经有了正确的配置文件了，那么这个时候你看到  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No signing identity found </span><br></pre></td></tr></table></figure>
+          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>最近在看Tornado的<a target="_blank" rel="noopener" href="http://demo.pythoner.com/itt2zh/ch4.html">教程</a>，其中使用了MongoDB，之前没用过，所以需要配置下相关的环境，并在Python中使用</p>
+<h2 id="安装MongoDB"><a href="#安装MongoDB" class="headerlink" title="安装MongoDB"></a>安装MongoDB</h2><h3 id="完整的命令行"><a href="#完整的命令行" class="headerlink" title="完整的命令行"></a>完整的命令行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">brew update</span><br><span class="line">brew install mongodb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为数据库创建默认的文件目录，并设置权限</span></span><br><span class="line">sudo <span class="built_in">mkdir</span> -p /data/db</span><br><span class="line">sudo <span class="built_in">chown</span> -R linyehui /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务器</span></span><br><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 另外启动一个终端，连接服务器</span></span><br><span class="line">mongo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>这个提示是可以忽略的，已经可以真机调试了。</p>
-<h2 id="Certificates-Identifiers-amp-Profiles"><a href="#Certificates-Identifiers-amp-Profiles" class="headerlink" title="Certificates, Identifiers &amp; Profiles"></a>Certificates, Identifiers &amp; Profiles</h2><p>Provisioning Profiles 到底是干什么的？  </p>
-<p>简单说，这个配置文件做的事情就是校验调试流程的三个主体的合法性：苹果开发者，XCode使用者，iPhone使用者。</p>
-<p>所以在developer.apple.com后台生成Provisioning Profiles的时候，你需要分别选择：</p>
-<ol>
-<li><p>开发者的证书（手动生成的时候是需要本地调用钥匙串来生成秘钥的）  </p>
-</li>
-<li><p>App ID，应用的名称，可以使用通配符  </p>
-</li>
-<li><p>Deviece ID，设备ID</p>
-</li>
-</ol>
-<h2 id="我为什么会遇到这个问题"><a href="#我为什么会遇到这个问题" class="headerlink" title="我为什么会遇到这个问题"></a>我为什么会遇到这个问题</h2><p>公司的开发者账号很容易满员，所以我加入了三个开发者账号……</p>
+<h3 id="过程分解"><a href="#过程分解" class="headerlink" title="过程分解"></a>过程分解</h3><p>我的系统是Mac OS X 10.11.2，根据<a target="_blank" rel="noopener" href="https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/">MongoDB官网的指引</a>，我直接用HomeBrew安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后，尝试启动数据库服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 出现错误，提示</span></span><br><span class="line">2016-01-13T15:19:24.484+0800 I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: 29 Data directory /data/db not found., terminating</span><br></pre></td></tr></table></figure>
+
+<p>原来是默认的数据库目录不存在，但是于是创建下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /data/db</span><br><span class="line"></span><br><span class="line"><span class="comment"># 记得要设置下目录权限，把owner设置成当前用户</span></span><br><span class="line">sudo <span class="built_in">chown</span> -R linyehui /data</span><br></pre></td></tr></table></figure>
+
+<p>如果目前权限没有设置正常，会出现权限问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2016-01-13T15:22:47.055+0800 I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: 98 Unable to create/open lock file: /data/db/mongod.lock errno:13 Permission denied Is a mongod instance already running?, terminating</span><br></pre></td></tr></table></figure>
+
+<p>好了，可以起启动了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mongod</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">2016-01-13T19:58:30.287+0800 I CONTROL  [initandlisten] MongoDB starting : pid=16845 port=27017 dbpath=/data/db 64-bit host=linyehui-mbp.local</span><br><span class="line">2016-01-13T19:58:30.288+0800 I CONTROL  [initandlisten] db version v3.2.0</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>服务器启动好了，就可以新建一个终端，来连接数据库测试了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">MongoDB shell version: 3.2.0</span><br><span class="line">connecting to: <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Python中使用MongoDB"><a href="#Python中使用MongoDB" class="headerlink" title="Python中使用MongoDB"></a>Python中使用MongoDB</h2><p>我们这里使用的Python库是PyMongo，我直接用pip安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pymongo</span><br><span class="line">pip show pymongo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端显示</span></span><br><span class="line">Name: pymongo</span><br><span class="line">Version: 3.2</span><br></pre></td></tr></table></figure>
+<p>安装成功后，就可以在Python下，import pymongo了</p>
+<p>参考<a target="_blank" rel="noopener" href="http://api.mongodb.org/python/current/api/pymongo/mongo_client.html#pymongo.mongo_client.MongoClient">PyMongo的官方文档</a>，pymongo的连接测试代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = MongoClient()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.test_database</span><br><span class="line">Database(MongoClient(host=[<span class="string">&#x27;localhost:27017&#x27;</span>], document_class=<span class="built_in">dict</span>, tz_aware=<span class="literal">False</span>, connect=<span class="literal">True</span>), <span class="string">u&#x27;test_database&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c[<span class="string">&#x27;test-database&#x27;</span>]</span><br><span class="line">Database(MongoClient(host=[<span class="string">&#x27;localhost:27017&#x27;</span>], document_class=<span class="built_in">dict</span>, tz_aware=<span class="literal">False</span>, connect=<span class="literal">True</span>), <span class="string">u&#x27;test-database&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br></pre></td></tr></table></figure>
+
+<p>好了，可以用了 ：）</p>
 
       
     </div>
@@ -231,7 +233,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-05-07-update-cocos2d-js-from-3.1-to-3.6/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/12/11/2015/2015-12-11-weixin-js-sdk-tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -245,7 +247,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2015/2015-05-07-update-cocos2d-js-from-3.1-to-3.6/" class="post-title-link" itemprop="url">升级cocos2d-js 3.1到3.6</a>
+            <a href="/2015/12/11/2015/2015-12-11-weixin-js-sdk-tips/" class="post-title-link" itemprop="url">微信JS-SDK联调</a>
         </h2>
 
         <div class="post-meta">
@@ -255,7 +257,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2015-12-11 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-11T00:00:00+08:00">2015-12-11</time>
             </span>
 
           
@@ -269,199 +271,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>cocos2d-js 3.1的热更新有点问题，我们想升级到3.2；打开官网一看，哦~ 刚刚发布了3.6版本，既然升级就直接升到最新的吧（会是个坑吧……）</p>
-<h3 id="关于cocos2d-js-3-6更新了什么"><a href="#关于cocos2d-js-3-6更新了什么" class="headerlink" title="关于cocos2d-js 3.6更新了什么"></a>关于cocos2d-js 3.6更新了什么</h3><p>从官网上可以看到3.1到3.6还是发生了很多事情：<br><a target="_blank" rel="noopener" href="http://www.cocos2d-x.org/docs/manual/framework/html5/release-notes/zh">COCOS2D-JS 发布说明</a>  </p>
-<p>另外还有论坛上的帖子：<a target="_blank" rel="noopener" href="http://www.cocoachina.com/bbs/read.php?tid=297633">Cocos2d-JS v3.6 已发布！</a>  </p>
-<h2 id="升级前的准备"><a href="#升级前的准备" class="headerlink" title="升级前的准备"></a>升级前的准备</h2><h3 id="升级前的版本"><a href="#升级前的版本" class="headerlink" title="升级前的版本"></a>升级前的版本</h3><ul>
-<li>cocos2d-js 3.1</li>
-<li>cocos ide 1.1.0</li>
-<li>cocos studio 1.6</li>
-<li>NDK r9d</li>
-</ul>
-<h3 id="升级到cocos2d-js-3-6需要升级的部分"><a href="#升级到cocos2d-js-3-6需要升级的部分" class="headerlink" title="升级到cocos2d-js 3.6需要升级的部分"></a>升级到cocos2d-js 3.6需要升级的部分</h3><ul>
-<li>cocos2d-js 3.6</li>
-<li>cocos ide 1.2.0</li>
-<li>NDK r10c （不升级无法兼容Android 5.0，其他版本的Android还可以正常使用)</li>
-<li>cocos studio 2.2.0 官方声称兼容老的版本，所以我们这次没有升级，因为变化太大，但实际测试兼容还是有点小问题</li>
-</ul>
-<h2 id="升级步骤"><a href="#升级步骤" class="headerlink" title="升级步骤"></a>升级步骤</h2><h3 id="1-本次只更新cocos2d-js和ide，cocos-studio保持1-6版本不变，需要下载下面这两个文件："><a href="#1-本次只更新cocos2d-js和ide，cocos-studio保持1-6版本不变，需要下载下面这两个文件：" class="headerlink" title="1.本次只更新cocos2d-js和ide，cocos studio保持1.6版本不变，需要下载下面这两个文件："></a>1.本次只更新cocos2d-js和ide，cocos studio保持1.6版本不变，需要下载下面这两个文件：</h3><ul>
-<li>cocos2d-js-v3.6.zip</li>
-<li>cocos-code-ide-win64-1.2.0.exe，对应的Mac版本：cocos-code-ide-mac64-1.2.0.dmg</li>
-</ul>
-<h3 id="2-删除或者重命名cocod2d-3-1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）"><a href="#2-删除或者重命名cocod2d-3-1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）" class="headerlink" title="2.删除或者重命名cocod2d-3.1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）"></a>2.删除或者重命名cocod2d-3.1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）</h3><h3 id="3-解压cocos2d-js-v3-6-zip，解压后执行下setup-py，执行后在命令行下执行下cocos命令，检查下路径是否正确"><a href="#3-解压cocos2d-js-v3-6-zip，解压后执行下setup-py，执行后在命令行下执行下cocos命令，检查下路径是否正确" class="headerlink" title="3.解压cocos2d-js-v3.6.zip，解压后执行下setup.py，执行后在命令行下执行下cocos命令，检查下路径是否正确"></a>3.解压cocos2d-js-v3.6.zip，解压后执行下setup.py，执行后在命令行下执行下cocos命令，检查下路径是否正确</h3><h3 id="4-安装cocos-ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）"><a href="#4-安装cocos-ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）" class="headerlink" title="4.安装cocos ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）"></a>4.安装cocos ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）</h3><h3 id="5-从cocos2d-js目录下重新复制这4个目录到工程目录："><a href="#5-从cocos2d-js目录下重新复制这4个目录到工程目录：" class="headerlink" title="5.从cocos2d-js目录下重新复制这4个目录到工程目录："></a>5.从cocos2d-js目录下重新复制这4个目录到工程目录：</h3><p>frameworks&#x2F;cocos2d-html5&#x2F;<br>frameworks&#x2F;js-bindings&#x2F;<br>tools&#x2F;bindings-generator&#x2F;<br>tools&#x2F;tojs&#x2F;</p>
-<h3 id="6-使用cocos-ide或者xcode编译，第一次编译需要较长的时间"><a href="#6-使用cocos-ide或者xcode编译，第一次编译需要较长的时间" class="headerlink" title="6.使用cocos ide或者xcode编译，第一次编译需要较长的时间"></a>6.使用cocos ide或者xcode编译，第一次编译需要较长的时间</h3><h2 id="升级过程中遇到的问题"><a href="#升级过程中遇到的问题" class="headerlink" title="升级过程中遇到的问题"></a>升级过程中遇到的问题</h2><h3 id="JSB编译错误"><a href="#JSB编译错误" class="headerlink" title="JSB编译错误"></a>JSB编译错误</h3><p>主要是jsb开始使用智能指针，以前的代码需要改造下</p>
-<p>找到两个官方的帖子：<br><a target="_blank" rel="noopener" href="https://github.com/cocos2d/cocos2d-js/issues/1109">refactor binding code use JS::CallArgs instead of c style macro #1109</a>  </p>
-<p><a target="_blank" rel="noopener" href="https://github.com/cocos2d/cocos2d-js/issues/1139">Use SpiderMonkey template for GC thing instead of raw type #1139</a>  </p>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/JSAPI_Cookbook?redirectlocale=en-US&redirectslug=SpiderMonkey/JSAPI_Phrasebook">JSAPI Cookbook</a>  </p>
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);</span><br><span class="line">    args.rval().setUndefined();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    XXXObject *newObject = XXXObject::GetInstance();</span><br><span class="line">    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);</span><br><span class="line"></span><br><span class="line">    js_proxy_t *p;</span><br><span class="line">    HASH_FIND_PTR(_native_js_global_ht, &amp;newObject, p);</span><br><span class="line">    if (!p) &#123;</span><br><span class="line">        JSObject *obj = JS_NewObject(cx, JSB_XObject_class, JS::RootedObject(cx, JSB_XObject_object), JS::NullPtr());</span><br><span class="line">        p = jsb_new_proxy(newObject, obj);</span><br><span class="line">        JS::AddNamedObjectRoot(cx, &amp;p-&gt;obj, JSB_MODULE_OS_HELPER);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    args.rval().set(OBJECT_TO_JSVAL(p-&gt;obj));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // define name space</span><br><span class="line">    JS::RootedObject myBinding(cx, JS_NewObject(cx, NULL, JS::NullPtr(), JS::NullPtr()));</span><br><span class="line">    JS::RootedValue myBindingVal(cx);</span><br><span class="line">    myBindingVal = OBJECT_TO_JSVAL(myBinding);</span><br><span class="line">    JS_SetProperty(cx, obj, &quot;XXXHandleBinding&quot;, myBindingVal);</span><br><span class="line">    JsbVoiceHandleObjectCreateClass(cx, myBinding, &quot;XXXHandleObject&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">static void JsbVoiceHandleObjectCreateClass(JSContext *cx, JS::HandleObject globalObj, const char* name)</span><br><span class="line"></span><br><span class="line">    JSContext* jc = ScriptingCore::getInstance()-&gt;getGlobalContext();</span><br><span class="line">    JS::RootedValue retval(jc);</span><br><span class="line"></span><br><span class="line">    bool ok = true;</span><br><span class="line">    int32_t arg0 = 0;</span><br><span class="line">    ok &amp;= jsval_to_int32(cx, args[0], &amp;arg0);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="向导生成的文件升级了"><a href="#向导生成的文件升级了" class="headerlink" title="向导生成的文件升级了"></a>向导生成的文件升级了</h3><p>主要是class根目录以及class&#x2F;runtime目录下的文件，解决方案就是用新版本的cocos ide生成一个新的带native的工程，对比下新旧文件，覆盖过来就可以了</p>
-<h4 id="Android还需要往-mk文件中加下文件"><a href="#Android还需要往-mk文件中加下文件" class="headerlink" title="Android还需要往.mk文件中加下文件"></a>Android还需要往.mk文件中加下文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">../../Classes/runtime/ConnectWaitLayer.cpp \</span><br><span class="line">../../Classes/runtime/ConsoleCommand.cpp \</span><br><span class="line">../../Classes/runtime/FileServer.cpp \</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="编译通过后提示UI-ExportJson文件找不到了"><a href="#编译通过后提示UI-ExportJson文件找不到了" class="headerlink" title="编译通过后提示UI ExportJson文件找不到了"></a>编译通过后提示UI ExportJson文件找不到了</h3><p>原因是3.3版本的时候升级了从xxxSence.json文件找ui文件的算法，以前都是用全路径，现在改成了相对于xxxSence.json的相对路径，所以文件都找不到了</p>
-<h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>我们其实没有使用xxxSence.json，可以试下全部直接使用xxxExportJson</p>
-<p>修改前后的代码对比</p>
+          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在微信中打开我们的网页，网页能够使用微信提供的JS-SDK，比如使用chooseImage，选择图片等等</p>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="AppID"><a href="#AppID" class="headerlink" title="AppID"></a>AppID</h3><p>要使用公众账号的开发AppID，而不是微信开发平台下的应用AppID</p>
+<h3 id="业务域名和JS接口安全域名"><a href="#业务域名和JS接口安全域名" class="headerlink" title="业务域名和JS接口安全域名"></a>业务域名和JS接口安全域名</h3><p>1、不设置会导致签名失败  </p>
+<p>2、设置方法  </p>
+<p>在微信公众平台的后台，公众设置，功能设置中进行设置，业务域名和JS接口安全域名都是需要设置的  </p>
+<h3 id="签名失败"><a href="#签名失败" class="headerlink" title="签名失败"></a>签名失败</h3><p>遇到签名失败，首先根据微信官方的指引：<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html#.E9.99.84.E5.BD.955-.E5.B8.B8.E8.A7.81.E9.94.99.E8.AF.AF.E5.8F.8A.E8.A7.A3.E5.86.B3.E6.96.B9.E6.B3.95">《附录5-常见错误及解决方法》</a>，看看能不能解决。</p>
+<h4 id="我自己踩坑之后的理解如下："><a href="#我自己踩坑之后的理解如下：" class="headerlink" title="我自己踩坑之后的理解如下："></a>我自己踩坑之后的理解如下：</h4><p>1、签名用的url要动态获取  </p>
 <blockquote>
+<p>location.href.split(‘#’)[0]</p>
 </blockquote>
-<p>&#x2F;&#x2F;        var node &#x3D; ccs.sceneReader.createNodeWithSceneFile(res.login_scene);  </p>
-<p>&#x2F;&#x2F;        var widget &#x3D; node.getChildByTag(10003).getComponent(“LoginComponent”).getNode();  </p>
-<pre><code>    var widget = ccs.uiReader.widgetFromJsonFile(res.LoginUI_ExportJson);  
-
-    this.addChild(widget);  
-</code></pre>
-<p>虽然cocos官方说支持cocos studio 1.6版本，但是还是会有些布局上的问题，需要针对3.6进行下适配。</p>
-<h3 id="Cocos2D-X-3-6-android与友盟-zlib-冲突，无法编译！"><a href="#Cocos2D-X-3-6-android与友盟-zlib-冲突，无法编译！" class="headerlink" title="Cocos2D-X 3.6 android与友盟 zlib 冲突，无法编译！"></a>Cocos2D-X 3.6 android与友盟 zlib 冲突，无法编译！</h3><p><a target="_blank" rel="noopener" href="http://bbs.umeng.com/thread-8639-1-1.html">Cocos2D-X 3.6 android与友盟 zlib 冲突，无法编译！</a></p>
-<p>这个目前只能呢个等待umeng官网更新版本支持。</p>
-<h4 id="2015-05-08更新"><a href="#2015-05-08更新" class="headerlink" title="2015-05-08更新"></a>2015-05-08更新</h4><p>umeng的跟进还是挺快的，他们更新了一个兼容cocos2d-x 3.6的测试版本，可以从<a target="_blank" rel="noopener" href="http://dev.umeng.com/game_analytics/game-c2d/sdk-download">这里</a>下载到（测试版本，后续可能会被更新掉）：   </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cocos2dx 游戏统计分析SDK使用 v4.1 （2015-05-07）</span><br><span class="line">功能更新:</span><br><span class="line">新SDK使用新协议(Thrift)</span><br><span class="line">重构SDK数据采集的逻辑框架，提高SDK稳定性；</span><br><span class="line">采用了全新的账号统计接口</span><br><span class="line">支持cocos2dx 3.6</span><br><span class="line">支持按间隔发送数据策略</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-06-22-compare-version/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2015/2015-06-22-compare-version/" class="post-title-link" itemprop="url">版本号比较</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>比较类似1.0.0的两个字符串</p>
-<h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h2><p>印象中这个代码自己写过好多次，不过这次写的是最快的，5分钟之内测试通过</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConsoleApplication2.cpp : Defines the entry point for the console application.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">UpdateVersion</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> major;</span><br><span class="line">	<span class="type">int</span> minor;</span><br><span class="line">	<span class="type">int</span> revision;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">UpdateVersion</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		major = <span class="number">0</span>;</span><br><span class="line">		minor = <span class="number">0</span>;</span><br><span class="line">		revision = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">UpdateVersion</span>(<span class="type">const</span> UpdateVersion&amp; item)</span><br><span class="line">	&#123;</span><br><span class="line">		major = item.major;</span><br><span class="line">		minor = item.minor;</span><br><span class="line">		revision = item.revision;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	UpdateVersion&amp; <span class="keyword">operator</span>=(<span class="type">const</span> UpdateVersion&amp; item)</span><br><span class="line">	&#123;</span><br><span class="line">		major = item.major;</span><br><span class="line">		minor = item.minor;</span><br><span class="line">		revision = item.revision;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">UpdateVersion <span class="title">parseUpdateVersion</span><span class="params">(<span class="type">const</span> std::string&amp; versionStr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	UpdateVersion result;</span><br><span class="line">	<span class="keyword">if</span> (versionStr.<span class="built_in">empty</span>())</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">	<span class="type">size_t</span> pos1 = versionStr.<span class="built_in">find</span>(<span class="string">&#x27;.&#x27;</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="type">size_t</span> pos2 = versionStr.<span class="built_in">find</span>(<span class="string">&#x27;.&#x27;</span>, pos1 + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span> (pos1 == <span class="number">-1</span> || pos2 == <span class="number">-1</span> || pos2 &gt;= versionStr.<span class="built_in">length</span>())</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">	result.major = <span class="built_in">atoi</span>(versionStr.<span class="built_in">substr</span>(<span class="number">0</span>, pos1).<span class="built_in">c_str</span>());</span><br><span class="line">	result.minor = <span class="built_in">atoi</span>(versionStr.<span class="built_in">substr</span>(pos1 + <span class="number">1</span>, pos2 - pos1).<span class="built_in">c_str</span>());</span><br><span class="line">	result.revision = <span class="built_in">atoi</span>(versionStr.<span class="built_in">substr</span>(pos2 + <span class="number">1</span>, versionStr.<span class="built_in">length</span>() - pos2).<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">compareUpdateVersion</span><span class="params">(<span class="type">const</span> UpdateVersion&amp; left, <span class="type">const</span> UpdateVersion&amp; right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (left.major != right.major)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> left.major &gt; right.major ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (left.minor != right.minor)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> left.minor &gt; right.minor ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (left.revision != right.revision)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> left.revision &gt; right.revision ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">compareUpdateVersion</span><span class="params">(<span class="type">const</span> std::string&amp; left, <span class="type">const</span> std::string&amp; right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	UpdateVersion leftVer = <span class="built_in">parseUpdateVersion</span>(left);</span><br><span class="line">	UpdateVersion rightVer = <span class="built_in">parseUpdateVersion</span>(right);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">compareUpdateVersion</span>(leftVer, rightVer);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strcmp</span>(<span class="string">&quot;1.0.0&quot;</span>, <span class="string">&quot;1.0.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strcmp</span>(<span class="string">&quot;1.0.0&quot;</span>, <span class="string">&quot;1.0.1&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strcmp</span>(<span class="string">&quot;1.0.9&quot;</span>, <span class="string">&quot;1.0.10&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strcmp</span>(<span class="string">&quot;1.1.0&quot;</span>, <span class="string">&quot;1.0.10&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;======================\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;0 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.0&quot;</span>, <span class="string">&quot;1.0.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;0 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;2.4.3&quot;</span>, <span class="string">&quot;2.4.3&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;-1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.0&quot;</span>, <span class="string">&quot;1.0.1&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;-1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.9&quot;</span>, <span class="string">&quot;1.0.10&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;-1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.10&quot;</span>, <span class="string">&quot;1.1.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;-1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.2.10&quot;</span>, <span class="string">&quot;2.0.0&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.1.0&quot;</span>, <span class="string">&quot;1.0.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.10&quot;</span>, <span class="string">&quot;1.0.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.1.0&quot;</span>, <span class="string">&quot;1.0.10&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;100.1.0&quot;</span>, <span class="string">&quot;10.0.10&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-04-29-cocos2dx-playeffect-failed/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2015/2015-04-29-cocos2dx-playeffect-failed/" class="post-title-link" itemprop="url">cocos2d下语音聊天和游戏音效冲突，导致playEffect没声音</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。</p>
-<h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><p>各种尝试后，发现了这篇文章：<a target="_blank" rel="noopener" href="http://www.imgeek.org/forum.php?mod=viewthread&tid=651">调用录音后，游戏音效播放不出来的问题</a>，这篇给了我们一个新的解决思路：  </p>
-<p>会不会是iOS下AVAudioSession的category导致的问题？</p>
-<p>在语音使用麦克风录音的前后，已经播放音效的前后，都将AVAudioSession的category属性Log打印出来，发现一旦我们使用了cocos2d-js提供的cc.audioEngine.playEffect方法，category就会变成kAudioSessionCategory_SoloAmbientSound，而像我们这种既有语音又有音效的情况，我们需要的其实是：AVAudioSessionCategoryPlayAndRecord。  </p>
-<p>好了，找到直接的原因了，但是怎么改呢？</p>
-<h2 id="阅读代码，寻找解决方案"><a href="#阅读代码，寻找解决方案" class="headerlink" title="阅读代码，寻找解决方案"></a>阅读代码，寻找解决方案</h2><p>带着上面的问题，看下cocos2d-x的代码，看看能不能找到解决方案。</p>
-<ul>
-<li>如果没有设置或CDaudioManager的configured，会使用默认的mode：kAMM_FxPlusMusicIfNoOtherAudio</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># ./frameworks/js-bindings/cocos2d-x/cocos/audio/ios/CDAudioManager.m</span><br><span class="line"></span><br><span class="line">// Init</span><br><span class="line">+ (CDAudioManager *) sharedManager</span><br><span class="line">&#123;</span><br><span class="line">    @synchronized(self)     &#123;</span><br><span class="line">        if (!sharedManager) &#123;</span><br><span class="line">            if (!configured) &#123;</span><br><span class="line">                //Set defaults here</span><br><span class="line">                configuredMode = kAMM_FxPlusMusicIfNoOtherAudio;</span><br><span class="line">            &#125;</span><br><span class="line">            sharedManager = [[CDAudioManager alloc] init:configuredMode];</span><br><span class="line">            _sharedManagerState = kAMStateInitialised;//This is only really relevant when using asynchronous initialisation</span><br><span class="line">            [[NSNotificationCenter defaultCenter] postNotificationName:kCDN_AudioManagerInitialised object:nil];</span><br><span class="line">        &#125;    </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return sharedManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>而默认的这个mode对应的正是AVAudioSessionCategorySoloAmbient</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void) setMode:(tAudioManagerMode) mode &#123;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>解决方案出来了</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 调用下CDAudioManager的这个方法，初始化下我们的mode</span><br><span class="line">+ (void) configure: (tAudioManagerMode) mode;</span><br></pre></td></tr></table></figure>
-
-<h2 id="最终的解决方案"><a href="#最终的解决方案" class="headerlink" title="最终的解决方案"></a>最终的解决方案</h2><ol>
-<li><p>确认工程配置的Header目录包含CDAudioManager.h所在的目录  </p>
-</li>
-<li><p>在播放音效之前初始下CDAudioManager的mode为kAMM_PlayAndRecord</p>
-</li>
-</ol>
-<blockquote>
-<p>[CDAudioManager configure:kAMM_PlayAndRecord];</p>
-</blockquote>
+<p>2、appID不要用错了，要用公众平台的开发appID  </p>
+<p>3、怀疑签名算法有问题，可以用微信提供的签名校验网址来确认：<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign">微信 JS 接口签名校验工具</a>  </p>
+<p>4、文档中说了“出于安全考虑，开发者必须在服务器端实现签名的逻辑。”，这个不是强制的，在前端静态页面直接获取到token后再去获取ticket，然后直接生成签名，也是可以的。    </p>
+<p>当然这样做并不安全，只是说可以这样子，微信并没有做代码级的限制。  </p>
+<p>5、JS-SDK的调通跟公众平台后台的”开发-》基本配置-》服务器配置(未启用)”没有关系。    </p>
+<h2 id="参考的材料"><a href="#参考的材料" class="headerlink" title="参考的材料"></a>参考的材料</h2><p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html">微信JS-SDK说明文档</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://pigerla.com/wechat-api/2015-06-23/using-js-sdk-of-WeChat/">如何接入微信公众平台（nodejs）</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://m.oschina.net/blog/384705">微信JS-SDK分享功能开发实例</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.smallerpig.com/889.html">微信JSSDK Python版本讲解</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#JSSDK.E4.BD.BF.E7.94.A8.E6.AD.A5.E9.AA.A4">微信JS-SDK 接入步骤</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.cocoachina.com/webapp/20150708/12465.html">基于node.js的微信JS-SDK简单应用</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://203.195.235.76/jssdk/sample.zip">微信官方提供的sample</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign">微信 JS 接口签名校验工具</a>  </p>
 
       
     </div>
@@ -481,7 +313,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-09-24-uiimage-get-sub-image/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/11/05/2015/2015-11-05-unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -495,7 +327,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2015/2015-09-24-uiimage-get-sub-image/" class="post-title-link" itemprop="url">iOS图片裁剪scale问题</a>
+            <a href="/2015/11/05/2015/2015-11-05-unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/" class="post-title-link" itemprop="url">Xcode 7.1无法使用Instruments真机调试，设备灰色不可选</a>
         </h2>
 
         <div class="post-meta">
@@ -505,7 +337,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2015-11-05 00:00:00" itemprop="dateCreated datePublished" datetime="2015-11-05T00:00:00+08:00">2015-11-05</time>
             </span>
 
           
@@ -519,7 +351,227 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>资源中有一张<a href="mailto:&#99;&#111;&#118;&#101;&#114;&#x40;&#x32;&#120;&#x2e;&#x70;&#110;&#103;">&#99;&#111;&#118;&#101;&#114;&#x40;&#x32;&#120;&#x2e;&#x70;&#110;&#103;</a>，对图片进行裁剪后图片的大小是对的，但是图片上裁剪的区域不对。</p>
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>Macbook Pro + Mac OS X 10.11.1 + Xcode 7.1 +Instruments 7.1  </p>
+<p>iPhone 6 + iOS 9.1  </p>
+<h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="/media/files/2015/11/05/instruments-gray-device.png" alt="Instruments中的设备选择无法选择iPhone真机，灰色不可选"></p>
+<p>Instruments中的设备选择无法选择iPhone真机，灰色不可选</p>
+<h3 id="解决方案：重启"><a href="#解决方案：重启" class="headerlink" title="解决方案：重启"></a>解决方案：重启</h3><p>我最终的解决步骤：  </p>
+<p>1、拔掉iPhone的USB线，重启iPhone  </p>
+<p>2、关闭Xcode和Instruments  </p>
+<p>3、重新连接iPhone到Mac上  </p>
+<p>4、重启Xcode并启动Profile  </p>
+<p>5、成功  </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>这个帖子的方法管用，我的iPhone 6 9.1系统可以正常调试起来了  </p>
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/32878283/unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta">unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/11/05/2015/2015-11-05-double-commander-for-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/11/05/2015/2015-11-05-double-commander-for-mac/" class="post-title-link" itemprop="url">Double Commander for Mac</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-11-05 00:00:00" itemprop="dateCreated datePublished" datetime="2015-11-05T00:00:00+08:00">2015-11-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h2><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
+<p>TC确实可以替换系统的资源管理器，但是他的目标可不是替换系统资源管理器这么简单。</p>
+<p>无奈之下选择了一款免费的Finder插件XtraFinder，用了一段时间之后，我的Mac升级了OS X 10.11，用不了了：<a target="_blank" rel="noopener" href="https://www.trankynam.com/xtrafinder/sip.html">如果不关闭System Integrity Protection就无法使用了</a>。</p>
+<p>不能忍，再找找吧，在网上看到了这几个帖子：  </p>
+<p><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/66737">怎么，Mac 下的诸多文件管理软件还在仰望 Total Commander，在 TC 的阴影下生活么？</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.zhihu.com/question/19607061">Mac 是否有类似Windows上 Total Commander 这样的应用？</a></p>
+<p>几个帖子中都提到了一个我之前没有试用过的软件：<a target="_blank" rel="noopener" href="http://doublecmd.sourceforge.net/">Double Commander</a></p>
+<p>用了一分钟之后，我只能说：相见恨晚</p>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><h3 id="Mac下的版本选择"><a href="#Mac下的版本选择" class="headerlink" title="Mac下的版本选择"></a>Mac下的版本选择</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mac OS X &gt;= 10.5</span><br><span class="line">doublecmd-0.6.6-6327.carbon.i386.dmg</span><br><span class="line"></span><br><span class="line">Mac OS X &gt;= 10.8	</span><br><span class="line">64 bit	doublecmd-0.6.6-6327.qt.x86_64.dmg</span><br></pre></td></tr></table></figure>
+
+<h4 id="结论是：选择32位版本"><a href="#结论是：选择32位版本" class="headerlink" title="结论是：选择32位版本"></a>结论是：选择32位版本</h4><h4 id="理由："><a href="#理由：" class="headerlink" title="理由："></a>理由：</h4><p>1、性能上的差别没有做比较，但是两者使用下来没有明显的差异，至少没有卡顿的情况；  </p>
+<p>2、除去性能，64位的界面太毛糙了，无论是图标还是界面的文字显示效果都很差；  </p>
+<p>两者的界面库是不同的，32位下采用carbon，而64位下使用的是Qt，carbon的界面是使用系统原生来适配的，而qt的界面是跨平台的。</p>
+<p>举个简单的例子：carbon可以使用OS X 10.11后的新字体，而Qt没有使用。</p>
+<h3 id="快捷键冲突"><a href="#快捷键冲突" class="headerlink" title="快捷键冲突"></a>快捷键冲突</h3><h4 id="复制、剪切、和粘贴"><a href="#复制、剪切、和粘贴" class="headerlink" title="复制、剪切、和粘贴"></a>复制、剪切、和粘贴</h4><p>为了方便在Finder和DC之间复制文件，对应Ctrl+C、Ctrl+X、Ctrl+V分别多加一个快捷键   </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Command+C、Command+X、Command+V</span><br></pre></td></tr></table></figure>
+
+<h4 id="左右窗口的复制快捷键Ctrl-左-x2F-右和Mac的屏幕切换冲突了"><a href="#左右窗口的复制快捷键Ctrl-左-x2F-右和Mac的屏幕切换冲突了" class="headerlink" title="左右窗口的复制快捷键Ctrl+左&#x2F;右和Mac的屏幕切换冲突了"></a>左右窗口的复制快捷键Ctrl+左&#x2F;右和Mac的屏幕切换冲突了</h4><p>我的做法是自定义快捷键：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+option+左</span><br><span class="line">Ctrl+option+右</span><br></pre></td></tr></table></figure>
+
+<p>其他的快捷键冲突，也使用类似的解决方案</p>
+<h3 id="对键盘党来说必备的小功能"><a href="#对键盘党来说必备的小功能" class="headerlink" title="对键盘党来说必备的小功能"></a>对键盘党来说必备的小功能</h3><p>F5复制，F6移动  </p>
+<p>快速过滤定位文件  </p>
+<p>文件内查找文本  </p>
+<p>批量重命名  </p>
+<p>压缩文件  </p>
+<p>比较文件  </p>
+<p>等等……  </p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Path Finder等收费软件虽然界面很美观，但产品的定位上只是Finder的一个增强或者替代品，和Total Commander没有可比性；  </p>
+<p>作为一个独立的效率工具来说，Double Commander和Total Commander定位非常接近；  </p>
+<p>另外还有一点，作为开源软件的Double Commander，他的版本计划还在继续，非常值得期待。  </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/10/23/2015/2015-10-23-ios-garageband-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/10/23/2015/2015-10-23-ios-garageband-tips/" class="post-title-link" itemprop="url">iOS版本GarageBand使用小技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-10-23 00:00:00" itemprop="dateCreated datePublished" datetime="2015-10-23T00:00:00+08:00">2015-10-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="录音时长"><a href="#录音时长" class="headerlink" title="录音时长"></a>录音时长</h2><p>点击右上角的“+”号，修改为自动，时间就不会只有8秒了</p>
+<h2 id="导出到Mac上-GarageBand进行编辑"><a href="#导出到Mac上-GarageBand进行编辑" class="headerlink" title="导出到Mac上 GarageBand进行编辑"></a>导出到Mac上 GarageBand进行编辑</h2><p>1、在iOS的“我的乐曲”页面，长按选择一首乐曲，然后点击左上角的分享图标，出现的选择列表中，选择“iTunes”  </p>
+<p>2、在Mac上打开iTunes，在我的设备，应用的底部，可以看到“共享文档”，选择GarageBand，就能看到你刚刚导出的.band文件  </p>
+<p>3、选择并点击右下角的“存储到”，把.band文件保存到Mac上  </p>
+<p>4、在Mac上直接打开刚刚导出的.band文件，Mac版的GarageBand会自动帮你转换成Mac版本的.band文件，另存下就可以了  </p>
+<p>5、第一次使用还会下载iOS上的效果库，300多MB，直接下载很慢可以挂个代理  </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/09/24/2015/2015-09-24-uiimage-get-sub-image/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/09/24/2015/2015-09-24-uiimage-get-sub-image/" class="post-title-link" itemprop="url">iOS图片裁剪scale问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-09-24 00:00:00" itemprop="dateCreated datePublished" datetime="2015-09-24T00:00:00+08:00">2015-09-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>资源中有一张<a href="mailto:&#x63;&#x6f;&#x76;&#x65;&#114;&#x40;&#50;&#120;&#46;&#112;&#x6e;&#x67;">&#x63;&#x6f;&#x76;&#x65;&#114;&#x40;&#50;&#120;&#46;&#112;&#x6e;&#x67;</a>，对图片进行裁剪后图片的大小是对的，但是图片上裁剪的区域不对。</p>
 <h2 id="先直接看最终的代码吧"><a href="#先直接看最终的代码吧" class="headerlink" title="先直接看最终的代码吧"></a>先直接看最终的代码吧</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  截取部分图像</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  @param rect 裁剪的区域</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">-(<span class="built_in">UIImage</span> *)getSubImage:(<span class="built_in">CGRect</span>)rect&#123;</span><br><span class="line">    <span class="built_in">CGImageRef</span> subImageRef = <span class="built_in">CGImageCreateWithImageInRect</span>(<span class="keyword">self</span>.CGImage,</span><br><span class="line">														  <span class="built_in">CGRectMake</span>(rect.origin.x,</span><br><span class="line">																	 rect.origin.y,</span><br><span class="line">																	 rect.size.width * <span class="keyword">self</span>.scale,</span><br><span class="line">																	 rect.size.height * <span class="keyword">self</span>.scale));</span><br><span class="line">    <span class="built_in">CGRect</span> smallBounds = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="built_in">CGImageGetWidth</span>(subImageRef), <span class="built_in">CGImageGetHeight</span>(subImageRef));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//UIGraphicsBeginImageContext(smallBounds.size);</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(smallBounds.size, <span class="literal">NO</span>, [<span class="built_in">UIScreen</span> mainScreen].scale);</span><br><span class="line">    <span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="built_in">CGContextDrawImage</span>(context, smallBounds, subImageRef);</span><br><span class="line">    <span class="built_in">UIImage</span>* smallImage = [<span class="built_in">UIImage</span> imageWithCGImage:subImageRef];</span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> smallImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>@2x，表示图片的scale是2，但是裁剪的时候，使用UIImage size获取到的其实是图片@2x处理后的大小，也就是除以2之后的大小，所以导致了裁剪的区域错误。</p>
@@ -544,7 +596,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-07-07-submit-voice-game-to-app-store/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/07/07/2015/2015-07-07-submit-voice-game-to-app-store/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -558,7 +610,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2015/2015-07-07-submit-voice-game-to-app-store/" class="post-title-link" itemprop="url">一款语音杀人游戏的App Store提交记录</a>
+            <a href="/2015/07/07/2015/2015-07-07-submit-voice-game-to-app-store/" class="post-title-link" itemprop="url">一款语音杀人游戏的App Store提交记录</a>
         </h2>
 
         <div class="post-meta">
@@ -568,7 +620,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2015-07-07 00:00:00" itemprop="dateCreated datePublished" datetime="2015-07-07T00:00:00+08:00">2015-07-07</time>
             </span>
 
           
@@ -680,7 +732,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-06-12-total-command-load-selection-from-clip/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/06/22/2015/2015-06-22-compare-version/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -694,7 +746,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2015/2015-06-12-total-command-load-selection-from-clip/" class="post-title-link" itemprop="url">Total Command导入文件选择列表</a>
+            <a href="/2015/06/22/2015/2015-06-22-compare-version/" class="post-title-link" itemprop="url">版本号比较</a>
         </h2>
 
         <div class="post-meta">
@@ -704,7 +756,66 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2015-06-22 00:00:00" itemprop="dateCreated datePublished" datetime="2015-06-22T00:00:00+08:00">2015-06-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>比较类似1.0.0的两个字符串</p>
+<h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h2><p>印象中这个代码自己写过好多次，不过这次写的是最快的，5分钟之内测试通过</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConsoleApplication2.cpp : Defines the entry point for the console application.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">UpdateVersion</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> major;</span><br><span class="line">	<span class="type">int</span> minor;</span><br><span class="line">	<span class="type">int</span> revision;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">UpdateVersion</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		major = <span class="number">0</span>;</span><br><span class="line">		minor = <span class="number">0</span>;</span><br><span class="line">		revision = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">UpdateVersion</span>(<span class="type">const</span> UpdateVersion&amp; item)</span><br><span class="line">	&#123;</span><br><span class="line">		major = item.major;</span><br><span class="line">		minor = item.minor;</span><br><span class="line">		revision = item.revision;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	UpdateVersion&amp; <span class="keyword">operator</span>=(<span class="type">const</span> UpdateVersion&amp; item)</span><br><span class="line">	&#123;</span><br><span class="line">		major = item.major;</span><br><span class="line">		minor = item.minor;</span><br><span class="line">		revision = item.revision;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">UpdateVersion <span class="title">parseUpdateVersion</span><span class="params">(<span class="type">const</span> std::string&amp; versionStr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	UpdateVersion result;</span><br><span class="line">	<span class="keyword">if</span> (versionStr.<span class="built_in">empty</span>())</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">	<span class="type">size_t</span> pos1 = versionStr.<span class="built_in">find</span>(<span class="string">&#x27;.&#x27;</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="type">size_t</span> pos2 = versionStr.<span class="built_in">find</span>(<span class="string">&#x27;.&#x27;</span>, pos1 + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span> (pos1 == <span class="number">-1</span> || pos2 == <span class="number">-1</span> || pos2 &gt;= versionStr.<span class="built_in">length</span>())</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">	result.major = <span class="built_in">atoi</span>(versionStr.<span class="built_in">substr</span>(<span class="number">0</span>, pos1).<span class="built_in">c_str</span>());</span><br><span class="line">	result.minor = <span class="built_in">atoi</span>(versionStr.<span class="built_in">substr</span>(pos1 + <span class="number">1</span>, pos2 - pos1).<span class="built_in">c_str</span>());</span><br><span class="line">	result.revision = <span class="built_in">atoi</span>(versionStr.<span class="built_in">substr</span>(pos2 + <span class="number">1</span>, versionStr.<span class="built_in">length</span>() - pos2).<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">compareUpdateVersion</span><span class="params">(<span class="type">const</span> UpdateVersion&amp; left, <span class="type">const</span> UpdateVersion&amp; right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (left.major != right.major)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> left.major &gt; right.major ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (left.minor != right.minor)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> left.minor &gt; right.minor ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (left.revision != right.revision)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> left.revision &gt; right.revision ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">compareUpdateVersion</span><span class="params">(<span class="type">const</span> std::string&amp; left, <span class="type">const</span> std::string&amp; right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	UpdateVersion leftVer = <span class="built_in">parseUpdateVersion</span>(left);</span><br><span class="line">	UpdateVersion rightVer = <span class="built_in">parseUpdateVersion</span>(right);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">compareUpdateVersion</span>(leftVer, rightVer);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strcmp</span>(<span class="string">&quot;1.0.0&quot;</span>, <span class="string">&quot;1.0.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strcmp</span>(<span class="string">&quot;1.0.0&quot;</span>, <span class="string">&quot;1.0.1&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strcmp</span>(<span class="string">&quot;1.0.9&quot;</span>, <span class="string">&quot;1.0.10&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">strcmp</span>(<span class="string">&quot;1.1.0&quot;</span>, <span class="string">&quot;1.0.10&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;======================\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;0 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.0&quot;</span>, <span class="string">&quot;1.0.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;0 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;2.4.3&quot;</span>, <span class="string">&quot;2.4.3&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;-1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.0&quot;</span>, <span class="string">&quot;1.0.1&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;-1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.9&quot;</span>, <span class="string">&quot;1.0.10&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;-1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.10&quot;</span>, <span class="string">&quot;1.1.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;-1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.2.10&quot;</span>, <span class="string">&quot;2.0.0&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.1.0&quot;</span>, <span class="string">&quot;1.0.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.0.10&quot;</span>, <span class="string">&quot;1.0.0&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;1.1.0&quot;</span>, <span class="string">&quot;1.0.10&quot;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1 == %d\n&quot;</span>, <span class="built_in">compareUpdateVersion</span>(<span class="string">&quot;100.1.0&quot;</span>, <span class="string">&quot;10.0.10&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/06/12/2015/2015-06-12-total-command-load-selection-from-clip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/06/12/2015/2015-06-12-total-command-load-selection-from-clip/" class="post-title-link" itemprop="url">Total Command导入文件选择列表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-06-12 00:00:00" itemprop="dateCreated datePublished" datetime="2015-06-12T00:00:00+08:00">2015-06-12</time>
             </span>
 
           
@@ -782,7 +893,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-11-05-unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/05/07/2015/2015-05-07-update-cocos2d-js-from-3.1-to-3.6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -796,7 +907,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2015/2015-11-05-unable-to-profile-app-on-device-with-ios-9-1-using-xcode-7-1/" class="post-title-link" itemprop="url">Xcode 7.1无法使用Instruments真机调试，设备灰色不可选</a>
+            <a href="/2015/05/07/2015/2015-05-07-update-cocos2d-js-from-3.1-to-3.6/" class="post-title-link" itemprop="url">升级cocos2d-js 3.1到3.6</a>
         </h2>
 
         <div class="post-meta">
@@ -806,7 +917,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2015-05-07 00:00:00" itemprop="dateCreated datePublished" datetime="2015-05-07T00:00:00+08:00">2015-05-07</time>
             </span>
 
           
@@ -820,186 +931,53 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>Macbook Pro + Mac OS X 10.11.1 + Xcode 7.1 +Instruments 7.1  </p>
-<p>iPhone 6 + iOS 9.1  </p>
-<h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="/media/files/2015/11/05/instruments-gray-device.png" alt="Instruments中的设备选择无法选择iPhone真机，灰色不可选"></p>
-<p>Instruments中的设备选择无法选择iPhone真机，灰色不可选</p>
-<h3 id="解决方案：重启"><a href="#解决方案：重启" class="headerlink" title="解决方案：重启"></a>解决方案：重启</h3><p>我最终的解决步骤：  </p>
-<p>1、拔掉iPhone的USB线，重启iPhone  </p>
-<p>2、关闭Xcode和Instruments  </p>
-<p>3、重新连接iPhone到Mac上  </p>
-<p>4、重启Xcode并启动Profile  </p>
-<p>5、成功  </p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>这个帖子的方法管用，我的iPhone 6 9.1系统可以正常调试起来了  </p>
-<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/32878283/unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta">unable-to-profile-app-on-device-with-ios-9-0-1-using-xcode-7-7-0-1-or-7-1-beta</a></p>
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>cocos2d-js 3.1的热更新有点问题，我们想升级到3.2；打开官网一看，哦~ 刚刚发布了3.6版本，既然升级就直接升到最新的吧（会是个坑吧……）</p>
+<h3 id="关于cocos2d-js-3-6更新了什么"><a href="#关于cocos2d-js-3-6更新了什么" class="headerlink" title="关于cocos2d-js 3.6更新了什么"></a>关于cocos2d-js 3.6更新了什么</h3><p>从官网上可以看到3.1到3.6还是发生了很多事情：<br><a target="_blank" rel="noopener" href="http://www.cocos2d-x.org/docs/manual/framework/html5/release-notes/zh">COCOS2D-JS 发布说明</a>  </p>
+<p>另外还有论坛上的帖子：<a target="_blank" rel="noopener" href="http://www.cocoachina.com/bbs/read.php?tid=297633">Cocos2d-JS v3.6 已发布！</a>  </p>
+<h2 id="升级前的准备"><a href="#升级前的准备" class="headerlink" title="升级前的准备"></a>升级前的准备</h2><h3 id="升级前的版本"><a href="#升级前的版本" class="headerlink" title="升级前的版本"></a>升级前的版本</h3><ul>
+<li>cocos2d-js 3.1</li>
+<li>cocos ide 1.1.0</li>
+<li>cocos studio 1.6</li>
+<li>NDK r9d</li>
+</ul>
+<h3 id="升级到cocos2d-js-3-6需要升级的部分"><a href="#升级到cocos2d-js-3-6需要升级的部分" class="headerlink" title="升级到cocos2d-js 3.6需要升级的部分"></a>升级到cocos2d-js 3.6需要升级的部分</h3><ul>
+<li>cocos2d-js 3.6</li>
+<li>cocos ide 1.2.0</li>
+<li>NDK r10c （不升级无法兼容Android 5.0，其他版本的Android还可以正常使用)</li>
+<li>cocos studio 2.2.0 官方声称兼容老的版本，所以我们这次没有升级，因为变化太大，但实际测试兼容还是有点小问题</li>
+</ul>
+<h2 id="升级步骤"><a href="#升级步骤" class="headerlink" title="升级步骤"></a>升级步骤</h2><h3 id="1-本次只更新cocos2d-js和ide，cocos-studio保持1-6版本不变，需要下载下面这两个文件："><a href="#1-本次只更新cocos2d-js和ide，cocos-studio保持1-6版本不变，需要下载下面这两个文件：" class="headerlink" title="1.本次只更新cocos2d-js和ide，cocos studio保持1.6版本不变，需要下载下面这两个文件："></a>1.本次只更新cocos2d-js和ide，cocos studio保持1.6版本不变，需要下载下面这两个文件：</h3><ul>
+<li>cocos2d-js-v3.6.zip</li>
+<li>cocos-code-ide-win64-1.2.0.exe，对应的Mac版本：cocos-code-ide-mac64-1.2.0.dmg</li>
+</ul>
+<h3 id="2-删除或者重命名cocod2d-3-1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）"><a href="#2-删除或者重命名cocod2d-3-1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）" class="headerlink" title="2.删除或者重命名cocod2d-3.1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）"></a>2.删除或者重命名cocod2d-3.1目录（这一步其实可以不做，只是方便环境没有切换过来的时候不至于使用到老的）</h3><h3 id="3-解压cocos2d-js-v3-6-zip，解压后执行下setup-py，执行后在命令行下执行下cocos命令，检查下路径是否正确"><a href="#3-解压cocos2d-js-v3-6-zip，解压后执行下setup-py，执行后在命令行下执行下cocos命令，检查下路径是否正确" class="headerlink" title="3.解压cocos2d-js-v3.6.zip，解压后执行下setup.py，执行后在命令行下执行下cocos命令，检查下路径是否正确"></a>3.解压cocos2d-js-v3.6.zip，解压后执行下setup.py，执行后在命令行下执行下cocos命令，检查下路径是否正确</h3><h3 id="4-安装cocos-ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）"><a href="#4-安装cocos-ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）" class="headerlink" title="4.安装cocos ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）"></a>4.安装cocos ide（覆盖安装），并设置下cocos2d-js的新目录（首选项-》cocos-》Javascript）</h3><h3 id="5-从cocos2d-js目录下重新复制这4个目录到工程目录："><a href="#5-从cocos2d-js目录下重新复制这4个目录到工程目录：" class="headerlink" title="5.从cocos2d-js目录下重新复制这4个目录到工程目录："></a>5.从cocos2d-js目录下重新复制这4个目录到工程目录：</h3><p>frameworks&#x2F;cocos2d-html5&#x2F;<br>frameworks&#x2F;js-bindings&#x2F;<br>tools&#x2F;bindings-generator&#x2F;<br>tools&#x2F;tojs&#x2F;</p>
+<h3 id="6-使用cocos-ide或者xcode编译，第一次编译需要较长的时间"><a href="#6-使用cocos-ide或者xcode编译，第一次编译需要较长的时间" class="headerlink" title="6.使用cocos ide或者xcode编译，第一次编译需要较长的时间"></a>6.使用cocos ide或者xcode编译，第一次编译需要较长的时间</h3><h2 id="升级过程中遇到的问题"><a href="#升级过程中遇到的问题" class="headerlink" title="升级过程中遇到的问题"></a>升级过程中遇到的问题</h2><h3 id="JSB编译错误"><a href="#JSB编译错误" class="headerlink" title="JSB编译错误"></a>JSB编译错误</h3><p>主要是jsb开始使用智能指针，以前的代码需要改造下</p>
+<p>找到两个官方的帖子：<br><a target="_blank" rel="noopener" href="https://github.com/cocos2d/cocos2d-js/issues/1109">refactor binding code use JS::CallArgs instead of c style macro #1109</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/cocos2d/cocos2d-js/issues/1139">Use SpiderMonkey template for GC thing instead of raw type #1139</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/JSAPI_Cookbook?redirectlocale=en-US&redirectslug=SpiderMonkey/JSAPI_Phrasebook">JSAPI Cookbook</a>  </p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);</span><br><span class="line">    args.rval().setUndefined();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    XXXObject *newObject = XXXObject::GetInstance();</span><br><span class="line">    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);</span><br><span class="line"></span><br><span class="line">    js_proxy_t *p;</span><br><span class="line">    HASH_FIND_PTR(_native_js_global_ht, &amp;newObject, p);</span><br><span class="line">    if (!p) &#123;</span><br><span class="line">        JSObject *obj = JS_NewObject(cx, JSB_XObject_class, JS::RootedObject(cx, JSB_XObject_object), JS::NullPtr());</span><br><span class="line">        p = jsb_new_proxy(newObject, obj);</span><br><span class="line">        JS::AddNamedObjectRoot(cx, &amp;p-&gt;obj, JSB_MODULE_OS_HELPER);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    args.rval().set(OBJECT_TO_JSVAL(p-&gt;obj));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // define name space</span><br><span class="line">    JS::RootedObject myBinding(cx, JS_NewObject(cx, NULL, JS::NullPtr(), JS::NullPtr()));</span><br><span class="line">    JS::RootedValue myBindingVal(cx);</span><br><span class="line">    myBindingVal = OBJECT_TO_JSVAL(myBinding);</span><br><span class="line">    JS_SetProperty(cx, obj, &quot;XXXHandleBinding&quot;, myBindingVal);</span><br><span class="line">    JsbVoiceHandleObjectCreateClass(cx, myBinding, &quot;XXXHandleObject&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">static void JsbVoiceHandleObjectCreateClass(JSContext *cx, JS::HandleObject globalObj, const char* name)</span><br><span class="line"></span><br><span class="line">    JSContext* jc = ScriptingCore::getInstance()-&gt;getGlobalContext();</span><br><span class="line">    JS::RootedValue retval(jc);</span><br><span class="line"></span><br><span class="line">    bool ok = true;</span><br><span class="line">    int32_t arg0 = 0;</span><br><span class="line">    ok &amp;= jsval_to_int32(cx, args[0], &amp;arg0);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<h3 id="向导生成的文件升级了"><a href="#向导生成的文件升级了" class="headerlink" title="向导生成的文件升级了"></a>向导生成的文件升级了</h3><p>主要是class根目录以及class&#x2F;runtime目录下的文件，解决方案就是用新版本的cocos ide生成一个新的带native的工程，对比下新旧文件，覆盖过来就可以了</p>
+<h4 id="Android还需要往-mk文件中加下文件"><a href="#Android还需要往-mk文件中加下文件" class="headerlink" title="Android还需要往.mk文件中加下文件"></a>Android还需要往.mk文件中加下文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">../../Classes/runtime/ConnectWaitLayer.cpp \</span><br><span class="line">../../Classes/runtime/ConsoleCommand.cpp \</span><br><span class="line">../../Classes/runtime/FileServer.cpp \</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-12-11-weixin-js-sdk-tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2015/2015-12-11-weixin-js-sdk-tips/" class="post-title-link" itemprop="url">微信JS-SDK联调</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>在微信中打开我们的网页，网页能够使用微信提供的JS-SDK，比如使用chooseImage，选择图片等等</p>
-<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><h3 id="AppID"><a href="#AppID" class="headerlink" title="AppID"></a>AppID</h3><p>要使用公众账号的开发AppID，而不是微信开发平台下的应用AppID</p>
-<h3 id="业务域名和JS接口安全域名"><a href="#业务域名和JS接口安全域名" class="headerlink" title="业务域名和JS接口安全域名"></a>业务域名和JS接口安全域名</h3><p>1、不设置会导致签名失败  </p>
-<p>2、设置方法  </p>
-<p>在微信公众平台的后台，公众设置，功能设置中进行设置，业务域名和JS接口安全域名都是需要设置的  </p>
-<h3 id="签名失败"><a href="#签名失败" class="headerlink" title="签名失败"></a>签名失败</h3><p>遇到签名失败，首先根据微信官方的指引：<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html#.E9.99.84.E5.BD.955-.E5.B8.B8.E8.A7.81.E9.94.99.E8.AF.AF.E5.8F.8A.E8.A7.A3.E5.86.B3.E6.96.B9.E6.B3.95">《附录5-常见错误及解决方法》</a>，看看能不能解决。</p>
-<h4 id="我自己踩坑之后的理解如下："><a href="#我自己踩坑之后的理解如下：" class="headerlink" title="我自己踩坑之后的理解如下："></a>我自己踩坑之后的理解如下：</h4><p>1、签名用的url要动态获取  </p>
+<h3 id="编译通过后提示UI-ExportJson文件找不到了"><a href="#编译通过后提示UI-ExportJson文件找不到了" class="headerlink" title="编译通过后提示UI ExportJson文件找不到了"></a>编译通过后提示UI ExportJson文件找不到了</h3><p>原因是3.3版本的时候升级了从xxxSence.json文件找ui文件的算法，以前都是用全路径，现在改成了相对于xxxSence.json的相对路径，所以文件都找不到了</p>
+<h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>我们其实没有使用xxxSence.json，可以试下全部直接使用xxxExportJson</p>
+<p>修改前后的代码对比</p>
 <blockquote>
-<p>location.href.split(‘#’)[0]</p>
 </blockquote>
-<p>2、appID不要用错了，要用公众平台的开发appID  </p>
-<p>3、怀疑签名算法有问题，可以用微信提供的签名校验网址来确认：<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign">微信 JS 接口签名校验工具</a>  </p>
-<p>4、文档中说了“出于安全考虑，开发者必须在服务器端实现签名的逻辑。”，这个不是强制的，在前端静态页面直接获取到token后再去获取ticket，然后直接生成签名，也是可以的。    </p>
-<p>当然这样做并不安全，只是说可以这样子，微信并没有做代码级的限制。  </p>
-<p>5、JS-SDK的调通跟公众平台后台的”开发-》基本配置-》服务器配置(未启用)”没有关系。    </p>
-<h2 id="参考的材料"><a href="#参考的材料" class="headerlink" title="参考的材料"></a>参考的材料</h2><p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/wiki/7/1c97470084b73f8e224fe6d9bab1625b.html">微信JS-SDK说明文档</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://pigerla.com/wechat-api/2015-06-23/using-js-sdk-of-WeChat/">如何接入微信公众平台（nodejs）</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://m.oschina.net/blog/384705">微信JS-SDK分享功能开发实例</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://www.smallerpig.com/889.html">微信JSSDK Python版本讲解</a>  </p>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#JSSDK.E4.BD.BF.E7.94.A8.E6.AD.A5.E9.AA.A4">微信JS-SDK 接入步骤</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://www.cocoachina.com/webapp/20150708/12465.html">基于node.js的微信JS-SDK简单应用</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://203.195.235.76/jssdk/sample.zip">微信官方提供的sample</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign">微信 JS 接口签名校验工具</a>  </p>
+<p>&#x2F;&#x2F;        var node &#x3D; ccs.sceneReader.createNodeWithSceneFile(res.login_scene);  </p>
+<p>&#x2F;&#x2F;        var widget &#x3D; node.getChildByTag(10003).getComponent(“LoginComponent”).getNode();  </p>
+<pre><code>    var widget = ccs.uiReader.widgetFromJsonFile(res.LoginUI_ExportJson);  
 
-      
-    </div>
+    this.addChild(widget);  
+</code></pre>
+<p>虽然cocos官方说支持cocos studio 1.6版本，但是还是会有些布局上的问题，需要针对3.6进行下适配。</p>
+<h3 id="Cocos2D-X-3-6-android与友盟-zlib-冲突，无法编译！"><a href="#Cocos2D-X-3-6-android与友盟-zlib-冲突，无法编译！" class="headerlink" title="Cocos2D-X 3.6 android与友盟 zlib 冲突，无法编译！"></a>Cocos2D-X 3.6 android与友盟 zlib 冲突，无法编译！</h3><p><a target="_blank" rel="noopener" href="http://bbs.umeng.com/thread-8639-1-1.html">Cocos2D-X 3.6 android与友盟 zlib 冲突，无法编译！</a></p>
+<p>这个目前只能呢个等待umeng官网更新版本支持。</p>
+<h4 id="2015-05-08更新"><a href="#2015-05-08更新" class="headerlink" title="2015-05-08更新"></a>2015-05-08更新</h4><p>umeng的跟进还是挺快的，他们更新了一个兼容cocos2d-x 3.6的测试版本，可以从<a target="_blank" rel="noopener" href="http://dev.umeng.com/game_analytics/game-c2d/sdk-download">这里</a>下载到（测试版本，后续可能会被更新掉）：   </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cocos2dx 游戏统计分析SDK使用 v4.1 （2015-05-07）</span><br><span class="line">功能更新:</span><br><span class="line">新SDK使用新协议(Thrift)</span><br><span class="line">重构SDK数据采集的逻辑框架，提高SDK稳定性；</span><br><span class="line">采用了全新的账号统计接口</span><br><span class="line">支持cocos2dx 3.6</span><br><span class="line">支持按间隔发送数据策略</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2015/2015-11-05-double-commander-for-mac/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2015/2015-11-05-double-commander-for-mac/" class="post-title-link" itemprop="url">Double Commander for Mac</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="相见恨晚"><a href="#相见恨晚" class="headerlink" title="相见恨晚"></a>相见恨晚</h2><p>作为一个深度依赖Total Commander的键盘党，切换开发环境到Mac后，一直找不到一款可以在Mac上接替TC的产品，试用过Path Finder、ForkLift都无法达到我的需求，不是因为界面的缘故，而是产品的设计理念根本就不一样。</p>
-<p>TC确实可以替换系统的资源管理器，但是他的目标可不是替换系统资源管理器这么简单。</p>
-<p>无奈之下选择了一款免费的Finder插件XtraFinder，用了一段时间之后，我的Mac升级了OS X 10.11，用不了了：<a target="_blank" rel="noopener" href="https://www.trankynam.com/xtrafinder/sip.html">如果不关闭System Integrity Protection就无法使用了</a>。</p>
-<p>不能忍，再找找吧，在网上看到了这几个帖子：  </p>
-<p><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/66737">怎么，Mac 下的诸多文件管理软件还在仰望 Total Commander，在 TC 的阴影下生活么？</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://www.zhihu.com/question/19607061">Mac 是否有类似Windows上 Total Commander 这样的应用？</a></p>
-<p>几个帖子中都提到了一个我之前没有试用过的软件：<a target="_blank" rel="noopener" href="http://doublecmd.sourceforge.net/">Double Commander</a></p>
-<p>用了一分钟之后，我只能说：相见恨晚</p>
-<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><h3 id="Mac下的版本选择"><a href="#Mac下的版本选择" class="headerlink" title="Mac下的版本选择"></a>Mac下的版本选择</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mac OS X &gt;= 10.5</span><br><span class="line">doublecmd-0.6.6-6327.carbon.i386.dmg</span><br><span class="line"></span><br><span class="line">Mac OS X &gt;= 10.8	</span><br><span class="line">64 bit	doublecmd-0.6.6-6327.qt.x86_64.dmg</span><br></pre></td></tr></table></figure>
-
-<h4 id="结论是：选择32位版本"><a href="#结论是：选择32位版本" class="headerlink" title="结论是：选择32位版本"></a>结论是：选择32位版本</h4><h4 id="理由："><a href="#理由：" class="headerlink" title="理由："></a>理由：</h4><p>1、性能上的差别没有做比较，但是两者使用下来没有明显的差异，至少没有卡顿的情况；  </p>
-<p>2、除去性能，64位的界面太毛糙了，无论是图标还是界面的文字显示效果都很差；  </p>
-<p>两者的界面库是不同的，32位下采用carbon，而64位下使用的是Qt，carbon的界面是使用系统原生来适配的，而qt的界面是跨平台的。</p>
-<p>举个简单的例子：carbon可以使用OS X 10.11后的新字体，而Qt没有使用。</p>
-<h3 id="快捷键冲突"><a href="#快捷键冲突" class="headerlink" title="快捷键冲突"></a>快捷键冲突</h3><h4 id="复制、剪切、和粘贴"><a href="#复制、剪切、和粘贴" class="headerlink" title="复制、剪切、和粘贴"></a>复制、剪切、和粘贴</h4><p>为了方便在Finder和DC之间复制文件，对应Ctrl+C、Ctrl+X、Ctrl+V分别多加一个快捷键   </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Command+C、Command+X、Command+V</span><br></pre></td></tr></table></figure>
-
-<h4 id="左右窗口的复制快捷键Ctrl-左-x2F-右和Mac的屏幕切换冲突了"><a href="#左右窗口的复制快捷键Ctrl-左-x2F-右和Mac的屏幕切换冲突了" class="headerlink" title="左右窗口的复制快捷键Ctrl+左&#x2F;右和Mac的屏幕切换冲突了"></a>左右窗口的复制快捷键Ctrl+左&#x2F;右和Mac的屏幕切换冲突了</h4><p>我的做法是自定义快捷键：  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+option+左</span><br><span class="line">Ctrl+option+右</span><br></pre></td></tr></table></figure>
-
-<p>其他的快捷键冲突，也使用类似的解决方案</p>
-<h3 id="对键盘党来说必备的小功能"><a href="#对键盘党来说必备的小功能" class="headerlink" title="对键盘党来说必备的小功能"></a>对键盘党来说必备的小功能</h3><p>F5复制，F6移动  </p>
-<p>快速过滤定位文件  </p>
-<p>文件内查找文本  </p>
-<p>批量重命名  </p>
-<p>压缩文件  </p>
-<p>比较文件  </p>
-<p>等等……  </p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Path Finder等收费软件虽然界面很美观，但产品的定位上只是Finder的一个增强或者替代品，和Total Commander没有可比性；  </p>
-<p>作为一个独立的效率工具来说，Double Commander和Total Commander定位非常接近；  </p>
-<p>另外还有一点，作为开源软件的Double Commander，他的版本计划还在继续，非常值得期待。  </p>
 
       
     </div>

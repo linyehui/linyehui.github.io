@@ -148,7 +148,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2013/2013-06-02-a-message-to-garcia/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2013/06/02/2013/2013-06-02-a-message-to-garcia/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -162,7 +162,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2013/2013-06-02-a-message-to-garcia/" class="post-title-link" itemprop="url">致加西亚的信</a>
+            <a href="/2013/06/02/2013/2013-06-02-a-message-to-garcia/" class="post-title-link" itemprop="url">致加西亚的信</a>
         </h2>
 
         <div class="post-meta">
@@ -172,7 +172,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2013-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2013-06-02T00:00:00+08:00">2013-06-02</time>
             </span>
 
           
@@ -229,7 +229,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2013/2013-07-04-new-or-updated-in-windows-8-1-preview/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2013/04/09/2013/2013-04-09-win8-virtualbox-verr-ssm-load-cpuid-mismatch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -243,7 +243,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2013/2013-07-04-new-or-updated-in-windows-8-1-preview/" class="post-title-link" itemprop="url">New or updated in Windows 8.1 Preview</a>
+            <a href="/2013/04/09/2013/2013-04-09-win8-virtualbox-verr-ssm-load-cpuid-mismatch/" class="post-title-link" itemprop="url">VirtualBox在Win8下的VERR_SSM_LOAD_CPUID_MISMATCH问题</a>
         </h2>
 
         <div class="post-meta">
@@ -253,7 +253,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2013-04-09 00:00:00" itemprop="dateCreated datePublished" datetime="2013-04-09T00:00:00+08:00">2013-04-09</time>
             </span>
 
           
@@ -267,726 +267,103 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>上周的Build 2013上微软发布了Windows 8.1 Preview，微软对外公布了8.1的更新信息：  </p>
-<p><a target="_blank" rel="noopener" href="http://msdn.microsoft.com/zh-cn/library/windows/apps/bg182889.aspx">New or updated in Windows 8.1 Preview</a></p>
-<p>我自己看了之后比较感兴趣的点有下面这些：</p>
-<h1 id="1-General-updates"><a href="#1-General-updates" class="headerlink" title="1. General updates"></a>1. General updates</h1><h3 id="App-bundle-support"><a href="#App-bundle-support" class="headerlink" title="App bundle support"></a>App bundle support</h3><p>资源包，方便做多语言的支持，比现在散落在目录下规范很多</p>
-<h1 id="2-Diagnostics"><a href="#2-Diagnostics" class="headerlink" title="2. Diagnostics"></a>2. Diagnostics</h1><h3 id="Mixed-language-debugging"><a href="#Mixed-language-debugging" class="headerlink" title="Mixed-language debugging"></a>Mixed-language debugging</h3><p>终于可以同时调试Javascript和C++了，只能说现在的版本太搓了 </p>
-<h3 id="Managed-app-debugging"><a href="#Managed-app-debugging" class="headerlink" title="Managed app debugging"></a>Managed app debugging</h3><p>动态修改变量的值，实用功能</p>
-<h3 id="Asynchronous-debugging-improvements"><a href="#Asynchronous-debugging-improvements" class="headerlink" title="Asynchronous debugging improvements"></a>Asynchronous debugging improvements</h3><p>task任务的堆栈可以追溯到创建的地方，这个调试异步任务时非常实用</p>
-<h3 id="DOM-Explorer"><a href="#DOM-Explorer" class="headerlink" title="DOM Explorer"></a>DOM Explorer</h3><p>得到了加强</p>
-<h3 id="JavaScript-Console"><a href="#JavaScript-Console" class="headerlink" title="JavaScript Console"></a>JavaScript Console</h3><p>不用自己console.dir了</p>
-<h3 id="JavaScript-Memory-Profiler"><a href="#JavaScript-Memory-Profiler" class="headerlink" title="JavaScript Memory Profiler"></a>JavaScript Memory Profiler</h3><p>现在的发现点还不够智能，需要验证下好不好用才知道</p>
-<h3 id="JavaScript-UI-Responsiveness"><a href="#JavaScript-UI-Responsiveness" class="headerlink" title="JavaScript UI Responsiveness"></a>JavaScript UI Responsiveness</h3><p>实用</p>
-<h1 id="3-JavaScript-editor"><a href="#3-JavaScript-editor" class="headerlink" title="3. JavaScript editor"></a>3. JavaScript editor</h1><p>小改动都比较实用</p>
-<h1 id="4-C-development"><a href="#4-C-development" class="headerlink" title="4. C++ development"></a>4. C++ development</h1><h3 id="C-REST-SDK"><a href="#C-REST-SDK" class="headerlink" title="C++ REST SDK"></a>C++ REST SDK</h3><p>我们自己用不到，但是这也算是当下必备的基础库了</p>
-<h3 id="IDE-productivity-features"><a href="#IDE-productivity-features" class="headerlink" title="IDE productivity features"></a>IDE productivity features</h3><p>优化了编译速度，这个比较期待</p>
-<h3 id="Build-time-performance-enhancements"><a href="#Build-time-performance-enhancements" class="headerlink" title="Build-time performance enhancements"></a>Build-time performance enhancements</h3><p>优化了并行编译，期待</p>
-<h1 id="5-HTML-design-tools"><a href="#5-HTML-design-tools" class="headerlink" title="5. HTML design tools"></a>5. HTML design tools</h1><p>使用的优化，对开发影响不大</p>
-<h1 id="6-XAML-design-tools"><a href="#6-XAML-design-tools" class="headerlink" title="6. XAML design tools"></a>6. XAML design tools</h1><p>使用的优化，对开发影响不大</p>
-<h1 id="7-Windows-App-Certification-Kit-3-0"><a href="#7-Windows-App-Certification-Kit-3-0" class="headerlink" title="7. Windows App Certification Kit 3.0"></a>7. Windows App Certification Kit 3.0</h1><p>连这个小工具都做了并行优化，挺用心的嘛</p>
-<h3 id="New-validation-tests"><a href="#New-validation-tests" class="headerlink" title="New validation tests"></a>New validation tests</h3><h5 id="File-extensions-and-protocols"><a href="#File-extensions-and-protocols" class="headerlink" title="File extensions and protocols"></a>File extensions and protocols</h5><p>数量在规则上并没有什么变化，只是加了检查，网盘类应用应该比较关心这个</p>
-<h5 id="JavaScript-background-tasks"><a href="#JavaScript-background-tasks" class="headerlink" title="JavaScript background tasks"></a>JavaScript background tasks</h5><p>考虑省电的缘故，后台不给常驻了，但如果应用配合服务端的话，“常驻”比较难被检查出来吧？不知道微软是怎么检查的</p>
-<h3 id="Test-reports"><a href="#Test-reports" class="headerlink" title="Test reports"></a>Test reports</h3><p>之前遇到过一个莫名其妙的启动性能Failed，给的report detail根本就看不出是什么原因导致的，希望这个版本能够有所改进。</p>
-<h1 id="8-开发建议"><a href="#8-开发建议" class="headerlink" title="8. 开发建议"></a>8. 开发建议</h1><p>从之前微软发布Windows 8 预览版的节操来看，Preview版本和RTM版本还是会有比较大的差异，所以开发者不要着急着全面跟进8.1的新特性；<br>先把这些特性都研究下，改改兼容性的Bug，能做到8.1正式发布后第一时间有新版本跟进也就可以了。</p>
-<p>Good luck， have fun :)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2013/2013-09-25-use-duiengine-with-wtl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2013/2013-09-25-use-duiengine-with-wtl/" class="post-title-link" itemprop="url">在WTL向导工程中使用DuiEngine</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>假设你清楚的理解什么是<a target="_blank" rel="noopener" href="http://wtl.sf.net/">WTL</a>，什么是<a target="_blank" rel="noopener" href="http://duiengine.googlecode.com/">DuiEngine</a>，那么请继续往下看 :)</p>
-<h1 id="在WTL向导生成的工程中使用DuiEngine"><a href="#在WTL向导生成的工程中使用DuiEngine" class="headerlink" title="在WTL向导生成的工程中使用DuiEngine"></a>在WTL向导生成的工程中使用DuiEngine</h1><h4 id="1-用WTL向导生成一个Module-Dialog的工程：WTLDemo"><a href="#1-用WTL向导生成一个Module-Dialog的工程：WTLDemo" class="headerlink" title="1. 用WTL向导生成一个Module Dialog的工程：WTLDemo"></a>1. 用WTL向导生成一个Module Dialog的工程：WTLDemo</h4><h4 id="2-用DuiEngine向导生成一个最简单的工程：DuiDemo"><a href="#2-用DuiEngine向导生成一个最简单的工程：DuiDemo" class="headerlink" title="2. 用DuiEngine向导生成一个最简单的工程：DuiDemo"></a>2. 用DuiEngine向导生成一个最简单的工程：DuiDemo</h4><h4 id="3-从DuiDemo目录下复制这些目录和文件到WTLDemo目录下"><a href="#3-从DuiDemo目录下复制这些目录和文件到WTLDemo目录下" class="headerlink" title="3. 从DuiDemo目录下复制这些目录和文件到WTLDemo目录下"></a>3. 从DuiDemo目录下复制这些目录和文件到WTLDemo目录下</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">duires目录</span><br><span class="line">skin目录</span><br><span class="line">MainDlg.h和MainDlg.cpp</span><br><span class="line">UIHandler.h和UIHandler.cpp</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-修改-rc文件，最方便的使用BeyondCompare等工具直接比较合并，其实需要合并过来的就是这三段"><a href="#4-修改-rc文件，最方便的使用BeyondCompare等工具直接比较合并，其实需要合并过来的就是这三段" class="headerlink" title="4. 修改.rc文件，最方便的使用BeyondCompare等工具直接比较合并，其实需要合并过来的就是这三段"></a>4. 修改.rc文件，最方便的使用BeyondCompare等工具直接比较合并，其实需要合并过来的就是这三段</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> TEXTINCLUDE </span><br><span class="line">BEGIN</span><br><span class="line">    <span class="string">&quot;#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n&quot;</span></span><br><span class="line">    <span class="string">&quot;LANGUAGE 4, 2\r\n&quot;</span></span><br><span class="line">    <span class="string">&quot;#pragma code_page(936)\r\n&quot;</span></span><br><span class="line">    <span class="string">&quot;#include &quot;</span><span class="string">&quot;duires\\winres.rc2&quot;</span><span class="string">&quot; //DUI×ÊÔ´\r\n&quot;</span></span><br><span class="line">    <span class="string">&quot;#endi\0&quot;</span></span><br><span class="line">END</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// XML2</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line">IDR_NAME2ID             XML2                    <span class="string">&quot;duires\\name2id.xml&quot;</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Icon</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Icon with lowest ID value placed first to ensure application icon</span></span><br><span class="line"><span class="comment">// remains consistent on all systems.</span></span><br><span class="line">IDI_MAINWND             ICON                    <span class="string">&quot;duires\\WTLDemo.ico&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> APSTUDIO_INVOKED</span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Generated from the TEXTINCLUDE 3 resource.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)</span></span><br><span class="line">LANGUAGE <span class="number">4</span>, <span class="number">2</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> code_page(936)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;duires\winres.rc2&quot;</span> <span class="comment">//DUI×ÊÔ´</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span>    <span class="comment">// not APSTUDIO_INVOKED</span></span></span><br></pre></td></tr></table></figure>
-
-<p>** resource.h中新增两行 **</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define IDR_NAME2ID                     112</span><br><span class="line">#define IDI_MAINWND                     113</span><br></pre></td></tr></table></figure>
-
-<p>** stdafx.h中加入duiengine的头文件和lib **</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dui include</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;duistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;duihostwnd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;duictrls.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;duiwndnotify.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;DuiCSS.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;resource.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;duires/res.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> DuiEngine;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> DLL_DUI</span></span><br><span class="line">	<span class="meta"># <span class="keyword">pragma</span> comment(lib, <span class="string">&quot;duiengine.lib&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">	<span class="meta"># <span class="keyword">pragma</span> comment(lib, <span class="string">&quot;duiengine_static.lib&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>5.WTLDemo.cpp中新增DuiEngine的初始化和销毁，以及调用逻辑，直接贴下代码</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;resource.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MainDlg.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DuiSystem.h&quot;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;DuiDefaultLogger.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">CAppModule _Module;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">RunUI</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> nRet = <span class="number">0</span>;</span><br><span class="line">	CMainDlg dlgMain;</span><br><span class="line">	nRet = dlgMain.<span class="built_in">DoModal</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> nRet;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">RunDuiEngine</span><span class="params">(HRESULT hRes, HINSTANCE hInstance)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">DUIASSERT</span>(<span class="built_in">SUCCEEDED</span>(hRes));</span><br><span class="line"></span><br><span class="line">	TCHAR szCurrentDir[MAX_PATH + <span class="number">1</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="built_in">memset</span>( szCurrentDir, <span class="number">0</span>, <span class="built_in">sizeof</span>(szCurrentDir) );</span><br><span class="line">	<span class="built_in">GetModuleFileName</span>( <span class="literal">NULL</span>, szCurrentDir, MAX_PATH );</span><br><span class="line">	LPTSTR lpInsertPos = _tcsrchr( szCurrentDir, _T(<span class="string">&#x27;\\&#x27;</span>) );</span><br><span class="line">	*lpInsertPos = _T(<span class="string">&#x27;\0&#x27;</span>);   </span><br><span class="line"></span><br><span class="line">	<span class="function">DuiSystem <span class="title">duiSystem</span><span class="params">(hInstance)</span></span>;</span><br><span class="line"></span><br><span class="line">	DefaultLogger loger;</span><br><span class="line">	loger.<span class="built_in">setLogFilename</span>(<span class="built_in">CDuiStringT</span>(szCurrentDir) + _T(<span class="string">&quot;\\duiengine.log&quot;</span>));</span><br><span class="line">	duiSystem.<span class="built_in">SetLogger</span>(&amp;loger);</span><br><span class="line">	duiSystem.<span class="built_in">logEvent</span>(_T(<span class="string">&quot;demo started&quot;</span>));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 加载ID名称对照表,该资源属于APP级别，所有皮肤应该共享该名字表，名字表总是从程序资源加载</span></span><br><span class="line">	duiSystem.<span class="built_in">InitName2ID</span>(IDR_NAME2ID,_T(<span class="string">&quot;XML2&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __DUIFILE_RC </span></span><br><span class="line">	<span class="comment">//从文件夹加载皮肤,指定皮肤位置</span></span><br><span class="line">	_tcscat( szCurrentDir, _T(<span class="string">&quot;\\..\\..\\..\\..\\coding\\demo\\WTLDemo\\skin&quot;</span>) );</span><br><span class="line">	DuiResProviderFiles *pResFiles=<span class="keyword">new</span> DuiResProviderFiles;</span><br><span class="line">	<span class="keyword">if</span>(!pResFiles-&gt;<span class="built_in">Init</span>(szCurrentDir))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">DUIASSERT</span>(<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	duiSystem.<span class="built_in">SetResProvider</span>(pResFiles);</span><br><span class="line"><span class="meta">#<span class="keyword">else</span> </span></span><br><span class="line">	<span class="comment">//从资源加载皮肤</span></span><br><span class="line">	duiSystem.<span class="built_in">SetResProvider</span>(<span class="keyword">new</span> <span class="built_in">DuiResProviderPE</span>(hInstance));</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> </span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//初始化DUI系统,原来的系统初始化方式依然可以使用。</span></span><br><span class="line">	BOOL result = duiSystem.<span class="built_in">Init</span>(IDR_DUI_INIT);</span><br><span class="line">	duiSystem.<span class="built_in">SetMsgBoxTemplate</span>(IDR_DUI_MSGBOX);</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> uiResult = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (result)</span><br><span class="line">	&#123;</span><br><span class="line">		uiResult = <span class="built_in">RunUI</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	duiSystem.<span class="built_in">logEvent</span>(_T(<span class="string">&quot;demo end&quot;</span>));</span><br><span class="line">	<span class="keyword">delete</span> duiSystem.<span class="built_in">GetResProvider</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> uiResult;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE <span class="comment">/*hPrevInstance*/</span>, LPTSTR <span class="comment">/*lpstrCmdLine*/</span>, <span class="type">int</span> <span class="comment">/*nCmdShow*/</span>)</span><br><span class="line">&#123;</span><br><span class="line">	HRESULT hRes = ::<span class="built_in">CoInitialize</span>(<span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">// If you are running on NT 4.0 or higher you can use the following call instead to </span></span><br><span class="line"><span class="comment">// make the EXE free threaded. This means that calls come in on a random RPC thread.</span></span><br><span class="line"><span class="comment">//	HRESULT hRes = ::CoInitializeEx(NULL, COINIT_MULTITHREADED);</span></span><br><span class="line">	<span class="built_in">ATLASSERT</span>(<span class="built_in">SUCCEEDED</span>(hRes));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// this resolves ATL window thunking problem when Microsoft Layer for Unicode (MSLU) is used</span></span><br><span class="line">	::<span class="built_in">DefWindowProc</span>(<span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0L</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">AtlInitCommonControls</span>(ICC_BAR_CLASSES);	<span class="comment">// add flags to support other controls</span></span><br><span class="line"></span><br><span class="line">	hRes = _Module.<span class="built_in">Init</span>(<span class="literal">NULL</span>, hInstance);</span><br><span class="line">	<span class="built_in">ATLASSERT</span>(<span class="built_in">SUCCEEDED</span>(hRes));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">AtlAxWinInit</span>();</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> nRet = <span class="built_in">RunDuiEngine</span>(hRes, hInstance);</span><br><span class="line"></span><br><span class="line">	_Module.<span class="built_in">Term</span>();</span><br><span class="line">	::<span class="built_in">CoUninitialize</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> nRet;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>6.配置Pre Build Event，直接从DuiDemo复制过来就可以了，就是调用下residbuilder</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2013/2013-09-26-update-duiengine/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2013/2013-09-26-update-duiengine/" class="post-title-link" itemprop="url">升级DuiEngine到2013</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在我开始接触之前，有个很早的项目，使用的是DuiEngine一开始的开源代码，具体时间和版本已经找不清楚了，然后呢现在我需要把他升级到最新版本的<a target="_blank" rel="noopener" href="http://duiengine.googlecode.com/">DuiEngine</a>，在从老的库升级到新版本时遇到了下面这些问题。</p>
-<h3 id="DuiEngine版本"><a href="#DuiEngine版本" class="headerlink" title="DuiEngine版本"></a>DuiEngine版本</h3><pre><code>http://duiengine.googlecode.com/svn/trunk
-Revision: 246
-Author: setoutsoft@qq.com
-Date: 2013年8月26日,星期一 14:23:51
-Message:
-修改窗口默认属性的实现，删除原来的baseClass
-</code></pre>
-<h3 id="升级过程中遇到的问题及解决方案"><a href="#升级过程中遇到的问题及解决方案" class="headerlink" title="升级过程中遇到的问题及解决方案"></a>升级过程中遇到的问题及解决方案</h3><h4 id="1-skin-xml描述类的变化"><a href="#1-skin-xml描述类的变化" class="headerlink" title="1.skin xml描述类的变化"></a>1.skin xml描述类的变化</h4><p>1.1 原来winres.h中的资源ID是手动一个个添加的，新版本的DuiEngine已经可以用工具自动生成  </p>
-<p>解决方案：  </p>
-<p>删除之前生成的winrex.h和name2id.xml，用命令行重新生成，其实就是给每个资源在xml中添加一个name属性，体力活，耐心改下，有个简单的方案是把你之前在winres.h中定义的ID作为xml中的name属性，比如：IDC_TXT_TITLE</p>
+          <p><strong>问题描述：</strong>  </p>
+<p>之前都好好的，今天自己不记得做了什么操作后（后面我才想起来），我的VirtualBox中的虚拟机要么启动到一半就卡住，要么就提示：  </p>
+<p>中文：  </p>
 <blockquote>
-<p>..\3rdparty\duiengine\tool\residbuilder -y -p skin -i skin\index.xml -r .\duires\winres.rc2 -n .\duires\name2id.xml -h .\duires\winres.h </p>
+<p>不能为虚拟电脑 UbuntuDesktop 打开一个新任务.</p>
+<p>cpum#1: X86_CPUID_FEATURE_ECX_MONITOR mismatch: host&#x3D;0 saved&#x3D;1 [ver&#x3D;14 pass&#x3D;final] (VERR_SSM_LOAD_CPUID_MISMATCH).</p>
+<p>返回 代码:E_FAIL (0x80004005)<br>组件:Console<br>界面:IConsole {db7ab4ca-2a3f-4183-9243-c1208da92392}</p>
 </blockquote>
-<p>1.2 模板生成的索引xml文件名字从idmap.xml改成了index.xml，这个只是名字的区别，DuiEngine的Demo目录结构还是老的，没有影响</p>
-<p>1.3 resid type&#x3D;”PNG”被resid type&#x3D;”IMGX”替代，直接查找替换即可</p>
-<p>1.4 header&#x3D;“1”属性被去掉了，改成新的标签了，具体使用方法可以在DuiEngine Demo中搜索<caption><br>解决方案：删除header&#x3D;”1”属性，改成用<caption></caption></p>
-<p>1.5 如果对应的xml文件是布局类型的xml，那么记得在index.xml中加个属性layer&#x3D;”1”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;resid type=&quot;XML&quot;  id_name=&quot;IDR_MAIN_DIALOG&quot; id=&quot;103&quot; layer=&quot;1&quot; file=&quot;xml\dlg_main.xml&quot;  /&gt;</span><br></pre></td></tr></table></figure>
-
-<p>1.6 duiedit改名成了edit，需要在xml添加几个配置，照着Demo工程COPY就好了</p>
-<p>1.7 imgframe替换了原来的imghorzex,png等skin类型</p>
-<h4 id="2-编译中对ATL的依赖"><a href="#2-编译中对ATL的依赖" class="headerlink" title="2.编译中对ATL的依赖"></a>2.编译中对ATL的依赖</h4><p>我个人比较喜欢WTL，但是新版本中用WTL.mini进行了替换，好在可以用USING_ATL预编译宏进行开关选择继续使用WTL，使用的时候DuiEngine和使用的工程都需要使用这个预编译宏，否则会出现link error</p>
-<h4 id="3-static-lib-releaes编译时的诡异link-error"><a href="#3-static-lib-releaes编译时的诡异link-error" class="headerlink" title="3.static lib releaes编译时的诡异link error"></a>3.static lib releaes编译时的诡异link error</h4><p>最后我发现了问题的所在，是一个编译选项配错了，改成默认的就可以了  </p>
-<p>C&#x2F;C++-&gt;Language-&gt;Treat wchar_t as Built-in Type  </p>
-<p>改成默认的Yes就可以link成功，编译通过了，我不知道是不是我自己不小心改出来的，不过好像google code取下来的代码就是有这个问题的</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>昨天下午开始做这个事情，工程我已经迁移完成了，改动的过程比较痛苦，但DuiEngine整个UI库的设计理念没有太大的变化，所以都是些细节，作者也比较懒，没有一个升级的指引，源代码就是文档 :(  </p>
-<p>新版本还是改了很多Bug的，我比较奇怪的是作者为什么要把WTL给去掉呢？自己实现的SimpleWnd功能还不全，合并呢？  </p>
-<p>我本来可以沿用老版本的DuiEngine，但是本着开源代码就是要用最新的原则，我还是进行了版本升级，过程比现象中的要纠结，但时间比想象中花的少。  </p>
-<p>Thanks DuiEngine, gl hf :)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2013/2013-11-15-webbrowser-cross-domain-access/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2013/2013-11-15-webbrowser-cross-domain-access/" class="post-title-link" itemprop="url">WebBrowser内嵌页面的跨域调用问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>很早之前我写过一篇Blog：<a target="_blank" rel="noopener" href="http://blog.csdn.net/debehe/article/details/5053759">网页通过External接口与WebBrowser交互</a>，文中的交互其实只介绍了JS调用C++的部分，而C++调用JS由于微软自己的例子太多，那篇文章就没介绍，不过我最近遇到了一个新问题，和C++调用JS有关，所以重新梳理了下这块的逻辑，把之前的代码完善了下。</p>
-<h2 id="我遇到的问题："><a href="#我遇到的问题：" class="headerlink" title="我遇到的问题："></a>我遇到的问题：</h2><p>内嵌IE浏览器控件WebBrowser的内嵌页host.html中使用iframe又嵌套了一个页面iframe.html，iframe.html上有个JS方法，我用C++调用不到，而host.html上的JS方法可以正常调用到。</p>
-<h2 id="问题分析："><a href="#问题分析：" class="headerlink" title="问题分析："></a>问题分析：</h2><p>从JS来说，这是个跨域问题，host.html和iframe.html不在一个域内；<br>JS解决跨域问题的方案其实也是有的，但这个不是我们本文的重点，本文的重点是怎么通过WebBrowser控件直接来解决这个“跨域调用”的问题。</p>
-<h3 id="问题的根本原因在于："><a href="#问题的根本原因在于：" class="headerlink" title="问题的根本原因在于："></a>问题的根本原因在于：</h3><p>调用网页的JS需要拿到IHTMLDocument2接口，而每个iframe都有自己对应的IHTMLDocument2，所以我们只要能拿到iframe对应的IHTMLDocument2就能解决问题了。</p>
-<h2 id="解决方案：直接上代码吧"><a href="#解决方案：直接上代码吧" class="headerlink" title="解决方案：直接上代码吧"></a>解决方案：直接上代码吧</h2><pre><code>/* -------------------------------------------------------------------------
-//	FileName	:	calljs_helper.h
-//	Creator		:	linyehui
-//	Date		:	2013/11/16 01:18:09
-//	Brief		:	调用WebBrowser控件内嵌页上的JS函数，iframe中的也能调到
-//
-//	$Id: $
-// -----------------------------------------------------------------------*/
-#ifndef __CALLJS_HELPER_H__
-#define __CALLJS_HELPER_H__
-
-// -------------------------------------------------------------------------
-namespace calljs_helper
-&#123;
-    bool CallFunction(
-        CComPtr&lt;IWebBrowser2&gt; spIWebBrowser, 
-        LPCTSTR lpFuncName,
-        const vector&lt;wstring&gt;&amp; paramArray, 
-        CComVariant * pVarResult = NULL,
-        bool bEnumFrame = true);
-
-&#125; // namespace
-
-// -------------------------------------------------------------------------
-// $Log: $
-
-#endif /* __CALLJS_HELPER_H__ */
-
-
-
-/* -------------------------------------------------------------------------
-//	FileName	:	calljs_helper.cpp
-//	Creator		:	linyehui
-//	Date		:	2013/11/16 01:18:14
-//	Brief		:	调用WebBrowser控件内嵌页上的JS函数，iframe中的也能调到
-//
-//	$Id: $
-// -----------------------------------------------------------------------*/
-
-#include &quot;stdafx.h&quot;
-#include &quot;calljs_helper.h&quot;
-
-// -------------------------------------------------------------------------
-
-CComPtr&lt;IWebBrowser2&gt; HtmlWindowToHtmlWebBrowser(CComPtr&lt;IHTMLWindow2&gt; spWindow)
-&#123;
-    ATLASSERT(spWindow != NULL);
-    CComQIPtr&lt;IServiceProvider&gt;  spServiceProvider = spWindow;
-    if (spServiceProvider == NULL)
-    &#123;
-        return CComPtr&lt;IWebBrowser2&gt;();
-    &#125;
-
-    CComPtr&lt;IWebBrowser2&gt; spWebBrws;
-    HRESULT hRes = spServiceProvider-&gt;QueryService(IID_IWebBrowserApp, IID_IWebBrowser2, (void**)&amp;spWebBrws);
-    if (hRes != S_OK)
-    &#123;
-        return CComPtr&lt;IWebBrowser2&gt;();
-    &#125;
-
-    return spWebBrws;
-&#125;
-
-// Converts a IHTMLWindow2 object to a IHTMLDocument2. Returns NULL in case of failure.
-// It takes into account accessing the DOM across frames loaded from different domains.
-CComPtr&lt;IHTMLDocument2&gt; HtmlWindowToHtmlDocument(CComPtr&lt;IHTMLWindow2&gt; spWindow)
-&#123;
-    ATLASSERT(spWindow != NULL);
-    CComPtr&lt;IHTMLDocument2&gt; spDocument;
-    HRESULT hRes = spWindow-&gt;get_document(&amp;spDocument);
-    if ((S_OK == hRes) &amp;&amp; (spDocument != NULL))
-    &#123;
-        // The html document was properly retrieved.
-        return spDocument;
-    &#125;
-
-    // hRes could be E_ACCESSDENIED that means a security restriction that
-    // prevents scripting across frames that loads documents from different internet domains.
-    CComPtr&lt;IWebBrowser2&gt; spBrws = HtmlWindowToHtmlWebBrowser(spWindow);
-    if (spBrws == NULL)
-    &#123;
-        return CComPtr&lt;IHTMLDocument2&gt;();
-    &#125;
-
-    // Get the document object from the IWebBrowser2 object.
-    CComPtr&lt;IDispatch&gt; spDisp;
-    hRes = spBrws-&gt;get_Document(&amp;spDisp);
-    spDocument = spDisp;
-    return spDocument;
-&#125;
-
-bool CallFunctionInDocument(
-                            CComPtr&lt;IHTMLDocument2&gt; spDocument2, 
-                            LPCTSTR lpFuncName,
-                            const vector&lt;wstring&gt;&amp; paramArray, 
-                            CComVariant * pVarResult)
-&#123;
-    if (!spDocument2)
-        return false;
-
-    CComPtr&lt;IDispatch&gt; spScript; 
-    if (FAILED(spDocument2-&gt;get_Script(&amp;spScript))) &#123; return false; &#125;
-
-    CComBSTR bstrMember(lpFuncName); 
-    DISPID dispid = NULL; 
-    HRESULT hr = spScript-&gt;GetIDsOfNames(IID_NULL, &amp;bstrMember, 1, LOCALE_SYSTEM_DEFAULT, &amp;dispid); 
-    if (FAILED(hr)) &#123; return false; &#125;
-
-    const int arraySize = paramArray.size(); 
-
-    DISPPARAMS dispparams; 
-    memset(&amp;dispparams, 0, sizeof dispparams); 
-    dispparams.cArgs = arraySize; 
-    dispparams.rgvarg = new VARIANT[dispparams.cArgs]; 
-
-    for (int i = 0; i &lt; arraySize; i++)
-    &#123;
-        CComBSTR bstr = paramArray[arraySize - 1 - i].c_str(); // back reading
-        bstr.CopyTo(&amp;dispparams.rgvarg[i].bstrVal); 
-        dispparams.rgvarg[i].vt = VT_BSTR; 
-    &#125;
-    dispparams.cNamedArgs = 0; 
-
-    EXCEPINFO excepInfo; 
-    memset(&amp;excepInfo, 0, sizeof excepInfo); 
-    CComVariant vaResult; 
-    UINT nArgErr = (UINT)-1;  // initialize to invalid arg
-
-    hr = spScript-&gt;Invoke(dispid, IID_NULL, 0, DISPATCH_METHOD, &amp;dispparams, &amp;vaResult, &amp;excepInfo, &amp;nArgErr); 
-
-    delete [] dispparams.rgvarg; 
-    if (FAILED(hr)) &#123; return false; &#125;
-
-    if (pVarResult) &#123; *pVarResult = vaResult; &#125;
-
-    return true;
-&#125;
-
-void EnumFrame(
-                              CComPtr&lt;IHTMLDocument2&gt; spIHTMLDocument2, 
-                              LPCTSTR lpFuncName,const vector&lt;wstring&gt;&amp; paramArray, 
-                              CComVariant* pVarResult)
-&#123;
-    if ( !spIHTMLDocument2 )
-        return;
-
-    CComPtr&lt; IHTMLFramesCollection2 &gt; spFramesCollection2;
-    spIHTMLDocument2-&gt;get_frames( &amp;spFramesCollection2 );
-
-    long nFrameCount=0;
-    HRESULT hr = spFramesCollection2-&gt;get_length( &amp;nFrameCount );
-    if ( FAILED ( hr ) || 0 == nFrameCount )
-        return;
-
-    for(long i = 0; i &lt; nFrameCount; i++)
-    &#123;
-        CComVariant vDispWin2;
-        hr = spFramesCollection2-&gt;item( &amp;CComVariant(i), &amp;vDispWin2 );
-        if ( FAILED ( hr ) ) 
-            continue;
-
-        CComQIPtr&lt; IHTMLWindow2 &gt; spWin2 = vDispWin2.pdispVal;
-        if( !spWin2 )
-            continue;
-
-        CComPtr &lt; IHTMLDocument2 &gt; spDoc2;
-        spDoc2 = HtmlWindowToHtmlDocument(spWin2);
-        if (!spDoc2)
-            continue;
-
-        CallFunctionInDocument(spDoc2, lpFuncName, paramArray, pVarResult);
-    &#125;
-&#125;
-
-bool calljs_helper::CallFunction(
-                  CComPtr&lt;IWebBrowser2&gt; spIWebBrowser, 
-                  LPCTSTR lpFuncName,
-                  const vector&lt;wstring&gt;&amp; paramArray, 
-                  CComVariant * pVarResult,
-                  bool bEnumFrame)
-&#123;
-    if (!spIWebBrowser) 
-        return false;
-
-    CComPtr&lt;IDispatch&gt; spDispDoc; 
-    HRESULT hr = spIWebBrowser-&gt;get_Document(&amp;spDispDoc); 
-    if (FAILED(hr))
-        return false;
-
-    CComQIPtr&lt;IHTMLDocument2&gt; spDocument2 = spDispDoc; 
-    if (!spDocument2)
-        return false;
-
-    CallFunctionInDocument(spDocument2, lpFuncName, paramArray, pVarResult);
-    
-    if (bEnumFrame)
-    &#123;
-        EnumFrame(spDocument2, lpFuncName, paramArray, pVarResult);
-    &#125;
-    
-    return true; 
-&#125;
-
-// -------------------------------------------------------------------------
-// $Log: $
-</code></pre>
-<p>完整的例子代码在附件中。</p>
-<h3 id="另外再附上帮助我解决问题的参考资料"><a href="#另外再附上帮助我解决问题的参考资料" class="headerlink" title="另外再附上帮助我解决问题的参考资料:"></a>另外再附上帮助我解决问题的参考资料:</h3><p><a target="_blank" rel="noopener" href="http://blog.csdn.net/skyremember/article/details/3422841">IHTMLWindow2的get_document方法有时候会返回E_ACCESSDENIED</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/nvidiacuda/article/details/9300869">VC++实现浏览器自动填表</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://www.itdelphi.com/delphibbs/doc/2007/3845499.htm">webbrowser控件的IHTMLDocument3 or2接口的iframe问题（非安全设置）</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rainman/archive/2011/02/21/1960044.html">window.name实现的跨域数据传输</a>  </p>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html">JavaScript跨域总结与解决办法</a>  </p>
-<p>The End.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2012/2012-06-20-music-fm-vs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2012/2012-06-20-music-fm-vs/" class="post-title-link" itemprop="url">音乐电台对比</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>对于音乐我是个门外汉，本文讨论重点在于音乐电台这类互联网应用的产品体验。  </p>
-<p>一直用着豆瓣电台，最近开始体验jing.fm感觉眼前一亮，所以觉得有必要写点东西推一推新产品的新思维，希望QQ音乐电台能更给力点，这样也就不枉费我的QQ绿钻了 :)</p>
-<h1 id="douban-fm"><a href="#douban-fm" class="headerlink" title="douban.fm"></a>douban.fm</h1><p>我最开始用的音乐电台，很省心的产品，但是在我听过的歌曲达到了2W之后我开始稍微有点反感了：  </p>
-<ol>
-<li>大部分的音乐都是演唱会的歌曲，质量很低（也许是版权费的问题，专挑免费的歌曲，歌手总要出来说说话，类似“杰伦加油”这种，当然这个我还是可以接受的，无法接受的是唱完歌还要说几分钟话的那种）</li>
-<li>推荐的歌曲已经开始变成一个大循环了，歌越听越少</li>
-<li>“发现DJ”的出发点很好，用户创造内容是未来发展的大方向，但是目前来看高质量的DJ还是太少，而且不一定符合自己的心情，寻找合适自己的DJ电台比较麻烦</li>
-<li>不能屏蔽艺人（某些道德沦陷的艺人，我一点都不想听到，和歌曲无关）</li>
-</ol>
-<h1 id="fm-qq-com-y-qq-com"><a href="#fm-qq-com-y-qq-com" class="headerlink" title="fm.qq.com + y.qq.com"></a>fm.qq.com + y.qq.com</h1><ol>
-<li>和豆瓣音乐和豆瓣电台比唯一的优势是正版音乐比较多，音乐质量稍微高点</li>
-<li>有y.qq.com做支持，不担心版权的问题，歌曲比较全，艺人电台比较全</li>
-<li>猜你喜欢的算法对于我来说还太弱了，总是没能找准我喜欢的音乐，这点不如豆瓣电台（这点不同人理解不同，我也见过说好的）</li>
-<li>有歌词，不过听电台很少看这个，偶尔会看下</li>
-<li>不能屏蔽艺人（某些道德沦陷的艺人，我一点都不想听到，和歌曲无关）</li>
-</ol>
-<h1 id="jing-fm"><a href="#jing-fm" class="headerlink" title="jing.fm"></a>jing.fm</h1><ol>
-<li>jing.fm是最近刚出来的一款音乐电台应用，他的Genius功能可以说是惊艳！艺压群芳！（可以根据你的情感. 风格. 艺人来进行快速的搜索听歌）</li>
-<li>同时具备个人电台. 喜欢、删除，还有刚刚推出的屏蔽艺人的功能（赞！）</li>
-<li>可以说是在众多音乐电台吵来吵去的时候出现的一次大变革，大突破。</li>
-<li>jing.fm 的音乐关键字竟然有“雨声”！其他的音乐电台瞬时被秒杀</li>
-<li>HTML5播放器下经常听歌听到一半卡住，换成flash播放器后就比较少出现，不过产品刚出来不久，后面应该会改善（记得豆瓣电台刚开始也有类似的问题，我还在twitter反馈过，现在偶尔也会这样）</li>
-</ol>
-<p>xiami.com&#x2F;radio和meile.com&#x2F;fm 我个人用的很少，只是简单体验过，没有太多新意。</p>
-<h1 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h1><ol>
-<li>老牌劲旅豆瓣电台如果不收费的话必然受限于版权问题，歌曲越听越少</li>
-<li>QQ音乐电台依靠QQ音乐强大的音乐版权，艺人电台是最大优势，猜你喜欢还有很大的提升空间</li>
-<li>jing.fm 刚刚推出，不仅界面交互让人眼前一亮，Genius的音乐搜索功能绝对算的上是一次变革，很让人期待</li>
-</ol>
-<p>怎么写得有点像软文，我觉得最快把Genius COPY过去的会是QQ音乐，豆瓣电台会在“发现DJ”这块继续发力，用户创造内容是大方向，但是搜索要优化。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2012/2012-07-11-taiwan-2012/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2012/2012-07-11-taiwan-2012/" class="post-title-link" itemprop="url">台湾</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>作为一个中国人，台湾是那样的熟悉，却又是那样的陌生；没有人不知道台湾，但也没几个人能说的清楚台湾。  </p>
-<p>在刚刚过去的6天5夜，我有幸和同事们一起和台湾来了个亲密接触。  </p>
-<p>6天5夜的台湾之行根本不够我们认真的体验台湾，但却足以感受台湾的热情，台湾最美的不是她的风景，不是购物天堂，不仅仅是台妹销魂的声音，而是台湾的风土人情。</p>
-<h1 id="台妹的声音"><a href="#台妹的声音" class="headerlink" title="台妹的声音"></a>台妹的声音</h1><p>大陆媒体上能听得到的好多台湾女孩的声音都很做作，听到鸡皮疙瘩都快起来了，但我们在台北听到了声音是自然的、舒服的、骨头都会酥掉的</p>
-<h1 id="汽车"><a href="#汽车" class="headerlink" title="汽车"></a>汽车</h1><p>汽油、的士没有垄断！我们只打过一次的，在车上和司机简单的聊了会，发现：  </p>
-<ul>
-<li>1.没有燃油附加费（台湾的油价对市场的反应很快，升得快，降得也快）；</li>
-<li>2.不用交份子钱，车归自己，包括税在内一个月交2000块新台币左右后其他的都算自己的（我们去的那几天1元钱人民币可以换4.6元新台币）；</li>
-<li>3.只要你有驾照交1万新台币就能拿到的士拍照</li>
-<li>4.马路上几乎有8成以上是日本车（丰田、三菱、日产……），然后是宝马，奔驰，在夜市见过一辆兰博基尼</li>
-<li>5.我们回来的那天台湾98#的油价小涨了点，是新台币35.3，约合人民币7.6，这个时候深圳的97#是￥8.6</li>
-</ul>
-<h1 id="购物点"><a href="#购物点" class="headerlink" title="购物点"></a>购物点</h1><p>相对来说没有大陆的那些购物点那么让人反感，没有表现出那么势利好像</p>
-<h1 id="阿德哥"><a href="#阿德哥" class="headerlink" title="阿德哥"></a>阿德哥</h1><p>我们的台湾地陪阿德哥，是一个很黄但又有点淳朴的大叔，他总是说：“好啦，我给你们讲个黄色笑话”。  </p>
-<p>去完阿里山的那个晚上，我们还有一个景点没去，但是大家都很累了，所以一致统一不去那个景点了，但大陆旅行社的领队就说必须写下这个情况，所有人签字才可以。阿德哥写完后给大陆领队看，领队说不行不行，怎么能写：“由于天色已晚，考虑到安全问题，大家一致同意……”，要写“由于天色已晚，所有团员主动要求……”</p>
-<h1 id="景点"><a href="#景点" class="headerlink" title="景点"></a>景点</h1><p>景点不会让你震撼，但都挺舒服的  </p>
-<p>由于我一贯主张出来旅游不能累着自己，所以好几个地方如果我觉得可去可不去的话我就不去了，比如野柳地质公园，我就是走了一半我就回去找了个凉快的地方等他们；这样的整个行程下来走的最累的应该是故宫博物院。</p>
-<h1 id="城市"><a href="#城市" class="headerlink" title="城市"></a>城市</h1><p>我最喜欢的是台中，惬意的有点像珠海;台北人太多，像香港;高雄是重工业城市，弥漫着浓厚的油烟味。</p>
-<h1 id="期待什么时候可以台湾自助游"><a href="#期待什么时候可以台湾自助游" class="headerlink" title="期待什么时候可以台湾自助游~"></a>期待什么时候可以台湾自助游~</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2012/2012-07-19-tips-of-winrt-component-in-cpp-and-calling-it-from-js/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/2012/2012-07-19-tips-of-winrt-component-in-cpp-and-calling-it-from-js/" class="post-title-link" itemprop="url">WinRT下JavaScript调用C++ WinRT组件的注意事项</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>有段时间没有写WinRT相关的文章了，这段时间还会继续，因为我们目前在进行界面应用层的HTML5化 :)</p>
-<h1 id="今天要和大家分享的是："><a href="#今天要和大家分享的是：" class="headerlink" title="今天要和大家分享的是："></a>今天要和大家分享的是：</h1><p>WinRT下，使用HTML+JavaScript实现的界面应用层，调用C++实现的底层WinRT组件（Windows Runtime component）的相关注意事项</p>
-<h1 id="嗯，标题很长，下面我们来干货："><a href="#嗯，标题很长，下面我们来干货：" class="headerlink" title="嗯，标题很长，下面我们来干货："></a>嗯，标题很长，下面我们来干货：</h1><ul>
-<li><p>0、提供给JS工程调用的C++类必须是ref类，这个好像不用说吧？:)</p>
-</li>
-<li><p>1、JS调用的函数名首字母必须是小写，无论你C++代码实际是不是小写，比如：KillBill()，在JS中调用的时候必须写成killBill()</p>
-</li>
-<li><p>2、JS调用的delegate方法，在赋值时要注意加上前缀”on”，同时全部字母小写，比如：C++类中有这么一个成员变量：</p>
+<p>英文：  </p>
 <blockquote>
-<p>event OOXXEventDelegate^ OOXXEvent，<br>那么你在JS中给他赋值时必须这么写：<br>objOOXX.onooxxevent &#x3D; handler_ooxx;</p>
+<p>Failed to open a session for the virtual machine UbuntuServerJP.</p>
+<p>cpum#1: X86_CPUID_FEATURE_ECX_MONITOR mismatch: host&#x3D;0 saved&#x3D;1 [ver&#x3D;14 pass&#x3D;final] (VERR_SSM_LOAD_CPUID_MISMATCH).</p>
+<p>Result Code: E_FAIL (0x80004005)<br>Component: Console<br>Interface: IConsole {db7ab4ca-2a3f-4183-9243-c1208da92392}</p>
 </blockquote>
-</li>
-<li><p>3、提供给JS工程调用的C++类的命名空间必须和DLL的名字相同，比如你的DLL叫做SuperEngine，那么你的类的顶级命名空间也必须是SuperEngine</p>
-</li>
-<li><p>4、JS可以调用ref 类的静态方法，但是记得方法名一样要首字母小写</p>
-</li>
-<li><p>5、回调回JS的代码必须在主界面线程中回调，否则会失败，这个在XAML下也是一样的，解决的方法还是比较简单的，就是在一开始保存下当前的Dispatcher，</p>
+<p><strong>寻找原因：</strong>  </p>
+<p>我感到非常的奇怪，一阵狂轰滥炸之后我突然想起了关键字CPU，所以我打开了“securable.exe”，结果如我所料的是虚拟化技术不支持！  </p>
+<p>这个太奇怪了，明明是支持的，而且前两天都还好好的，怎么会突然这样呢？</p>
+<p>于是我再次Google，Win8 虚拟化，结果一个似曾相识的关键字映入我的眼帘：“Hyper-V”  </p>
+<p>我好像想起了什么？！是的我早上的时候在网卡适配器那里看到几个Hyper-V的虚拟化网卡，我以为是VirtualBox的，所以我就从设备管理器里面把他给卸载掉了  </p>
+<p>好吧，看来问题就出在这个Hyper-V上面，而且是我把他给破坏了</p>
+<p><strong>知道了原因，解决方案也是水落石出：</strong>  </p>
+<p>1、到控制面板中“启用或关闭 Windows功能”，找到Hyper-V，去掉勾选，确认，重启  </p>
+<p>2、重新打开“securable.exe”，OK，最后一个选项正常了  </p>
+<p>3、重新打开VirtualBox，一切都正常了  </p>
+<p><strong>参考信息：</strong>  </p>
+<p><a target="_blank" rel="noopener" href="http://blogs.msdn.com/b/b8_cn/archive/2011/09/12/hyper-v-windows-8.aspx">将 Hyper-V 引入“Windows 8”</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://soft.cfan.com.cn/apps/201301/07/1357549782d99787.shtml">Windows 8自带虚拟机Hyper-V，VMware靠边站</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/mal327/article/details/6597263">VirtualBox32位系统上安装64位系统</a>  </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2013/03/30/2013/2013-03-30-fix-network-after-imported-an-appliance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/03/30/2013/2013-03-30-fix-network-after-imported-an-appliance/" class="post-title-link" itemprop="url">VirtualBox导入虚拟电脑后找不到网卡</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-03-30 00:00:00" itemprop="dateCreated datePublished" datetime="2013-03-30T00:00:00+08:00">2013-03-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>问题：</strong>  </p>
+<p>使用了VirtualBox的导入和导出功能，用来实现类似VM的“克隆”功能，但是发现导出后，再次导入的虚拟机，如果我选择了</p>
 <blockquote>
-<p>auto dispatcher &#x3D; Windows::ApplicationModel::Core::CoreApplication::GetCurrentView()-&gt;CoreWindow-&gt;Dispatcher;<br>然后回调的地方用RunAsync跳转下：<br>auto callback &#x3D; ref new Windows::UI::Core::DispatchedHandler(<a href="">&#x3D;</a>{<br>m_event-&gt;OOXXEvent(eCode, ref new Platform::String(strErrTip.pstr));<br>});<br>m_dispatcher-&gt;RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, callback);</p>
+<p>“Reinitialize the MAC address of all network cards”（重新初始化所有网卡的MAC地址），</p>
 </blockquote>
-</li>
-<li><p>6、导出的类必须要有CPP文件JS那边才能访问的到</p>
-</li>
-<li><p>7、导出的类所继承的类不可以包含数据成员变量和Event类型的成员变量，private的也不行</p>
-</li>
-<li><p>8、导出的类可以继承接口，接口中可以包含event类型的变量(理论上其实event就是个函数），这条和上一条并不冲突。<br>举个例子说明下这两点：</p>
-<ul>
-<li>8.1、你有一个接口INotifyPropertyChanged，接口只有一个方法：event PropertyChangedEventHandler^ PropertyChanged;</li>
-<li>8.2、如果：你的实现类直接继承了INotifyPropertyChanged，那么这样的导出类是没有问题的（这个时候按照语法你需要在你的实现类中这样声明下：</li>
-</ul>
-<p>   virtual event PropertyChangedEventHandler^ PropertyChanged;</p>
-<ul>
-<li>8.3、如果：你的实现类，继承了一个类叫做NotifyPropertyChangedBase，而NotifyPropertyChangedBase又继承了INotifyPropertyChanged，那么这个代码在C++这边编译没有问题，但是JS一调用就会crash：</li>
-</ul>
-<p>  An unhandled win32 exception occurred in WWAHost.exe</p>
-</li>
-<li><p>9、还有什么回头想到我再补上</p>
-</li>
-</ul>
-<h1 id="微软官方提供的例子其实还是挺不错的，只是说的没那么清楚："><a href="#微软官方提供的例子其实还是挺不错的，只是说的没那么清楚：" class="headerlink" title="微软官方提供的例子其实还是挺不错的，只是说的没那么清楚："></a>微软官方提供的例子其实还是挺不错的，只是说的没那么清楚：</h1><p>[<a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/apps/hh755833(v=vs.110).aspx">http://msdn.microsoft.com/en-us/library/windows/apps/hh755833(v=vs.110).aspx</a> MSDN：Walkthrough: Creating a basic Windows Runtime component in C++ and calling it from JavaScript]</p>
+<p>那么在导入完成后你会发现系统无法找到网卡eth0了</p>
+<p><strong>解决方法：</strong>  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash"><span class="built_in">cd</span> /etc/udev/rules.d</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">sudo <span class="built_in">mkdir</span> backup</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">sudo <span class="built_in">mv</span> * backup</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">sudo reboot</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>参考：</strong>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.cnitblog.com/luofuchong/archive/2007/12/18/37831.html">【转】跟我一起写udev规则(译)</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://www.blogjava.net/zhyiwww/archive/2010/12/31/312612.html">VirtualBox虚拟机Ubuntu找不到网卡的解决方法</a>  </p>
 
       
     </div>
@@ -1006,7 +383,7 @@ bool calljs_helper::CallFunction(
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2012/2012-08-25-tips-for-using-currentapp-in-an-metro-style-app/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2013/03/28/2013/2013-03-28-config-bridged-networking-for-virtualbox-on-ubuntu-1204/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1020,7 +397,7 @@ bool calljs_helper::CallFunction(
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2012/2012-08-25-tips-for-using-currentapp-in-an-metro-style-app/" class="post-title-link" itemprop="url">Windows 8下如何使用Windows.ApplicationModel.Store的CurrentApp类</a>
+            <a href="/2013/03/28/2013/2013-03-28-config-bridged-networking-for-virtualbox-on-ubuntu-1204/" class="post-title-link" itemprop="url">VirtualBox下的Ubuntu 12.04 配置桥接网络上网</a>
         </h2>
 
         <div class="post-meta">
@@ -1030,7 +407,7 @@ bool calljs_helper::CallFunction(
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2013-03-28 00:00:00" itemprop="dateCreated datePublished" datetime="2013-03-28T00:00:00+08:00">2013-03-28</time>
             </span>
 
           
@@ -1044,31 +421,18 @@ bool calljs_helper::CallFunction(
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="首先你应该知道这个类大概是做什么的："><a href="#首先你应该知道这个类大概是做什么的：" class="headerlink" title="首先你应该知道这个类大概是做什么的："></a>首先你应该知道这个类大概是做什么的：</h1><p>Windows::ApplicationModel::Store::CurrentApp  </p>
-<p><a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/apps/br229885.aspx">MSDN上的说明：Windows.ApplicationModel.Store classes</a></p>
-<p>上面的MSDN页面给我们提供的API主要是用于Metro Style  App的Store购买相关的信息和功能，其实微软给我们提供了两个类：  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CurrentApp class</span><br><span class="line">Defines methods and properties you can use to get license and listing info about the current app and perform in-app purchases.</span><br><span class="line"></span><br><span class="line">CurrentAppSimulator class</span><br><span class="line">Defines methods and properties used to instantiate an object that you can use to get simulated license info during testing.</span><br></pre></td></tr></table></figure>
+          <p><strong>最终有用的方法是：</strong>  </p>
+<p>1.打开virtualbox，选择【设置】-【网络】将连接方式改为【Bridged Adapter】  </p>
+<p>2.在Ubuntu中，<br>运行sudo vi &#x2F;etc&#x2F;network&#x2F;interfaces  </p>
+<p>修改如下:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">auto lo</span><br><span class="line">iface lo inet loopback</span><br><span class="line">auto eth0</span><br><span class="line">iface eth0 inet static</span><br><span class="line">address 172.17.1.178</span><br><span class="line">netmask 255.255.0.0  #此处改成您的掩码</span><br><span class="line">gateway 172.17.1.111 #此处改成您的网关</span><br><span class="line">dns-search example.com</span><br><span class="line">dns-nameservers 192.168.3.45 192.168.8.10</span><br></pre></td></tr></table></figure>
 
-<p>这两个类中，微软推荐我们用CurrentAppSimulator进行测试，可惜我有个坏毛病，代码一定要自己跑过一次才相信，微软所说的先用CurrentAppSimulator调试，上架的时候直接换成CurrentApp就万事大吉了，这样的“理所当然”我可不信，所以我想方设法想亲自验证下CurrentApp这个类的功能，下面是一些我自己的验证。</p>
-<h1 id="测试环境："><a href="#测试环境：" class="headerlink" title="测试环境："></a>测试环境：</h1><p>外网大家正在用的Windows 8 RTM版本，VS2012（这俩微软官没有正式版，所以本文的结论一段时间后可能会被微软自己推翻）</p>
-<h1 id="我遇到的问题："><a href="#我遇到的问题：" class="headerlink" title="我遇到的问题："></a>我遇到的问题：</h1><p>微软的MSDN说要调试CurrentApp必须使用开发者帐号，且应用已经上架，那我就想我本地想调试应该怎么弄呢？我不想用CurrentAppSimulator敷衍我自己  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2012/9/8 补充</span><br><span class="line">这里其实有猫腻，所谓的已经上架还不够，还需要你在调试的机器上购买并下载了这个应用才算数</span><br><span class="line">所以调试之前一定要到应用商店的“你的应用”中检查下要调试的应用的状态</span><br></pre></td></tr></table></figure>
-<h2 id="最后成功的方案和需要注意的细节："><a href="#最后成功的方案和需要注意的细节：" class="headerlink" title="最后成功的方案和需要注意的细节："></a>最后成功的方案和需要注意的细节：</h2><ul>
-<li>1、应用已经上架，这个是必须的，如果没有的话就确实只能用CurrentAppSimulator</li>
-<li>2、Package.appxmanifest里Packageing Tab页的Publisher属性必须是你已经上架了的应用的开发者帐号对应的证书，这个证书在你创建用于上传到Store的Package时会自动帮你填充（<strong>这个证书是关键</strong>）</li>
-<li>3、只要你调试的时候符合上面两个条件，无论你是本机直接F5调试还是编译本地安装包然后测试，都能获取到CurrentApp的Store信息。你会发现异步获取到的ListingInformation就是你在Store后台配置的应用信息。(ListingInformation-&gt;Name就是Store上的应用名)</li>
-</ul>
-<h2 id="修改安装后的应用文件是否会影响CurrentApp-gt-LicenseInformation的IsActive和IsTrial呢？"><a href="#修改安装后的应用文件是否会影响CurrentApp-gt-LicenseInformation的IsActive和IsTrial呢？" class="headerlink" title="修改安装后的应用文件是否会影响CurrentApp-&gt;LicenseInformation的IsActive和IsTrial呢？"></a>修改安装后的应用文件是否会影响CurrentApp-&gt;LicenseInformation的IsActive和IsTrial呢？</h2><p>我的实验结果是不会，而且我发现这影响Store返回的两个属性值的关键在于我上面提到的Package.appxmanifest里Packageing Tab页的Publisher这个证书。  </p>
-<p>也就是说你从Store安装了某个应用，然后修改这个应用安装目录下的文件，CurrentApp-&gt;LicenseInformation的IsActive和IsTrial属性并不会受到影响，其他的属性我就没有进一步确认，大家有兴趣可以自己验证。</p>
-<h2 id="2012-x2F-9-x2F-8-21-18-今晚调试后再补充点信息吧，希望对读者有用："><a href="#2012-x2F-9-x2F-8-21-18-今晚调试后再补充点信息吧，希望对读者有用：" class="headerlink" title="2012&#x2F;9&#x2F;8 21:18 今晚调试后再补充点信息吧，希望对读者有用："></a>2012&#x2F;9&#x2F;8 21:18 今晚调试后再补充点信息吧，希望对读者有用：</h2><ul>
-<li>1、没有网络的时候获取License Information是会失败的</li>
-<li>2、没有购买的时候获取License Information也是会失败的</li>
-<li>3、License获取的线程也是有讲究的，你用线程定时器起来的异步操作中执行的话，需要先做下线程切换</li>
-</ul>
-<p>所以我们需要对代码进行异常捕获，要这么写才可以： </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AppEngine::InitializeLicenseCore</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">try</span></span><br><span class="line">	&#123;</span><br><span class="line">		m_licenseInformation = CurrentApp::LicenseInformation;</span><br><span class="line">		<span class="function">task&lt;ListingInformation^&gt; <span class="title">listingTask</span><span class="params">(CurrentApp::LoadListingInformationAsync())</span></span>;</span><br><span class="line">		<span class="keyword">this</span>-&gt;m_licenseInformation-&gt;LicenseChanged += ref <span class="keyword">new</span> <span class="built_in">LicenseChangedEventHandler</span>(<span class="keyword">this</span>, &amp;AppEngine::OnLicenseChanged);</span><br><span class="line">		<span class="keyword">this</span>-&gt;<span class="built_in">OnLicenseChanged</span>();</span><br><span class="line"></span><br><span class="line">		listingTask.<span class="built_in">then</span>([=](ListingInformation^ listing)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>-&gt;m_listingInformation = listing;</span><br><span class="line">			Platform::String^ name = <span class="keyword">this</span>-&gt;m_listingInformation-&gt;Name;</span><br><span class="line">			<span class="comment">// ...</span></span><br><span class="line">		&#125;)</span><br><span class="line">		.<span class="built_in">then</span>([=](Concurrency::task&lt;<span class="type">void</span>&gt; t)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">try</span></span><br><span class="line">			&#123;</span><br><span class="line">				t.<span class="built_in">get</span>();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">catch</span> (Platform::Exception ^ e)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">log_error</span>(<span class="string">&quot;license listing task exception&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">catch</span> (Platform::Exception^ e)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">log_error</span>(<span class="string">&quot;InitializeLicenseCore exception&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Windows 8还没正式发布，我所说的都是错的 :)</p>
+<p>3.还是不行的话就执行下:  </p>
+<p>resolvconf –disable-updates  </p>
+<p>这个步骤是我后面google出来的综合结论，Ubuntu 12.04 在DNS这块有所改动导致的这一问题</p>
+<p><strong>参考：</strong>  </p>
+<p><a target="_blank" rel="noopener" href="http://askubuntu.com/questions/157154/how-do-i-add-changes-to-resolv-conf-without-them-getting-overwritten-on-reboot">How do I add changes to resolv.conf without them getting overwritten on reboot?</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://serverfault.com/questions/414879/how-do-i-set-the-dns-search-domain-in-ubuntu-12-04">How do I set the dns search domain in Ubuntu 12.04?</a>  </p>
 
       
     </div>
@@ -1088,7 +452,7 @@ bool calljs_helper::CallFunction(
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2022/05/17/2012/2012-09-20-remote-debug-using-vs2012/">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2013/01/29/2013/2013-01-29-run-web-py-on-nginx-with-flup-on-windows/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1102,7 +466,7 @@ bool calljs_helper::CallFunction(
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/05/17/2012/2012-09-20-remote-debug-using-vs2012/" class="post-title-link" itemprop="url">用VS2012远程调试Metro style apps</a>
+            <a href="/2013/01/29/2013/2013-01-29-run-web-py-on-nginx-with-flup-on-windows/" class="post-title-link" itemprop="url">Windows下通过Nginx+Flup来运行Web.py</a>
         </h2>
 
         <div class="post-meta">
@@ -1112,7 +476,7 @@ bool calljs_helper::CallFunction(
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-05-17 15:49:14" itemprop="dateCreated datePublished" datetime="2022-05-17T15:49:14+08:00">2022-05-17</time>
+              <time title="Created: 2013-01-29 00:00:00" itemprop="dateCreated datePublished" datetime="2013-01-29T00:00:00+08:00">2013-01-29</time>
             </span>
 
           
@@ -1126,28 +490,443 @@ bool calljs_helper::CallFunction(
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="我的问题："><a href="#我的问题：" class="headerlink" title="我的问题："></a>我的问题：</h1><p>环境：  </p>
-<p>Windows 8 版本 RTM (Build9200) + Visual Studio Ultimate 2012(Version 11.0.50722.1)</p>
-<p>我希望在同一个无线网络下的PC和平板之间远程调试我们的Metro 应用，PC上安装了VS2012，平板上没有安装VS2012，但是遇到了些问题</p>
-<h1 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h1><ul>
-<li><p>1、在平板上安装远程调试工具包：rtools_setup_x64.exe</p>
-</li>
-<li><p>2、在平板上运行并配置Remote Debugger</p>
-<ul>
-<li>2.1 记得以管理员权限打开Remote Debugging Monitor</li>
-<li>2.2 配置认证方法，使用“No Authenticaton”并勾选”Allow any user to debug”</li>
-</ul>
-</li>
-<li><p>3、在PC上，打开VS，菜单”Tools”-&gt;”Attach to Process”，选择Remote，然后输入平板的IP地址，随便选择一个进程进行attach**</p>
-</li>
-<li><p>4、必须要有第三步，因为我发现我从PC竟然ping不到平板的IP，但是却可以用第三步attach到平板上的进程</p>
-</li>
-<li><p>5、取消第三步的attach，打开你需要远程调试的工程，Debug Target选择“Remote Machine”，然后F5</p>
-</li>
-<li><p>6、搞定</p>
-</li>
-</ul>
-<p>关键在于远程之前先attach下，应该是VS的一个Bug，不知道新版本是否解决了，这里备忘下</p>
+          <p>在Windows下搞这些东西纯属娱乐，虽然上不了台面，但简单够用，这就足够了。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>0、本文的前提是你已经知道什么是<a target="_blank" rel="noopener" href="http://webpy.org/">Web.py</a>并且知道怎么运行Web.py的代码。  </p>
+<p>1、本文是对Web.py Cookbook中<a target="_blank" rel="noopener" href="http://webpy.org/cookbook/fastcgi-nginx">Webpy + Nginx with FastCGI</a>这一章节的实践操作指南  </p>
+<p>2、所以本文假设你已经在本机安装好了python和web.py并能正常运行  </p>
+<h3 id="配置指南"><a href="#配置指南" class="headerlink" title="配置指南"></a>配置指南</h3><p><strong>1、下载并配置Nginx</strong>  </p>
+<p>1.1 Nginx专门有Windows的zip包，直接从<a target="_blank" rel="noopener" href="http://nginx.org/en/download.html">官网</a>下载即可：<a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.2.6.zip">nginx&#x2F;Windows-1.2.6</a>  </p>
+<p>1.2 下载后解压到你喜欢的任何目录  </p>
+<p>1.3 打开nginx.conf进行配置，我的配置如下：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">error_log  logs/error.log;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">error_log  logs/error.log  notice;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">error_log  logs/error.log  info;</span></span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">pid        logs/nginx.pid;</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  64;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"> </span><br><span class="line">    #log_format  main  &#x27;$remote_addr - $remote_user [$time_local] $request &#x27;</span><br><span class="line">    #                  &#x27;&quot;$status&quot; $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">    #                  &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line"> </span><br><span class="line">    #access_log  logs/access.log  main;</span><br><span class="line"> </span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"> </span><br><span class="line">    #keepalive_timeout  0;</span><br><span class="line">    keepalive_timeout  10;</span><br><span class="line"> </span><br><span class="line">    #gzip  on;</span><br><span class="line"> </span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">       </span><br><span class="line">        #root   /cygdrive/D/html;</span><br><span class="line">        root   D:/git/learning/HelloWebPy/HelloWorld;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line"> </span><br><span class="line">        charset utf-8;</span><br><span class="line"> </span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line">        </span><br><span class="line">        location = /favicon.ico &#123;</span><br><span class="line">	    rewrite ^/favicon.ico$  /static/favicon.ico break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        # 静态资源</span><br><span class="line">        location ~* ^.+/.(html|jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|bmp|rtf|js)$</span><br><span class="line">        &#123;</span><br><span class="line">                expires 30d;</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        location / &#123;</span><br><span class="line">            # 指定 fastcgi 的主机和端口</span><br><span class="line">            fastcgi_pass 127.0.0.1:8051;</span><br><span class="line">            fastcgi_param PATH_INFO $fastcgi_script_name;</span><br><span class="line">            fastcgi_param REQUEST_METHOD $request_method;</span><br><span class="line">            fastcgi_param QUERY_STRING $query_string;</span><br><span class="line">            fastcgi_param CONTENT_TYPE $content_type;</span><br><span class="line">            fastcgi_param CONTENT_LENGTH $content_length;</span><br><span class="line">            fastcgi_param SERVER_PROTOCOL $server_protocol;</span><br><span class="line">            fastcgi_param SERVER_PORT $server_port;</span><br><span class="line">            fastcgi_param SERVER_NAME $server_name;</span><br><span class="line">            fastcgi_pass_header Authorization;</span><br><span class="line">            fastcgi_intercept_errors off;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        #error_page  404              /404.html;</span><br><span class="line"> </span><br><span class="line">        # redirect server error pages to the static page /50x.html</span><br><span class="line">        #</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        # proxy the PHP scripts to Apache listening on 127.0.0.1:80</span><br><span class="line">        #</span><br><span class="line">        #location ~ /.php$ &#123;</span><br><span class="line">        #    proxy_pass   http://127.0.0.1;</span><br><span class="line">        #&#125;</span><br><span class="line"> </span><br><span class="line">        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span><br><span class="line">        #</span><br><span class="line">        #location ~ /.php$ &#123;</span><br><span class="line">        #    root           html;</span><br><span class="line">        #    fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        #    fastcgi_index  index.php;</span><br><span class="line">        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span><br><span class="line">        #    include        fastcgi_params;</span><br><span class="line">        #&#125;</span><br><span class="line"> </span><br><span class="line">        # deny access to .htaccess files, if Apache&#x27;s document root</span><br><span class="line">        # concurs with nginx&#x27;s one</span><br><span class="line">        #</span><br><span class="line">        #location ~ //.ht &#123;</span><br><span class="line">        #    deny  all;</span><br><span class="line">        #&#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">another virtual host using mix of IP-, name-, and port-based configuration</span></span><br><span class="line"><span class="meta prompt_">   #</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">   <span class="comment">#server &#123;</span></span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   listen       8000;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   listen       somename:8080;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   server_name  somename  <span class="built_in">alias</span>  another.alias;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   location / &#123;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">       root   html;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">       index  index.html index.htm;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   &#125;</span></span><br><span class="line"><span class="meta prompt_">   #</span><span class="language-bash">&#125;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">HTTPS server</span></span><br><span class="line"><span class="meta prompt_">   #</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">   <span class="comment">#server &#123;</span></span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   listen       443;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   server_name  localhost;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   ssl                  on;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   ssl_certificate      cert.pem;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   ssl_certificate_key  cert.key;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   ssl_session_timeout  5m;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   ssl_protocols  SSLv2 SSLv3 TLSv1;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   ssl_prefer_server_ciphers   on;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   location / &#123;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">       root   html;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">       index  index.html index.htm;</span></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">   &#125;</span></span><br><span class="line"><span class="meta prompt_">   #</span><span class="language-bash">&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.4 运行nginx.exe，并在浏览器输入127.0.0.1验证下nginx是否正常启动  </p>
+<p><strong>2、下载并配置Flup</strong>  </p>
+<p>2.1 从<a target="_blank" rel="noopener" href="http://pypi.python.org/pypi/flup">Python官网的Flup页面</a>下载最新的Flup，我下载的是<a target="_blank" rel="noopener" href="http://pypi.python.org/packages/source/f/flup/flup-1.0.2.tar.gz#md5=24dad7edc5ada31dddd49456ee8d5254">flup 1.0.2</a>  </p>
+<p>2.2 解压后执行setup.py install就好了（依赖<a target="_blank" rel="noopener" href="http://pypi.python.org/packages/2.7/s/setuptools/">setuptools</a>）  </p>
+<p>2.3 好了  </p>
+<p><strong>3、启动web.py</strong>  </p>
+<p>Nginx已经启动了，Flup也已经安装好了，现在你需要的就是根据Nginx.conf中配置的fastcgi端口(我的配置文件中是8051)，启动你的web.py:  </p>
+<blockquote>
+<p>index.py 8051 fastcgi</p>
+</blockquote>
+<p>顺利的话，你已经在Windows上搭好了一个web.py的Nginx Web服务器，Have fun :)</p>
+<p><strong>参考文章</strong>  </p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/yavobo/article/details/6240122">Windows下Nginx + flup + fastcgi + webpy 开发应用环境的设置</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://blog.ops.cc/develop/541ff02680c990b4.html">在windows上利用Nginx部署web.py</a>  </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2013/01/08/2013/2013-01-08-diagnosing-memory-leaks-in-managed-windows-store-apps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/01/08/2013/2013-01-08-diagnosing-memory-leaks-in-managed-windows-store-apps/" class="post-title-link" itemprop="url">Windows Store Apps内存泄漏分析之SOS.dll</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2013-01-08 00:00:00" itemprop="dateCreated datePublished" datetime="2013-01-08T00:00:00+08:00">2013-01-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1. 环境准备"></a>1. 环境准备</h2><h3 id="1-1-在Win8下要用x86的Windbg才能成功load起sos-dll，抓取Dump的工具也必须是x86的版本，否则就就会出现下面两种错误："><a href="#1-1-在Win8下要用x86的Windbg才能成功load起sos-dll，抓取Dump的工具也必须是x86的版本，否则就就会出现下面两种错误：" class="headerlink" title="1.1 在Win8下要用x86的Windbg才能成功load起sos.dll，抓取Dump的工具也必须是x86的版本，否则就就会出现下面两种错误："></a>1.1 在Win8下要用x86的Windbg才能成功load起sos.dll，抓取Dump的工具也必须是x86的版本，否则就就会出现下面两种错误：</h3><h4 id="error：-x64的Windbg无法成功load-sos-dll"><a href="#error：-x64的Windbg无法成功load-sos-dll" class="headerlink" title="error： x64的Windbg无法成功load sos.dll"></a>error： x64的Windbg无法成功load sos.dll</h4><blockquote>
+<p>0:000&gt; .load sos.dll<br>The call to LoadLibrary(sos.dll) failed, Win32 error 0n193<br>    “%1 不是有效的 Win32 应用程序。”<br>Please check your debugger configuration and&#x2F;or network access.</p>
+</blockquote>
+<h4 id="error-x64的TaskManager或者Procexp创建的Dump不支持SOS-dll，我最后成功的是用x86的Windbg-抓的"><a href="#error-x64的TaskManager或者Procexp创建的Dump不支持SOS-dll，我最后成功的是用x86的Windbg-抓的" class="headerlink" title="error: x64的TaskManager或者Procexp创建的Dump不支持SOS.dll，我最后成功的是用x86的Windbg 抓的"></a>error: x64的TaskManager或者Procexp创建的Dump不支持SOS.dll，我最后成功的是用x86的Windbg 抓的</h4><blockquote>
+<p>0:000&gt; !DumpHeap -stat<br>SOS does not support the current target architecture.</p>
+</blockquote>
+<h3 id="1-2-Windbg"><a href="#1-2-Windbg" class="headerlink" title="1.2 Windbg"></a>1.2 Windbg</h3><p>直接到微软下载就可以了：<a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-US/windows/hardware/gg463009/">http://msdn.microsoft.com/en-US/windows/hardware/gg463009/</a>  </p>
+<h3 id="1-3-SOS-dll"><a href="#1-3-SOS-dll" class="headerlink" title="1.3 SOS.dll"></a>1.3 SOS.dll</h3><p>文档中使用了<a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/bb190764.aspx">SOS.dll (SOS Debugging Extension)</a>，使用之前需要先用下面的命令加载下sos.dll</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.load &lt;full path of sos.dll&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-遇到的其他错误"><a href="#2-遇到的其他错误" class="headerlink" title="2. 遇到的其他错误"></a>2. 遇到的其他错误</h2><h3 id="2-1-Failed-to-find-runtime-DLL-clr-dll-0x80004005"><a href="#2-1-Failed-to-find-runtime-DLL-clr-dll-0x80004005" class="headerlink" title="2.1 Failed to find runtime DLL (clr.dll), 0x80004005"></a>2.1 Failed to find runtime DLL (clr.dll), 0x80004005</h3><blockquote>
+<p>0:000&gt; .load sos.dll<br>0:000&gt; !dumpheap -stat<br>Failed to find runtime DLL (clr.dll), 0x80004005<br>Extension commands need clr.dll in order to have something to do.</p>
+</blockquote>
+<h3 id="2-2-解决方案："><a href="#2-2-解决方案：" class="headerlink" title="2.2 解决方案："></a>2.2 解决方案：</h3><p>App必须是：Managed Windows Store Apps，所以对我们来说SOS.dll这个方向一开始就是错的，汗</p>
+<h3 id="2-3-参考："><a href="#2-3-参考：" class="headerlink" title="2.3 参考："></a>2.3 参考：</h3><p><a target="_blank" rel="noopener" href="http://mylittlereminder.wordpress.com/2011/07/08/windbg-load-sos-in-windbg-0x80004005/">Load SOS in WinDbg</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/neils03/article/details/7928641">使用WinDbg调试Silverlight中遇到“Failed to find runtime DLL (clr.dll), 0x80004005”问题的解决方法之一</a>  </p>
+<h2 id="3-小结"><a href="#3-小结" class="headerlink" title="3. 小结"></a>3. 小结</h2><p>非Managed的App无法使用这个方案，这对我们的应用就没有意义了，但是解决前面遇到的几个小问题的方法希望对其他朋友有所帮助。</p>
+<h2 id="4-参考文档："><a href="#4-参考文档：" class="headerlink" title="4. 参考文档："></a>4. 参考文档：</h2><p><a target="_blank" rel="noopener" href="http://blogs.microsoft.co.il/blogs/sasha/archive/2012/10/15/diagnosing-memory-leaks-in-managed-windows-store-apps.aspx">Diagnosing Memory Leaks in Managed Windows Store Apps</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/12/24/2012/2012-12-24-christmas-eve-2012/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2012/12/24/2012/2012-12-24-christmas-eve-2012/" class="post-title-link" itemprop="url">Christmas Eve 2012</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-12-24 00:00:00" itemprop="dateCreated datePublished" datetime="2012-12-24T00:00:00+08:00">2012-12-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>周一的平安夜，我们刚刚上了三天班…… </p>
+<h1 id="自勉如下："><a href="#自勉如下：" class="headerlink" title="自勉如下："></a>自勉如下：</h1><p>不要做包工头，要做大师兄；  </p>
+<p>平常心做事，不急不躁；  </p>
+<p>坚持看书，坚持实践；  </p>
+<p>Good luck, have fun :)</p>
+<p><img src="http://t2.qpic.cn/mblogpic/75a89acccddd6a36203a/2000" alt="2000"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/12/22/2012/2012-12-22-hello-ruby-on-windows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2012/12/22/2012/2012-12-22-hello-ruby-on-windows/" class="post-title-link" itemprop="url">Hello Ruby on Windows</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-12-22 00:00:00" itemprop="dateCreated datePublished" datetime="2012-12-22T00:00:00+08:00">2012-12-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>有人说在Windows上Ruby是件很虐心的事情，这段时间实践了下，其实一点也不然，有了RubyInstaller，纯Ruby的学习找就是无障碍一步到位了。</p>
+<p><strong>当然闹心的事情还是有的 :)</strong>  </p>
+<h3 id="1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。"><a href="#1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。" class="headerlink" title="1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。"></a>1、如果你需要使用gem，那么真正虐心的事情来了：天朝的网络问题。</h3><p><strong>解决方案：</strong>  </p>
+<p><a target="_blank" rel="noopener" href="http://ruby.taobao.org/">http://ruby.taobao.org/</a>    </p>
+<p>按照首页上的指引操作就好了</p>
+<h3 id="2、公司代理问题（公司网络只能通过http代理来上网）"><a href="#2、公司代理问题（公司网络只能通过http代理来上网）" class="headerlink" title="2、公司代理问题（公司网络只能通过http代理来上网）"></a>2、公司代理问题（公司网络只能通过http代理来上网）</h3><p>gem也是可以设置代理的，不过有个简单的方法是给系统变量添加一个http_proxy，这样在CMD中运行gem   install就能直接使用代理来安装了 :)  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set http_proxy=&lt;http://proxy.yourdomain.com:8080&gt;  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3、给IDE增加Debug功能"><a href="#3、给IDE增加Debug功能" class="headerlink" title="3、给IDE增加Debug功能"></a>3、给IDE增加Debug功能</h3><p>你需要执行下面这个命令：  </p>
+<blockquote>
+<p>gem install ruby-debug-base19x</p>
+</blockquote>
+<p>如果你发现失败了？而且错误提示中提到了“DevKit”，那么你需要先安装、配置好DevKit。  </p>
+<p>从[<a target="_blank" rel="noopener" href="http://rubyinstaller.org/downloads/">http://rubyinstaller.org/downloads/</a>   这里]下载，解压，到解压出来的目录下执行：  </p>
+<blockquote>
+<p>ruby dk.rb init<br>ruby dk.rb review<br>ruby dk.rb install<br>搞定，DevKit就安装好了，可以再执行下这个命令行，运气不是很差的话你，你已经可以在IDE中Debug Ruby了<br>gem install ruby-debug-base19x</p>
+</blockquote>
+<p>这里其实还有个更简便的方法：使用<a target="_blank" rel="noopener" href="http://railsinstaller.org/">RailsInstaller</a></p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/varlxj/archive/2011/10/16/2211004.html">解决Rubygems被墙，GEM无法更新</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://44ux.com/blog/2012/10/13/proxy-setting-in-cmd/">CMD 和 Git 中的代理设置</a>  </p>
+<p><a target="_blank" rel="noopener" href="http://rubyer.me/blog/134/">Windows下安装DevKit</a>  </p>
+<p>RubyInstaller和DevKit都可以从这里下载到：<a target="_blank" rel="noopener" href="http://rubyinstaller.org/downloads/">http://rubyinstaller.org/downloads/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/10/16/2012/2012-10-16-malaysia-travel-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2012/10/16/2012/2012-10-16-malaysia-travel-guide/" class="post-title-link" itemprop="url">从深圳经香港，游玩吉隆坡马六甲和沙巴——马来西亚旅游攻略</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-10-16 00:00:00" itemprop="dateCreated datePublished" datetime="2012-10-16T00:00:00+08:00">2012-10-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="引子："><a href="#引子：" class="headerlink" title="引子："></a>引子：</h1><p>这是一篇攻略，重点简述从深圳出发，经香港转机前往马来西亚旅游的交通、签证、语言等方面的注意事项。</p>
+<h1 id="1、我们的行程"><a href="#1、我们的行程" class="headerlink" title="1、我们的行程"></a>1、我们的行程</h1><p>2012年8月10号出发，包括搭飞机前后共11天。  </p>
+<p>深圳出发，在蛇口码头坐船去香港国际机场，搭亚洲航空飞机到吉隆坡，然后做大巴往返了下马六甲，再从吉隆坡打飞机去沙巴，最后又从沙巴搭飞机回吉隆坡，从吉隆坡回香港。  </p>
+<p>我们的行程安排的不是特别好，这里就不具体介绍了；  </p>
+<p>主要是我的工作时间不好安排，筹备的时间太短，机票和酒店都是半个月左右时决定去的时候才开始定，如果早点定的话能便宜不少。  </p>
+<h1 id="2、签证"><a href="#2、签证" class="headerlink" title="2、签证"></a>2、签证</h1><p>马来西亚可以落地签，不过去那人生地不熟的还是算了，另外我们要从香港搭飞机，所以肯定是要先签好签证；  </p>
+<p>马来西甲的签证很容易办，也不用什么抵押，找个旅行社帮忙办就不用自己去领事馆办，我们办的时候每人180RMB。  </p>
+<h1 id="3、定机票和酒店"><a href="#3、定机票和酒店" class="headerlink" title="3、定机票和酒店"></a>3、定机票和酒店</h1><p>3.1 直接在<a target="_blank" rel="noopener" href="http://www.qunar.com上搜索,会帮忙跳转到具体的外国网站;/">www.qunar.com上搜索，会帮忙跳转到具体的外国网站；</a>  </p>
+<p>3.2 我们全程4躺飞机都是亚航的，所以机票都是直接在亚航官网上预定的，信用卡支付  </p>
+<p>3.3 酒店也是调整之后我们主要选择在booking.com和agoda.com上面预定的，一样是信用卡支付  </p>
+<h1 id="4、我们住的酒店"><a href="#4、我们住的酒店" class="headerlink" title="4、我们住的酒店"></a>4、我们住的酒店</h1><h2 id="4-1-吉隆坡-The-Royale-Chulan-Hotel"><a href="#4-1-吉隆坡-The-Royale-Chulan-Hotel" class="headerlink" title="4.1 吉隆坡 The Royale Chulan Hotel"></a>4.1 吉隆坡 The Royale Chulan Hotel</h2><p>不知道为什么帮我们升级了房间，很豪华，住的很舒服；  </p>
+<p>就是交通不是很方便，离地铁站走路要15分钟（路稍微有点绕）；  </p>
+<p>酒店一楼的自助餐是伊斯兰口味的，我们不小心尝试了下，完全吃不惯，而且很贵，慎入；  </p>
+<p>有免费WiFi。</p>
+<h2 id="4-2-马六甲-Hotal-Hong"><a href="#4-2-马六甲-Hotal-Hong" class="headerlink" title="4.2 马六甲 Hotal Hong"></a>4.2 马六甲 Hotal Hong</h2><p>老板是一个华人，非常Nice~  </p>
+<p>酒店的位置在鸡场街的街尾，马六甲很小的，所以打的也不会花多少钱，如果提前和老板联系的话老板很可能会去车站接你；  </p>
+<p>离开的时候老板会开车送你去车站，我们原来觉得有点不好意思，不过老板真的很好，算是他们酒店的特色贴心服务 :)  </p>
+<p>酒店很便宜，所以条件肯定不能和吉隆坡的比，但是卫生整洁，有免费WiFi。  </p>
+<h2 id="4-3-吉隆坡-Furama-Bukit-Bintang"><a href="#4-3-吉隆坡-Furama-Bukit-Bintang" class="headerlink" title="4.3 吉隆坡 Furama Bukit Bintang"></a>4.3 吉隆坡 Furama Bukit Bintang</h2><p>酒店前台有个MM会讲中文；  </p>
+<p>酒店没有免费WiFi，马路对面的猪肚鸡可以搜索到免费Wifi；  </p>
+<p>酒店条件一般，离地铁站走路也是10几分钟，离华人街比较近，走路去Pudu Sentral 20多分钟吧。  </p>
+<h2 id="4-4-沙巴-Gaya-Centre-Hotel"><a href="#4-4-沙巴-Gaya-Centre-Hotel" class="headerlink" title="4.4 沙巴 Gaya Centre Hotel"></a>4.4 沙巴 Gaya Centre Hotel</h2><p>海边，靠近去沙比岛(Sapi Island)的码头，步行5分钟就到码头；  </p>
+<p>从机场打的到酒店30RM(RM是马币的意思，1RM 算成人民币差不多是   2RMB还要多一些，大概这么算，数学好的自己查下汇率）；  </p>
+<p>性价比高的“廉价酒店”，大概就是国内如家的条件，有窗户可以看到海，但景观和条件自然是不能和香格里拉比；  </p>
+<p>酒店一楼大堂有免费WiFi和电脑可以上网。  </p>
+<h2 id="4-5-吉隆坡-Traders-Hotel"><a href="#4-5-吉隆坡-Traders-Hotel" class="headerlink" title="4.5 吉隆坡 Traders Hotel"></a>4.5 吉隆坡 Traders Hotel</h2><p>位置超赞，双子塔正旁边，房间落地窗完美双子塔景观；  </p>
+<p>算成人民币也是700多一晚，酒店顶楼有个酒吧;  </p>
+<p>双子塔边上，交通自然差不了，双子塔楼底下就是地铁站，走过去10分钟这样子（就在眼前但还是要走上一小段时间）；  </p>
+<p>有免费WiFi。  </p>
+<h1 id="5、语言"><a href="#5、语言" class="headerlink" title="5、语言"></a>5、语言</h1><p>马来西亚的华人挺多的，但官方语言是马来语和英语，也就是说地铁站、汽车站、机场的工作人员说的一般都不是中文，这个要提前有点心理准备，基本的英语会话还是要有的，不然你就得盼啊盼，盼到一个会中文的帮你翻译。马来西亚的华人大概占了25%左右，时不时都会遇到一两个，但不是每时每刻都能遇到的 ：）  </p>
+<p>沙巴的华人比较多，酒店、的士、饭馆会说中文的很多，中文基本可以畅通无阻，说白话的人更多。  </p>
+<h1 id="6、亚洲航空和LCCT"><a href="#6、亚洲航空和LCCT" class="headerlink" title="6、亚洲航空和LCCT"></a>6、亚洲航空和LCCT</h1><p>廉价著称的亚洲航空，飞机上是没有免费食物的；  </p>
+<p>虽说不给带水和食物，但其实你自己带上放包里也没事；  </p>
+<p>不是国际航线，马来西亚航班安检的时候水是可以通过的；  </p>
+<p>其实飞机上的套餐也挺划算的，不像国内那么坑爹；  </p>
+<p>亚航每年都有特价机票活动，关注的话能优惠非常多；  </p>
+<p>LCCT真是我见过的最烂，最脏的机场，机场里面的麦当劳桌子上苍蝇乱飞……  </p>
+<p>本来这条是放在最后的，写到最后我决定调整下顺序。  </p>
+<h1 id="7、经香港转机"><a href="#7、经香港转机" class="headerlink" title="7、经香港转机"></a>7、经香港转机</h1><p>从蛇口码头去香港机场的船是可以网上预定的，最好先在网上买好，我们当时差点错过，最后只能买头等舱的票过去；  </p>
+<p>买完票要检查下你的机票预定，最好提请就把登机牌打印好，不然打印机票预订的那个页面也可以；  </p>
+<p>坐船到香港机场后，通道出来的大厅就可以办理亚航的行李托运和登机牌;  </p>
+<p>从香港出发的时候机票是可以退税的，我们两个人的机票退了100多港币，刚好可以在机场里面吃个饭；  </p>
+<p>机场里有免费WiFi，吃饭可以刷卡，没有港币也没事。</p>
+<h1 id="8、吉隆坡"><a href="#8、吉隆坡" class="headerlink" title="8、吉隆坡"></a>8、吉隆坡</h1><p>机场入境手续很简单，走出很破的机场通道，到了一个空调不要钱的大厅，什么表都不用填，一本签证过去盖个戳就搞定了；  </p>
+<p>入境后再拿行李，拿了行李过海关就出机场了；  </p>
+<p>出门就可以买去市区大大巴票，也可以直接走到巴士站再买票；  </p>
+<p>Sky Line和Star Bus价格都是一样的，服务也都差不多，到KL Sentral是10RM，Pudu Sentral 12RM，另外有一种自由下个点的是18RM就不要坐了，其实就是到市区后帮你转的士，你自己到了上面任意一个Sentral后转地铁就OK了，不差钱的话从机场直接打的回市区大概是75RM（那天我们刚好赶上他们的开斋节，全国告诉免费）；  </p>
+<p>马来西亚是一个伊斯兰国家，女的面带头巾，虽然已经废除了一夫多妻制，但是街上还是能时不时看到一个男的带着两个老婆逛街的……  </p>
+<p>说这个主要是想表达：民俗习惯很不一样，要先做点功课。  </p>
+<p>吉隆坡有点脏乱差，城市建设和国内的一线城市是没法比的，我想了好久，觉得跟福州比较像……(不要打我）  </p>
+<p>但是交通比较发达，地铁也是好几条线，在市区内活动地铁绝对是首选；  </p>
+<p>打的比较贵，中短途大巴很便宜（机场、云顶、马六甲……）；  </p>
+<p>去云顶玩的话最好早点起，去KL Sentral或者Pudu Sentral买套票过去，人多的话最好一到那里就把回程票给买了；  </p>
+<p>机场到市区的大巴也是到KL Sentral和Pudu Sentral这两个点的；  </p>
+<p>在吉隆坡玩的话KL Sentral和Pudu   Sentral是非常重要的两个“交通要塞”，定酒店和安排行程最好能结合这两个车站中的一个，会方便很多。  </p>
+<h1 id="9、马六甲"><a href="#9、马六甲" class="headerlink" title="9、马六甲"></a>9、马六甲</h1><p>从吉隆坡去马六甲现在已经不能从Pudu Sentral坐车了，现在要统一去Bandar Tasik Selatan买票搭车（有地铁直达）；  </p>
+<p>马六甲汽车站可以搭车到KL Sentral或者Pudu Sentral；  </p>
+<p>马六甲很小，但是很有历史的味道；  </p>
+<p>离新加坡很近，很多新加坡人过来度周末。  </p>
+<h1 id="10、沙巴"><a href="#10、沙巴" class="headerlink" title="10、沙巴"></a>10、沙巴</h1><p>从吉隆坡下飞机也是一样要入境，跟着队伍排队就好了，有签证的话什么都不用填，排队盖戳就OK了；  </p>
+<p>出门后门口打的就好啦，马拉西亚的的士比较规范，还是一样先在Counter交钱买的士票，出门再凭票排队打的；  </p>
+<p>还是沙巴休闲啊，没有吉隆坡的喧嚣，市区也比较小；  </p>
+<p>打的都是不打表的，先说好价钱，10几马币一般是；  </p>
+<p>华人比较多，语言畅通，华人饭馆等等众多；  </p>
+<p>几个华人夜市还不错，我们去吃的华兴比较有广东口味，价格也比较公道；  </p>
+<p>浮潜的三个岛（马穆迪岛、曼奴干岛和沙比岛）其实都差不多，如果想玩的轻松点的话完全可以只玩一个岛；  </p>
+<p>码头里面的买票的Counter其实都差不多，在码头那里可以租救生衣；  </p>
+<p>我们第一天去岛上的时候11点才从码头出发，导游建议我们只玩一个岛，但后面一下子就玩的差不多想换个岛，时间肯定是来得及的；  </p>
+<p>美人鱼岛的深潜确实不错，美不胜收，比靠近市区的三个岛要漂亮很多；  </p>
+<p>美人鱼岛我们是找到当地旅行社报的名，先坐车1个半小时左右，再做45分钟快艇才能到；  </p>
+<p>长鼻猴和萤火虫想去的话也可以去看看，休闲之旅，到了当地找个旅行社报名就好啦，每天都有团的。  </p>
+<h1 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h1><p>从香港出发的机票要便宜很多；  </p>
+<p>马来西亚旅游比较厚道，价格贵不贵是一回事但都比较规范；  </p>
+<p>吉隆坡就算了，城市没什么好逛的，云顶的话去下澳门+香港肯定好过那里了；  </p>
+<p>马六甲是比较有味道的，但是专门去的话有点浪费，可以选择去新加坡的时候顺路去玩下；  </p>
+<p>沙巴是最休闲惬意的，适合度假，深潜比浮潜好玩很多~  </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2012/10/14/2012/2012-10-14-god-is-not-easy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2012/10/14/2012/2012-10-14-god-is-not-easy/" class="post-title-link" itemprop="url">当神不容易</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-10-14 00:00:00" itemprop="dateCreated datePublished" datetime="2012-10-14T00:00:00+08:00">2012-10-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这是一篇产品理念的小思考。</p>
+<h1 id="引子："><a href="#引子：" class="headerlink" title="引子："></a>引子：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">八卦消息说天**广*场的画像要撤下，……运回湖南…… bla bla bla…… </span><br><span class="line">从某种意义上说，这是仪式上的走下神台。</span><br></pre></td></tr></table></figure>
+
+<h1 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h1><p>走下神坛很难？可为什么要走下神坛呢？  </p>
+<p>大团队经常会说的一句话是：真羡慕你们小团队，船大了不好调头？  </p>
+<p>这其实就是一种自命不凡的神化，为何不放下身段，回到空杯心态？  </p>
+<p>所谓的用户和所谓的级别其实都是自己或者别人“观察”出来的一个框框条条，不破不立。</p>
 
       
     </div>

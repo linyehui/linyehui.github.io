@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="问题我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：  [proxychains] preloading .&#x2F;libproxychains4.dylibdyld: warning: could not load inserted library ‘.&#x2F;libproxychains4.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="升级到Sierra后proxychains4 pod update失败">
+<meta property="og:url" content="http://linyehui.me/2017/02/17/2017/2017-02-17-proxychain4-pod-update-failed/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="问题我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：  [proxychains] preloading .&#x2F;libproxychains4.dylibdyld: warning: could not load inserted library ‘.&#x2F;libproxychains4.">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-02-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2017-02-16T16:00:00.000Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="mac">
+<meta property="article:tag" content="pod">
+<meta property="article:tag" content="proxychains">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://linyehui.me/2017/02/17/2017/2017-02-17-proxychain4-pod-update-failed/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>升级到Sierra后proxychains4 pod update失败 | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2017/02/17/2017/2017-02-17-proxychain4-pod-update-failed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          升级到Sierra后proxychains4 pod update失败
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-02-17 00:00:00" itemprop="dateCreated datePublished" datetime="2017-02-17T00:00:00+08:00">2017-02-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>我的问题是proxychains4 telnet 是没问题的，但是proxychains4 pod update就会报下面这样的警告，然后失败：</p>
+<blockquote>
+<p>[proxychains] preloading .&#x2F;libproxychains4.dylib<br>dyld: warning: could not load inserted library ‘.&#x2F;libproxychains4.dylib’ into library validated process because no suitable image found. Did find:<br>.&#x2F;libproxychains4.dylib: code signing blocked mmap() of ‘.&#x2F;libproxychains4.dylib’</p>
+</blockquote>
+<h3 id="我的环境如下："><a href="#我的环境如下：" class="headerlink" title="我的环境如下："></a>我的环境如下：</h3><ul>
+<li>macOS Sierra 10.12.3</li>
+<li>proxychains-ng 4.12_1</li>
+<li>SIP之前配置过用的是：csrutil enable –without debug，查询的状态如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ csrutil status</span><br><span class="line">System Integrity Protection status: enabled (Custom Configuration).</span><br><span class="line"></span><br><span class="line">Configuration:</span><br><span class="line">	Apple Internal: disabled</span><br><span class="line">	Kext Signing: enabled</span><br><span class="line">	Filesystem Protections: enabled</span><br><span class="line">	Debugging Restrictions: disabled</span><br><span class="line">	DTrace Restrictions: enabled</span><br><span class="line">	NVRAM Protections: enabled</span><br><span class="line">	BaseSystem Verification: enabled</span><br><span class="line"></span><br><span class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="寻找原因"><a href="#寻找原因" class="headerlink" title="寻找原因"></a>寻找原因</h2><p>一开始是找到了这篇issues:<a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/109">Proxychains4 with brew for MacOs error #109</a>，以为是我的proxychains4版本问题或者是我的SIP问题，所以做了以下尝试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 进入系统的recovery mode，禁用SIP</span><br><span class="line">csrutil disable</span><br><span class="line">reboot</span><br><span class="line"></span><br><span class="line"># 重启后卸载老的proxychains</span><br><span class="line">brew tap beeftornado/rmtree</span><br><span class="line">brew rmtree proxychains-ng</span><br><span class="line"></span><br><span class="line"># 重新安装</span><br><span class="line">proxychains-ng --universal</span><br><span class="line"></span><br><span class="line"># 确认下proxychains-ng的配置是否正确，如果不正确就再配置下proxychains.conf</span><br><span class="line"># 确认下telnet是否正常</span><br><span class="line">proxychains4 telnet google.com 80</span><br><span class="line"></span><br><span class="line"># 再尝试下pod update</span><br><span class="line">proxychains4 pod update</span><br><span class="line"></span><br><span class="line"># 问题依旧：code signing blocked mmap()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>在另外一个issue78:<a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/78">Not working on OS X 10.11 due to SIP #78</a>中看到了被点赞了4次的这个回答，让我最后解决了问题：</p>
+<blockquote>
+<p>It only happens if you execute a system binary using proxychains, e.g. proxychains4 ssh user@server. For now, a workaround is to copy the executable to another location (e.g. cp &#x2F;usr&#x2F;bin&#x2F;ssh ~&#x2F;XXX), and use it (e.g. proxychains4 ~&#x2F;XXX&#x2F;ssh user@server). You can modify the path variable so that ~&#x2F;XXX&#x2F;ssh is executed instead of &#x2F;usr&#x2F;bin&#x2F;ssh, when you just type “ssh”.</p>
+</blockquote>
+<h3 id="一句话描述问题："><a href="#一句话描述问题：" class="headerlink" title="一句话描述问题："></a>一句话描述问题：</h3><blockquote>
+<p>proxychain尝试注入系统bin目录下的二进制文件会出现这种情况，解决方案就是换个非系统目录的文件来执行和注入就可以了。</p>
+</blockquote>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>根据上面的问题描述，再考虑pod update的实际操作，其实就是调用git去更新，而我的git用的是系统自带的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/bin/git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样一来问题就变成了让pod update使用我自己安装的git就可以了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br><span class="line"></span><br><span class="line"># 修改.bash_profile，增加下面的export配置，优先搜索/usr/local/bin目录</span><br><span class="line"># 这样修改后，terminal下使用git就会优先使用我们刚刚安装的git版本了</span><br><span class="line">export PATH=/usr/local/bin:/usr/local/sbin:$&#123;PATH&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好了，配置好了，再试一下，成功了:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 pod update</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于SIP"><a href="#关于SIP" class="headerlink" title="关于SIP"></a>关于SIP</h3><p>最后我验证了下，SIP其实不需要disable，csrutil enable –without debug下proxychains也是能正常工作的</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>说下我这里能够正常运行的环境和因素：</p>
+<ul>
+<li>macOS Sierra 10.12.3</li>
+<li>proxychains-ng 4.12_1</li>
+<li>进入系统的recovery mode，打开terminal，csrutil enable –without debug<br>可以使用这个命令查询的状态，我的状态如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ csrutil status</span><br><span class="line">System Integrity Protection status: enabled (Custom Configuration).</span><br><span class="line"></span><br><span class="line">Configuration:</span><br><span class="line">	Apple Internal: disabled</span><br><span class="line">	Kext Signing: enabled</span><br><span class="line">	Filesystem Protections: enabled</span><br><span class="line">	Debugging Restrictions: disabled</span><br><span class="line">	DTrace Restrictions: enabled</span><br><span class="line">	NVRAM Protections: enabled</span><br><span class="line">	BaseSystem Verification: enabled</span><br><span class="line"></span><br><span class="line">This is an unsupported configuration, likely to <span class="built_in">break</span> <span class="keyword">in</span> the future and leave your machine <span class="keyword">in</span> an unknown state.</span><br></pre></td></tr></table></figure></li>
+<li>我的git使用的是brew install git的版本:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/local/bin/git</span><br></pre></td></tr></table></figure>
+<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/78">Not working on OS X 10.11 due to SIP #78</a><br><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/109">Proxychains4 with brew for MacOs error #109</a><br><a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng/issues/159">code signing blocked mmap() #159</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mac/" rel="tag"># mac</a>
+              <a href="/tags/pod/" rel="tag"># pod</a>
+              <a href="/tags/proxychains/" rel="tag"># proxychains</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/02/08/2017/2017-02-08-ignore-sigpipe-crash/" rel="prev" title="ignore SIGPIPE crash">
+      <i class="fa fa-chevron-left"></i> ignore SIGPIPE crash
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/02/23/2017/2017-02-23-traffic-raiders-for-kansai-tourist/" rel="next" title="关西旅行交通攻略">
+      关西旅行交通攻略 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E7%8E%AF%E5%A2%83%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">我的环境如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text">寻找原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%89%80%E5%9C%A8"><span class="nav-number">3.</span> <span class="nav-text">问题所在</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%8F%8F%E8%BF%B0%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">一句话描述问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8ESIP"><span class="nav-number">3.3.</span> <span class="nav-text">关于SIP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%9D%90%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考材料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

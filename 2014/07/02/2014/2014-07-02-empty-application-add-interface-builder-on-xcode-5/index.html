@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. 新建一个Empty Application的工程Xcode-&gt;New Project-&gt;Empty Application 2. 填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”3. 选择工程保存的路径，然后点击“Create”4. File-&gt;New File-&gt;左边的导航选择Cocoa Touch-&gt;右边选择Objective-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给Xcode5下Empty Application模板创建的工程添加Interface Builder">
+<meta property="og:url" content="http://linyehui.me/2014/07/02/2014/2014-07-02-empty-application-add-interface-builder-on-xcode-5/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="1. 新建一个Empty Application的工程Xcode-&gt;New Project-&gt;Empty Application 2. 填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”3. 选择工程保存的路径，然后点击“Create”4. File-&gt;New File-&gt;左边的导航选择Cocoa Touch-&gt;右边选择Objective-">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-07-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2014-07-01T16:00:00.000Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="ios">
+<meta property="article:tag" content="xcode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://linyehui.me/2014/07/02/2014/2014-07-02-empty-application-add-interface-builder-on-xcode-5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>给Xcode5下Empty Application模板创建的工程添加Interface Builder | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/02/2014/2014-07-02-empty-application-add-interface-builder-on-xcode-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          给Xcode5下Empty Application模板创建的工程添加Interface Builder
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-07-02 00:00:00" itemprop="dateCreated datePublished" datetime="2014-07-02T00:00:00+08:00">2014-07-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-新建一个Empty-Application的工程"><a href="#1-新建一个Empty-Application的工程" class="headerlink" title="1. 新建一个Empty Application的工程"></a>1. 新建一个Empty Application的工程</h3><p>Xcode-&gt;New Project-&gt;Empty Application</p>
+<h3 id="2-填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”"><a href="#2-填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”" class="headerlink" title="2. 填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”"></a>2. 填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”</h3><h3 id="3-选择工程保存的路径，然后点击“Create”"><a href="#3-选择工程保存的路径，然后点击“Create”" class="headerlink" title="3. 选择工程保存的路径，然后点击“Create”"></a>3. 选择工程保存的路径，然后点击“Create”</h3><h3 id="4-File-gt-New-File-gt-左边的导航选择Cocoa-Touch-gt-右边选择Objective-C-Class-gt-点击“Next”"><a href="#4-File-gt-New-File-gt-左边的导航选择Cocoa-Touch-gt-右边选择Objective-C-Class-gt-点击“Next”" class="headerlink" title="4. File-&gt;New File-&gt;左边的导航选择Cocoa Touch-&gt;右边选择Objective-C Class-&gt;点击“Next”"></a>4. File-&gt;New File-&gt;左边的导航选择Cocoa Touch-&gt;右边选择Objective-C Class-&gt;点击“Next”</h3><h3 id="5-配置下类的信息如下："><a href="#5-配置下类的信息如下：" class="headerlink" title="5. 配置下类的信息如下："></a>5. 配置下类的信息如下：</h3><p>Subclass of：UIViewController （这个先填，Xcode会帮你生成Class的值）<br>Class：HelloWorldUIViewController<br>Targeted for iPad:不勾选<br>With XIB for user interface:勾选<br>然后点击“Next”</p>
+<h3 id="6-选择路径后，点击“Create”"><a href="#6-选择路径后，点击“Create”" class="headerlink" title="6. 选择路径后，点击“Create”"></a>6. 选择路径后，点击“Create”</h3><p>你会发现工程下新增了三个文件：<br>HelloWorldUIViewController.h<br>HelloWorldUIViewController.m<br>HelloWorldUIViewController.xib</p>
+<h3 id="7-把新建的UIViewController显示到界面上"><a href="#7-把新建的UIViewController显示到界面上" class="headerlink" title="7. 把新建的UIViewController显示到界面上"></a>7. 把新建的UIViewController显示到界面上</h3><p>7.1 打开AppDelegate.m文件，并在</p>
+<blockquote>
+<p>#import “AppDelegate.h”<br>之后加上一句<br>#import “HelloWorldUIViewController.h”</p>
+</blockquote>
+<p>7.2 在这句注释之后添加两行我们的代码</p>
+<blockquote>
+<p>&#x2F;&#x2F; Override point for customization after application launch.<br>修改后的代码如下：</p>
+</blockquote>
+<pre><code>// Override point for customization after application launch.
+    HelloWorldViewController *hvc = [[HelloWorldViewController alloc] init];
+    [[self window] setRootViewController:hvc];
+</code></pre>
+<h3 id="8-编译，运行"><a href="#8-编译，运行" class="headerlink" title="8. 编译，运行"></a>8. 编译，运行</h3><p>&#x3D;&#x3D;&#x3D;The End&#x3D;&#x3D;&#x3D;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios/" rel="tag"># ios</a>
+              <a href="/tags/xcode/" rel="tag"># xcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/07/01/2014/2014-07-01-what-did-add-native-support-do/" rel="prev" title="Add Native Support 都做了些什么">
+      <i class="fa fa-chevron-left"></i> Add Native Support 都做了些什么
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/07/05/2014/2014-07-05-make-cocos2dx-samples-as-static-libraries/" rel="next" title="把cocos2dx的Sample工程改成Static Library">
+      把cocos2dx的Sample工程改成Static Library <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAEmpty-Application%E7%9A%84%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 新建一个Empty Application的工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A1%AB%E4%B8%8A%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E6%AF%94%E5%A6%82HelloWorld%EF%BC%8C%E5%85%B6%E4%BB%96%E7%9A%84%E4%BF%9D%E6%8C%81%E9%BB%98%E8%AE%A4%EF%BC%8C%E7%84%B6%E5%90%8E%E7%82%B9%E5%87%BB%E2%80%9CNext%E2%80%9D"><span class="nav-number">2.</span> <span class="nav-text">2. 填上工程的名字，比如HelloWorld，其他的保持默认，然后点击“Next”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%80%89%E6%8B%A9%E5%B7%A5%E7%A8%8B%E4%BF%9D%E5%AD%98%E7%9A%84%E8%B7%AF%E5%BE%84%EF%BC%8C%E7%84%B6%E5%90%8E%E7%82%B9%E5%87%BB%E2%80%9CCreate%E2%80%9D"><span class="nav-number">3.</span> <span class="nav-text">3. 选择工程保存的路径，然后点击“Create”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-File-gt-New-File-gt-%E5%B7%A6%E8%BE%B9%E7%9A%84%E5%AF%BC%E8%88%AA%E9%80%89%E6%8B%A9Cocoa-Touch-gt-%E5%8F%B3%E8%BE%B9%E9%80%89%E6%8B%A9Objective-C-Class-gt-%E7%82%B9%E5%87%BB%E2%80%9CNext%E2%80%9D"><span class="nav-number">4.</span> <span class="nav-text">4. File-&gt;New File-&gt;左边的导航选择Cocoa Touch-&gt;右边选择Objective-C Class-&gt;点击“Next”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%85%8D%E7%BD%AE%E4%B8%8B%E7%B1%BB%E7%9A%84%E4%BF%A1%E6%81%AF%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">5. 配置下类的信息如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E9%80%89%E6%8B%A9%E8%B7%AF%E5%BE%84%E5%90%8E%EF%BC%8C%E7%82%B9%E5%87%BB%E2%80%9CCreate%E2%80%9D"><span class="nav-number">6.</span> <span class="nav-text">6. 选择路径后，点击“Create”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%8A%8A%E6%96%B0%E5%BB%BA%E7%9A%84UIViewController%E6%98%BE%E7%A4%BA%E5%88%B0%E7%95%8C%E9%9D%A2%E4%B8%8A"><span class="nav-number">7.</span> <span class="nav-text">7. 把新建的UIViewController显示到界面上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E7%BC%96%E8%AF%91%EF%BC%8C%E8%BF%90%E8%A1%8C"><span class="nav-number">8.</span> <span class="nav-text">8. 编译，运行</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

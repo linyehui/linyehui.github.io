@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="问题描述iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。 问题排查各种尝试后，发现了这篇文章：调用录音后，游戏音效播放不出来的问题，这篇给了我们一个新的解决思路：   会不会是iOS下AVAudioSession的category导致的问题？ 在语音使用麦克风录音的前后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cocos2d下语音聊天和游戏音效冲突，导致playEffect没声音">
+<meta property="og:url" content="http://linyehui.me/2015/04/29/2015/2015-04-29-cocos2dx-playeffect-failed/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="问题描述iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。 问题排查各种尝试后，发现了这篇文章：调用录音后，游戏音效播放不出来的问题，这篇给了我们一个新的解决思路：   会不会是iOS下AVAudioSession的category导致的问题？ 在语音使用麦克风录音的前后">
+<meta property="og:locale">
+<meta property="article:published_time" content="2015-04-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2015-04-28T16:00:00.000Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="ios">
+<meta property="article:tag" content="cocos2d">
+<meta property="article:tag" content="playEffect">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://linyehui.me/2015/04/29/2015/2015-04-29-cocos2dx-playeffect-failed/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>cocos2d下语音聊天和游戏音效冲突，导致playEffect没声音 | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2015/04/29/2015/2015-04-29-cocos2dx-playeffect-failed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cocos2d下语音聊天和游戏音效冲突，导致playEffect没声音
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-04-29 00:00:00" itemprop="dateCreated datePublished" datetime="2015-04-29T00:00:00+08:00">2015-04-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>iOS下，游戏使用cocos2d-js 3.1和语音聊天，单独只有语音聊天或者只有游戏音效时，两者都正常，但是语音和音效同时使用时，就会有一方无法正常播放或者两者都无法正常播放。</p>
+<h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><p>各种尝试后，发现了这篇文章：<a target="_blank" rel="noopener" href="http://www.imgeek.org/forum.php?mod=viewthread&tid=651">调用录音后，游戏音效播放不出来的问题</a>，这篇给了我们一个新的解决思路：  </p>
+<p>会不会是iOS下AVAudioSession的category导致的问题？</p>
+<p>在语音使用麦克风录音的前后，已经播放音效的前后，都将AVAudioSession的category属性Log打印出来，发现一旦我们使用了cocos2d-js提供的cc.audioEngine.playEffect方法，category就会变成kAudioSessionCategory_SoloAmbientSound，而像我们这种既有语音又有音效的情况，我们需要的其实是：AVAudioSessionCategoryPlayAndRecord。  </p>
+<p>好了，找到直接的原因了，但是怎么改呢？</p>
+<h2 id="阅读代码，寻找解决方案"><a href="#阅读代码，寻找解决方案" class="headerlink" title="阅读代码，寻找解决方案"></a>阅读代码，寻找解决方案</h2><p>带着上面的问题，看下cocos2d-x的代码，看看能不能找到解决方案。</p>
+<ul>
+<li>如果没有设置或CDaudioManager的configured，会使用默认的mode：kAMM_FxPlusMusicIfNoOtherAudio</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># ./frameworks/js-bindings/cocos2d-x/cocos/audio/ios/CDAudioManager.m</span><br><span class="line"></span><br><span class="line">// Init</span><br><span class="line">+ (CDAudioManager *) sharedManager</span><br><span class="line">&#123;</span><br><span class="line">    @synchronized(self)     &#123;</span><br><span class="line">        if (!sharedManager) &#123;</span><br><span class="line">            if (!configured) &#123;</span><br><span class="line">                //Set defaults here</span><br><span class="line">                configuredMode = kAMM_FxPlusMusicIfNoOtherAudio;</span><br><span class="line">            &#125;</span><br><span class="line">            sharedManager = [[CDAudioManager alloc] init:configuredMode];</span><br><span class="line">            _sharedManagerState = kAMStateInitialised;//This is only really relevant when using asynchronous initialisation</span><br><span class="line">            [[NSNotificationCenter defaultCenter] postNotificationName:kCDN_AudioManagerInitialised object:nil];</span><br><span class="line">        &#125;    </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return sharedManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>而默认的这个mode对应的正是AVAudioSessionCategorySoloAmbient</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void) setMode:(tAudioManagerMode) mode &#123;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解决方案出来了</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 调用下CDAudioManager的这个方法，初始化下我们的mode</span><br><span class="line">+ (void) configure: (tAudioManagerMode) mode;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最终的解决方案"><a href="#最终的解决方案" class="headerlink" title="最终的解决方案"></a>最终的解决方案</h2><ol>
+<li><p>确认工程配置的Header目录包含CDAudioManager.h所在的目录  </p>
+</li>
+<li><p>在播放音效之前初始下CDAudioManager的mode为kAMM_PlayAndRecord</p>
+</li>
+</ol>
+<blockquote>
+<p>[CDAudioManager configure:kAMM_PlayAndRecord];</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios/" rel="tag"># ios</a>
+              <a href="/tags/cocos2d/" rel="tag"># cocos2d</a>
+              <a href="/tags/playEffect/" rel="tag"># playEffect</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/03/27/2015/2015-03-27-ios-provisioning-profiles/" rel="prev" title="iOS Provisioning Profiles">
+      <i class="fa fa-chevron-left"></i> iOS Provisioning Profiles
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/05/07/2015/2015-05-07-update-cocos2d-js-from-3.1-to-3.6/" rel="next" title="升级cocos2d-js 3.1到3.6">
+      升级cocos2d-js 3.1到3.6 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%AF%BB%E6%89%BE%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">阅读代码，寻找解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">最终的解决方案</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

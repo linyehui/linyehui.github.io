@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"linyehui.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="需求描述 我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发； 我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心 Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用 现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把cocos2dx的Sample工程改成Static Library">
+<meta property="og:url" content="http://linyehui.me/2014/07/05/2014/2014-07-05-make-cocos2dx-samples-as-static-libraries/index.html">
+<meta property="og:site_name" content="HABIT IS POWER">
+<meta property="og:description" content="需求描述 我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发； 我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心 Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用 现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/just_hall.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/one_game.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/two_games.png">
+<meta property="article:published_time" content="2014-07-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2014-07-04T16:00:00.000Z">
+<meta property="article:author" content="linyehui">
+<meta property="article:tag" content="ios">
+<meta property="article:tag" content="cocos2dx">
+<meta property="article:tag" content="library">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/just_hall.png">
+
+<link rel="canonical" href="http://linyehui.me/2014/07/05/2014/2014-07-05-make-cocos2dx-samples-as-static-libraries/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>把cocos2dx的Sample工程改成Static Library | HABIT IS POWER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HABIT IS POWER</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">习惯就是力量</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/07/05/2014/2014-07-05-make-cocos2dx-samples-as-static-libraries/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          把cocos2dx的Sample工程改成Static Library
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-07-05 00:00:00" itemprop="dateCreated datePublished" datetime="2014-07-05T00:00:00+08:00">2014-07-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h1><ol>
+<li>我们的产品分为大厅和游戏两大模块，大厅使用iOS或Android SDK直接开发，游戏内嵌在大厅中，但是使用cocos2dx开发；</li>
+<li>我们希望把大厅和游戏从project上分开来，省的代码缴在一起编译，看着都恶心</li>
+<li>Andoird下已经实现上述需求，大厅使用SDK开发，游戏作为Library提供给大厅直接调用</li>
+<li>现在我们需要把iOS下的cocos2dx工程也改造成一个Library提供给大厅调用。</li>
+</ol>
+<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>Mac下已经配置好了cocos2dx的开发环境，Sample中的HelloCpp工程可以在Xcode下成功编译并运行</p>
+<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h3 id="1-把HelloCpp工程从Cocos2dx目录下复制出来"><a href="#1-把HelloCpp工程从Cocos2dx目录下复制出来" class="headerlink" title="1. 把HelloCpp工程从Cocos2dx目录下复制出来"></a>1. 把HelloCpp工程从Cocos2dx目录下复制出来</h3><h4 id="问题：复制出来后会提示cocos2d-h文件找不到"><a href="#问题：复制出来后会提示cocos2d-h文件找不到" class="headerlink" title="问题：复制出来后会提示cocos2d.h文件找不到"></a>问题：复制出来后会提示cocos2d.h文件找不到</h4><h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><p>原因是Sample工程设置的include路径是按照工程再cocos自己的目录下来设置的，把工程复制出来后路径就变了</p>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><ol>
+<li><p>先添加一个SourceTrees变量</p>
+<blockquote>
+<p>Perferences-&gt;Locatons-&gt;Source Trees<br>添加一个COCOS2DX_HOME变量，并把path设置成本机的cocos2dx根目录</p>
+</blockquote>
+</li>
+<li><p>修改工程Targets中的Header Search Paths</p>
+<blockquote>
+<p>点击工程-&gt;Targets-&gt;HelloCpp-&gt;Build Settings-&gt;Search Paths-&gt;Header Search Paths<br>把值修改成这个：</p>
+</blockquote>
+<p> “$(SDKROOT)&#x2F;usr&#x2F;include&#x2F;libxml2&#x2F;“ “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;include” “$(COCOS2DX_HOME)&#x2F;cocos2dx” “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;platform&#x2F;ios” “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;kazmath&#x2F;include” “$(COCOS2DX_HOME)&#x2F;external&#x2F;chipmunk&#x2F;include&#x2F;chipmunk”</p>
+</li>
+<li><p>Clean工程，然后再次Build，成功</p>
+</li>
+</ol>
+<h3 id="2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"><a href="#2-iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来" class="headerlink" title="2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来"></a>2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来</h3><h4 id="先把HelloCpp工程调整成这样"><a href="#先把HelloCpp工程调整成这样" class="headerlink" title="先把HelloCpp工程调整成这样"></a>先把HelloCpp工程调整成这样</h4><p>发现这个文章做了我想做的事情的一部分：<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/crayondeng/article/details/16828555">Cocos2d-x UIView和Coco2d-x场景之间的相互跳转切换</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.raywenderlich.com/zh-hans/24764/%E5%A6%82%E4%BD%95%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8cocos2d%E5%92%8Cuikit-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86">如何结合使用Cocos2d和UIKit 第一部分</a></p>
+<h3 id="3-新增HelloCpp-Target：Static-Library"><a href="#3-新增HelloCpp-Target：Static-Library" class="headerlink" title="3. 新增HelloCpp Target：Static Library"></a>3. 新增HelloCpp Target：Static Library</h3><p>在Library的Target中有几个点需要参考默认Target的配置：</p>
+<ol>
+<li><p>不使用ARC</p>
+<blockquote>
+<p>Object-C Automatic Reference Counting —–&gt; NO</p>
+</blockquote>
+</li>
+<li><p>Search Path，直接复制默认Target的配置即可</p>
+<p> “$(SDKROOT)&#x2F;usr&#x2F;include&#x2F;libxml2&#x2F;“ “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;include” “$(COCOS2DX_HOME)&#x2F;cocos2dx” “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;platform&#x2F;ios” “$(COCOS2DX_HOME)&#x2F;cocos2dx&#x2F;kazmath&#x2F;include” “$(COCOS2DX_HOME)&#x2F;external&#x2F;chipmunk&#x2F;include&#x2F;chipmunk”</p>
+</li>
+<li><p>修改预编译宏定义 Preprocessor Macros，也是直接复制默认的Target配置就可以了</p>
+<blockquote>
+<p>USE_FILE32API CC_TARGET_OS_IPHONE COCOS2D_DEBUG&#x3D;1<br>USE_FILE32API CC_TARGET_OS_IPHONE</p>
+</blockquote>
+</li>
+<li><p>添加对libcocos2dx.a的依赖</p>
+<blockquote>
+<p>Build Phases-&gt;Link Binary With Libraries</p>
+</blockquote>
+</li>
+<li><p>新的Target配置成功后会编译出.a文件</p>
+</li>
+</ol>
+<h3 id="4-新增工程GamesHall用于调用library"><a href="#4-新增工程GamesHall用于调用library" class="headerlink" title="4. 新增工程GamesHall用于调用library"></a>4. 新增工程GamesHall用于调用library</h3><ul>
+<li>把HelloCpp工程添加到GamesHall下</li>
+<li>在Target中添加对libhellocpp.a的依赖</li>
+<li>不添加任何代码，编译工程，可以运行</li>
+<li>如果不能运行要按照错误提示进行修改，很有可能是libhellocpp.a没有编译出来，那就要检查下上面的步骤，看新增的Static Library的Target是不是配置的有问题</li>
+<li>配置正确的话，GamesHall编译后可以再调试目录(Debug-iphonesimulator)下看到libhellocpp.a和libcocos2dx.a还有include目录都正确复制过来了</li>
+</ul>
+<blockquote>
+<p>&#x2F;Users&#x2F;linyehui&#x2F;Library&#x2F;Developer&#x2F;Xcode&#x2F;DerivedData&#x2F;GamesHall-ezsoyplchjjurfeznsedhgwywbkr&#x2F;Build&#x2F;Products&#x2F;Debug-iphonesimulator</p>
+</blockquote>
+<h3 id="5-添加代码调用"><a href="#5-添加代码调用" class="headerlink" title="5. 添加代码调用"></a>5. 添加代码调用</h3><ul>
+<li>添加后发现link失败，找了好多原因，最后有效的是这个：<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/18959691/ios7-only-stdlibc-linking-issue">IOS7 (only) stdlibc++ linking issue</a></li>
+<li>改完stdlib后又提示zlib相关的几个函数找不到<br>工程依赖加上libz.dylib</li>
+</ul>
+<h3 id="6-调用成功，独立成Static-Library没问题"><a href="#6-调用成功，独立成Static-Library没问题" class="headerlink" title="6. 调用成功，独立成Static Library没问题"></a>6. 调用成功，独立成Static Library没问题</h3><h3 id="7-尝试多个游戏一起加入进来"><a href="#7-尝试多个游戏一起加入进来" class="headerlink" title="7. 尝试多个游戏一起加入进来"></a>7. 尝试多个游戏一起加入进来</h3><ul>
+<li><p>单个HelloCpp是OK的</p>
+</li>
+<li><p>两个一起加会编译失败但没有具体失败的项，只有Warning，很奇怪</p>
+</li>
+<li><p>两个分别成功加进去，并正确运行后，再把两个加到一起，可以运行，但是第二个游戏错乱了，还要再找下原因</p>
+</li>
+<li><p>第二个游戏不是乱了，而是显示了第一个游戏的场景；原因是：</p>
+<p>  注册cocos2d::CCApplication用的是一个全局静态变量，而不是注册上去的，我们有两个游戏，其实有两个这个全局变量的实现，用来处理cocos的启动跟暂停；<br>  而且我们的runWithScene是在这个里面调用的，所以导致了，两个游戏启动的时候都调用到了同样的场景。</p>
+</li>
+<li><p>尝试自己runWithScene，看看能不能把两个游戏分开<br>CCApplication的之类全局自定义一个，然后runWitSenne拿到cocosView中来分别处理，可以做到，但是这个方案并不好，下面单独解释。</p>
+</li>
+</ul>
+<h1 id="两个工程合在一起的问题"><a href="#两个工程合在一起的问题" class="headerlink" title="两个工程合在一起的问题"></a>两个工程合在一起的问题</h1><h3 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h3><blockquote>
+<p>不要把两个独立的游戏座位Library整合在一个应用内。<br>技术上可以实现，但是Cocos架构不支持，勉强自己改来用的话出现莫名其妙问题的风险很大。</p>
+</blockquote>
+<h3 id="非要实现的细节和缺陷"><a href="#非要实现的细节和缺陷" class="headerlink" title="非要实现的细节和缺陷"></a>非要实现的细节和缺陷</h3><ol>
+<li><p>Cocos本身的设计没有考虑这种一个进程多个游戏的架构，我们使用会有架构风险<br>比如cocos2d::CCApplication的事件注册并不是Add上去，而是定义一个全局变量来实现，这个设计本身就没考虑多个实例同时存在</p>
+<p> &#x2F;&#x2F; cocos2d application instance<br> &#x2F;&#x2F; 两个游戏加到一个工程的时候只能保留一个，否则会从Cocos内部直接异常退出<br> &#x2F;&#x2F; 变量名不同也没用，因为实际起作用的是父类CCApplication的成员变量<br> &#x2F;&#x2F; static CCApplication * sm_pSharedApplication;<br><br><br> &#x2F;&#x2F;static CocosAppDelegate s_sharedApplication;<br> 解决的办法，是多个游戏只保留一个CCApplication之类的全局变量的定义。</p>
+</li>
+<li><p>本来应该每个游戏自己响应CCApplication事件并做出处理，现在这个点不能做了，架构上本身就有问题，和把游戏整个在一个Cocos实例下没有本质的区别，未知的问题还更多</p>
+</li>
+<li><p>Xcode对于这种多个Library依赖同一个Library的编译支持有时候会出错<br>会出现上面提到的：提示编译失败，但是没有列出具体失败的地方，如果这个时候把其中一个游戏工程删掉，错误的地方就能正确被提示</p>
+</li>
+</ol>
+<h1 id="关于静态库对安装包大小的影响"><a href="#关于静态库对安装包大小的影响" class="headerlink" title="关于静态库对安装包大小的影响"></a>关于静态库对安装包大小的影响</h1><p>以下三个包，资源都是一样的，只是库文件上有差异</p>
+<h3 id="只有大厅，不包含游戏库，-app大小235KB"><a href="#只有大厅，不包含游戏库，-app大小235KB" class="headerlink" title="只有大厅，不包含游戏库，.app大小235KB"></a>只有大厅，不包含游戏库，.app大小235KB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/just_hall.png" alt="just_hall.png"></p>
+<h3 id="大厅-一个cocos2dx游戏Library，-app大小3-5MB"><a href="#大厅-一个cocos2dx游戏Library，-app大小3-5MB" class="headerlink" title="大厅+一个cocos2dx游戏Library，.app大小3.5MB"></a>大厅+一个cocos2dx游戏Library，.app大小3.5MB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/one_game.png" alt="one_game.png"></p>
+<h3 id="大厅-两个cocos2dx游戏Library，-app大小3-2MB"><a href="#大厅-两个cocos2dx游戏Library，-app大小3-2MB" class="headerlink" title="大厅+两个cocos2dx游戏Library，.app大小3.2MB"></a>大厅+两个cocos2dx游戏Library，.app大小3.2MB</h3><p><img src="https://raw.githubusercontent.com/linyehui/cocos2dx-game-as-library/master/screenshot/two_games.png" alt="two_games.png"></p>
+<p>科学吗？差不多是这个意思</p>
+<h1 id="其他参考文章"><a href="#其他参考文章" class="headerlink" title="其他参考文章"></a>其他参考文章</h1><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/beginor/archive/2012/04/20/2459244.html">iOS 静态类库项目的建立与使用</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ios/" rel="tag"># ios</a>
+              <a href="/tags/cocos2dx/" rel="tag"># cocos2dx</a>
+              <a href="/tags/library/" rel="tag"># library</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/07/02/2014/2014-07-02-empty-application-add-interface-builder-on-xcode-5/" rel="prev" title="给Xcode5下Empty Application模板创建的工程添加Interface Builder">
+      <i class="fa fa-chevron-left"></i> 给Xcode5下Empty Application模板创建的工程添加Interface Builder
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/07/06/2014/2014-07-06-migrating-from-wikidot-to-jekyll/" rel="next" title="把Blog数据从Wikidot迁移到Jekyll">
+      把Blog数据从Wikidot迁移到Jekyll <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">需求描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%8F%90"><span class="nav-number">2.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">操作步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8A%8AHelloCpp%E5%B7%A5%E7%A8%8B%E4%BB%8ECocos2dx%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%A4%8D%E5%88%B6%E5%87%BA%E6%9D%A5"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. 把HelloCpp工程从Cocos2dx目录下复制出来</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A4%8D%E5%88%B6%E5%87%BA%E6%9D%A5%E5%90%8E%E4%BC%9A%E6%8F%90%E7%A4%BAcocos2d-h%E6%96%87%E4%BB%B6%E6%89%BE%E4%B8%8D%E5%88%B0"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">问题：复制出来后会提示cocos2d.h文件找不到</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.0.1.1.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.0.1.1.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-iOS%E5%B7%A5%E7%A8%8B%E5%90%AF%E5%8A%A8%E5%85%88%E8%BF%9B%E5%85%A5UIView%EF%BC%8C%E5%86%8D%E8%B7%B3%E8%BD%AC%E5%88%B0Cocos2d%E5%9C%BA%E6%99%AF%EF%BC%8C%E5%B9%B6%E5%8F%AF%E4%BB%A5%E8%B7%B3%E8%BD%AC%E5%9B%9E%E6%9D%A5"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. iOS工程启动先进入UIView，再跳转到Cocos2d场景，并可以跳转回来</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E6%8A%8AHelloCpp%E5%B7%A5%E7%A8%8B%E8%B0%83%E6%95%B4%E6%88%90%E8%BF%99%E6%A0%B7"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">先把HelloCpp工程调整成这样</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%B0%E5%A2%9EHelloCpp-Target%EF%BC%9AStatic-Library"><span class="nav-number">3.0.3.</span> <span class="nav-text">3. 新增HelloCpp Target：Static Library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%96%B0%E5%A2%9E%E5%B7%A5%E7%A8%8BGamesHall%E7%94%A8%E4%BA%8E%E8%B0%83%E7%94%A8library"><span class="nav-number">3.0.4.</span> <span class="nav-text">4. 新增工程GamesHall用于调用library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E8%B0%83%E7%94%A8"><span class="nav-number">3.0.5.</span> <span class="nav-text">5. 添加代码调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%B0%83%E7%94%A8%E6%88%90%E5%8A%9F%EF%BC%8C%E7%8B%AC%E7%AB%8B%E6%88%90Static-Library%E6%B2%A1%E9%97%AE%E9%A2%98"><span class="nav-number">3.0.6.</span> <span class="nav-text">6. 调用成功，独立成Static Library没问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%B0%9D%E8%AF%95%E5%A4%9A%E4%B8%AA%E6%B8%B8%E6%88%8F%E4%B8%80%E8%B5%B7%E5%8A%A0%E5%85%A5%E8%BF%9B%E6%9D%A5"><span class="nav-number">3.0.7.</span> <span class="nav-text">7. 尝试多个游戏一起加入进来</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E5%B7%A5%E7%A8%8B%E5%90%88%E5%9C%A8%E4%B8%80%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">两个工程合在一起的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA%EF%BC%9A"><span class="nav-number">4.0.1.</span> <span class="nav-text">结论：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%BB%86%E8%8A%82%E5%92%8C%E7%BC%BA%E9%99%B7"><span class="nav-number">4.0.2.</span> <span class="nav-text">非要实现的细节和缺陷</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E9%9D%99%E6%80%81%E5%BA%93%E5%AF%B9%E5%AE%89%E8%A3%85%E5%8C%85%E5%A4%A7%E5%B0%8F%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">5.</span> <span class="nav-text">关于静态库对安装包大小的影响</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AA%E6%9C%89%E5%A4%A7%E5%8E%85%EF%BC%8C%E4%B8%8D%E5%8C%85%E5%90%AB%E6%B8%B8%E6%88%8F%E5%BA%93%EF%BC%8C-app%E5%A4%A7%E5%B0%8F235KB"><span class="nav-number">5.0.1.</span> <span class="nav-text">只有大厅，不包含游戏库，.app大小235KB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%8E%85-%E4%B8%80%E4%B8%AAcocos2dx%E6%B8%B8%E6%88%8FLibrary%EF%BC%8C-app%E5%A4%A7%E5%B0%8F3-5MB"><span class="nav-number">5.0.2.</span> <span class="nav-text">大厅+一个cocos2dx游戏Library，.app大小3.5MB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%8E%85-%E4%B8%A4%E4%B8%AAcocos2dx%E6%B8%B8%E6%88%8FLibrary%EF%BC%8C-app%E5%A4%A7%E5%B0%8F3-2MB"><span class="nav-number">5.0.3.</span> <span class="nav-text">大厅+两个cocos2dx游戏Library，.app大小3.2MB</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">6.</span> <span class="nav-text">其他参考文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">linyehui</p>
+  <div class="site-description" itemprop="description">HABIT IS POWER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linyehui</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

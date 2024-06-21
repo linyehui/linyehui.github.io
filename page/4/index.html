@@ -931,7 +931,7 @@
           <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>系统升级到OS X 10.10.1 + CocoaPods 0.34后遇到了下面的问题，之前是一切正常的：  </p>
 <blockquote>
 <p>[!] The use of implicit sources has been deprecated. To continue using all of the sources currently on your machine, add the following to the top of your Podfile:</p>
-<p>   source ‘<a target="_blank" rel="noopener" href="https://github.com/CocoaPods/Specs.git&#39;">https://github.com/CocoaPods/Specs.git&#39;</a></p>
+<p>   source ‘<a target="_blank" rel="noopener" href="https://github.com/CocoaPods/Specs.git">https://github.com/CocoaPods/Specs.git</a>‘</p>
 <p>[!] CocoaPods was not able to update the <code>master</code> repo. If this is an unexpected issue and persists you can inspect it running <code>&gt;pod repo update --verbose</code></p>
 </blockquote>
 <h1 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h1><h2 id="尝试1：重装CocoaPods，问题依旧"><a href="#尝试1：重装CocoaPods，问题依旧" class="headerlink" title="尝试1：重装CocoaPods，问题依旧"></a>尝试1：重装CocoaPods，问题依旧</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gem list --local | grep cocoapods</span><br><span class="line"></span><br><span class="line"># 好几个，全部uninstall</span><br><span class="line">gem uninstall cocoapods</span><br><span class="line"></span><br><span class="line">gem install cocoapods</span><br></pre></td></tr></table></figure>

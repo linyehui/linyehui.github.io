@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
+<meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -723,92 +723,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/08/21/2014/2014-08-21-adb-shell-vi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="linyehui">
-      <meta itemprop="description" content="HABIT IS POWER">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HABIT IS POWER">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/08/21/2014/2014-08-21-adb-shell-vi/" class="post-title-link" itemprop="url">adb shell下使用vi修改hosts</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2014-08-21T00:00:00+08:00">2014-08-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="原始需求"><a href="#原始需求" class="headerlink" title="原始需求"></a>原始需求</h2><p>Android应用测试的时候经常需要修改&#x2F;system&#x2F;etc&#x2F;hosts，有这么几种常见方法：  </p>
-<ul>
-<li>1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦）</li>
-<li>2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作）</li>
-<li>3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）</li>
-</ul>
-<h2 id="落地需求"><a href="#落地需求" class="headerlink" title="落地需求"></a>落地需求</h2><p>adb shell vi这个方案无疑是操作起来最高效的，那怎样才能可以在adb shell下使用vi命令呢？</p>
-<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="0-前提：你的手机已经ROOT过了"><a href="#0-前提：你的手机已经ROOT过了" class="headerlink" title="0. 前提：你的手机已经ROOT过了"></a>0. 前提：你的手机已经ROOT过了</h2><h2 id="1-手机上下载并安装BusyBox"><a href="#1-手机上下载并安装BusyBox" class="headerlink" title="1. 手机上下载并安装BusyBox"></a>1. 手机上下载并安装BusyBox</h2><ul>
-<li>我用的是这个：<a target="_blank" rel="noopener" href="http://www.wandoujia.com/apps/stericson.busybox.donate">BusyBox工具箱 汉化版</a></li>
-<li>我安装的版本是1.22.1</li>
-<li>安装的时候直接安装到&#x2F;system&#x2F;bin，这样敲命令行的时候就不需要这么敲了：<blockquote>
-<p>busybox vi</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="2-adb-shell-vi"><a href="#2-adb-shell-vi" class="headerlink" title="2. adb shell vi"></a>2. adb shell vi</h2><h3 id="2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用"><a href="#2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用" class="headerlink" title="2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用"></a>2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用</h3><h3 id="2-2-Windows下的-adb-shell-vi"><a href="#2-2-Windows下的-adb-shell-vi" class="headerlink" title="2.2 Windows下的 adb shell vi"></a>2.2 Windows下的 adb shell vi</h3><ul>
-<li>Windows下直接使用CDM连接后使用vi会出现乱码，解决的方案是使用：adbputty</li>
-<li>从这里下载：<a target="_blank" rel="noopener" href="https://github.com/sztupy/adbputty/downloads">adb putty</a></li>
-<li>putty配置：主机填写transport-usb ，连接类型选择Adb（对应5037端口）</li>
-</ul>
-<p>配置可以参考这个：<a target="_blank" rel="noopener" href="http://yesokay.herokuapp.com/2012-07-31-adbputty.html">adb putty</a></p>
-<h2 id="3-vi-保存文件时提示：Read-only-file-system"><a href="#3-vi-保存文件时提示：Read-only-file-system" class="headerlink" title="3. vi 保存文件时提示：Read-only file system."></a>3. vi 保存文件时提示：Read-only file system.</h2><p>都是mount R&#x2F;W的问题，同一个问题两个解决方案：</p>
-<h3 id="3-1-mount-R-x2F-W"><a href="#3-1-mount-R-x2F-W" class="headerlink" title="3.1 mount R&#x2F;W"></a>3.1 mount R&#x2F;W</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Simply change ro to rw and add the remount option</span><br><span class="line"># mount -o rw,remount /system</span><br><span class="line"></span><br><span class="line">Once you are done making changes, you should remount with the original readonly.</span><br><span class="line"># mount -o ro,remount /system</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-还有个比较鸡肋，但是偷懒的解决方案"><a href="#3-2-还有个比较鸡肋，但是偷懒的解决方案" class="headerlink" title="3.2 还有个比较鸡肋，但是偷懒的解决方案"></a>3.2 还有个比较鸡肋，但是偷懒的解决方案</h3><p>不记得命令行的时候可以使用下 :)</p>
-<ol>
-<li>使用Root Exporler等工具，点击Mount R&#x2F;W按钮</li>
-<li>回到adb shell下操作，你会发现已经可以保存了</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/08/21/2014/2014-08-21-cocoapods-cause-undefined-symbols-for-architecture-i386/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -894,6 +808,92 @@
 <h3 id="最终的方案"><a href="#最终的方案" class="headerlink" title="最终的方案"></a>最终的方案</h3><p> 有了上面的信息，我的解决方案也就水到渠成了：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pod &#x27;FMDB&#x27;, &#x27;~&gt; 2.3&#x27;</span><br><span class="line"></span><br><span class="line">post_install do |installer_representation|</span><br><span class="line">  installer_representation.project.targets.each do |target|</span><br><span class="line">    target.build_configurations.each do |config|</span><br><span class="line">      config.build_settings[&#x27;ARCHS&#x27;] = &#x27;armv7 armv7s&#x27;</span><br><span class="line">      config.build_settings[&#x27;ONLY_ACTIVE_ARCH&#x27;] = &#x27;NO&#x27;</span><br><span class="line">    end</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://linyehui.me/2014/08/21/2014/2014-08-21-adb-shell-vi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="linyehui">
+      <meta itemprop="description" content="HABIT IS POWER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HABIT IS POWER">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/08/21/2014/2014-08-21-adb-shell-vi/" class="post-title-link" itemprop="url">adb shell下使用vi修改hosts</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2014-08-21T00:00:00+08:00">2014-08-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><h2 id="原始需求"><a href="#原始需求" class="headerlink" title="原始需求"></a>原始需求</h2><p>Android应用测试的时候经常需要修改&#x2F;system&#x2F;etc&#x2F;hosts，有这么几种常见方法：  </p>
+<ul>
+<li>1、 adb pull 拉取到PC上进行修改，修改后再 adb push 回手机（麻烦）</li>
+<li>2、 直接用手机上的Root Explorer等工具进行编辑（默认的文本编辑很难操作）</li>
+<li>3、 PC上直接使用adb shell vi命令（android系统默认是没有vi命令的）</li>
+</ul>
+<h2 id="落地需求"><a href="#落地需求" class="headerlink" title="落地需求"></a>落地需求</h2><p>adb shell vi这个方案无疑是操作起来最高效的，那怎样才能可以在adb shell下使用vi命令呢？</p>
+<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="0-前提：你的手机已经ROOT过了"><a href="#0-前提：你的手机已经ROOT过了" class="headerlink" title="0. 前提：你的手机已经ROOT过了"></a>0. 前提：你的手机已经ROOT过了</h2><h2 id="1-手机上下载并安装BusyBox"><a href="#1-手机上下载并安装BusyBox" class="headerlink" title="1. 手机上下载并安装BusyBox"></a>1. 手机上下载并安装BusyBox</h2><ul>
+<li>我用的是这个：<a target="_blank" rel="noopener" href="http://www.wandoujia.com/apps/stericson.busybox.donate">BusyBox工具箱 汉化版</a></li>
+<li>我安装的版本是1.22.1</li>
+<li>安装的时候直接安装到&#x2F;system&#x2F;bin，这样敲命令行的时候就不需要这么敲了：<blockquote>
+<p>busybox vi</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-adb-shell-vi"><a href="#2-adb-shell-vi" class="headerlink" title="2. adb shell vi"></a>2. adb shell vi</h2><h3 id="2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用"><a href="#2-1-非Windows机器直接在终端上adb-shell就可以了，无缝使用" class="headerlink" title="2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用"></a>2.1 非Windows机器直接在终端上adb shell就可以了，无缝使用</h3><h3 id="2-2-Windows下的-adb-shell-vi"><a href="#2-2-Windows下的-adb-shell-vi" class="headerlink" title="2.2 Windows下的 adb shell vi"></a>2.2 Windows下的 adb shell vi</h3><ul>
+<li>Windows下直接使用CDM连接后使用vi会出现乱码，解决的方案是使用：adbputty</li>
+<li>从这里下载：<a target="_blank" rel="noopener" href="https://github.com/sztupy/adbputty/downloads">adb putty</a></li>
+<li>putty配置：主机填写transport-usb ，连接类型选择Adb（对应5037端口）</li>
+</ul>
+<p>配置可以参考这个：<a target="_blank" rel="noopener" href="http://yesokay.herokuapp.com/2012-07-31-adbputty.html">adb putty</a></p>
+<h2 id="3-vi-保存文件时提示：Read-only-file-system"><a href="#3-vi-保存文件时提示：Read-only-file-system" class="headerlink" title="3. vi 保存文件时提示：Read-only file system."></a>3. vi 保存文件时提示：Read-only file system.</h2><p>都是mount R&#x2F;W的问题，同一个问题两个解决方案：</p>
+<h3 id="3-1-mount-R-x2F-W"><a href="#3-1-mount-R-x2F-W" class="headerlink" title="3.1 mount R&#x2F;W"></a>3.1 mount R&#x2F;W</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Simply change ro to rw and add the remount option</span><br><span class="line"># mount -o rw,remount /system</span><br><span class="line"></span><br><span class="line">Once you are done making changes, you should remount with the original readonly.</span><br><span class="line"># mount -o ro,remount /system</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-还有个比较鸡肋，但是偷懒的解决方案"><a href="#3-2-还有个比较鸡肋，但是偷懒的解决方案" class="headerlink" title="3.2 还有个比较鸡肋，但是偷懒的解决方案"></a>3.2 还有个比较鸡肋，但是偷懒的解决方案</h3><p>不记得命令行的时候可以使用下 :)</p>
+<ol>
+<li>使用Root Exporler等工具，点击Mount R&#x2F;W按钮</li>
+<li>回到adb shell下操作，你会发现已经可以保存了</li>
+</ol>
 
       
     </div>
@@ -1103,7 +1103,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
